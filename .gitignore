@@ -1,0 +1,74 @@
+### Systems MacOS
+.DS_Store
+/Icon?
+
+
+### Projects
+temp/
+data/
+.idea/
+.vscode/
+.fleet/
+*.drawio.bkp
+.obsidian/
+
+### Private
+Resume/
+
+
+### Go
+# Go workspace file
+go.work
+vendor/
+bin/
+# match any directory equal **/out/
+out/
+
+# If you prefer the allow list template instead of the deny list, see community template:
+# https://github.com/github/gitignore/blob/main/community/Golang/Go.AllowList.gitignore
+#
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+### Python
+# Python
+__pychache__
+*.py[cod]
+.venv/
+venv/
+
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+
+
+### JavaScripts
+node_modules/
+package-lock.json
+yarn.lock
+
+### Rust
+target/
+
+### zip rar tar.gz
+*.zip
+*.rar
+*.tar.gz
+*.tar.xz
+*.tgz
+*.txz
