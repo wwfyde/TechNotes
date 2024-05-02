@@ -29,3 +29,53 @@
 ### 自动化测试
 
 ### 配置热加载
+
+
+
+# 代码质量
+
+## 基本原则
+
+### 模块化
+
+### 分层架构
+
+# 开发规范
+
+```shell
+# 代码目录
+~/projects  # 推荐
+~/src
+
+# 用户二进制
+~/.local/bin
+/usr/local/bin
+
+# 用户配置
+~/.config
+~/.<project_name>/config
+~/.ssh/
+~/.gitconfig
+~/.npm/
+
+# 控制文件run commands
+~/.vimrc
+~/.zshrc
+
+# 用户缓存
+~/.cache
+
+# 应用/软件安装目录(第三方软件目录
+/usr/local
+/opt
+
+# 二进制
+/usr/local/bin
+/usr/bin
+
+# lib
+/usr/local/lib
+
+#
+```
+

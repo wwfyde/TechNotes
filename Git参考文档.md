@@ -118,7 +118,7 @@ git command [parameter]
 
 ![prompted](https://wwfyde.oss-cn-hangzhou.aliyuncs.com/images/20210426194900.png)
 
-# Git基础
+
 
 # 专业术语-Glossary
 
@@ -265,6 +265,16 @@ Git 有三种状态，你的文件可能处于其中之一：已提交（committ
 - **Staged** means that you have marked a modified file in its current version to go into your next commit snapshot.
   已暂存表示对一个已修改文件的当前版本做了标记，使之包含在下次提交的快照中。
 
+
+
+> This leads us to the three main sections of a Git project: the working tree, the staging area, and the Git directory.
+
+这为我们引入了Git 项目的三个主要部分: 工作区(the working tree), 暂存区(the staging area, index, cache)和Git目录(Git directory, Repository仓库区)
+
+> [!tip]
+>
+> 暂存区只是一个索引文件, 通常位于 .git目录的index文件中(这是一个二进制文件, 不是目录)
+
 ![三个工作区](https://wwfyde.oss-cn-hangzhou.aliyuncs.com/images/20210426194911.png)
 
 Git 仓库(.git directory)目录是 Git 用来保存项目的元数据(metadata)和对象(object)数据库的地方。 这是 Git
@@ -284,6 +294,22 @@ Git 仓库(.git directory)目录是 Git 用来保存项目的元数据(metadata)
 如果 Git 目录中保存着特定版本的文件，就属于已提交状态。 如果作了修改并已放入暂存区域，就属于已暂存状态。
 如果自上次取出后，作了修改但还没有放到暂存区域，就是已修改状态。
 在[Git 基础](https://git-scm.com/book/zh/v2/ch00/ch02-git-basics)一章，你会进一步了解这些状态的细节，并学会如何根据文件状态实施后续操作，以及怎样跳过暂存直接提交。
+
+## 文件状态
+
+### Untracked
+
+### Unmodified
+
+### Modified
+
+### Staged
+
+### Deleted
+
+### Renamed
+
+### ignored
 
 ## 用户信息
 
@@ -357,7 +383,7 @@ Git 会在这里列出来。 最后，该命令还显示了当前所在分支，
 
 暂存区: stage index
 
-版本库:
+版本库(仓库区):
 
 main :
 
@@ -397,6 +423,18 @@ main :
 ## branch
 
 # log-日志
+
+
+
+```shell
+# 美化日志
+git log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+
+# 显示路径
+git log --graph
+```
+
+
 
 ## reflog-引用日志
 
@@ -604,6 +642,9 @@ git diff --cached [<commit>]  # 比较暂存区与最近的一次提交
 
 # Changes in the working tree since your last commit;
 git diff HEAD  # 对比工作区与仓库区
+
+# 对比不同分支的文件 
+git diff man dev -- <file>
 ```
 
 **若要查看已暂存的将要添加到下次提交里的内容**，可以用 `git diff --cached` 命令。还允许使用 `git diff --staged`(
@@ -725,6 +766,7 @@ git reset --hard 版本号  # 同时会回退工作区
 git checkout
 
 # undo commit
+# 可以用以合并提交
 git reset --soft 版本号  # 只退回commit 保留index
 
 # 
@@ -939,13 +981,23 @@ git checkout v1.0
 git checkout main
 ```
 
-## switch-切换
+
 
 ## mergetool
 
 ## log-日志
 
 ## worktree
+
+# switch-切换
+
+```shell
+# 从远程获取相同名称的分支并
+git switch hint-refine # 等价于
+git switch -c <local-branch-name> --track origin/<remote-branch-name>
+```
+
+
 
 # branch-分支
 
@@ -1097,11 +1149,16 @@ TODO
 ```shell
 # 合并指定分支到当前分支, 并产生新的提交.
 git merge <barnch>
+
+
+# merge squash
+# 将new-feature commits squashed into a single commit to main
+git merge --squash new-feature
 ```
 
 Demo
 
-# stash-贮藏
+# **stash**-贮藏
 
 ```shell
 # [NAME] git-stash - Stash the changes in a dirty working directory away
@@ -1131,7 +1188,7 @@ git push origin --all
 git push -f
 ```
 
-# fetch-提取
+# **fetch**-提取
 
 ```shell
 git-fetch - Download objects and refs from another repository
@@ -1185,6 +1242,18 @@ git remote set-url origin https://github.com/wwfyde/new-test.git
 
 git-ls-remote - List references in a remote repository
 
+
+
+# **show**
+
+```shell
+
+git show HEAD
+
+```
+
+
+
 # Patching
 
 # rebase-变基
@@ -1224,10 +1293,23 @@ rebase做到了并行的事情串行化, 即将看起来是两个人做的事情
 
 # 将feature分支合并到main分支
 git checkout feature
-git rebase main
+git rebase main  # 将feature分支的提交重新设置在main分支的基础上
 
 # 这两条命令等价于
 git rebase main feature
+
+将UAT 分支合并到main 分支
+
+
+# squash  将feature分支的多个提交squash to a single commit
+# git squash commit
+git rebase --squash 
+
+# interactively
+git rebase -i  
+git rebase -
+
+
 
 
 
@@ -1329,6 +1411,14 @@ git-checkout-index - Copy files from the index to the working tree
 
 主分支, 开发分支, 特性分支
 
+### 创建合并请求(拉取请求)
+
+```shell
+gh pr create --base main --head your-branch-name --title "Your PR title" --body "Your PR description"
+```
+
+
+
 ## 提交信息
 
 ### 参考资料
@@ -1393,6 +1483,26 @@ git remote set-head origin -a	# 根据remote HEAD set the default branch for the
 # 从索引检出
 git  checkout 文件名
 git checkout -- <pathspec>  # 禁用所有参数, 优先从暂存区检出,否则从版本库检出
+```
+
+## 基于开源开发
+
+- 跟踪一个远程分支设置为upsteam
+
+```shell
+git remote -v
+
+origin    git@github.com:octocat/my-full-stack.git (fetch)
+origin    git@github.com:octocat/my-full-stack.git (push)
+upstream    git@github.com:tiangolo/full-stack-fastapi-template.git (fetch)
+upstream    git@github.com:tiangolo/full-stack-fastapi-template.git (push)
+
+git pull --no-commit upstream master/main
+# his will download the latest changes from this template without committing them, that way you can check everything is right before committing.
+# If there are conflicts, solve them in your editor.
+
+# Once you are done, commit the changes:
+
 ```
 
 

@@ -1,14 +1,33 @@
 # Nginx
 
-> [官方文档 https://docs.nginx.com](https://docs.nginx.com)
+> 
 >
-> [官方文档 https://nginx.org/en/docs/](https://nginx.org/en/docs/)
+> 
+
+## Links
+
+- [官方文档 https://docs.nginx.com](https://docs.nginx.com)
+- [https://nginx.org/en/docs/](https://nginx.org/en/docs/)
+- [官方文档 https://nginx.org/en/docs/](https://nginx.org/en/docs/)
+- [GitHub Nginx Ingress](https://github.com/kubernetes/ingress-nginx)
 
 ## Installation
 
-- [](https://nginx.org/en/linux_packages.html#Ubuntu)
+- [Ubuntu](https://nginx.org/en/linux_packages.html#Ubuntu)
+- [Installing a Prebuilt Ubuntu Package from the Official NGINX Repository ](https://docs.nginx.com/nginx/admin-guide/installing-nginx/installing-nginx-open-source/#installing-prebuilt-ubuntu-packages)
 
 ```shell
+sudo apt install curl gnupg2 ca-certificates lsb-release ubuntu-keyring
+
+curl https://nginx.org/keys/nginx_signing.key | gpg --dearmor \
+    | sudo tee /usr/share/keyrings/nginx-archive-keyring.gpg >/dev/null
+
+gpg --dry-run --quiet --no-keyring --import --import-options import-show /usr/share/keyrings/nginx-archive-keyring.gpg
+
+echo "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] \
+http://nginx.org/packages/ubuntu `lsb_release -cs` nginx" \
+    | sudo tee /etc/apt/sources.list.d/nginx.list
+
 sudo apt install nginx
 
 # 开机自启
@@ -16,7 +35,14 @@ sudo systemctl enable nginx
 
 # 启动
 sudo systemctl start nginx
+
+#检查配置
+sudo nginx -t  # 检查语法
+sudo systemctl reload nginx 重新加载配置
+
 ```
+
+### 安装新版
 
 ## Configuration
 
@@ -146,3 +172,10 @@ try_files $uri $uri/ /index.html =404;
 
 ## 307 Temporary Redirect
 
+## 日志解读
+
+
+
+### access.log
+
+查看端口访问

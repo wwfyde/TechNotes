@@ -8,8 +8,8 @@
 ## 用户代码存放目录
 
 ```shell
-code
 projects
+code
 opt
 ```
 
@@ -114,6 +114,16 @@ python3.11 --version
 
 注意依赖
 
+```shell
+# zlib
+sudo apt install zlib1g zlib1g-dev libssl-dev libbz2-dev libsqlite3-dev
+
+
+
+```
+
+
+
 
 
 ### 方式四 源码
@@ -127,6 +137,29 @@ sudo fdisk -l
 # 重新格式化为ext4文件系统
 sudo m
 
+```
+
+## 重新分配内存
+
+```shell
+# 关闭交换文件(虚拟内存)
+sudo swapoff /swapfile
+
+# 查看状态
+free -h
+
+# 增加
+sudo truncate -s 32G /swapfile  
+
+# 分配内存
+sudo fallocate -l 32G /swapfile
+
+# 
+sudo mkswap /swapfile
+
+sudo swapon /swapfile
+
+ free -h
 ```
 
 

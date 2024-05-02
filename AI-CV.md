@@ -1,5 +1,9 @@
 # CV
 
+> [!note]
+>
+> 计算机视觉, Computer Vision
+
 # Glossary
 
 ## Items

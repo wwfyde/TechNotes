@@ -121,18 +121,27 @@ sudo usermod -a -G docker $USER
 
 ## 配置
 
-
+- 
 
 ```shell
 ### 镜像加速
 # 参考资料
 # https://gist.github.com/y0ngb1n/7e8f16af3242c7815e7ca2f0833d3ea6
+# 阿里云
+"registry-mirrors": ["https://qdyoqqzy.mirror.aliyuncs.com"],
 
+# 清华
+{
+  "registry-mirrors": ["https://docker.mirrors.tuna.tsinghua.edu.cn"]
+}
 # 腾讯云
 https://mirror.ccs.tencentyun.com	
 
 # 科大镜像源
 https://docker.mirrors.ustc.edu.cn
+{
+  "registry-mirrors": ["https://docker.mirrors.ustc.edu.cn"]
+}
 
 # Docker镜像代理
 https://dockerproxy.com
@@ -816,10 +825,12 @@ docker tag  e934 centos-new:newtag
 ```shell
 # 命令格式
 docker image inspect IMAGE [IMAGE2]
+
 docker inspect IMAGE [IMAGE2]
 
 # 用法示例
 docker image inspect centos
+docker image inspect -f "{{.Architecture}}" redis
 docker inspect -f "{{json .ID}}" centos
 ```
 
@@ -947,6 +958,14 @@ docker 利用了集装箱的思想 不断的堆积, 底层可以不断的被复�
 # Docker 命令
 
 ## **容器相关**
+
+## pull
+
+```shell
+ docker pull --platform linux/amd64 node:20
+```
+
+
 
 ## 创建-create
 
@@ -2518,6 +2537,41 @@ docker compose up --build
 
 ```
 
+## volume
+
+```shell
+# 简单绑定
+volumes:
+      - ./volumes/db/data:/var/lib/postgresql/data
+```
+
+
+
+
+
+## healthcheck
+
+```shell
+# mysql
+
+
+
+
+# postgres
+ healthcheck:
+      test: [ "CMD", "pg_isready" ]
+      interval: 1s
+      timeout: 3s
+      retries: 30l
+
+
+# redis 
+healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+
+
+```
+
 
 
 # Swarm
@@ -3836,6 +3890,90 @@ Docker提供了工具和平台来管理容器的生命周期：
 
 - [Docker Samples](https://docs.docker.com/samples/)
 
+## registry
+
+
+
+## 代理
+
+> Configure Docker to use a proxy server: https://docs.docker.com/network/proxy/
+>
+> https://docs.docker.com/config/daemon/systemd/
+
+### 使用镜像
+
+### systemd中设置环境变量
+
+```shell
+systemctl status docker
+sudo vim /lib/systemd/system/docker.service
+
+Environment="HTTP_PROXY=http://127.0.0.1:7890"
+Environment="HTTPS_PROXY=http://127.0.0.1:7890"
+Environment="ALL_PROXY=socks5://127.0.0.1:7890"
+Environment="NO_PROXY=localhost,127.0.0.1,127.0.0.0/8"
+```
+
+
+
+### docker配置文件
+
+~/.docker/config.json
+
+
+
+或者通过网关 http://172.17.0.1:7890
+
+```json
+{
+ "proxies": {
+   "default": {
+     "httpProxy": "http://192.168.0.181:7890",
+     "httpsProxy": "http://192.168.0.181:7890",
+     "noProxy": "*.test.example.com,.example.org,127.0.0.0/8"
+   }
+ }
+}
+```
+
+
+
+### docker build时环境变量
+
+> [!tip]
+>
+> 这种模式下`127.0.0.1` `localhost` `192.168.0.1`这样的代理无效
+
+## 网关(宿主机)
+
+https://docs.docker.com/desktop/networking/#i-want-to-connect-from-a-container-to-a-service-on-the-host
+
+```shell
+host.docker.internal
+gateway.docker.internal
+```
+
+
+
+## Docker
+
+```shell
+docker pull --platform linux/amd64 redis
+
+docker save -o redis
+```
+
+## Staged build
+
+```shell
+
+# 思路一 将阶段一的容器作为阶段二的base容器
+
+# 思路二 将阶段一构建的文件复制到阶段二中
+```
+
+
+
 ## 容器化方案与思路
 
 容器化的基本思路是通过Dockerfile来控制
@@ -4050,13 +4188,13 @@ docker run  --name ubuntu -p 2222:22 \
 docker run --restart always -p 6379:6379 --name redis -d redis
 
 # redis with redis.conf and logfile 
-docker run --restart always \
+docker run \
 -v ~/docker/redis/config:/usr/local/etc/redis \
 -v ~/docker/redis/data:/data \
 -e TZ=Asia/Shanghai \
 -p 6379:6379 --name redis -d redis redis-server /usr/local/etc/redis/6379.conf --save 60 1 --loglevel warning --appendonly yes
 # 持久化
-# --appendonly yes 
+# --appendonly yes --restart always
 # -v ~/docker/redis/log/redis.log:/var/log/redis/redis.log \
 # -v ~/docker/redis/log:/var/log/redis \
 
@@ -4067,7 +4205,7 @@ docker run --restart always \
 docker run --restart always -p 3306:3306 -h mysql --name mysql \
 -v ~/docker/mysql/config:/etc/mysql/conf.d \
 -v ~/docker/mysql/data:/var/lib/mysql \
--e TZ=Asia/Shanghai -e MYSQL_DATABASE=model_testing_ui -e MYSQL_ROOT_PASSWORD=metac2022  -d mysql
+-e TZ=Asia/Shanghai -e MYSQL_DATABASE=molook -e MYSQL_ROOT_PASSWORD=metac2022  -d mysql
 
 docker run --rm -p 3307:3306 --name mysql2 -e MYSQL_DATABASE=demo -e MYSQL_ROOT_PASSWORD=wawawa -it mysql /bin/bash
 
@@ -4082,10 +4220,12 @@ docker run --restart always -p 43306:3306 -h mysql --name mysql5 \
 # postgres
 docker run -p 5432:5432 -h postgres --name postgres \
 -v /Users/wwfyde/docker/postgres/data:/var/lib/postgresql/data \
--e POSTGRES_PASSWORD=wawawa -d postgres
+-e TZ=Asia/Shanghai -e POSTGRES_PASSWORD=wawawa -d postgres
 # default username : postgres
 # -e POSTGRES_USER=molook 
+# -e POSTGRES_USER=molook -e POSTGRES_DB=molook \
 # --restart always 
+# -v /Users/wwfyde/docker/postgres/data:/var/lib/postgresql/data \
 
 docker run --rm -d  -e POSTGRES_PASSWORD=wawawa -e POSTGRES_USER=molook -e POSTGRES_DB=molook  postgres
 
@@ -4124,12 +4264,12 @@ docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=Mssql123' \
 -p 1433:1433 -d mcr.microsoft.com/mssql/server 
 
 # rabbitmq
-docker run -d --restart always \
---name rabbitmq \
+docker run -d --name rabbitmq \
 -p 15672:15672 \
 -p 5672:5672 \
 rabbitmq:3-management
 # guest / guest
+#  --restart always
 
 # oracle
 docker run --name oracle-demo \

@@ -1,6 +1,8 @@
-# GPT
+# LLM
 
 > 大语言模型(Large Language Model, LLM)
+>
+> GPT
 
 ## 参考资料
 

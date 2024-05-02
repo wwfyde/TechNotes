@@ -14,6 +14,20 @@ tag: [机器学习, 神经网络, 深度学习, 知识图谱]
 
 ## 应用前景
 
+## Quickstart
+
+### 核心概念
+
+GPT是一种基于深度学习的自然语言处理技术，利用了大规模数据集进行预训练，以生成文本。它基于Transformer架构，这是一种专为处理序列数据（如文本）设计的深度学习模型架构。GPT的核心特性包括：
+
+- **自注意力机制**：Transformer架构的关键，允许模型在处理每个词时考虑到整个文本序列，从而捕捉复杂的语言关系。
+- **预训练与微调**：GPT先在大规模数据集上进行预训练，学习语言模式和知识，然后可以针对特定任务进行微调，以提高性能。
+- **生成能力**：GPT能够基于给定的文本提示生成连贯、相关的文本，使其应用于各种场景，包括文本生成、摘要、翻译等。
+
+**自注意力机制**
+
+
+
 
 
 # Glossary
@@ -25,6 +39,8 @@ tag: [机器学习, 神经网络, 深度学习, 知识图谱]
 ## Lists
 
 - 神经网络(neural network):
+    - 卷积神经网络
+
 - 机器学习(Machine Learning): 
 - **模型**(model)
     - [[Microsoft](https://learn.microsoft.com/zh-cn/windows/ai/windows-ml/what-is-a-machine-learning-model)]机器学习模型是一个文件，在经过训练后可以识别特定类型的模式。 你可以用一组数据训练模型，为它提供一种算法，模型利用该算法学习这些数据并进行推理。
@@ -44,12 +60,14 @@ tag: [机器学习, 神经网络, 深度学习, 知识图谱]
 - 向量(vector)
 - 矩阵(matrix)
 - 卷积(convolution)
+- 
 - transformer
 - attention
 - GPT(Generative Pre-trained Transformers):生成式预训练转换器
     - 生成式 预训练 自注意力转换器
 - GenAI(Generative Artifical Intelligenc)—生成式人工智能
 - AGI(Artificial General Intelligence)—通用人工智能
+- 梯度(gradient
 
 
 ## Lingo
@@ -71,10 +89,12 @@ tag: [机器学习, 神经网络, 深度学习, 知识图谱]
 
     - 学习数据分布的生成模型，适用于各种生成和重构任务。
 
-- RAG(Retrieval-Augment Generation): 检索增强生成
+- **RAG**(Retrieval-Augmented Generation): 检索增强生成
+  
   - https://blogs.nvidia.com/blog/what-is-retrieval-augmented-generation/
   - RAG is an AI framework for retrieving facts from an external knowledge base to ground large language models (LLMs) on the most accurate, up-to-date information and to give users insight into LLMs' generative process.——[IBM: What is retrieval-augmented generation?](https://research.ibm.com/blog/retrieval-augmented-generation-RAG)
-
+  - RAG is a technique for augmenting LLM knowledge with additional data.
+  
 - fine-tuning(微调)
 
 - ONNX
@@ -86,9 +106,10 @@ tag: [机器学习, 神经网络, 深度学习, 知识图谱]
   - 用来打标
   - **unCLIP**
 
-- **UNet**()
+- **UNet**(Convolutional Networks for Biomedical Image Segmentation)
 
-    - 主要用于图像分割任务
+    - 主要用于图像分割任务, 语义分割
+    - **U-Net**是[弗赖堡大学](https://zh.wikipedia.org/wiki/弗赖堡大学)计算机科学系为生物医学[图像分割](https://zh.wikipedia.org/wiki/图像分割)开发的[卷积神经网络](https://zh.wikipedia.org/wiki/卷积神经网络)。
     - 图像分割设计的有效网络
 
 - Zero-shot Learning(零迁移学习)
@@ -194,6 +215,12 @@ Tensors are a specialized data structure that are very similar to arrays and mat
 - Tokenization: splitting input/output texts into smaller units for LLM AI models.
   
 
+## Prompt
+
+[](AI-Prompt.md#Glossary)
+
+- 思维链(chain of thought)
+
 ## Topics
 
 ### NLP
@@ -211,6 +238,14 @@ Tensors are a specialized data structure that are very similar to arrays and mat
 - 通过机器学习预测关键词出现概率
   - 
   - 示例: 对于`教室里___` 预测: 教室里有桌子, 教室里上课, ~~教室里打高尔夫~~.  明显高尔夫是不对的
+
+## 词汇
+
+- 嵌入(embed)
+- 扩散(diffusion)
+- 潜(latent diffusion)
+- 蒸馏()
+- Latent Consistency Models, LCM
 
 ## CV
 
@@ -272,5 +307,11 @@ https://www.tensorflow.org/tutorials/images/data_augmentation?hl=zh-cn
 # Stable Diffusion
 
 ## Extensions
+
+
+
+# Object Detect
+
+
 
 # NLP

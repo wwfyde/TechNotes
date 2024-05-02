@@ -19,15 +19,43 @@ tag: [机器学习, 神经网络, 深度学习, 知识图谱]
 
 > 相关文档
 >
-> 
+> 更多参考 AI
 
 ## Lists
 
 - 神经网络(neural network):
+    - [AWS 什么是神经网络](https://aws.amazon.com/cn/what-is/neural-network/)
+    - [YouTube 什么是神经网络](https://www.youtube.com/watch?v=aircAruvnKk)
+        - 为何人脑能够将不一样的(3), 但相似的视觉信号识别为相同的东西, 但是有能区别不同的视觉信号, 模式识别
+        - 当程序中要对模式识别的信息(3)进行视觉表示时该如何处理
+        - 神经元更像是一个函数
+        - ReLU(线性整流函数)
+    - 神经元
+    - 节点(知识/材料/概念), 连接(联系):
+    - 生物学
+        - 人脑：神经网络可以比作人脑，其中节点代表神经元，连接代表突触连接。
+        - 神经元: 节点可以形象化为神经元，接收来自其他神经元的信号，并将其传递给下一个神经元
+        - 突触：连接可以形象化为突触，是神经元之间传递信号的桥梁。
+    - **计算类比:**
+        - 函数：神经网络可以比作一个函数，将输入数据映射到输出数据。
+        - 节点：节点可以形象化为函数中的计算单元，执行加减乘除等运算。
+        - 连接：连接可以形象化为函数中的参数，控制计算过程。
+    - 形象标识
+    - 抽象表示: 节点是一个向量, 包含该的属性, 例如激活值(activation), 权重(weight)等; 连接是一个矩阵, 代表不同节点连接之间的连接权重; 层: 可以比作神经网络中的不同功能模块，例如输入层、隐藏层和输出层。
+        - **权重:** 可以比作连接两个神经元的突触的强度，决定了信号传递的强度。
+        - **激活函数:** 可以比作神经元的兴奋程度，决定了神经元是否会将信号传递给下一个神经元。
+        - **偏置(bias):** 可以比作神经元的阈值，决定了神经元需要多少信号才会被激活. **偏置实际上是对神经元激活状态的控制**。。
+        - **训练:** 可以比作训练一个运动员，通过不断地练习和调整，提高神经网络的性能。
+        - **神经元:** 可以比作一个生物细胞，接收来自其他神经元的信号，并将其传递给下一个神经元。
+        - 权重矩阵*向量偏置就
+    - Python(PyTorch)中的表示: 节点(nn.Module), 连接(nn.Parameter)
+- 强化学习
+- 卷积神经网络
+- 递归神经网络
+- 深度神经网络
 - 机器学习(Machine Learning): 
   - 机器学习的三个核心概念: 数据、模型和学习
   - ![机器学习的核心概念](https://wwfyde.oss-cn-hangzhou.aliyuncs.com/images/202311211634305.png)
-
 - **模型**(model)
   - [[Microsoft](https://learn.microsoft.com/zh-cn/windows/ai/windows-ml/what-is-a-machine-learning-model)]机器学习模型是一个文件，在经过训练后可以识别特定类型的模式。 你可以用一组数据训练模型，为它提供一种算法，模型利用该算法学习这些数据并进行推理。
   - 表示一个知识, 数据的结构
@@ -148,6 +176,12 @@ Tensors are a specialized data structure that are very similar to arrays and mat
 - NVIDIA GPU: 即图形处理单元，NVIDIA公司生产的高性能处理器，广泛用于图形渲染、游戏和深度学习等。
 - NVIDIA DPU (Data Processing Unit): 数据处理单元，是NVIDIA推出的新型计算架构，专注于数据处理和高性能计算。
 - cuDNN: 这是CUDA Deep Neural Network的缩写，是用于深度学习应用的CUDA库的子集，专门针对深度神经网络进行优化。
+
+## Misc
+
+### **LLMOps**
+
+[什么是LLMOps](https://docs.dify.ai/v/zh-hans/learn-more/extended-reading/what-is-llmops)
 
 # Nvidia
 
@@ -316,9 +350,42 @@ conda activate
 
 # PyTorch
 
+## Glossary
+
+- 构建快(building blocks)
+    - Tensor
+    - Autograd Module
+    - **Neural Network Module** 
+    - **Optimizers**
+    - **Data Loading and Processing**
+    - **UDA Support for GPU Computing**:
+
+```shell
+# 创建模型, 也是一个神经网络节点
+torch.nn.Module
+
+# 利用多个GPU
+CUDA_VISBLE_DEVICE=0,1 python train.py # 使用0，1两
+```
+
+
+
 # jupyter
 
 将远程端口映射到本地端口 以实现连接访问
+
+```shell
+# Safari 浏览器中支持SF Mono
+ui-monospace, 'SF Mono'
+```
+
+
+
+# 奇技淫巧
+
+
+
+
 
 # ML服务器创建
 
@@ -490,6 +557,15 @@ remind.ai
 
 
 
+## 翻译
+
+- Bard
+- GPT4
+- Claude
+- DeepL
+
+
+
 ## LLaMA2
 
 ## disco diffusion
@@ -499,6 +575,61 @@ remind.ai
 ## stable diffusion 
 
 
+
+# Agent
+
+Design pattern 
+
+reflection-反思
+
+- ﻿﻿Self-Refine: Iterative Refinement with Self-Feedback, Madaan et al. (2023)
+- ﻿﻿Reflexion: Language Agents with Verbal Reinforcement Learning, Shinn et al., (2023)
+
+tool use-使用工具
+
+GMIRACT: Proming Mail Tor emit Mason and Alita, Yang et al. (2023)
+
+
+
+planning -规划
+
+Hugging i: Soring A Task wit ason and as Fiend an Hugging - We, stal, a, 2023)
+
+multiagent collaboration-多智能体协作
+
+
+
+# LLM-API
+
+## misc
+
+平台对API调用请求没有设置速率限制，但会受到模型官方的速率限制。
+
+- [OpenAI ChatGPT](https://platform.openai.com/docs/guides/gpt/chat-completions-api)
+    - https://platform.openai.com/docs/guides/rate-limits/usage-tiers?context=tier-free
+- [Azure OpenAI API](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference)
+    - https://learn.microsoft.com/zh-CN/azure/ai-services/openai/quotas-limits
+    - https://learn.microsoft.com/zh-CN/azure/ai-services/openai/how-to/quota?tabs=rest
+- [Anthropic Claude](https://anthropic.com/)
+    - https://docs.anthropic.com/claude/reference/rate-limits
+- [Google Gemini ](https://developers.generativeai.google/)
+    - https://ai.google.dev/models/gemini?hl=zh-cn
+- [智谱 ChatGLM](https://bigmodel.cn/)
+    - https://maas.aminer.cn/dev/howuse/rate-limits/level?tab=0
+- [Moonshot AI](https://platform.moonshot.cn/)
+    - https://platform.moonshot.cn/docs/pricing#%E5%85%85%E5%80%BC%E4%B8%8E%E9%99%90%E9%80%9F
+
+## OpenAI
+
+### message
+
+#### system message
+
+Typically, a conversation will start with a system message that tells the assistant how to behave, followed by alternating user and assistant messages, but you are not required to follow this format.
+
+## Azure
+
+- https://learn.microsoft.com/en-us/azure/ai-services/openai/reference
 
 
 
@@ -540,49 +671,62 @@ remind.ai
 
 约会话题-智谱AI
 
-# Prompt
+# GPTs
 
-## 技巧
+Web browser
 
-### 模式语言
+### 
 
-- 任务Task, 角色Role, 格式Format
-  - 通过这样的模板给GPT指令：
-     现在你要充当（**角色**） 
-     执行（**任务**）
-     以这种（**格式**）显示
-- 模版Template
-- 角色上设定专家角色
+# Workflow
 
-### 用法层级
+> chatflow
 
-•选择大模型——**直接使用 或 调用接口**
+用户意图(intention)识别
 
-•测试原生能力——**提示词工程（Prompt Engineer）**
+## Links
 
-•链接外部知识的AI——**检索增强生成(RAG)——**AI备忘录/企业知识库
-
-•训练外部知识的AI——**调整训练（Finetune）——**微调大模型/垂直大模型
-
-
-
-## 引导词汇
-
-概述, 综述(overview)
-
-快速上手(quickstart), 应用场景, 效率技巧, 生产力技巧(productivity tips)
-
-解释,详解,用法
-
-底层原理, 核心概念, 原则
+- [Dify 工作流](https://docs.dify.ai/v/zh-hans/guides/workflow)
 
 # CV
+
+# **YOLO**
 
 # Huggingface
 
 ## SAM(segment anything model)
 
 使用 transformer.js 库 v2.14
+
+# LangChain
+
+## Links
+
+- https://aws.amazon.com/cn/what-is/langchain/
+- https://github.com/chatchat-space/Langchain-Chatchat
+
+
+
+### pictures
+
+![image-20240318155433522](https://wwfyde.oss-cn-hangzhou.aliyuncs.com/images/202403181554628.png)
+
+![LangChain Universe v0.1.0](https://wwfyde.oss-cn-hangzhou.aliyuncs.com/images/202403181619767.jpeg)
+
+![Image](https://wwfyde.oss-cn-hangzhou.aliyuncs.com/images/202403181631760.jpeg)
+
+![LangSmith Platform Overview v0.2.0](https://wwfyde.oss-cn-hangzhou.aliyuncs.com/images/202403182107864.jpeg)
+
+![langchain_stack](https://wwfyde.oss-cn-hangzhou.aliyuncs.com/images/202403181617468.svg)
+
+## Core Concepts
+
+### 链(Chain)
+
+### LangSmith-Observe
+
+控制中心
+
+### LangServe-deploy
 
 # midjourney
 
@@ -605,6 +749,100 @@ runway
 robotic @google
 
 AI 足球解说员
+
+
+
+Midjourney是如何处理提示的
+
+## Links
+
+- [Midjourney Latest Updates](https://www.midjourney.com/updates)
+- [Midjourney/Getting Startted/Prompts](https://docs.midjourney.com/docs/prompts)
+- [Midjourney/Writing-Prompts/Prompts](https://docs.midjourney.com/docs/prompts-2)
+
+ 
+
+## Introduction
+
+文生图, 图生图
+
+### Feature
+
+训练数据包含了大量已有作品
+
+图像质量高, 可以生成各种风格的图像
+
+### 对比Stability AI 
+
+
+
+### 用法
+
+主要通过指令进行图像生成、调整和优化, 支持提示词,参数
+
+## Prompts
+
+|                                  |          |      |
+| -------------------------------- | -------- | ---- |
+| flat view                        | 平铺视图 |      |
+| clear colors                     | 颜色清洗 |      |
+| in the style of seamless pattern | 无缝图案 |      |
+| high resolution                  | 高分辨率 |      |
+| detailed details                 | 细节详尽 |      |
+
+
+
+### Word Choice
+
+### Plural words and Collective Nouns
+
+### Prompt Length and Details
+
+## Commands
+
+### imagine
+
+### describe
+
+### settings
+
+### blend(混合)
+
+图像编写提示词
+
+
+
+
+
+## Parameter
+
+
+
+|                     |                                 |                                   |                               |
+| ------------------- | ------------------------------- | --------------------------------- | ----------------------------- |
+|                     |                                 |                                   |                               |
+| no                  | --no item1, item2, item3        | what not to include in your image | 不应该包含某些                |
+| ar                  | --ar<br />--aspect ratio        |                                   | 宽高比                        |
+| chaos               | --chaos 0<br />--chaos 30       |                                   | 混乱度, 创造性                |
+| tile                |                                 |                                   | 无缝<br />tile 模式下无法放大 |
+| stylize             | --stylize 100<br />--stylize 50 |                                   | 风格化                        |
+| quality             | --q 1                           |                                   | 精细度                        |
+| style_reference     | --sref <br />--sw 0-1000(100)   |                                   | 风格引用                      |
+|                     |                                 |                                   |                               |
+| character_reference | --cref <br />--sw 0-100(100)    |                                   | 特征应用                      |
+
+
+
+
+
+### funning
+
+```shell
+# imagine prompt
+illustration with a solid color backgorund , the subject a about the 17 on dragon ball --chaos 40 
+```
+
+## 风格
 
 ## 描画, 
 
@@ -667,12 +905,12 @@ WantedBy=multi-user.target
 
 - drag a image that generated by comfyui will automatically load the workflow.
     拖拽ComfyUI生成的图片到界面将会自动加载Workflow
-- 
+- comfyui只支持单GPU, 一个进程不支持多CPU
 
 # Magnific AI
 
 https://magnific.ai/
 
-# Claude
+# **Claude**
 
 # NLP

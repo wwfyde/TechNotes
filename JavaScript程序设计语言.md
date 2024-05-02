@@ -4274,6 +4274,22 @@ Event 对象代表事件的状态，比如事件在其中发生的元素、键�
 | [screenY](https://www.w3school.com.cn/jsref/event_screeny.asp)             | 返回当某个事件被触发时，鼠标指针的垂直坐标。    |
 | [shiftKey](https://www.w3school.com.cn/jsref/event_shiftkey.asp)           | 返回当事件被触发时，"SHIFT" 键是否被按下。 |
 
+
+
+## Fetch API
+
+```js
+
+
+async function logMovies() {
+  const response = await fetch("http://127.0.0.1:8002/info");
+  const movies = await response.json();
+  console.log(movies);
+}
+```
+
+
+
 ## HTML
 
 html对象,一些标签

@@ -73,6 +73,13 @@ ftp.connect("192.168.0.237", "21")
 ftp.login("pacsftp", "ftp123456,")
 ```
 
+## 解决unicode escape
+
+```python
+print(f"resolve: {chunk.encode('utf-8').decode('unicode_escape')}")
+
+```
+
 
 
 ## 重写内部方法
@@ -184,9 +191,11 @@ def walkFile(file):
 
 ## 配置存储办法
 
-- 配置文件(ini / conf)
+- ~~配置文件(ini / conf, py)~~
 - 存到数据库表中 (通过表 来读取到数据)
 - 存到字典中 (python数据类型, 所有读取到的配置信息都建议以这种方式进行, **优于列表或元组结构**)
+- 保持到redis, etcd, vault, consul, nats
+- 
 - 保存到json / xml文件
 
 ## 获取环境变量值
@@ -330,6 +339,12 @@ a_bytes = a.encode()
 
 第三方库 : xmltodict, suds
 
+
+
+## 图片上传/媒体上传
+
+如果使用json文档类型, 需要将图像转换成base64
+
 # 编程技巧
 
 ## 获取文件的路径
@@ -396,6 +411,26 @@ if __name__ == '__main__':
         value.join()
         print(key)
 
+```
+
+
+
+## 使用模版变量
+
+```python
+from string import Template
+
+t = Template("hello, ${name}, your order number is $order_id.")
+s = t.substitute(name='hello', order_id=23)
+print(s)
+```
+
+使用string.format
+
+```shell
+# 使用string.format
+t = "hello, {name}."
+s = t.format(name='世界')
 ```
 
 

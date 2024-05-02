@@ -1891,7 +1891,7 @@ def create_app(config_name):
 
 > 运行项目，当前项目日志已输出到 `logs` 的目录下自动创建的 log 文件中
 
-- 在 logs 文件夹下创建 .gitkeep 文件，以便能将 logs 文件夹添加到远程仓库，并在 .gitignore 文件中添加忽略提交生成的日志文件
+- 在 logs 文件夹下创建 .gitkeep/.keep 文件，以便能将 logs 文件夹添加到远程仓库，并在 .gitignore 文件中添加忽略提交生成的日志文件
 
 ```
 logs/log*

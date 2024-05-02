@@ -153,6 +153,254 @@ ORM同时提供了方法用于在表(table)/实体(entity)之间建立连接(con
 @app.on_event('startup')
 ```
 
+## 响应
+
+
+
+### server-sent events-SSE-text/event-stream
+
+# 基本用法
+
+## read
+
+```python
+# with first
+with Session(engine) as session:
+  statment = select(Hero).where(Hero.age <= 35)
+  results = session.exec(statment)
+  # 使用 for loop
+  for hero in results:
+    print(hero)
+  # 使用first
+  hero = results.first()
+	print("Hero:", hero)
+  # first or None
+  
+  
+
+  
+```
+
+### where
+
+### get
+
+当出现None data get依然不会报错, 则会返回None
+
+```python
+# Code above omitted 👆
+
+def select_heroes():
+    with Session(engine) as session:
+        hero = session.get(Hero, 1)
+        print("Hero:", hero)
+
+# Code below omitted 👇
+```
+
+
+
+## LIMIT and OFFSET
+
+## Update-更新
+
+raw sql :
+
+```sql
+update here set age = 16 where name = "Spider-Boy"
+```
+
+use with add and commit and refresh
+
+```shell
+# Code above omitted 👆
+
+def update_heroes():
+    with Session(engine) as session:
+        statement = select(Hero).where(Hero.name == "Spider-Boy")
+        results = session.exec(statement)
+        hero = results.one()
+        print("Hero:", hero)
+				
+				# set field value
+        hero.age = 16
+        session.add(hero)
+        session.commit()
+        session.refresh(hero)
+
+# Code below omitted 👇
+```
+
+multiple update
+
+```shell
+# Code above omitted 👆
+
+def update_heroes():
+    with Session(engine) as session:
+        statement = select(Hero).where(Hero.name == "Spider-Boy")  
+        results = session.exec(statement)  
+        hero_1 = results.one()  
+        print("Hero 1:", hero_1)  
+
+        statement = select(Hero).where(Hero.name == "Captain North America")  
+        results = session.exec(statement)  
+        hero_2 = results.one()  
+        print("Hero 2:", hero_2)  
+
+        hero_1.age = 16  
+        hero_1.name = "Spider-Youngster"  
+        session.add(hero_1)  
+
+        hero_2.name = "Captain North America Except Canada"  
+        hero_2.age = 110  
+        session.add(hero_2)  
+
+        session.commit()  
+        session.refresh(hero_1)  
+        session.refresh(hero_2)  
+
+        print("Updated hero 1:", hero_1)  
+        print("Updated hero 2:", hero_2)  
+    
+
+# Code below omitted 👇
+```
+
+## delete
+
+```python
+from typing import Optional
+
+from sqlmodel import Field, Session, SQLModel, create_engine, select
+
+
+class Hero(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    name: str = Field(index=True)
+    secret_name: str
+    age: Optional[int] = Field(default=None, index=True)
+
+
+sqlite_file_name = "database.db"
+sqlite_url = f"sqlite:///{sqlite_file_name}"
+
+engine = create_engine(sqlite_url, echo=True)
+
+
+def create_db_and_tables():
+    SQLModel.metadata.create_all(engine)
+
+
+def create_heroes():
+    hero_1 = Hero(name="Deadpond", secret_name="Dive Wilson")
+    hero_2 = Hero(name="Spider-Boy", secret_name="Pedro Parqueador")
+    hero_3 = Hero(name="Rusty-Man", secret_name="Tommy Sharp", age=48)
+    hero_4 = Hero(name="Tarantula", secret_name="Natalia Roman-on", age=32)
+    hero_5 = Hero(name="Black Lion", secret_name="Trevor Challa", age=35)
+    hero_6 = Hero(name="Dr. Weird", secret_name="Steve Weird", age=36)
+    hero_7 = Hero(name="Captain North America", secret_name="Esteban Rogelios", age=93)
+
+    with Session(engine) as session:
+        session.add(hero_1)
+        session.add(hero_2)
+        session.add(hero_3)
+        session.add(hero_4)
+        session.add(hero_5)
+        session.add(hero_6)
+        session.add(hero_7)
+
+        session.commit()
+
+
+def update_heroes():
+    with Session(engine) as session:
+        statement = select(Hero).where(Hero.name == "Spider-Boy")
+        results = session.exec(statement)
+        hero_1 = results.one()
+        print("Hero 1:", hero_1)
+
+        statement = select(Hero).where(Hero.name == "Captain North America")
+        results = session.exec(statement)
+        hero_2 = results.one()
+        print("Hero 2:", hero_2)
+
+        hero_1.age = 16
+        hero_1.name = "Spider-Youngster"
+        session.add(hero_1)
+
+        hero_2.name = "Captain North America Except Canada"
+        hero_2.age = 110
+        session.add(hero_2)
+
+        session.commit()
+        session.refresh(hero_1)
+        session.refresh(hero_2)
+
+        print("Updated hero 1:", hero_1)
+        print("Updated hero 2:", hero_2)
+
+
+def delete_heroes():
+    with Session(engine) as session:
+        statement = select(Hero).where(Hero.name == "Spider-Youngster")  
+        results = session.exec(statement)  
+        hero = results.one()  
+        print("Hero: ", hero)  
+
+        session.delete(hero)  
+        session.commit()  
+
+        print("Deleted hero:", hero)  
+
+        statement = select(Hero).where(Hero.name == "Spider-Youngster")  
+        results = session.exec(statement)  
+        hero = results.first()  
+
+        if hero is None:  
+            print("There's no hero named Spider-Youngster")  
+    
+
+
+def main():
+    create_db_and_tables()
+    create_heroes()
+    update_heroes()
+    delete_heroes()
+
+
+if __name__ == "__main__":
+    main()
+```
+
+## join
+
+
+
+
+
+# Middleware
+
+8. Implement a Pure ASGI Middleware instead of `BaseHTTPMiddleware`
+
+> The [`BaseHTTPMiddleware`](https://www.starlette.io/middleware/#basehttpmiddleware) is the simplest way to create a middleware in FastAPI.
+
+
+
+> [!Note]
+>
+> The `@app.middleware("http")` decorator is a wrapper around the `BaseHTTPMiddleware`.
+
+> There were some issues with the `BaseHTTPMiddleware`, but most of the issues were fixed in the latest versions. That said, there's still a performance penalty when using it.
+
+> To avoid the performance penalty, you can implement a [Pure ASGI middleware](https://www.starlette.io/middleware/#pure-asgi-middleware). The downside is that it's more complex to implement.
+
+> Check the Starlette's documentation to learn how to implement a [Pure ASGI middleware](https://www.starlette.io/middleware/#pure-asgi-middleware).
+
+[advanced-middleware](https://fastapi.tiangolo.com/advanced/middleware/)
+
+
+
 # 高级用法
 
 ## 直接使用Request
@@ -171,6 +419,7 @@ ORM同时提供了方法用于在表(table)/实体(entity)之间建立连接(con
 ## (全局异常处理)Install custom exception handlers
 
 - [Install custom exception handlers](https://fastapi.tiangolo.com/tutorial/handling-errors/#install-custom-exception-handlers)
+- [handling-errors](https://fastapi.tiangolo.com/tutorial/handling-errors/)
 
 基本思路是捕获特定类型的异常, 然后针对异常作出特定的响应
 
@@ -202,6 +451,69 @@ async def read_unicorn(name: str):
     return {"unicorn_name": name}
 ```
 
+# Model设计
+
+## Many-to-Many
+
+```python
+
+# Declare Classes / Tables
+class BookAuthor(Base):
+    __tablename__ = 'book_authors'
+    book_id = Column(ForeignKey('books.id'), primary_key=True)
+    author_id = Column(ForeignKey('authors.id'), primary_key=True)
+    blurb = Column(String, nullable=False)
+    book = relationship("Book", back_populates="authors")
+    author = relationship("Author", back_populates="books")
+
+class Book(Base):
+    __tablename__ = 'books'
+    id = Column(Integer, primary_key=True)
+    title = Column(String, nullable=False)
+    authors = relationship("BookAuthor", back_populates="book")
+
+class Author(Base):
+    __tablename__ = 'authors'
+    id = Column(Integer, primary_key=True)
+    name = Column(String, nullable=False)
+    books = relationship("BookAuthor", back_populates="author")
+
+```
+
+
+
+方式二
+
+```python
+book_authors = Table('book_authors', Base.metadata,
+    Column('book_id', ForeignKey('books.id'), primary_key=True),
+    Column('author_id', ForeignKey('authors.id'), primary_key=True)
+)
+
+class Book(Base):
+    __tablename__ = 'books'
+    id = Column(Integer, primary_key=True)
+    title = Column(String, nullable=False)
+    authors = relationship("Author", secondary="book_authors", back_populates='books')
+
+class Author(Base):
+    __tablename__ = 'authors'
+    id = Column(Integer, primary_key=True)
+    name = Column(String, nullable=False)
+    books = relationship("Book", secondary="book_authors", back_populates='authors')
+
+```
+
+
+
+# 最佳实践
+
+# Tips
+
+```shell
+pip install uvloop httptools # fastapi[all] 默认已安装
+```
+
 
 
 # 常见需求
@@ -213,6 +525,14 @@ async def read_unicorn(name: str):
 
 
 ## 请求数据库接口
+
+## search API 
+
+- [[fastapi_query_utils.py](https://gist.github.com/ghandic/21c27470f6797dd856208a2c68f3e43a)](https://gist.github.com/ghandic/21c27470f6797dd856208a2c68f3e43a)
+- https://www.taniarascia.com/rest-api-sorting-filtering-pagination/#filtering
+- [REST API: Sorting, Filtering, and Pagination](https://www.taniarascia.com/rest-api-sorting-filtering-pagination/#filtering)
+- [Pagination, Filtering, and Sorting](https://specs.openstack.org/openstack/api-wg/guidelines/pagination_filter_sort.html)
+- 分页token
 
 ## 请求API接口
 
@@ -240,8 +560,72 @@ async def call_external_api():
 ## https
 
 ```shell
-uvicorn main:app --host 0.0.0.0 --port 443 --ssl-keyfile jumpserver.molook.cn.key --ssl-certfile jumpserver.molook.cn.pem 
+uvicorn main:app --host 0.0.0.0 --port 43044 --ssl-keyfile jumpserver.molook.cn.key --ssl-certfile jumpserver.molook.cn.pem 
 
+```
+
+
+
+## 异常处理
+
+- [Handling Errors](https://fastapi.tiangolo.com/tutorial/handling-errors/)
+
+```shell
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
+
+
+class UnicornException(Exception):
+    def __init__(self, name: str):
+        self.name = name
+
+
+app = FastAPI()
+
+
+@app.exception_handler(UnicornException)
+async def unicorn_exception_handler(request: Request, exc: UnicornException):
+    return JSONResponse(
+        status_code=418,
+        content={"message": f"Oops! {exc.name} did something. There goes a rainbow..."},
+    )
+
+
+@app.get("/unicorns/{name}")
+async def read_unicorn(name: str):
+    if name == "yolo":
+        raise UnicornException(name=name)
+    return {"unicorn_name": name}
+```
+
+
+
+## 分页-Pagination
+
+
+
+```python
+@router.get('/textures')
+async def read_textures(
+        *,
+        page: Annotated[int | None, Query(gt=0, )] = 1,
+        size: Annotated[int | None, Query(gt=0)] = 20,
+        sort_by: str | None = None,
+        filter: str | None = None,
+        db: Session = Depends(get_db_molook_uat),
+):
+    offset = (page - 1) * size
+    stmt = select(Texture).offset(offset).limit(size)
+    textures = db.scalars(stmt).all()
+    total = db.query(Texture).count()
+    pages = -(-total // size)
+
+    return dict(items=textures,
+                page=page,
+                size=size,
+                pages=pages,
+                total=total
+                )
 ```
 
 

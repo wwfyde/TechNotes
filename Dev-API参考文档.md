@@ -121,7 +121,9 @@
 
 
 
-## PUT-更新(update)
+## PUT-完整更新或替换(update)
+
+## PATCH-部分更新(update)
 
 ## POST-增加(create)
 

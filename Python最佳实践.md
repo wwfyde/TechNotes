@@ -27,7 +27,12 @@
 
 ```shell
 # pip config set global.index-url https://mirrors.aliyun.com/pypi/simple
-pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+pip config set global.index-url https://mirror.nju.edu.cn/pypi/web/simple
+
+pip config set global.index-url https://mirror.sjtu.edu.cn/pypi/web/simple
+
+pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple  # 不推荐
+
 # pip config set install.trusted-host mirrors.aliyun.com
 
 # 配置路径
@@ -79,9 +84,22 @@ pipx ensurepath
 pipx completions
 ```
 
+```shell
+# 为虚拟环境增加额外的pip包
+pipx runpip ipython list
+```
+
 
 
 ## poetry
+
+```shell
+poetry show --tree
+
+poetry show --latest
+```
+
+
 
 
 
@@ -151,6 +169,18 @@ except Exception as e:
 
 # 调试分析
 
+## 时间追踪
+
+```python
+time.time()
+timeit
+time.perf_counter()  # 高精度时间计算
+
+datetime.datetime.now()
+```
+
+
+
 # 性能优化
 
 # 安全
@@ -164,6 +194,21 @@ except Exception as e:
 # 箴言
 
 - 一切皆对象, 一切皆协议, 一切皆类型
+
+
+
+# cli应用
+
+```python
+#!/Users/wwfyde/Projects/MoLook/comfyui-api/venv/bin/python
+# -*- coding: utf-8 -*-
+import re
+import sys
+from uvicorn.main import main
+if __name__ == "__main__":
+    sys.argv[0] = re.sub(r"(-script\.pyw|\.exe)?$", "", sys.argv[0])
+    sys.exit(main())
+```
 
 
 
@@ -285,6 +330,18 @@ method 方法名
 
 变量名应该是名词, 能够正确地描述业务, 有表达能力. 
 
+## 类型注解
+
+```python
+# 涉及到多个变量时, 增加类型标注
+obj_str
+obj_json
+obj_dict
+obj_int
+```
+
+
+
 ## OBJ出方法命名-Method
 
 ### 参考资料
@@ -387,6 +444,52 @@ X.Y     # Final release - 最终版 通常也是稳定版
 ## Java
 
 ## C/C++
+
+
+
+# 项目布局
+
+[structuring your project](https://docs.python-guide.org/writing/structure/)
+
+[开发规范/项目结构](#项目结构)
+
+project-layout
+
+src/
+
+app_name/(src)
+
+tools/
+
+docs/
+
+examples/
+
+scrips/
+
+configs
+
+bin/
+
+tests/
+
+/data/
+
+## 目录包
+
+一般比如 utils包, 通常还会有一个 utils.py作为主要入口, 也包括了`__init__.py`
+
+## project
+
+## application
+
+### fastapi
+
+## library
+
+
+
+
 
 # 文档规范
 
@@ -624,7 +727,9 @@ X.Y     # Final release - 最终版 通常也是稳定版
 
 
 
-# 架构思想
+# 架构模式
+
+架构模式
 
 ## 三层架构
 
@@ -649,6 +754,22 @@ X.Y     # Final release - 最终版 通常也是稳定版
 ## 渐进式, 增量开发
 
 ## 模块化/层级化/单元化
+
+### Repository Pattern(数据访问层, 仓储层)
+
+例层（或称为Interactors层）和实体层之
+
+通常用ABC来定义接口
+
+## Clean Architecture
+
+Entity-实体-领域模型-业务
+
+## DDD
+
+:":
+
+
 
 
 
@@ -787,7 +908,7 @@ structured programming
 
 
 
-# 开发规范
+# **开发规范**
 
 > 尽可能让命名有意义
 
@@ -827,6 +948,8 @@ structured programming
 
 测试 - tests
 
+第三方-third_party
+
 #### 文件
 
 安装 - setup.py
@@ -838,6 +961,14 @@ structured programming
 环境变量 - .env
 
 ## 
+
+
+
+## 包/库结构
+
+直接flat, 平铺, 将所有代码用文件组织, 避免过于复杂的结构, 一个文件就是一个包
+
+
 
 ## 文档注释
 
@@ -2017,6 +2148,11 @@ Z轴 - 数据分区, 数据独立, 可靠性保证;
 >
 > [官方文档](https://docs.python.org/zh-cn/3/library/debug.html)
 
+## Productivity Tips
+
+- 可以直接修改变量后继续运行, 而不用修改源码
+- **条件断点**
+
 ## debug
 
 ## profile
@@ -2042,6 +2178,93 @@ Z轴 - 数据分区, 数据独立, 可靠性保证;
 - test case
 - test suite:
     - 测试用例的集合
+
+> [!tip]
+>
+> 需要实践才能理解
+>
+> 应该需要编写高质量, 可测试的代码
+>
+> pytest(46%), unittest(32%)
+>
+> 测试函数单元, 功能单元, 模块单元
+>
+> *编写单元测试*的习惯
+>
+> 重要性:
+>
+> - 保证研发质量
+> - 提高项目的稳定性
+> - 提高开发速度
+
+## 单元测试
+
+### 目的
+
+编写高质量和可维护的代码
+
+一般认为，单元测试有四种作用：
+（1）使代码可以放心修改和重构；
+（2）迫使程序员从调用者而不是实现者的角度设计软件模块；
+（3）迫使程序员将软件模块写得易于测试和调用，从而有利于解耦；
+（4）测试本身可作为被测代码的用法说明，从而替代了一部分文档功能。
+
+### 零散记录
+
+单元测试:
+
+　　单元测试是对单独的代码块分别进行测试, 以确保它们的正确性, 单元测试主要还是由开发人员来做, 其余的集成测试和系统测试由专业的测试人员来做. python的单元测试代码编写主要记住以下几点:
+
+  　　1. 需要导入 unittest模块
+
+        　　2. 需要继承自 unittest.TestCase 类
+
+              　　3. 单元测试的代码函数名必须以test开头(其他语言也是如此)
+
+​    4. 单元测试里由 setUp 和 tearDown 两个勾子函数
+
+ 
+
+ 以下为代码实现举例:
+
+```python
+import unittest
+
+ 
+
+class TestClass(unittest.TestCase):
+
+    def setUp(self):
+        # 该方法会首先执行,相当于测试前的准备工作
+        pass 
+    def tearDown(self):
+        # 该方法会在测试完成后执行, 相当于测试的扫尾工作
+        pass
+
+    def test_app(self):
+        # 该方法为测试测试代码
+        pass
+```
+
+
+
+单元测试经常用到的断言方法:
+
+　　assertEqual       # 如果两个值相等, 则pass
+
+　　assertNotEqual    # 如果两个值不相等, 则pass
+
+　　assertTrue       # 如果bool值为True, 则pass
+
+　　assertFalse       # 如果bool值为false, 则pass
+
+　　assertIsNone      # 如果不存在,则pass
+
+　　assertIsNotNone   # 存在,则pass
+
+## 集成测试
+
+
 
 # 常见问题
 

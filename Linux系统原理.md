@@ -265,7 +265,28 @@ interface 接口概念 接口理解
 
 [博客文档](https://segmentfault.com/a/1190000003063859)
 
-[epoll - 向保松](https://zhuanlan.zhihu.com/p/137964977)
+## Unix I/O模型
+
+- Unix中的五种I/O模型
+
+    1. 阻塞I/O(Blocking I/O)
+    2. 非阻塞I/O
+    3. I/O复用: select, poll, epoll 
+    4. 信号驱动I/O
+    5. 异步I/O
+## Linux I/O类型
+文件, 网络, 设备等, 一切皆是文件
+- 文件I/O 
+- 网络I/O
+- 设备I/O
+- 特殊文件I/O
+	- 管道
+	- FIFO
+	- 信号
+- 直接I/O(Direct I/O)
+
+
+
 
 ## 调度策略
 

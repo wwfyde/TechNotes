@@ -1,5 +1,23 @@
 # MySQL数据库
 
+
+
+## Overview
+
+### 为什么需要Database
+
+> [!note]
+>
+> In your code you already have **variables**, **dictionaries**, **lists**, etc. They all store **data** in some way already. Why would you need to have a separate database?
+>
+> If you look closely, your code is **static**, it doesn't really change over time *once you run it*. Of course, you change the code frequently, adding features, etc, but once you start Python running your code, the program stays as it was when you started it. And if you change the code, the program will only change **once you run it again**.
+
+- 保证代码与数据隔离, 数据会频繁变更, 而不至于修改代码.
+
+- 可以持久化数据
+- 大多数场景中, 数据始于程序之外或止于程序之外. 
+- 高效处理数据, 并将数据独立于代码
+
 # Glossary
 
 > [Database Glossary](https://www.prisma.io/dataguide/intro/database-glossary)
@@ -18,7 +36,7 @@
 - Schema(架构/模式): 关于数据库和表的布局特性的信息
     - 抽象概念: database的结构视图
     - 数据库模式被视为数据库的蓝图，描述了数据如何与其他表或其他数据模型相关联。 但是，模式中并不包含数据。
-    
+
 - Table(表)::某种特定类型数据的结构化清单
     - 数据库中的表名应该是唯一的,通常库+表名的结构.
 - column(列)::
@@ -66,6 +84,26 @@
 - Query(查询):SQL的任何语句都是查询,但此术语一般指select语句
 - QPS(query per second, 每秒查询数)
 - TPS(Transactions Per Second, 每秒处理事务数)
+- MVCC(Multiple Version Concurrency Control, 多版本并发控制)
+
+    - MVCC是可重复读隔离级别的核心机制，它允许数据库维护同一数据的多个版本。这样，每个事务都可以看到一个一致的数据快照，即在事务开始时数据库的状态，而不受其他并发事务的影响。在MySQL的InnoDB存储引擎中，每行数据都会有一个隐藏的字段记录该行数据的版本信息，当读取数据时，InnoDB会返回版本最接近当前事务版本的数据行，以确保数据的一致性。
+
+- ### **Undo日志**
+
+    Undo日志用于记录数据的旧版本，当数据发生变更时，变更前的数据会被写入Undo日志。如果一个事务需要读取的数据在事务开始后被其他事务修改了，它可以通过Undo日志来访问到该数据的旧版本，从而实现可重复读。Undo日志还支持数据库的事务回滚操作，即如果一个事务失败或被撤销，通过Undo日志可以恢复数据到事务开始前的状态。
+- ### **锁机制**
+
+    尽管MVCC允许多个事务并发读取同一数据的不同版本，但对于数据的修改操作，MySQL仍然需要通过锁机制来避免数据冲突。在可重复读隔离级别下，InnoDB使用行级锁和间隙锁（Next-Key锁的一部分）来防止其他事务插入、删除或修改当前事务已经读取或准备读取的数据范围。这种锁机制确保了即使在高并发的环境下，数据的一致性也得到了保证。
+- ### **间隙锁（Gap Locks）**
+
+    在可重复读隔离级别下，InnoDB还会使用间隙锁来防止幻读（Phantom Reads），即防止在同一事务中两次执行相同查询时返回不同结果集。间隙锁是一种锁定索引记录之间的“间隙”，而不是锁定实际的记录，它确保在事务执行过程中不会有新的记录被插入到这些间隙中。 
+- ### 结论
+
+    通过MVCC、Undo日志、行级锁和间隙锁等机制，可重复读隔离级别能够有效地平衡数据的一致性需求和系统的并发性能。这些机制共同工作，为数据库操作提供了一个稳定且一致的数据视图，同时减少了锁竞争，提高了系统的并发处理能力。然而，这种隔离级别虽然可以防止脏读和不可重复读，但在某些情况下仍可能发生幻读，这是设计者在选择隔离级别时需要权衡的一个因素。
+
+
+
+
 
 ## 行话
 
@@ -219,16 +257,6 @@ Asa: 孤立记录,无法被应用,成为无效数据,却占用内存,影响性�
 
 约束作用: 保证数据的完整性和一致性.
 
-# MySQL程序
-
-## client 程序
-
-### mysql程序
-
-
-
-#### mysql client commands
-
 
 
 # mysql常用命令
@@ -236,6 +264,76 @@ Asa: 孤立记录,无法被应用,成为无效数据,却占用内存,影响性�
 > 客户端常用命令
 >
 > 参考链接
+
+```mysql
+# \G Send command to mysql server, display result vertivally. 
+# 使用垂直方向显示结果
+select * from mysql.user\G
+
+# 使用 mysql Monitor, MySQL Command-Line Cliet
+
+# \q quit mysql
+\q
+
+# 通过 -e 参数 执行命令 
+mysql -u root -p molook_extend -e 'show tables'
+mysql -uroot -p database_name -e "SELECT * FROM table_name;" -t
+```
+
+## mysqldump
+
+
+
+
+
+## mysqlbinlog
+
+```shell
+for i in $(seq -w 1 48); do
+    mysqlbinlog /path/to/logs/mysql-bin.$i | mysql -u [user] -p[password] [database_name]
+done
+```
+
+```shell
+# 通过--verbose参数打印人类可读语句
+mysqlbinlog  --verbose
+
+
+--exclude-gtids or --include-gtids
+```
+
+```shell
+# Show events from a specific binary log file:
+    mysqlbinlog path/to/binlog
+
+- Show entries from a binary log for a specific database:
+    mysqlbinlog --database database_name path/to/binlog
+
+- Show events from a binary log between specific dates:
+    mysqlbinlog --start-datetime='2022-01-01 01:00:00' --stop-datetime='2022-02-01 01:00:00' path/to/binlog
+
+- Show events from a binary log between specific positions:
+    mysqlbinlog --start-position=100 --stop-position=200 path/to/binlog
+
+- Show binary log from a MySQL server on the given host:
+    mysqlbinlog --host=hostname path/to/binlog
+
+```
+
+```shell
+#!/usr/bin/env bash
+
+for i in $(seq -w 10 47); do
+  if [[ "$i" -eq "47" ]]; then
+#        mysqlbinlog --stop-position=1655053 "binlog.0000$i" --database=moway_look | mysql -h 192.168.0.181 -u root -pmetac2022 moway_look
+        mysqlbinlog --stop-position=1655053 "binlog.0000$i"  | mysql -h 192.168.0.181 -u root -pmetac2022
+  else
+#        mysqlbinlog "binlog.0000$i"  --database=moway_look | mysql -h 192.168.0.181 -u root -pmetac2022 moway_look
+        mysqlbinlog "binlog.0000$i"   | mysql -h 192.168.0.181 -u root -pmetac2022
+  fi
+done
+
+```
 
 
 
@@ -2648,9 +2746,112 @@ table.
 
 - 在mysql中, 关于utf8与[utf8mb4](https://dev.mysql.com/doc/refman/8.0/en/charset-unicode-utf8mb4.html)
     - utf8是utf8mb3的别名
-    - Utf8mb4的意思是: a maximum of four bytes per multibyte character
+    - utf8mb4的意思是: a maximum of four bytes per multibyte character
+    - mysql8 则默认使用utf8-mb4;
 - `/var/run/mysqld/mysqld.sock`是一个套接字文件
-    - 它运行同一机器上的程序之间通过该文件与mysql服务器通信, 而不需要TCP/IP来完成
+    - 它允许同一机器上的程序之间通过该文件与mysql服务器通信, 而不需要TCP/IP来完成
+
+# 配置
+
+```shell
+# 安装与初始化
+sudo apt update
+sudo apt install mysql-server mysql-client
+
+# run scurity script
+sudo mysql_secure_installation
+```
+
+
+
+```shell
+ # The MySQL server, mysqld, has many command options and system variables that can be set at startup to configure its operation. To determine the default command option and system variable values used by the server, execute this command:
+ mysqld --verbose --help
+ 
+ 
+ # 查看变量
+ show variables;
+ 
+ # 查看状态
+ show status;
+```
+
+```ini
+
+# 允许被远程访问
+
+bind-address=0.0.0.0
+```
+
+
+
+# 备份恢复
+
+## Links
+
+- [mysql manual: backup and recovery](https://dev.mysql.com/doc/refman/8.3/en/backup-and-recovery.html)
+- [](https://dev.mysql.com/doc/mysql-backup-excerpt/8.0/en/)
+
+## 操作原则
+
+- 操作前先备份
+
+```shell
+mysqldump -u root -p <pass> <db_name> > mysql_bak.sql
+```
+
+
+
+```mysql
+# 查看二进制日志
+show variables like 'log_%';
+```
+
+## 备份方式
+
+### 逻辑备份
+
+#### mysqldump-snapshot backup
+
+```shell
+
+# 从文件加载
+LOAD DATA LOCAL INFILE '/path/pet.txt' INTO TABLE pet;
+```
+
+
+
+#### mysqlhotcoy
+
+### binlog(二进制日志)
+
+> binary log
+
+## docker备份
+
+### snapshot backup
+
+```shell
+# 备份整条数据库
+docker exec mysql_container_name mysqldump -u root --password=your_password database_name > backup.sql
+
+# 恢复数据库
+docker exec -i new_mysql_container mysql -u root --password=your_password database_name < backup.sql
+
+
+```
+
+
+
+### volume backup
+
+创建快照
+
+
+
+
+
+
 
 
 # MySQL安装
@@ -2784,7 +2985,13 @@ sudo apt-get install python3-dev 	default-libmysqlclient-dev
 
 ```
 
-# 最佳实践
+# 数据库设计
+
+## 闭包表
+
+
+
+# **最佳实践**
 
 > 从业务的问题和需求 来理解程序
 
@@ -2815,10 +3022,41 @@ select *, count(*) over() as total_count from model limit 10 offset 1;
 
 
 
-## 碎片记录
+## **零散记录**
 
 - 当数据库关联文件时, 删除该记录, 应该先, 删除该文件, 再删除记录, **先删除实体, 再删除索引**
     - 删除数据出错时, 如果先删除了索引, 文件就成了垃圾了。没办法再找到该文件
+- 表名, 个人一般喜欢单数, 一张表对应一个实体
+- MySQL会默认为主键创建索引, 所以一般不需要显式的声明`index=True`
+
+## 常用日志
+
+> [!tip]
+>
+> AI prompt: explain all mysql log type and their usage and purpose.
+
+| log type              | general path             | purpose |
+| --------------------- | ------------------------ | ------- |
+| error log             | /var/log/mysql/error.log |         |
+| general query log     |                          |         |
+| slow query log        |                          |         |
+| binary log            |                          |         |
+| relay log             |                          |         |
+| innoDB Monitor Output |                          |         |
+
+
+
+### Error Log
+
+```shell
+/var/log/mysql/error.log
+```
+
+
+
+
+
+### 
 
 ## MySQL主从同步
 
@@ -3030,10 +3268,14 @@ Ctrl + Shift + v
 
 ```mysql
 # 创建用户
-create user 'test'@'%' indentified by 'wawawa';
+create user 'test'@'%' identified by 'wawawa';
 
-# 授权用户db.tables to user@host
+# 授权用户db.tables to user@host 
+# *.* 表示 任何库和任何表
 grant all privileges on *.* to 'wwfyde'@'%';
+
+# 授予用户某个库的权限
+GRANT ALL ON menagerie.* TO 'your_mysql_name'@'your_client_host';
 
 # 修改表来实现权限修改
 update user
@@ -3203,8 +3445,8 @@ use mysql;
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'admin';
 
 # 服务管理
-service mysql status
-service mysql start | stop | restart
+sudo systemctl status mysql
+sudo systemctl  start | stop | restart  mysql
 
 systemctl start | status | stop  mysql
 
@@ -3331,6 +3573,77 @@ CREATE TABLE example_table (
     create_time DATETIME DEFAULT CURRENT_TIMESTAMP,
     update_time DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
+```
+
+## 表名
+
+> [!note]
+>
+> But this name will be derived from a class name. And it's common practice to use **singular**names for classes (e.g. `class Hero`, instead of `class Heroes`). Using singular names for classes like `class Hero` also makes your code more intuitive.
+
+一般推荐使用单数
+
+## 关系表命名
+
+```markdown
+在数据库设计中，命名约定是保持组织性和可读性的关键要素之一，特别是对于关系表，其命名应清晰反映表的用途和包含的数据类型。以下是一些广泛认可的最佳实践方法，用于命名那些存储实体之间关系的表：
+
+1. 使用实体名和关系指示
+实体-关系-实体 (Entity1_Relationship_Entity2): 这种方法直接将两个相关实体的名称和它们之间的关系结合起来。例如，如果你有一个表用来存储书和作者之间的关系，可以命名为Book_Author或Book_WrittenBy_Author，取决于关系的具体性质。
+2. 使用动词或关系短语
+动词或关系短语 (Verb_Entity1_Entity2, Entity1_Verb_Entity2): 选择反映实体间关系的动词或短语。例如，对于用户和他们的登录会话的关系表，可以命名为User_Has_Sessions或User_Sessions。
+3. 使用“连接”或“映射”表达关联
+连接或映射 (Entity1_to_Entity2, Entity1Entity2Map): 对于简单的关联表，可以使用“to”或“Map”来表示实体之间的连接或映射关系，如User_to_Role或UserRoleMap。
+4. 考虑关系方向
+指示关系方向 (Entity1_for_Entity2, Entity1_of_Entity2): 如果关系有明确的方向性，使用“for”或“of”来指示。例如，如果你存储的是用户为特定项目创建的内容，可以使用Content_for_Project或ProjectContent。
+5. 精简且描述性命名
+精简描述：尽可能使命名既简洁又具描述性，避免过长或过于复杂的名称，同时确保名称清楚地反映了表的内容和用途。
+6. 保持一致性
+命名一致性：在整个数据库中保持命名约定的一致性极为重要，这有助于开发人员和数据库管理员更容易理解和维护数据模型。
+7. 使用复数形式
+复数形式：考虑使用实体的复数形式来命名表，以表明表中包含了多个记录或实例，如Users_Roles。
+选择哪种命名方法取决于个人或团队的偏好、项目的具体需求以及现有的命名规范。重要的是选择一种清晰、逻辑性强且一致的命名策略，并在整个数据库设计中坚持使用它。
+```
+
+
+
+### 使用实体名和关系指示
+
+book_autor/ boot_writtenby_author
+
+### 使用动词或关系短语
+
+## 多对多表设计
+
+many-to-many
+
+> [!tip]
+>
+> 另外查看FastAPI文档
+
+```mysql
+CREATE TABLE Students (
+    student_id INT AUTO_INCREMENT,
+    name VARCHAR(100),
+    PRIMARY KEY (student_id)
+);
+
+CREATE TABLE Courses (
+    course_id INT AUTO_INCREMENT,
+    title VARCHAR(100),
+    PRIMARY KEY (course_id)
+);
+
+-- 符复合主键, 关联表
+CREATE TABLE StudentCourses (
+    student_id INT,
+    course_id INT,
+    enroll_date DATE,
+    PRIMARY KEY (student_id, course_id),
+    FOREIGN KEY (student_id) REFERENCES Students(student_id),
+    FOREIGN KEY (course_id) REFERENCES Courses(course_id)
+);
+
 ```
 
 

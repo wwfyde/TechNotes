@@ -8,6 +8,12 @@ GitHub is a code hosting platform for version control and collaboration. It lets
 
 ## 拉取请求(pull request)
 
+
+
+# Accounts
+
+[测试 SSH 连接](https://docs.github.com/zh/authentication/connecting-to-github-with-ssh/testing-your-ssh-connection)
+
 # Search
 
 ## Regular Expression

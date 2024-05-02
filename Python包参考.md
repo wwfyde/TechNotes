@@ -52,7 +52,7 @@ annotations: 这official descriptions  on python document
 
 ## pathlib-面向对象的文件系统路径
 
-
+## shutil
 
 ## sys-python系统工具
 
@@ -624,6 +624,8 @@ parser.add_argument('--speed', dest='speed', action='store',
 
 ## collections
 
+### deque(双端队列)
+
 ## **gc**-[垃圾回收](https://docs.python.org/zh-cn/3/library/gc.html)
 
 > garbage collection 
@@ -1087,46 +1089,6 @@ time.strftime('%H:%M:%S', time.localtime(time.time()))
 
 
 
-## typing-类型提示
-
-> 相关提案: 
->
-> - PEP-484: https://www.python.org/dev/peps/pep-0484/
->
-
-## 索引
-
-`type hints` `type annotations` `types intro`
-
-`类型提示` `类型注解`
-
-## 好处
-
-- 编辑器中增加了自动补全 `cmd + space`, 有了针对类型的方法提示
-- 增加了编辑器对代码的错误检查能力
-- 
-
-## 类型声明-declaring types
-
-### 简单类型
-
-- str
-- int
-- float
-- bool
-- bytes
-
-### 泛型generic type
-
-带有参数类型的泛型
-
-- dict
-- list
-- set
-- tuple
-
-
-
 
 
 ## select-等待I/O完成
@@ -1209,7 +1171,17 @@ A framework for network servers
 
 - https://docs.python.org/zh-cn/3.12/library/traceback.html
 
-## JSON
+## json
+
+## secrets
+
+> [!tip]
+>
+> 用位(bit)表示十六进制数字时, 一个十六进制数字(16=2**4)占4为(bit), 因此一个1字节可以存放两个十六进制数字
+
+## inspect-检查对象
+
+## traceback-打印或读取栈回溯信息
 
 # **asyncio**(std)
 
@@ -1220,7 +1192,54 @@ A framework for network servers
 
 # typing
 
+## **typing**-类型提示
 
+> 相关提案: 
+>
+> - PEP-484: https://www.python.org/dev/peps/pep-0484/
+
+### 索引
+
+`type hints` `type annotations` `types intro`
+
+`类型提示` `类型注解`
+
+### 好处
+
+- 编辑器中增加了自动补全 `cmd + space`, 有了针对类型的方法提示
+- 增加了编辑器对代码的错误检查能力
+- 
+
+## 类型声明-declaring types
+
+### 简单类型
+
+- str
+- int
+- float
+- bool
+- bytes
+
+### 泛型generic type
+
+带有参数类型的泛型
+
+- dict
+- list
+- set
+- tuple
+
+
+
+## Links
+
+- [mypy cheat sheet](https://mypy.readthedocs.io/en/latest/cheat_sheet_py3.html)
+
+## Glossary
+
+- 向前引用(Forward Reference): Deliberately using a name before it was defined in the module is called a forward reference.
+    - [PEP563](https://peps.python.org/pep-0563/#forward-references)
+    - 在定义之前引用
 
 ## Core
 
@@ -1235,13 +1254,171 @@ class Point2D(TypeDict):
   label: 
 ```
 
+### NamedTuple
 
+```python
+from typing import NamedTuple
+
+class Person(NamedTuple):
+    name: str
+    age: int
+    email: str
+
+def register_person(person: Person) -> None:
+    ...
+
+# 使用
+register_person(Person("Alice", 30, "alice@example.com"))
+
+
+
+from dataclasses import dataclass
+
+@dataclass
+class Person:
+    name: str
+    age: int
+    email: str
+
+def register_person(person: Person) -> None:
+    ...
+
+# 使用
+register_person(Person(name="Alice", age=30, email="alice@example.com"))
+
+
+
+
+# ---
+
+from typing import Tuple, Dict
+
+def example_func(*args: Tuple[int, str], **kwargs: Dict[str, int]) -> None:
+    for arg in args:
+        print(arg)
+    for key, value in kwargs.items():
+        print(key, value)
+```
+
+
+
+### overload
 
 # ---
 
 
 
-# pydantic
+# **pydantic**
+
+类似Go, Rust, C中的结构体(struct), 也类似Python中的数据类(dataclass), 主要用于数据验证(validate),序列化(serialize)和json schema 生成, 主要是数据类型转换, 通用抽象层, 通用模型.  
+
+> In Pydantic, the term "validation" refers to the process of instantiating
+
+
+
+## 常见需求
+
+### 参数验证装饰器
+
+```python
+from pydantic import ValidationError, validate_call
+
+
+@validate_call
+def repeat(s: str, count: int, *, separator: bytes = b'') -> bytes:
+    b = s.encode()
+    return separator.join(b for _ in range(count))
+
+
+a = repeat('hello', 3)
+print(a)
+#> b'hellohellohello'
+
+b = repeat('x', '4', separator=b' ')
+print(b)
+#> b'x x x x'
+
+try:
+    c = repeat('hello', 'wrong')
+except ValidationError as exc:
+    print(exc)
+    """
+    1 validation error for repeat
+    1
+      Input should be a valid integer, unable to parse string as an integer [type=int_parsing, input_value='wrong', input_type=str]
+    """
+```
+
+
+
+
+
+### 字典通过pydantic来验证
+
+```python
+user = User(**external_dict)
+```
+
+### json schema 生成
+
+### 验证pydantic model
+
+```python
+Demo.model_validate(data)
+```
+
+
+
+### 验证ORM(from_orm)
+
+https://docs.pydantic.dev/dev/concepts/models/#arbitrary-class-instances
+
+```python
+from_attributes=True
+from typing import List
+
+from sqlalchemy import Column, Integer, String
+from sqlalchemy.dialects.postgresql import ARRAY
+from sqlalchemy.orm import declarative_base
+from typing_extensions import Annotated
+
+from pydantic import BaseModel, ConfigDict, StringConstraints
+
+Base = declarative_base()
+
+
+class CompanyOrm(Base):
+    __tablename__ = 'companies'
+
+    id = Column(Integer, primary_key=True, nullable=False)
+    public_key = Column(String(20), index=True, nullable=False, unique=True)
+    name = Column(String(63), unique=True)
+    domains = Column(ARRAY(String(255)))
+
+
+class CompanyModel(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
+    public_key: Annotated[str, StringConstraints(max_length=20)]
+    name: Annotated[str, StringConstraints(max_length=63)]
+    domains: List[Annotated[str, StringConstraints(max_length=255)]]
+
+
+co_orm = CompanyOrm(
+    id=123,
+    public_key='foobar',
+    name='Testing',
+    domains=['example.com', 'foobar.com'],
+)
+print(co_orm)
+#> <__main__.CompanyOrm object at 0x0123456789ab>
+co_model = CompanyModel.model_validate(co_orm)
+print(co_model)
+"""
+id=123 public_key='foobar' name='Testing' domains=['example.com', 'foobar.com']
+"""
+```
 
 # dotenv
 
@@ -1260,18 +1437,151 @@ class Point2D(TypeDict):
 
 # alembic
 
+> [!tip]
+>
+> 官方链接: https://alembic.sqlalchemy.org
+>
+> https://github.com/sqlalchemy/alembic
+>
+> https://pypi.python.org/pypi/alembic
+
 ```shell
 # 查看修订版本
 alembic history
 
 # 查看信息
 alembic current
+# 回退一个版本
+alembic downgrade -1
 
+# 回退到指定版本
+alembic downgrade c1fbd
 # 重置到初始化(downgrade back to nothing)
 alembic downgrade base
+
+# 合并两个revision
+
+# track update
+alembic revision --autogenerate -m "init"
+
+# 升级
+alembic upgrade head
+
+
+# 运行离线模式 head
+alembic upgrade <revision_id> --sql > upgrade.sql
 ```
 
-# SQLAlchemy
+## 配置仅跟踪指定表
+
+https://alembic.sqlalchemy.org/en/latest/autogenerate.html#omitting-table-names-from-the-autogenerate-process
+
+```python
+```
+
+## SQL脚本生成(Offline Mode)
+
+```shell
+alembic upgrade head --sql
+```
+
+## 动态配置sqlalchemy.url
+
+方式一: 从设置里面读取
+
+```python
+# alembic/env.py
+
+def get_url() -> str:
+    host = settings.postgres.host
+    port = settings.postgres.port
+    db = settings.postgres.db
+    user = settings.postgres.user
+    password = settings.postgres.password
+    print(f"host: {host}, port: {port}, db: {db}, user: {user}, password: {password}")
+    return f"postgresql+psycopg://{user}:{password}@{host}:{port}/{db}"
+  
+def run_migrations_offline():
+    """Run migrations in 'offline' mode.
+
+    This configures the context with just a URL
+    and not an Engine, though an Engine is acceptable
+    here as well.  By skipping the Engine creation
+    we don't even need a DBAPI to be available.
+
+    Calls to context.execute() here emit the given string to the
+    script output.
+
+    """
+    url = get_url()
+    context.configure(
+        url=url, target_metadata=target_metadata, literal_binds=True, compare_type=True
+    )
+
+    with context.begin_transaction():
+        context.run_migrations()
+
+def run_migrations_online():
+    """Run migrations in 'online' mode.
+
+    In this scenario we need to create an Engine
+    and associate a connection with the context.
+
+    """
+    configuration = config.get_section(config.config_ini_section)
+    configuration["sqlalchemy.url"] = get_url()
+    connectable = engine_from_config(
+        configuration,
+        prefix="sqlalchemy.",
+        poolclass=pool.NullPool,
+    )
+
+    with connectable.connect() as connection:
+        context.configure(
+            connection=connection, target_metadata=target_metadata, compare_type=True
+        )
+
+        with context.begin_transaction():
+            context.run_migrations()
+
+
+```
+
+
+
+
+
+方式二: 从环境变量读取
+
+```python
+env_files = ['.env', '.env.local', '.env.prod']
+for env_file in env_files:
+    env_file = Path(__file__).resolve().parent.joinpath(env_file)
+    print(env_file)
+    load_dotenv(env_file, override=True)
+
+section = config.config_ini_section
+
+
+# config.set_section_option(section, "POSTGRES_DSN", os.environ.get("POSTGRES_DSN"))
+# config.set_section_option(section, "MYSQL_DSN", os.environ.get("MYSQL_DSN"))
+# config.set_section_option(section, "POSTGRES_DSN", os.environ.get("POSTGRES_DSN"))
+
+def get_url():
+    user = os.getenv("POSTGRES_USER", "postgres")
+    password = os.getenv("POSTGRES_PASSWORD", "")
+    server = os.getenv("POSTGRES_SERVER", "db")
+    port = os.getenv("POSTGRES_PORT", "5432")
+    db = os.getenv("POSTGRES_DB", "app")
+    return f"postgresql+psycopg://{user}:{password}@{server}:{port}/{db}"
+
+```
+
+
+
+
+
+# **SQLAlchemy**
 
 ## 参考资料
 
@@ -1279,6 +1589,8 @@ alembic downgrade base
 - [Data Manipulation with the ORM](https://docs.sqlalchemy.org/en/20/tutorial/orm_data_manipulation.html)
 - [Session API](https://docs.sqlalchemy.org/en/20/orm/session_api.html)
 - [](https://docs.sqlalchemy.org/en/20/orm/session_basics.html#id1)
+- [tutorials](https://docs.sqlalchemy.org/en/20/tutorial/index.html)
+- 
 
 ## 基础增删改查
 
@@ -1310,7 +1622,44 @@ db.execute(stmt)
 
 
 
+## 核心特性
 
+### Relationship Attributes
+
+- [sqlmodel relationship attribute](https://sqlmodel.tiangolo.com/tutorial/relationship-attributes/)
+
+What Are These Relationship Attributes[¶](https://sqlmodel.tiangolo.com/tutorial/relationship-attributes/define-relationships-attributes/#what-are-these-relationship-attributes)
+
+
+
+> [!tip]
+>
+> These new attributes are not the same as fields, they **don't represent a column** directly in the database, and their value is not a singular value like an integer. Their value is the actual **entire object** that is related.
+>
+> So, in the case of a `Hero` instance, if you call `hero.team`, you will get the entire `Team` instance object that this hero belongs to. ✨
+>
+> For example, you could check if a `hero` belongs to any `team` (if `.team` is not `None`) and then print the team's `name`:
+>
+> ```python
+> if hero.team:
+>     print(hero.team.name)
+> ```
+>
+> 
+
+高级配置接口, 用于方便直接从主对象操作或访问关联对象
+
+
+
+# redis
+
+## 最佳实践
+
+
+
+### 结果为str而不是bytes
+
+decode_responses=True, 注意连接池
 
 # mysql-connector-python
 
@@ -1318,9 +1667,33 @@ db.execute(stmt)
 
 ## json字符串
 
+
+
+# redis
+
+# pika
+
+# aio_pika
+
 # anyio
 
 # httpx
+
+# openai
+
+## 配置代理
+
+- [Configuring the HTTP client](https://github.com/openai/openai-python#configuring-the-http-client)
+
+```python
+client = OpenAI(
+  http_client=httpx.Client(proxy)
+)
+```
+
+
+
+# anthropic
 
 # requests
 
@@ -1328,13 +1701,29 @@ db.execute(stmt)
 
 # numpy
 
-# Pillow
+# **Pillow**
 
 # OpenCV
 
 
 
 # celery
+
+[Celery Docs](https://docs.celeryq.dev/)
+
+## Overview
+
+### What's Task Queue?
+
+Task queues are used as a mechanism to distribute work across threads or machines.
+
+A task queue's input is a unit of work, called a task, dedicated worker processes then constantly monitor the queue for new work to perform.
+
+> [!note]
+>
+> 任务队列的输入是一个工作单元, 叫作任务, 专门的worker处理然后持续的监控队列以执行新的工作
+
+
 
 # channels
 
@@ -1361,6 +1750,18 @@ pathlib
 
 
 # **memory_profiler**
+
+
+
+# websockets
+
+> [!tip]
+>
+> 类似: websocket-client
+
+
+
+# playwright
 
 
 

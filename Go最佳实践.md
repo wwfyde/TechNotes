@@ -10,6 +10,27 @@
 - https://gobyexample.com
 - [wiki: 常见错误—Common-mistakes](https://github.com/golang/go/wiki/CommonMistakes)
 
+## 安装配置
+
+- https://go.dev/wiki/Ubuntu
+
+### 方法一 ppa
+
+```shell
+sudo add-apt-repository ppa:longsleep/golang-backports
+sudo apt update
+sudo apt install golang-go
+
+```
+
+### 方法二 snap
+
+```shell
+sudo snap install --classic go
+```
+
+
+
 # 学习技巧(原则)
 
 ## List/Map/Tree

@@ -17,7 +17,7 @@
 
 # Glossary
 
-
+### FHS（Filesystem Hierarchy Standard）
 
 # 原则和技巧
 
@@ -1020,6 +1020,26 @@ $ sudo apt-get update
 
 ## Options
 
+## config
+
+## Usage
+
+### 光标移动
+
+- 使用方向键或 `h`, `j`, `k`, `l` 键来分别向左、下、上、右移动光标。
+- 使用 `w` 和 `b` 键以单词为单位向前或向后移动光标。
+- 使用 `^` 键将光标移动到当前行的第一个非空字符。
+- 使用 `$` 键将光标移动到当前行的末尾。
+- 使用 `gg` 和 `G` 键分别将光标移动到文件的第一行和最后一行。
+- 使用 `{` 和 `}` 键以段落为单位向前或向后移动光标。
+
+### 跳转
+
+- 使用 `Ctrl + f` 和 `Ctrl + b` 键进行向前和向后翻页。
+- 使用 `Ctrl + d` 和 `Ctrl + u` 键进行向下和向上滚动半页。
+- 使用 `Ctrl + e` 和 `Ctrl + y` 键分别向上和向下滚动一行。
+- 使用 `H`, `M`, `L` 键将光标移动到当前屏幕的顶部、中部和底部。
+
 
 
 # curl
@@ -1039,6 +1059,9 @@ curl是一个从服务器传输数据或传输数据到服务器的工具, 支�
 工作原理: 当命令执行后, 工具执行请求到指定URL,并将服务器的响应显示在终端上或将其保存到文件中
 
 ```shell
+curl --help 
+curl --help all  # recommend
+man curl
 # GET url resources
 curl http://localhost:8080/demo
 
@@ -1075,7 +1098,14 @@ curl -d @path/to/file <url>
 curl -F logo=@filename [URL]
 
 
-#
+#静默输出, 忽略提示
+curl -s https://api.chucknorris.io/jokes/random | jq
+
+# 流式输出 
+#  -N, --no-buffer   Disable buffering of the output stream
+curl --no-buffer http://127.0.0.1:8004/stream
+curl -N http://127.0.0.1:8004/stream
+
 ```
 
 Options or Arguments 
@@ -1090,8 +1120,8 @@ Options or Arguments
 | --data-urlencode          | 编码非ASCII | 将非ASCII码如空格编码成%20                                   |
 | -f, --fail                |             | 如果出现错误HTTP状态码, 则停止下载并返回非零的退出码         |
 | -l, --url                 |             | 根据地址自动识别协议, 一般不需要                             |
-| -o, --output <filepath\>  |             |                                                              |
-| -O, --remote-name         |             |                                                              |
+| -o, --output <filepath\>  |             | Write to file instead of stdout                              |
+| -O, --remote-name         |             | Write output to a file named as the remote file              |
 | --remote-name             |             | 根据远程文件名称保存文件                                     |
 | -L, -- location           |             | 自动重定向HTTP地址                                           |
 | --continue-at             |             | 断点续传                                                     |
@@ -1103,10 +1133,17 @@ Options or Arguments
 | -v, --verbose             |             |                                                              |
 | -s, --silent              | 静默模式    |                                                              |
 | -S, --show-error          |             |                                                              |
+| -N                        |             |                                                              |
 
-#### 上传文件
+## 上传文件
 
-```
+```shell
+# 相对路径
+curl -F "file=@uploads/document.txt" http://example.com/upload
+
+# 绝对路径
+curl -F "file=@/home/username/uploads/document.txt" http://example.com/upload
+
 
 ```
 
@@ -1122,6 +1159,10 @@ Options or Arguments
 ## 常见需求
 
 ```shell
+# password automation
+# https://www.redhat.com/sysadmin/ssh-automation-sshpass
+# SSH password automation in Linux with sshpass
+sshpass -p 'your_password' ssh | rsync | scp
 # basic 
 ssh user@host
 
@@ -1199,6 +1240,12 @@ ssh -o ServerAliveInterval=60
 
 
 
+```shell
+clear # clear the screen
+```
+
+
+
 ## 插件
 
 ### git
@@ -1213,6 +1260,33 @@ screen -DR
 
 
 ### tmux
+
+### jq
+
+```shell
+
+git clone https://github.com/reegnz/jq-zsh-plugin.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/jq
+
+jq
+```
+
+### chroma
+
+styles: [github, xcode, colorful, emacs], dark:[github-dark]
+
+### ripgrep
+
+https://github.com/BurntSushi/ripgrep
+
+### zoxide
+
+brew install zoxide
+
+### <s>starship</s>
+
+### colored-man-pages
+
+### `powerlevel10k`
 
 # **命令参考**
 
@@ -1252,6 +1326,10 @@ screen -DR
 
 [官方文档man-pages](https://www.kernel.org/doc/man-pages/)
 
+### cmd --help
+
+一般含义中文文档 
+
 ### man
 
 [官方文档](https://man7.org/linux/man-pages/man1/man.1.html)
@@ -1278,6 +1356,12 @@ The table below shows the section numbers of the manual followed
 3   Library calls (functions within program libraries)
 
 ### whatis-快速理解命令用途
+
+### help
+
+### whereis
+
+
 
 ## builtin-
 
@@ -1373,6 +1457,8 @@ pstree -p 80419 | wc -l
 # 判断是否为固态硬盘
 lsblk -d --output NAME,TYPE,ROTA
 
+lsblk -o NAME,ROTA
+
 ```
 
 
@@ -1448,6 +1534,11 @@ sudo apt-get update
 sudo apt-get install tzdata
 ```
 
+### localectl-本地化
+
+```shell
+```
+
 
 
 ### watch
@@ -1472,11 +1563,20 @@ apt-cache showpkg ufw
 # 保留版本 禁用更新 
 apt-mark hold nvidia-compute-utils-535 nvidia-kernel-common-535
 apt-mark hold nvidia-driver-535
+sudo apt-mark hold kubelet kubeadm kubectl
 
 # 包搜索
 
 # 包信息详情
 apt show redis-server
+
+# 第三ppa
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt update
+sudo apt install python3.12
+
+# Golang ppa
+sudo add-apt-repository ppa:longsleep/golang-backports
 
 
 
@@ -1632,6 +1732,24 @@ dmesg：系统log信息
 
 ### vmstat
 
+### iostat
+
+### dstat
+
+### mpstat
+
+### sar
+
+### pidstat
+
+### sysstat
+
+### dmesg-开机信息, 系统故障
+
+### locate-数据库查找
+
+### date
+
 ### watch
 
 ```shell
@@ -1647,7 +1765,9 @@ watch -n 0.1 -d -t nvidia-smi
 ● -t : 不显示标题。
 ```
 
+### strace
 
+### ltrace
 
 ## 系统信息
 
@@ -1660,7 +1780,7 @@ sysctl hw.physicalcpu
 
 ### date
 
-### local
+### locale
 
 ### env
 
@@ -1676,13 +1796,24 @@ printenv LANG
 
 ### **getent**-名称服务
 
-### get entries from Name Service Switch libraries
+查看系统数据信息
+
+get entries from Name Service Switch libraries
+
+get entries from Name Service Switch libraries
 
 ```shell
 getent group syslog
+
+# 查看服务端口信息
+getent services 
+
+# 查看主机信息
 ```
 
+### getconf-
 
+Query system configuration variables
 
 ## 配置管理
 
@@ -1736,6 +1867,9 @@ journalctl -b 0 -n 100
 # 查看内核日志
 journalctl -l
 
+# 按标识符过滤
+journalctl -t "your_string"
+
 # 查看某个服务并实时跟踪
 # 注意u应该在最后面
 journalctl -fu removebg
@@ -1757,7 +1891,7 @@ journalctl --since today
 journalctl --since "2023-01-01" --until "2023-01-09"
 
 # 查看内核消息
-journalcrl -k
+journalctl -k
 
 # 导出日志为JSON 
 journalctl -b -u service-name.service -o json
@@ -2308,7 +2442,7 @@ tar -xzvf
 
 
 
-### find - 查找文件 目录
+### **find** - 查找文件 目录
 
 这一节，我们从 格式详解、命令实践 两个方面来学习。
 
@@ -2497,8 +2631,12 @@ docker ps -a | grep -e 4b66edbad2fe -e 95bcadb01c10  -e CON
 grep demo demo.txt
 
 # A or B 
-grep -e <pattern>
+grep -e <pattern> -e <pattern2>
 grep --regexp=<pattern>
+
+# 扩展模型       
+-E, --extended-regexp
+grep -E "<pattern>|<pattern2>"
 
 # A and B 双重过滤
 grep "*A*B*"
@@ -2511,6 +2649,9 @@ grep --line-number
 # 忽略大小写
 grep -i
 grep --ignore-case
+
+# 反向匹配
+grep -v
 
 # 统计
 grep -c
@@ -2878,9 +3019,9 @@ duplicate standard input
 
 
 
+### json_pp
 
-
-## 网络管理
+## **网络管理**
 
 >  防火墙	firewall
 
@@ -2932,6 +3073,9 @@ ifconfig 替代工具
 ip addr
 
 ip link
+
+# 查看路由
+ip route show
 ```
 
 
@@ -2986,6 +3130,32 @@ ufw allow 22
 ufw allow from 192.168.33.71
 ```
 
+### iptables
+
+```shell
+sudo apt install iptables-persistent
+
+
+sudo iptables -t nat -A PREROUTING -p tcp --dport 43045 -j DNAT --to-destination 192.168.0.104:43045
+
+sudo iptables -t nat -A POSTROUTING -p tcp -d 192.168.0.104 --dport 43045 -j MASQUERADE
+
+sudo iptables-save
+sudo netfilter-persistent save
+
+# 允许ip转发 
+sudo vim /etc/sysctl.conf
+net.ipv4.ip_forward = 1
+net.ipv6.conf.all.forwarding = 1
+
+# 生效
+sudo sysctl -p
+
+# 查看 c'd
+```
+
+
+
 ### lsof
 
 ```shell
@@ -3034,7 +3204,7 @@ lsof -i
 lsof -i:21
 # 查看网络端口占用(部分系统进程可能需要root权限以显示进程信息)
 netstat -nltp 
-ps aux | lsof -i:22
+lsof -i:22
 
 # 查看监听端口
 netstat -tulnp
@@ -3042,8 +3212,13 @@ netstat -tulnp
 # 
 netstat -n -p TCP | grep SYN_RECV
 
+# 查看 网络流量接口, 路由表
+netstat -nr  
+
 # for Mac  
 netstat -an | grep -e 'state' -e 'LISTEN'
+
+
 
 
 ### Options
@@ -3129,10 +3304,16 @@ $ nc -x10.2.3.4:8080 -Xconnect host.example.com 42
 
 
 
-### iftop
+### **iftop**
 
 ```shell
 sudo iftop -n
+192.168.0.130                                                       
+=> 153.37.164.74                                                       26.7Mb  26.5Mb  26.4Mb
+                                                                    
+                 <=                                                          433Kb   463Kb   457Kb
+
+三个值分别2s（最近2秒平均）、10s（最近10秒平均）、40s（最近40秒平均）。
 ```
 
 ### wget
@@ -3143,10 +3324,23 @@ sudo iftop -n
 
 tcpdump is a powerful command-line packet analyzer that can capture and display network traffic on a macOS system. 
 
-```
+```shell
 sudo tcpdump -i any
 
 sudo tcpdump -i any -w capture.pcap
+
+# 
+    tcpdump -D
+
+# 分析站点
+# Capture the traffic from or to a host:
+
+#     tcpdump host www.example.com
+tcpdump host www.google.com
+
+
+# ip
+tcpdump ip
 ```
 
 | options |      |      |
@@ -3221,7 +3415,9 @@ sudo ethtool -s enp4s0 wol g
 
 ```
 
-### dig-
+### dig-DNS解析路径
+
+
 
 ### proxychains-代理链
 
@@ -3241,9 +3437,9 @@ sudo ethtool -s enp4s0 wol g
 sudo dscacheutil -flushcahe
 ```
 
-## SSH
 
-## 远程管理
+
+## **远程管理**
 
 ### ssh
 
@@ -3286,11 +3482,49 @@ screen -ls
 screen -r [会话id]
 ```
 
+### tmux
+
+```shell
+# 新建会话
+- Start a new session:
+tmux
+
+# 新建命名会话
+- Start a new named session:
+    tmux new -s name
+
+# 查看已经存在的会话
+- List existing sessions:
+    tmux ls
+
+- Attach to the most recently used session:
+    tmux attach
+
+- Detach from the current session (inside a tmux session):
+    <Ctrl>-B d
+
+- Create a new window (inside a tmux session):
+    <Ctrl>-B c
+
+- Switch between sessions and windows (inside a tmux session):
+    <Ctrl>-B w
+
+- Kill a session by name:
+    tmux kill-session -t name
+
+```
+
 
 
 ### ssh-copy-id
 
 ### scp
+
+```shell
+scp -P 
+```
+
+
 
 ### rsync
 
@@ -3400,7 +3634,32 @@ cat /etc/mtab
 
 # Mac命令
 
+## lauchctl
+
+```shell
+# 设置全局环境变量
+launchctl setenv LANG en_US.UTF-8
+```
+
+
+
 ## diskutil
+
+
+
+## scutil
+
+```shell
+sudo scutil --set HostName "kayn" 
+
+scutil --get HostName
+
+scutil --get ComputerName
+
+scutil --get LocalHostName
+```
+
+
 
 # 桌面管理
 
@@ -3416,6 +3675,12 @@ gsettings set org.gnome.system.proxy.socks host '127.0.0.1'
 gsettings set org.gnome.system.proxy ignore-hosts "['localhost', '127.0.0.0/8', '::1']"
 
 # 等同于通过 Settings|Network|Proxy|Manual
+```
+
+## gnome-remote-desktop
+
+```shell
+systemctl --user status gnome-remote-desktop.service 
 ```
 
 
@@ -3448,17 +3713,345 @@ sudo systemctl start cockpit.socket
 
 ## jq
 
+```shell 
+ https://api.chucknorris.io/jokes/random
+ curl  https://api.chucknorris.io/jokes/random | pp_json
+```
+
+pygmentize 
+
+## jc
+
+## bat(cat)
+
+## fd(find)
+
+## ripgrep(grep)
+
 ## watchman
 
 ## proxychains
 
 ## inotify
 
+## **vsftpd**
+
+[Digital Ocean: How To Set Up vsftpd for a User's Directory on Ubuntu 20.04](https://www.digitalocean.com/community/tutorials/how-to-set-up-vsftpd-for-a-user-s-directory-on-ubuntu-20-04)
+
+[官网: vsftpd conf](https://security.appspot.com/vsftpd/vsftpd_conf.html)
+
+### 常见需求
+
+### 配置ssl 登录
+
+必须设置为passive模式
+
+同时需要将数据端口转发出去 20002和20003 21
+
+past_address地址设置为公网IP即可
+
+```shell
+rsa_cert_file=/etc/vsftpd/ftp.molook.cn.pem
+rsa_private_key_file=/etc/vsftpd/ftp.molook.cn.key
+ssl_enable=YES
+force_local_data_ssl=YES
+force_local_logins_ssl=YES
+pasv_enable=YES
+pasv_min_port=20003
+pasv_max_port=20003
+pasv_address=39.174.67.232
+
+
+# 匿名登录 
+
+allow_anon_ssl=YES
+force_anon_logins_ssl=YES
+force_anon_data_ssl=YES
+
+# 可选项
+
+ssl_tlsv1=YES
+ssl_sslv2=NO
+ssl_sslv3=NO
+require_ssl_reuse=no
+
+
+```
+
+### 禁止删除目录
+
+```shell
+chown root:root /path/to/your/directory
+chmod 755 /path/to/your/directory
+```
+
+
+
+### 多用户登录
+
+#### 使用系统用户
+
+```shell
+# 创建ftp用户
+sudo adduser --disabled-login ftpuser 
+# --home /mnt/mnt 
+```
+
+
+
+#### 使用虚拟用户(推荐)
+
+```shell
+# 前置配置/etc/vsftpd.conf
+# 用户配置目录
+user_config_dir=/etc/vsftpd/user_configs
+
+
+# 
+# If enabled, virtual users will use the same privileges as local users. By default, virtual users will use the same privileges as anonymous users, which tends to be more restrictive (especially in terms of write access).
+virtual_use_local_privs=YES
+
+
+# 允许虚拟用户登录
+guest_enable=YES
+# 需要时一个已存在的系统用户 This setting is the real username which guest users are mapped to.
+guest_username=vsftpd
+
+# 启用pam 认证 对应 /etc/pam.d/目录下的文件
+pam_service_name=vsftpd
+```
+
+
+
+```shell
+
+
+# 安装db-util Berkeley DB
+sudo apt-get install db-util
+
+# 修改/etc/pam.d/vsftpd 文件(添加到末尾)
+auth required pam_userdb.so db=/etc/vsftpd/virtual_users
+account required pam_userdb.so db=/etc/vsftpd/virtual_users
+
+# 生成 Berkeley DB 文件
+sudo db_load -T -t hash -f /etc/vsftpd/virtual_users.txt /etc/vsftpd/virtual_users.db
+sudo chmod 600 /etc/vsftpd/virtual_users.db
+
+
+# 设置用户配置文件
+sudo vim /etc/vsftpd/user_configs/huangrui
+
+local_root=/home/molook/huangrui
+
+```
+
+
+
+
+
+#### 使用匿名用户登录
+
+#### 使用用户配置文件
+
+### 配置示例
+
+```ini
+# Example config file /etc/vsftpd.conf
+#
+# The default compiled in settings are fairly paranoid. This sample file
+# loosens things up a bit, to make the ftp daemon more usable.
+# Please see vsftpd.conf.5 for all compiled in defaults.
+#
+# READ THIS: This example file is NOT an exhaustive list of vsftpd options.
+# Please read the vsftpd.conf.5 manual page to get a full idea of vsftpd's
+# capabilities.
+#
+#
+# Run standalone?  vsftpd can run either from an inetd or as a standalone
+# daemon started from an initscript.
+listen=NO
+#
+# This directive enables listening on IPv6 sockets. By default, listening
+# on the IPv6 "any" address (::) will accept connections from both IPv6
+# and IPv4 clients. It is not necessary to listen on *both* IPv4 and IPv6
+# sockets. If you want that (perhaps because you want to listen on specific
+# addresses) then you must run two copies of vsftpd with two configuration
+# files.
+listen_ipv6=YES
+#
+# Allow anonymous FTP? (Disabled by default).
+# anonymous_enable=NO
+#
+# Uncomment this to allow local users to log in.
+# 允许本地用户登录
+local_enable=YES
+#
+# Uncomment this to enable any form of FTP write command.
+# 允许FTP写入
+write_enable=YES
+#
+# Default umask for local users is 077. You may wish to change this to 022,
+# if your users expect that (022 is used by most other ftpd's)
+#local_umask=022
+#
+# Uncomment this to allow the anonymous FTP user to upload files. This only
+# has an effect if the above global write enable is activated. Also, you will
+# obviously need to create a directory writable by the FTP user.
+# anon_upload_enable=YES
+#
+# Uncomment this if you want the anonymous FTP user to be able to create
+# new directories.
+# anon_mkdir_write_enable=YES
+#
+# Activate directory messages - messages given to remote users when they
+# go into a certain directory.
+dirmessage_enable=YES
+#
+# If enabled, vsftpd will display directory listings with the time
+# in  your  local  time  zone.  The default is to display GMT. The
+# times returned by the MDTM FTP command are also affected by this
+# option.
+use_localtime=YES
+#
+# Activate logging of uploads/downloads.
+xferlog_enable=YES
+#
+# Make sure PORT transfer connections originate from port 20 (ftp-data).
+connect_from_port_20=YES
+#
+# If you want, you can arrange for uploaded anonymous files to be owned by
+# a different user. Note! Using "root" for uploaded files is not
+# recommended!
+#chown_uploads=YES
+#chown_username=whoever
+#
+# You may override where the log file goes if you like. The default is shown
+# below.
+#xferlog_file=/var/log/vsftpd.log
+#
+# If you want, you can have your log file in standard ftpd xferlog format.
+# Note that the default log file location is /var/log/xferlog in this case.
+#xferlog_std_format=YES
+#
+# You may change the default value for timing out an idle session.
+#idle_session_timeout=600
+#
+# You may change the default value for timing out a data connection.
+#data_connection_timeout=120
+#
+# It is recommended that you define on your system a unique user which the
+# ftp server can use as a totally isolated and unprivileged user.
+#nopriv_user=ftpsecure
+#
+# Enable this and the server will recognise asynchronous ABOR requests. Not
+# recommended for security (the code is non-trivial). Not enabling it,
+# however, may confuse older FTP clients.
+#async_abor_enable=YES
+#
+# By default the server will pretend to allow ASCII mode but in fact ignore
+# the request. Turn on the below options to have the server actually do ASCII
+# mangling on files when in ASCII mode.
+# Beware that on some FTP servers, ASCII support allows a denial of service
+# attack (DoS) via the command "SIZE /big/file" in ASCII mode. vsftpd
+# predicted this attack and has always been safe, reporting the size of the
+# raw file.
+# ASCII mangling is a horrible feature of the protocol.
+#ascii_upload_enable=YES
+#ascii_download_enable=YES
+#
+# You may fully customise the login banner string:
+#ftpd_banner=Welcome to blah FTP service.
+#
+# You may specify a file of disallowed anonymous e-mail addresses. Apparently
+# useful for combatting certain DoS attacks.
+#deny_email_enable=YES
+# (default follows)
+#banned_email_file=/etc/vsftpd.banned_emails
+#
+# You may restrict local users to their home directories.  See the FAQ for
+# the possible risks in this before using chroot_local_user or
+# chroot_list_enable below.
+# 将HOME目录映射出来而不是整个目录
+chroot_local_user=YES
+allow_writeable_chroot=YES
+#
+# You may specify an explicit list of local users to chroot() to their home
+# directory. If chroot_local_user is YES, then this list becomes a list of
+# users to NOT chroot().
+# (Warning! chroot'ing can be very dangerous. If using chroot, make sure that
+# the user does not have write access to the top level directory within the
+# chroot)
+# chroot_local_user=YES
+# chroot_list_enable=YES
+# (default follows)
+# chroot_list_file=/etc/vsftpd.chroot_list
+#
+# You may activate the "-R" option to the builtin ls. This is disabled by
+# default to avoid remote users being able to cause excessive I/O on large
+# sites. However, some broken FTP clients such as "ncftp" and "mirror" assume
+# the presence of the "-R" option, so there is a strong case for enabling it.
+#ls_recurse_enable=YES
+#
+# Customization
+#
+# Some of vsftpd's settings don't fit the filesystem layout by
+# default.
+#
+# This option should be the name of a directory which is empty.  Also, the
+# directory should not be writable by the ftp user. This directory is used
+# as a secure chroot() jail at times vsftpd does not require filesystem
+# access.
+secure_chroot_dir=/var/run/vsftpd/empty
+#
+# This string is the name of the PAM service vsftpd will use.
+pam_service_name=vsftpd
+#
+# This option specifies the location of the RSA certificate to use for SSL
+# encrypted connections.
+rsa_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
+rsa_private_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
+ssl_enable=NO
+
+#
+# Uncomment this to indicate that vsftpd use a utf8 filesystem.
+# 允许UTF-8文件
+utf8_filesystem=YES
+
+
+# 修改默认根目录
+#user_sub_token=$USER
+#local_root=/home/$USER/ftp
+
+
+
+# 用户配置目录
+user_config_dir=/etc/vsftpd/user_configs
+
+
+# 
+# If enabled, virtual users will use the same privileges as local users. By default, virtual users will use the same privileges as anonymous users, which tends to be more restrictive (especially in terms of write access).
+virtual_use_local_privs=YES
+
+
+# 允许虚拟用户登录
+guest_enable=YES
+guest_username=molook
+
+# 可选
+local_umask=022
+
+
+```
+
+## testdisk 文件恢复
+
+
+
 ## 宝塔面板
 
 ## certbot
 
-## xrdp
+## ~~xrdp(不推荐)~~
 
 https://zhuanlan.zhihu.com/p/519648451
 
@@ -3503,7 +4096,7 @@ tcp_recv_buffer_bytes=3276800
 sudo apt install dbus-x11
 ```
 
-
+ti
 
 ## tigervnc
 
@@ -3512,7 +4105,66 @@ sudo apt install tigervnc-standalone-server tigervnc-common
 
 ```
 
+## tightvnc
 
+https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-vnc-on-ubuntu-22-04
+
+## gnome-remote-desktop(推荐)
+
+https://help.ubuntu.com/stable/ubuntu-help/sharing-desktop.html
+
+
+
+```shell
+systemctl --user restart gnome-remote-desktop.service
+```
+
+
+
+## flakpak
+
+## thincast
+
+## certbot(Let's Encrypt)
+
+```shell
+# Ubuntu 安装 certbot：
+sudo snap install --classic certbot
+sudo ln -s /snap/bin/certbot /usr/bin/certbot
+# 生成证书 & 修改 Nginx 配置
+sudo certbot --nginx
+# 根据指示进行操作
+# 重启 Nginx
+sudo service nginx restart
+```
+
+
+
+# 系统配置
+
+## 语言
+
+```shell
+# 语言 方式一
+sudo dpkg-reconfigure locales
+sudo localectl set-locale LANG=zh_CN.UTF-8
+
+sudo apt-get install language-pack-zh-hans
+
+# 方式二边界/etc/locale.gen或 locale-gen命令
+
+locale 
+locale -a
+locale-gen zh_CN.UTF-8
+update-locale  
+# update-locale  LANG=zh_CN.UTF-8   # 如果不需要设置为中文为默认不需要
+locale -a 
+
+# 时区
+timedatectl list-timezones
+timedatectl set-timezone Asia/Shanghai
+
+```
 
 # 环境变量
 
@@ -3537,6 +4189,7 @@ LC_CTYPE=C.UTF-8
 #  File generated by update-locale
 LANG=zh_CN.UTF-8
 LANGUAGE="zh_CN:zh"
+LC_CTYPE=zh_CN.UTF-8
 
 # 优先级
 LC_ALL > LC_* >LANG
@@ -3561,7 +4214,13 @@ LANGUAGE=en_US:zh_CN
 # 立即生效, 也可重新登录终端
 source /etc/default/locale
 # 或者
+sudo localectl set-locale LANG=zh_CN.UTF-8
 sudo locale-gen
+sudo update-locale
+
+# 安装中文语言
+sudo apt-get install language-pack-zh-hans
+
 
 
 ```
@@ -3612,6 +4271,19 @@ export LD_LIBRARY_PATH=/path/to/lib:$LD_LIBRARY_PATH
 /usr/local
 # 用户二进制
 /usr/local/bin
+# 用户库文件
+/usr/local/lib
+# 用户头文件
+/usr/local/include
+# 用户share
+/usr/local/share
+
+# 用户源码
+/usr/local/src
+
+# 多版本
+/usr/local/python-3.8
+/usr/local/python-3.9
 
 
 ### 变量文件(variable files)
@@ -3731,7 +4403,7 @@ ehco '' > filename
 
 mac `Unified Logging System` `os_log` 管理日志
 
-### logrotate
+### logrotate-日志轮转
 
 ### 重要日志文件
 
@@ -4517,6 +5189,8 @@ test.sh
 |          |                        |                                                              |                               |
 |          |                        |                                                              |                               |
 |          |                        |                                                              |                               |
+
+## 参数
 
 
 

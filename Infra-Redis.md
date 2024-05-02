@@ -13,8 +13,13 @@
 ## 参考资料
 
 - [Interview/面试-Redis](interview/面试-Redis.md)
+- [Redis FAQ](https://redis.io/docs/get-started/faq/)
 - 极客时间: 168-Redis核心技术与实战
 - 极客时间: 223-Redis源码剖析与实战
+
+## Articles and Blogs
+
+- [Redis Queue](https://redis.com/glossary/redis-queue/)
 
 # 简介·Introduction
 
@@ -127,6 +132,8 @@ The advantages of data structures make Redis a good choice for:
 🔹 Caching user behavior history and filtering malicious behaviors (zset, hash)
 
 🔹 Storing boolean information of extremely large data into small space. For example, login status, membership status. (bitmap)
+
+[![img](https://wwfyde.oss-cn-hangzhou.aliyuncs.com/images/202404281500209.jpg)](https://github.com/ByteByteGoHq/system-design-101/blob/main/images/top-redis-use-cases.jpg)
 
 ## 常见问题FAQ
 
@@ -410,7 +417,20 @@ maxmemory-policy
 
 ```
 
+## 数据缓存策略
 
+database caching strategies
+
+### 旁路缓存
+
+
+
+1. **Cache-Aside Pattern（缓存旁路模式）**：也称为 Lazy-Loading Pattern。应用程序首先在缓存中查找数据，如果未命中则从数据库中读取数据，并将数据写入缓存。这种模式的优点是简单易实现，缺点是需要开发人员管理缓存与数据库之间的一致性。
+2. **Read-Through Pattern（读取透过模式）**：应用程序不直接访问缓存，而是通过一个缓存代理（例如 Redis）来访问数据。如果缓存未命中，则缓存代理负责从数据库中读取数据，并将数据写入缓存。这种模式减少了应用程序与缓存之间的耦合。
+3. **Write-Through Pattern（写入透过模式）**：应用程序写入数据时，首先将数据写入缓存，然后缓存负责将数据写入数据库。这种模式可以减少数据库的写入负载，并保持缓存与数据库的一致性。
+4. **Write-Behind Caching（延迟写入缓存）**：应用程序写入数据时，首先将数据写入缓存，并立即响应，然后缓存负责将数据异步写入数据库。这种模式可以提高写入性能，但可能会导致缓存与数据库数据不一致。
+5. **Cache-Aside with Refresh-Ahead（带有预取的缓存旁路模式）**：应用程序在读取数据时，如果发现缓存中的数据即将过期，则提前从数据库中刷新数据到缓存中。这种模式可以减少缓存失效时的性能损失。
+6. **Two-Level Cache（双层缓存）**：使用两级缓存，第一级是本地缓存（如内存），第二级是分布式缓存（如 Redis）。本地缓存用于存储热点数据，分布式缓存用于存储大量数据。
 
 # 术语·Glossary
 

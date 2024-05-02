@@ -110,6 +110,8 @@ Kubernetes 会分步骤地将针对应用或其配置的更改上线，同时监
 
 ### Linux
 
+https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
+
 ```shell
 sudo apt-get update
 # apt-transport-https 可以是一个虚拟包；如果是这样，你可以跳过这个包
