@@ -62,6 +62,10 @@ I/O操作, 并发编程中, 程序是否会挂起可后台执行
 
 这是函数调用中的概念
 
+## 延伸
+
+### 数据并行技术
+
 ## 基本常识
 
 - 对于IO操作来说, 多线程和多进程性能差别不大
@@ -1647,7 +1651,9 @@ PEP 3156 是Python 3.4 中引入异步I/O框架asyncio 的一个提案，提供�
 
 - 主要的并发处理方式
     - 协程
-    - 任务
+    - 任务: 协程的具体执行实例
+        - asyncio.create_task
+        - loop.create_task
     - 事件循环
 
 Asynchronous programming is different from classic “sequential” programming.
@@ -1752,7 +1758,9 @@ asyncio.run(main())
 
 ```
 
+## 异步结合线程池
 
+- [executing-code-in-thread-or-process-pools](https://docs.python.org/3/library/asyncio-eventloop.html#executing-code-in-thread-or-process-pools)
 
 # 异步和并发的区别
 
@@ -2245,6 +2253,16 @@ asyncio.run(display_date())
 # 多线程
 
 # 多进程
+
+# 最佳实践
+
+## 常见需求
+
+### 控制并发数
+
+#### asyncio(semaphore)
+
+#### ProcessPoolExecutor
 
 
 

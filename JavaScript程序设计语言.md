@@ -68,6 +68,12 @@ document object model
 
 ## 核心思想
 
+# Glossary
+
+
+
+xpath: XPath（XML Path Language）是一种在 XML 文档中查找信息的语言。它是一种选择器语言，广泛应用于解析和导航 XML 文档。XPath 也可以用于 HTML 文档，因为 HTML 是 XML 的一种应用。Playwright 和其他自动化工具支持 XPath 选择器，以便用户能够查找和操作 HTML 页面上的元素。
+
 # 生态工具
 
 ## 动画
@@ -607,7 +613,7 @@ z-index: 1;
 **定位元素层级**
 定位元素是浮动的正常的文档流之上的，可以用z-index属性来设置元素的层级
 
-## 选择器
+## **选择器**
 
 | 选择器                                                                                                | 例子                    | 例子描述                               |
 |:---------------------------------------------------------------------------------------------------|:----------------------|:-----------------------------------|
@@ -4295,6 +4301,142 @@ async function logMovies() {
 html对象,一些标签
 
 ## CSS
+
+# xpath
+
+XPath（XML Path Language）是一种在 XML 文档中查找信息的语言。它是一种选择器语言，广泛应用于解析和导航 XML 文档。XPath 也可以用于 HTML 文档，因为 HTML 是 XML 的一种应用。Playwright 和其他自动化工具支持 XPath 选择器，以便用户能够查找和操作 HTML 页面上的元素。
+
+### XPath 基本概念
+
+XPath 使用路径表达式在 XML 或 HTML 文档中选择节点。节点可以是元素、属性、文本、处理指令、命名空间等。
+
+### XPath 语法示例
+
+- **绝对路径**： 绝对路径从根节点开始。例如：
+
+    ```
+    /html/body/div
+    ```
+    
+- **相对路径**： 相对路径相对于当前节点。例如：
+
+    ```
+    
+    //div[@class='example']
+    ```
+    
+- **使用条件**： 可以使用方括号 `[]` 来指定条件。例如：
+
+    ```shell
+    # //tagname[@attribute='value']: 选择具有特定属性值的所有 tagname 元素。
+    //input[@name='username']
+    ```
+    
+- **文本匹配**： 可以使用 `text()` 函数来匹配文本内容。例如：
+
+    ```
+    xpath
+    Copy code
+    //button[text()='Submit']
+    ```
+
+- **包含匹配**： 使用 `contains()` 函数来匹配包含特定文本的节点。例如：
+
+    ```
+    xpath
+    Copy code
+    //button[contains(text(), 'Submit')]
+    ```
+
+### 使用 XPath 选择器的示例
+
+以下是一些使用 XPath 选择器的示例，这些示例展示了如何在 Playwright 中使用 XPath 选择器来查找和操作页面元素。
+
+#### 示例 1：使用绝对路径
+
+```
+python
+Copy code
+# 选择根节点下的某个 div 元素
+page.locator("/html/body/div").click()
+```
+
+#### 示例 2：使用相对路径
+
+```
+python
+Copy code
+# 选择具有特定 class 属性的 div 元素
+page.locator("//div[@class='example']").click()
+```
+
+#### 示例 3：使用属性选择器
+
+```
+python
+Copy code
+# 选择具有特定 name 属性的 input 元素
+page.locator("//input[@name='username']").click()
+```
+
+#### 示例 4：使用文本匹配
+
+```
+python
+Copy code
+# 选择文本内容为 'Submit' 的按钮元素
+page.locator("//button[text()='Submit']").click()
+```
+
+#### 示例 5：使用包含匹配
+
+```
+python
+Copy code
+# 选择文本内容包含 'Submit' 的按钮元素
+page.locator("//button[contains(text(), 'Submit')]").click()
+```
+
+### Playwright 中使用 XPath
+
+在 Playwright 中，可以使用 `locator` 方法与 XPath 选择器一起使用。下面是一个完整的示例，展示如何在 Playwright 中使用 XPath 选择器：
+
+```
+python
+Copy code
+import asyncio
+from playwright.async_api import async_playwright
+
+async def run(playwright):
+    browser = await playwright.chromium.launch(headless=False)
+    context = await browser.new_context()
+    page = await context.new_page()
+
+    await page.goto('https://example.com')
+
+    # 使用 XPath 选择器选择并点击元素
+    await page.locator("//input[@name='username']").click()
+    await page.locator("//button[contains(text(), 'Submit')]").click()
+
+    await browser.close()
+
+async def main():
+    async with async_playwright() as playwright:
+        await run(playwright)
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+### 解释
+
+1. **XPath 选择器**：
+    - 使用 `//input[@name='username']` 来选择具有 `name` 属性为 `username` 的 `input` 元素。
+    - 使用 `//button[contains(text(), 'Submit')]` 来选择文本内容包含 `Submit` 的按钮元素。
+2. **Playwright `locator` 方法**：
+    - 使用 `page.locator(xpath_expression)` 来定位元素并执行操作。
+
+通过这种方式，你可以在 Playwright 中灵活地使用 XPath 选择器来查找和操作页面元素。
 
 # JQuery
 

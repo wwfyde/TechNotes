@@ -917,7 +917,7 @@ del Ting['k1']
 
 
 
-# 数据类
+# 数据类(dataclass)
 
 - [数据类](https://docs.python.org/zh-cn/3/library/dataclasses.html#module-dataclasses)
 - [](https://docs.python.org/zh-cn/3/tutorial/classes.html#odds-and-ends)
@@ -939,6 +939,26 @@ print(john.name)
 print(hohn.salary)
 ```
 
+# 抽象基类
+
+
+
+# 元类(abc)
+
+
+
+# 容器(collections)
+
+# types
+
+# 上下文(contextlib)
+
+# functools
+
+# inspect
+
+# property
+
 # 设计原则
 
 ## 组合胜过继承
@@ -952,6 +972,12 @@ Composition over Inheritance
 interface(abstract base class)
 
 使用接口或抽象基类来定义公共API，然后通过组合不同的实现来增强类的功能，也是一种常见做法
+
+
+
+
+
+
 
 
 

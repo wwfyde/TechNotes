@@ -99,6 +99,10 @@ poetry show --tree
 poetry show --latest
 ```
 
+```toml
+package-mode = false  # 设置root 非package
+```
+
 
 
 
@@ -169,6 +173,14 @@ except Exception as e:
 
 # 调试分析
 
+
+
+## Debug Mode
+
+
+
+
+
 ## 时间追踪
 
 ```python
@@ -178,6 +190,16 @@ time.perf_counter()  # 高精度时间计算
 
 datetime.datetime.now()
 ```
+
+## Memray
+
+## timeit
+
+## cProfile
+
+### line_profiler(参考, 未验证)
+
+## pyinstrument
 
 
 
@@ -197,7 +219,7 @@ datetime.datetime.now()
 
 
 
-# cli应用
+# CLI应用
 
 ```python
 #!/Users/wwfyde/Projects/MoLook/comfyui-api/venv/bin/python
@@ -2128,6 +2150,66 @@ Z轴 - 数据分区, 数据独立, 可靠性保证;
 
 
 
+## 输入输出一一对应
+
+使用Protocol 约束输入和输出类型
+
+使用泛型类型和类型约束
+
+```python
+from typing import TypeVar, Generic, List
+
+T = TypeVar('T')
+R = TypeVar('R')
+
+class Processor(Generic[T, R]):
+    def process(self, data: T) -> R:
+        raise NotImplementedError
+
+class IntProcessor(Processor[int, str]):
+    def process(self, data: int) -> str:
+        return str(data)
+
+class StrProcessor(Processor[str, List[str]]):
+    def process(self, data: str) -> List[str]:
+        return list(data)
+
+int_processor = IntProcessor()
+result1 = int_processor.process(123)  # result1 类型为 str
+
+str_processor = StrProcessor()
+result2 = str_processor.process("hello")  # result2 类型为 List[str]
+```
+
+类型守卫和条件分支
+
+使用方法重载
+
+```python
+from typing import TypeVar, Generic, List
+
+T = TypeVar('T')
+R = TypeVar('R')
+
+class Processor(Generic[T, R]):
+    def process(self, data: T) -> R:
+        raise NotImplementedError
+
+class IntProcessor(Processor[int, str]):
+    def process(self, data: int) -> str:
+        return str(data)
+
+class StrProcessor(Processor[str, List[str]]):
+    def process(self, data: str) -> List[str]:
+        return list(data)
+
+int_processor = IntProcessor()
+result1 = int_processor.process(123)  # result1 类型为 str
+
+str_processor = StrProcessor()
+result2 = str_processor.process("hello")  # result2 类型为 List[str]
+```
+
 
 
 ## 其他需求
@@ -3494,8 +3576,9 @@ if __name__ == '__main__':
 
 - [Errors and Exceptions](https://docs.python.org/3/tutorial/errors.html)
 - [错误和异常](https://docs.python.org/zh-cn/3/tutorial/errors.html)
-- 首选err
-- 次选exc
+- 首选err, 错误时err
+- 次选exc, 异常时exc
+- 不清晰时, e
 
 ```python
 # 获取错误类型
@@ -3505,6 +3588,13 @@ except Exception as exc:
     print(f"{repr(exc)}")  # 使用repr函数
     print(f"{type(exc)}")  # 使用type
 ```
+
+## 基本原则
+
+- **尽早失败**：遇到错误条件时，应该尽早抛出异常。这有助于减少错误在程序中传播造成更大损害的风险。
+- **最小化捕获范围**：尽量只捕获预期中可能发生的异常，避免捕获过于广泛的异常，如捕获所有的`Exception`，这可能会隐藏其他未被预期的错误。
+- **资源清理**：在使用了需要清理的资源（如文件、网络连接等）后，应确保在`finally`块中释放这些资源，或使用`with`语句自动管理。
+- **适当的异常层级**：在应用架构中，适当地在不同层级处理异常，例如在界面层捕获并处理所有异常，向用户展示友好的错误信息，而在更低的层级抛出具体的业务逻辑异常。
 
 # 加密和签名
 

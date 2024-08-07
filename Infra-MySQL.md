@@ -1557,7 +1557,9 @@ RENAME TABLE old_table_name TO new_table_name;
 
 ## INSERT
 
+## alter
 
+## modify
 
 # 常用函数
 
@@ -1738,6 +1740,27 @@ from dual;
 ```
 
 日期转换
+
+
+
+## JSON函数
+
+### JSON_UNQUOTE-将字段解码为字符串
+
+```sql
+SELECT *
+FROM example
+WHERE JSON_UNQUOTE(data) = 'null';
+
+
+# 字段提取
+SELECT *
+FROM example
+WHERE JSON_EXTRACT(data, '$') = '"null"';
+
+```
+
+
 
 ## 复合语句 Compound Statement
 
@@ -3402,6 +3425,8 @@ alter table 表名
 alter table students
     modify birth date not null;
 
+alter table product_review modify column comment text   ;
+
 -- 删除字段
 alter table 表名
     drop 列名;
@@ -3561,6 +3586,10 @@ select now();
 ## 创建时间与更新时间
 
 一般命名为 `created_at` 和 `updated_at` | `create_time` 和 `update_time`
+
+mac finder 则是 `date_created`和 `data_modified`, `date_last_opened` `last_modified_by` 
+
+date_added 文件/数据添加到设备时间
 
 另外可能涉及到前缀和后缀, 比如 `user_create_at`
 

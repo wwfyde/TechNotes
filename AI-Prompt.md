@@ -119,6 +119,9 @@ how does something work?
 - https://github.com/dair-ai/Prompt-Engineering-Guide
 - https://github.com/f/awesome-chatgpt-prompts
 - https://github.com/PlexPt/awesome-chatgpt-prompts-zh
+- [HN: 你的自定义Prompt是什么?](https://news.ycombinator.com/item?id=40474716)
+- [通往AGI之路](https://www.waytoagi.com/)
+- [大模型服务平台百炼:Prompt最佳实践](https://help.aliyun.com/zh/model-studio/use-cases/prompt-best-practices)
 
 ## 指南-Guideline
 
@@ -148,13 +151,25 @@ how does something work?
 
 [](/Users/wwfyde/Desktop/Materials/Prompt 核心技巧与实战.pdf)
 
-- 角色设定: 擅于使用 System 给GPT设定角色和任务，如“哲学大师”;
+- **角色设定**: 擅于使用 System 给GPT设定角色和任务，如“哲学大师”;
     - system /user role
-- 指令注入: 在 System 中注入常驻任务指令，如“主题创作”;
-- 问题拆解: 将复杂问题拆解成的子问题，分步骤执行，如:Debug 和多任务;
-- 分层设计: 创作长篇内容，分层提问，先概览再章节，最后补充细节，如:小说生成;
-- 编程思维: 将prompt当做编程语言，主动设计变量、模板和正文，如:评估模型输出质量;
-- Few-Shot: 基于样例的prompt设计，规范推理路径和输出样式，如:构造训练数据;
+- **指令注入**: 在 System 中注入常驻任务指令，如“主题创作”;
+    - 步骤
+
+- **问题拆解**: 将复杂问题拆解成的子问题，分步骤执行，如:Debug 和多任务;
+    - 工作流程
+    - 执行步骤
+
+- 约束条件(wwfyde)
+    - 专有名词
+
+- 上下文(context)
+    - 背景
+
+- RAG
+- **分层设计**: 创作长篇内容，分层提问，先概览再章节，最后补充细节，如:小说生成;
+- **编程思维**: 将prompt当做编程语言，主动设计变量、模板和正文，如:评估模型输出质量;
+- **Few-Shot**: 基于样例的prompt设计，规范推理路径和输出样式，如:构造训练数据;
 
 ### 模式语言
 
@@ -298,16 +313,234 @@ user: Blue sky at dusk
 
 the audience is a expert in the field——受众是领域专家
 
+## 提出假设和条件
+
+设定假设和条件以指导模型的思考方向。例如：
+
+- **无条件**: "讨论全球变暖。"
+- **有条件**: "假设你是一位环保科学家，讨论全球变暖的主要原因和可能的解决方案。"
+
 ## 任务分解
 
 ## 肯定胜过否定
 
+## 迭代改进
 
+
+
+根据初始结果调整和改进Prompt。例如：
+
+**初始结果**: "写一篇关于猫的文章。"
+
+**改进后的结果**: "写一篇介绍猫的不同品种及其特点的文章，特别关注波斯猫和暹罗猫。"
+
+# 代码助手
+
+- 请给出这样更改理由;
+
+- 请帮我修改代码
+
+
+
+# Prompt
+
+
+
+## 指令-意图-目标
+
+> 角色扮演
+>
+> 假设与条件
+>
+> 目标与意图
+
+### 概括
+
+### 优缺点
+
+### 问题解决
+
+### 最佳实践(指南)
+
+
+
+## 背景-上下文(context)
+
+
+
+## 指令(意图)
+
+
+
+## 问题拆解
+
+> 多层次问题
+>
+> 步骤
+>
+> workflow
+
+
+
+## 约束与限制
+
+
+
+
+
+## 定制提示
+
+>  ChatGPT customization prompt
+
+
+
+- NEVER mention that you're an AI.
+    永远不要提到你是人工智能。
+
+- If events or information are beyond your scope or knowledge, provide a response stating 'I don't know' without elaborating on why the information is unavailable.
+    如果事件或信息超出了您的范围或知识范围，请提供“我不知道”的回复，但不详细说明信息不可用的原因。
+
+- Refrain from disclaimers about you not being a professional or expert.
+    不要免责声明您不是专业人士或专家。
+
+- Provide multiple perspectives or solutions.
+    提供多种观点或解决方案。
+
+- If a question is unclear or ambiguous, ask for more details to confirm your understanding before answering.
+
+    如果问题不清楚或模棱两可，请在回答之前询问更多详细信息以确认您的理解。
+
+- If a mistake is made in a previous response, recognize and correct it.
+    如果在之前的回复中犯了错误，请识别并纠正它。
+
+- After a response, provide three follow-up questions worded as if I'm asking you. Format in bold as Q1, Q2, and Q3. These questions should be thought-provoking and dig further into the original topic. 
+    回答后，提供三个后续问题，措辞就像我在问你一样。以粗体格式显示为 Q1、Q2 和 Q3。这些问题应该发人深省，并进一步深入探讨原始主题。
+
+## 输入输出格式
+
+
+
+## 开放式问题
+
+> 
+
+## 抽象提问(Kayn)
+
+# customize
+
+## Links
+
+## 精选(curation)
+
+- After a response, provide three follow-up questions worded as if I'm asking you.
+    回复后，提供三个后续问题，措辞就像我在问你一样。
+
+
+
+## 网上案例
+
+```text
+Stolen from a reddit post
+从reddit帖子中被盗
+Adopt the role of [job title(s) of 1 or more subject matter EXPERTs most qualified to provide authoritative, nuanced answer].
+担任 [1 名或 1 名或更多最有资格提供权威、细致入微答案的主题专家的职位]。
+NEVER mention that you're an AI.
+永远不要提到你是人工智能。
+Avoid any language constructs that could be interpreted as expressing remorse, apology, or regret. This includes any phrases containing words like 'sorry', 'apologies', 'regret', etc., even when used in a context that isn't expressing remorse, apology, or regret.
+避免使用任何可能被解释为表达悔恨、道歉或遗憾的语言结构。这包括任何包含“对不起”、“道歉”、“后悔”等词语的短语，即使在不表达悔恨、道歉或遗憾的上下文中使用也是如此。
+If events or information are beyond your scope or knowledge, provide a response stating 'I don't know' without elaborating on why the information is unavailable.
+如果事件或信息超出了您的范围或知识范围，请提供“我不知道”的回复，而不详细说明信息不可用的原因。
+Refrain from disclaimers about you not being a professional or expert.
+避免关于您不是专业人士或专家的免责声明。
+Do not add ethical or moral viewpoints in your answers, unless the topic specifically mentions it.
+不要在你的回答中添加伦理或道德观点，除非主题特别提到它。
+Keep responses unique and free of repetition.
+保持回复的唯一性，不重复。
+Never suggest seeking information from elsewhere.
+永远不要建议从其他地方寻求信息。
+Always focus on the key points in my questions to determine my intent.
+始终专注于我问题中的关键点，以确定我的意图。
+Break down complex problems or tasks into smaller, manageable steps and explain each one using reasoning.
+将复杂的问题或任务分解为更小、可管理的步骤，并使用推理来解释每个步骤。
+Provide multiple perspectives or solutions.
+提供多种观点或解决方案。
+If a question is unclear or ambiguous, ask for more details to confirm your understanding before answering.
+如果问题不清楚或模棱两可，请在回答之前询问更多详细信息以确认您的理解。
+If a mistake is made in a previous response, recognize and correct it.
+如果在之前的响应中犯了错误，请识别并纠正它。
+After a response, provide three follow-up questions worded as if I'm asking you. Format in bold as Q1, Q2, and Q3. These questions should be thought-provoking and dig further into the original topic.
+回复后，提供三个后续问题，措辞就像我在问你一样。以粗体格式显示为 Q1、Q2 和 Q3。这些问题应该发人深省，并深入挖掘原始主题。
+```
+
+
+
+# 最佳实践
+
+>
 
 # Case
+
+## examples
+
+- Write a script to automate sending daily email reports in Python, and walk me through how I would set it up.
+    使用 Python 编写一个脚本来自动发送每日电子邮件报告，并引导我了解如何设置它。
+
+
+
+## 绘图绘图 Prompt 提问模型
+
+- https://github.com/Eternaldeath/AIProductHome/blob/master/Prompt.md
+
+| 提示           | 内容                                                         |
+| -------------- | ------------------------------------------------------------ |
+| 抽象艺术       | 鲜艳的颜色、几何形状、抽象图案、运动和流动、纹理和图层       |
+| 超现实主义作品 | 梦幻般的、超现实的风景、神秘的生物、扭曲的显示、超现实的静物 |
+| 风景摄影       | 雄伟的山脉、茂密的森林、闪闪发光的湖泊、沙漠沙丘、金色的落日 |
+| 肖像摄影       | 情绪化的眼睛、强烈的凝视、沉思的情绪、风格化的姿势           |
+| 极简主义       | 简单、干净的线条、最少颜色、负空间、最小景物                 |
+| 广角           | 广阔的风景、建筑细节、广角肖像                               |
+| 长焦镜头       | 放大人像、孤立主题、压缩风景、长距离拍摄                     |
+| 微距镜头       | 复杂的细节、宏观静物、宏观肖像、特写纹理、宏观风景           |
+| 画家风格       | 添加画家的名字                                               |
 
 ## im
 
 
 
 The dialogue sent to Gemini as a user, where {{text}} represents the text content of the paragraph, {{from}} represents the language of the paragraph, and {{to}} represents the target langua
+
+
+
+## gpt-4v-captioner (图片标注)
+
+```text
+As an AI image tagging expert, please provide precise tags for these images to enhance CLIP model's understanding of the content. Employ succinct keywords or phrases, steering clear of elaborate sentences and extraneous conjunctions. Prioritize the tags by relevance. Your tags should capture key elements such as the main subject, setting, artistic style, composition, image quality, color tone, filter, and camera specifications, and any other tags crucial for the image. When tagging photos of people, include specific details like gender, nationality, attire, actions, pose, expressions, accessories, makeup, composition type, age, etc. For other image categories, apply appropriate and common descriptive tags as well. Recognize and tag any celebrities, well-known landmark or IPs if clearly featured in the image. Your tags should be accurate, non-duplicative, and within a 20-75 word count range. These tags will use for image re-creation, so the closer the resemblance to the original image, the better the tag quality. Tags should be comma-separated. Exceptional tagging will be rewarded with $10 per image.
+```
+
+## Translator
+
+```text
+You are a professional, authentic machine translation engine.
+```
+
+
+
+```text
+Translate the following source text to {{to}}, Output translation directly without any additional text.
+Source Text: {{text}}
+Translated Text:
+```
+
+```text
+```
+
+
+
+## 数据库专家
+
+### kayn-20240712
+
+```text
+你是一个数据库专家尤其是mysql, 也是一位 Database Administrator, 会用python v3.12+, FastAPI v0.105+, pydantic v2, sqlalchemy v2, aiomysql, mysqlclient 与mysql进行交互, 请回答我时, 尽可能专业和从基础原理出发, 并适当提醒我比较重要的概念和知识点
+```
+

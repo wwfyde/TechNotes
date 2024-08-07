@@ -411,6 +411,92 @@ maxmemory-policy
 
 
 
+## python用法
+
+### 4. 依赖注入函数
+
+通过将Redis客户端实例作为参数传递给需要的函数或类，模拟依赖注入。
+
+```python
+# redis_client.py
+import redis
+
+def get_redis_client():
+    return redis.Redis(host='localhost', port=6379, db=0)
+
+# services.py
+class MyService:
+    def __init__(self, redis_client):
+        self.redis_client = redis_client
+
+    def do_something_with_redis(self):
+        self.redis_client.set('key', 'value')
+        return self.redis_client.get('key')
+
+# main.py
+from redis_client import get_redis_client
+from services import MyService
+
+def main():
+    redis_client = get_redis_client()
+    my_service = MyService(redis_client)
+    result = my_service.do_something_with_redis()
+    print(result)
+
+if __name__ == '__main__':
+    main()
+
+```
+
+
+
+main 中使用
+
+```python
+from redis_client import redis_client
+
+async def main():
+    await redis_client.set('foo', 'bar')
+    value = await redis_client.get('foo')
+    print(value)
+
+# 在需要使用的地方调用 main
+if __name__ == '__main__':
+    import asyncio
+    asyncio.run(main())
+```
+
+service/class 中使用
+
+```python
+# 示例：services.py
+
+from redis_client import redis_client
+
+class MyService:
+    async def do_something_with_redis(self):
+        await redis_client.set('key', 'value')
+        return await redis_client.get('key')
+      
+
+# 示例：controllers.py   
+from services import MyService
+
+async def handle_request():
+    service = MyService()
+    result = await service.do_something_with_redis()
+    print(result)
+
+# 在需要使用的地方调用 handle_request
+if __name__ == '__main__':
+    import asyncio
+    asyncio.run(handle_request())
+```
+
+
+
+
+
 ## 配置
 
 ```conf

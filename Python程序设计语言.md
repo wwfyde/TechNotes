@@ -1053,7 +1053,7 @@ imagnumber ::=  (floatnumber | digitpart) ("j" | "J")
 $       ?       `
 ```
 
-
+> `[]` 在python中的作用, 定义列表, 索引和切片(下标访问), 声明类型参数, 列表推导式, 类型注解(在使用类型注解时，方括号用于指定泛型类型参数)
 
 
 
@@ -1502,6 +1502,8 @@ while i <= 100:
 > [官方文档](https://docs.python.org/zh-cn/3/tutorial/classes.html)
 >
 > [Class](https://docs.python.org/3/tutorial/classes.html)
+
+> 类的使用方法主要两种功能为属性引用(`MyClass.__doc__`)和实例化(`x=MyClass()`)
 
 ## Glossary
 
@@ -3417,15 +3419,21 @@ for item in a:
 >
 > Python cookbook
 
+## array
+
 ## deque
 
 ## heapq
+
+
 
 ## 优先级队列
 
 ## defaultdict
 
-OrderedDict
+## OrderedDict
+
+## bisect
 
 # 文件处理
 
@@ -4126,7 +4134,9 @@ eval(repr('a\nb'))
 
 type有两种用法, 一种是返回对象的类型, 另一种则是生成一个新的类型
 
+# 常用函数和类
 
+## pprint
 
 # Python配置和用法
 

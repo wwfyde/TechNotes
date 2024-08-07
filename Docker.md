@@ -8,7 +8,7 @@
 >
 > 替代产品: containerd, vagrant
 
-
+ 
 
 
 
@@ -82,6 +82,19 @@ docker 三大部分 《docker实战》
 
 推荐直接按照官方Guide操作
 
+- https://docs.docker.com/engine/install/ubuntu/
+- https://docs.docker.com/desktop/install/mac-install/
+- https://docs.docker.com/desktop/install/linux-install/
+
+```shell
+# 通过镜像安装
+curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
+```
+
+
+
+```s
+
 ```shell
 # 官网安装
 sudo apt-get update
@@ -94,7 +107,6 @@ sudo apt-get install \
     software-properties-common
 
 # 添加Docker官方GPG key
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
 # 设置Docker稳定版仓库
 sudo add-apt-repository \
@@ -118,6 +130,20 @@ sudo usermod -a -G docker $USER
 # 这样就安装完毕了!
 
 ```
+
+```shell
+# https://get.docker.com/
+
+
+https://developer.aliyun.com/mirror/docker-ce/
+curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
+systemctl enable --now docker
+
+```
+
+
+
+
 
 ## 配置
 
@@ -965,7 +991,7 @@ docker 利用了集装箱的思想 不断的堆积, 底层可以不断的被复�
  docker pull --platform linux/amd64 node:20
 ```
 
-
+## 构建-buildx
 
 ## 创建-create
 
@@ -3886,6 +3912,19 @@ Docker提供了工具和平台来管理容器的生命周期：
 
 # **最佳实践**
 
+
+
+## push aliuyun
+
+```shell
+
+docker login
+
+docker tag
+```
+
+
+
 ## Resources
 
 - [Docker Samples](https://docs.docker.com/samples/)
@@ -3899,6 +3938,14 @@ Docker提供了工具和平台来管理容器的生命周期：
 > Configure Docker to use a proxy server: https://docs.docker.com/network/proxy/
 >
 > https://docs.docker.com/config/daemon/systemd/
+>
+> https://docs.docker.com/config/daemon/#configure-the-docker-daemon
+>
+> - https://docs.docker.com/config/daemon/proxy/
+
+> [!warning]
+>
+> 在`Docker Desktop` 和 `Docker Engine` 的 代理配置方式不一样
 
 ### 使用镜像
 
@@ -3912,13 +3959,34 @@ Environment="HTTP_PROXY=http://127.0.0.1:7890"
 Environment="HTTPS_PROXY=http://127.0.0.1:7890"
 Environment="ALL_PROXY=socks5://127.0.0.1:7890"
 Environment="NO_PROXY=localhost,127.0.0.1,127.0.0.0/8"
+
+Environment="HTTP_PROXY=http://10.31.0.181:7890"
+Environment="HTTPS_PROXY=http://10.31.0.181:7890/"
+Environment="NO_PROXY=localhost,127.0.0.1"
 ```
 
 
 
-### docker配置文件
+### docker配置文件 (推荐)
 
 ~/.docker/config.json
+
+```shell
+{
+ "proxies": {
+   "http-proxy": "http://10.31.0.181:7890",
+   "https-proxy": "http://10.31.0.181:7890",
+   "no-proxy": "*.test.example.com,.example.org,127.0.0.0/8, 10.31.0.1/16, ssrf_proxy"
+ }
+}
+
+```
+
+
+
+docker 引擎
+
+Linux 中应该使用`https://docs.docker.com/config/daemon/#configure-the-docker-daemon`
 
 
 
@@ -3960,7 +4028,9 @@ gateway.docker.internal
 ```shell
 docker pull --platform linux/amd64 redis
 
-docker save -o redis
+docker save -o redis 5c435642ca4d
+
+docker save -o prom.tar 5c435642ca4d     
 ```
 
 ## Staged build
@@ -4202,10 +4272,14 @@ docker run --restart always \
 -p 6379:6379 --name redis -d redis
 
 # mysql  
-docker run --restart always -p 3306:3306 -h mysql --name mysql \
+docker run  -p 3306:3306 -h mysql --name mysql \
 -v ~/docker/mysql/config:/etc/mysql/conf.d \
 -v ~/docker/mysql/data:/var/lib/mysql \
--e TZ=Asia/Shanghai -e MYSQL_DATABASE=molook -e MYSQL_ROOT_PASSWORD=metac2022  -d mysql
+-e TZ=Asia/Shanghai -e MYSQL_DATABASE=molook -e MYSQL_ROOT_PASSWORD=metac2022 \
+-e MYSQL_USER=molook -e MYSQL_PASSWORD=metac2022  -d mysql
+
+
+# --restart always
 
 docker run --rm -p 3307:3306 --name mysql2 -e MYSQL_DATABASE=demo -e MYSQL_ROOT_PASSWORD=wawawa -it mysql /bin/bash
 
@@ -4265,9 +4339,8 @@ docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=Mssql123' \
 
 # rabbitmq
 docker run -d --name rabbitmq \
--p 15672:15672 \
--p 5672:5672 \
-rabbitmq:3-management
+-e TZ=Asia/Shanghai -p 15672:15672 -p 5672:5672 \
+rabbitmq:management
 # guest / guest
 #  --restart always
 
@@ -4356,6 +4429,18 @@ uvicorn main:app --host 0.0.0.0 --port 8000
 ## 网络问题
 
 通过端口映射, VPN等方式保证网络可访问
+
+
+
+代理 三种方式
+
+
+
+systemd(推荐)
+
+config文件 
+
+export
 
 # Develop with Docker
 

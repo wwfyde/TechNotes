@@ -1036,8 +1036,17 @@ $ sudo apt-get update
 ### 跳转
 
 - 使用 `Ctrl + f` 和 `Ctrl + b` 键进行向前和向后翻页。
+    - **f** 代表“forward”的意思。
+    - **b** 代表“backward”的意思。
+
 - 使用 `Ctrl + d` 和 `Ctrl + u` 键进行向下和向上滚动半页。
+    - `Ctrl + d` 中的 **d** 可以记为“down”（向下），表示向下滚动。
+    - `Ctrl + u` 中的 **u** 可以记为“up”（向上），表示向上滚动。
+
 - 使用 `Ctrl + e` 和 `Ctrl + y` 键分别向上和向下滚动一行。
+    - **y** 代表“yank”或“yet another line”，表示向上移动或再多一行。
+    - **e** 代表“extend”或“extra line”，表示向下扩展或多一行。
+
 - 使用 `H`, `M`, `L` 键将光标移动到当前屏幕的顶部、中部和底部。
 
 
@@ -1330,6 +1339,13 @@ brew install zoxide
 
 一般含义中文文档 
 
+```shell
+man --help
+
+```
+
+
+
 ### man
 
 [官方文档](https://man7.org/linux/man-pages/man1/man.1.html)
@@ -1451,7 +1467,7 @@ pstree -p 80419 | wc -l
 
 ### free
 
-### lsblk-Block Device
+### **lsblk**-Block Device
 
 ```shell
 # 判断是否为固态硬盘
@@ -1471,7 +1487,7 @@ blkid
 
 ### df
 
-### fdisk
+### **fdisk**
 
 ### du
 
@@ -1578,6 +1594,24 @@ sudo apt install python3.12
 # Golang ppa
 sudo add-apt-repository ppa:longsleep/golang-backports
 
+# 配置代理
+
+sudo vim /etc/apt/apt.conf.d/02proxy
+sudo vim /etc/apt/apt.conf
+
+Acquire::http::Proxy "http://10.31.0.181:7890";
+Acquire::https::Proxy "http://10.31.0.181:7890";
+
+# 或者
+Acquire {
+  HTTP::proxy "http://proxy.example.com:port";
+  HTTPS::proxy "https://proxy.example.com:port";
+  FTP::proxy "ftp://proxy.example.com:port";
+}
+
+
+# 临时代理
+sudo apt-get -o Acquire::http::proxy="http://proxy.example.com:port" update
 
 
 ```
@@ -1588,6 +1622,14 @@ sudo add-apt-repository ppa:longsleep/golang-backports
 
 ```shell
 dpkg-query -W
+```
+
+
+
+### chroot
+
+```shell
+sudo chroot /target/root /bin/bash
 ```
 
 
@@ -1842,6 +1884,87 @@ sudo hostnamectl set-hostname <servername>
 > 进程和服务管理
 >
 > systemd: daemon of system, 守护进程
+
+
+
+
+
+### [使用 systemd](https://wiki.metacubex.one/startup/service/#systemd)[¶](https://wiki.metacubex.one/startup/service/#systemd)
+
+- 下载二进制可执行文件 [releases](https://github.com/MetaCubeX/mihomo/releases)
+- 将下载的二进制可执行文件重名名为 `mihomo` 并移动到 `/usr/local/bin/`
+- 以守护进程的方式，运行 mihomo。
+
+使用以下命令将 Clash 二进制文件复制到 /usr/local/bin, 配置文件复制到 /etc/mihomo:
+
+```
+cp mihomo /usr/local/bin
+cp config.yaml /etc/mihomo
+```
+
+创建 systemd 配置文件 `/etc/systemd/system/mihomo.service`:
+
+```
+[Unit]
+Description=mihomo Daemon, Another Clash Kernel.
+After=network.target NetworkManager.service systemd-networkd.service iwd.service
+
+[Service]
+Type=simple
+LimitNPROC=500
+LimitNOFILE=1000000
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_RAW CAP_NET_BIND_SERVICE CAP_SYS_TIME CAP_SYS_PTRACE CAP_DAC_READ_SEARCH CAP_DAC_OVERRIDE
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_RAW CAP_NET_BIND_SERVICE CAP_SYS_TIME CAP_SYS_PTRACE CAP_DAC_READ_SEARCH CAP_DAC_OVERRIDE
+Restart=always
+ExecStartPre=/usr/bin/sleep 1s
+ExecStart=/usr/local/bin/mihomo -d /etc/mihomo
+ExecReload=/bin/kill -HUP $MAINPID
+
+[Install]
+WantedBy=multi-user.target
+```
+
+使用以下命令重新加载 systemd:
+
+```
+systemctl daemon-reload
+```
+
+启用 mihomo 服务：
+
+```
+systemctl enable mihomo
+```
+
+使用以下命令立即启动 mihomo:
+
+```
+systemctl start mihomo
+```
+
+使用以下命令使 mihomo 重新加载：
+
+```
+systemctl reload mihomo
+```
+
+使用以下命令检查 mihomo 的运行状况：
+
+```
+systemctl status mihomo
+```
+
+使用以下命令检查 mihomo 的运行日志：
+
+```
+journalctl -u mihomo -o cat -e
+```
+
+或
+
+```
+journalctl -u mihomo -o cat -f
+```
 
 ### systemctl
 
@@ -2195,6 +2318,18 @@ sudo apt install sysstat
 
 > 磁盘管理
 
+### Links
+
+- [Logical Volume Management, or LVM](https://www.digitalocean.com/community/tutorials/how-to-use-lvm-to-manage-storage-devices-on-ubuntu-18-04)
+
+### 最佳实践
+
+```shell
+
+```
+
+
+
 ### ls - 列出文件信息
 
 > 默认是按文件名排序
@@ -2356,6 +2491,13 @@ tree -I 'directory_name1|directory_name2'
 df -hT
 ```
 
+## lsblk
+
+```shell
+# 
+sudo lsblk
+```
+
 
 
 ### **du** - 查看文件和目录信息
@@ -2452,7 +2594,11 @@ tar -xzvf
 
 ```shell
 # 从给定的目录递归查找文件或目录
-# Find files or directories under the given directory tree, recursively.                                                      
+# Find files or directories under the given directory tree, recursively.                                                     
+
+# 通过关键词查找
+find . | grep ext 
+
 #Find files by extension:                                                  
 find root_path -name '*.ext'
 
@@ -3019,6 +3165,48 @@ duplicate standard input
 
 
 
+```shell
+
+echo "hello, 世界!\n" | tee ~/demo.md > /dev/null
+
+
+# docker engine install 
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+
+#  将 标准输入 追加到文件
+tee -a "$HOME/.bashrc" << 'EOF'
+...contents of here-document here...
+EOF
+
+
+tee /etc/docker/daemon.json <<-'EOF'
+{
+  "registry-mirrors": ["https://kfp63jaj.mirror.aliyuncs.com"]
+}
+EOF
+
+# Copy `stdin` to each file, and also to `stdout`:
+    echo "example" | tee path/to/file
+
+# Append to the given files, do not overwrite:
+    echo "example" | tee -a path/to/file
+
+- Print `stdin` to the terminal, and also pipe it into another program for further processing:
+    echo "example" | tee /dev/tty | xargs printf "[%s]"
+
+- Create a directory called "example", count the number of characters in "example" and write "example" to the terminal:
+    echo "example" | tee >(xargs mkdir) >(wc -c)
+
+```
+
+
+
+
+
 ### json_pp
 
 ## **网络管理**
@@ -3365,11 +3553,16 @@ resolvectl status
 
 
 
-### nmcli
+### **nmcli**
 
 ```shell
 # 查看网络接口配置
 nmcli device show enp4s0
+
+nmcli connection modify | show
+
+# 应用配置
+sudo nmcli connection up 'Wired connection 1'  
 ```
 
 ### ethtool-
@@ -3455,7 +3648,7 @@ vim ~/.ssh/config
 # 示例
 ```
 
-### screen
+### screen(deprecated)
 
 [Screen User's Manual](https://www.gnu.org/software/screen/manual/screen.html)
 
@@ -3484,20 +3677,153 @@ screen -r [会话id]
 
 ### tmux
 
+> [!tip]
+>
+> `tmux` 是一个终端复用器，可以让你在一个终端会话中运行多个终端。它允许你在会话之间切换、分离和重新连接，非常适合远程工作和长时间运行的任务。以下是 `tmux` 的快速上手指南和常用命令。
+>
+> ### 安装 tmux
+>
+> 在大多数 Linux 发行版上，你可以使用包管理器安装 `tmux`：
+>
+> ```shell
+> # Debian/Ubuntu
+> sudo apt-get install tmux
+> 
+> # CentOS/RHEL
+> sudo yum install tmux
+> 
+> # macOS
+> brew install tmux
+> ```
+>
+> ### 启动 tmux
+>
+> 启动 `tmux` 会话：
+>
+> ```shell
+> tmux
+> ```
+>
+> 启动一个命名的 `tmux` 会话：
+>
+> ```shell
+> tmux new -s mysession
+> ```
+>
+> ### 分离和重新连接会话
+>
+> **分离会话**（保持会话运行，自己退出）：
+>
+> ```
+> bash
+> Copy code
+> Ctrl-b d
+> ```
+>
+> **重新连接到会话**：
+>
+> 列出当前的 `tmux` 会话：
+>
+> ```
+> 
+> tmux ls
+> ```
+>
+> 重新连接到命名的 `tmux` 会话：
+>
+> ```shell
+> tmux  # 也会直接到挂起的回话
+> tmux attch # 连接到默认
+> tmux attach -t mysession
+> ```
+>
+> ### 常用 tmux 快捷键
+>
+> `tmux` 的默认快捷键前缀是 `Ctrl-b`，下面的命令都是在按下 `Ctrl-b` 后执行的。
+>
+> #### 会话管理
+>
+> - `d`：分离会话
+> - `:`：进入命令模式
+> - `s`：选择会话
+>
+> #### 窗口管理
+>
+> - `c`：新建窗口
+> - `w`：列出所有窗口
+> - `,`：重命名当前窗口
+> - `&`：关闭当前窗口
+> - `n`：切换到下一个窗口
+> - `p`：切换到上一个窗口
+> - 数字键（如 `0`, `1`, `2`...）：切换到指定编号的窗口
+>
+> #### 面板管理(pane)
+>
+> - `%`：垂直分割面板
+> - `"`：水平分割面板
+> - `x`：关闭当前面板
+> - `o`：切换到下一个面板
+> - `!`:  将当前面板置于新窗口
+> - `Ctrl-方向键`：调整面板大小
+> - `q` : 显示面板编号
+>
+> #### 滚动与复制模式
+>
+> - `[`：进入滚动和复制模式
+> - `Space`：开始选择文本
+> - `Enter`：复制选定的文本
+> - `]`：粘贴复制的文本
+>
+> ### 配置文件示例
+>
+> 你可以通过编辑 `~/.tmux.conf` 文件来自定义 `tmux` 配置。以下是一个简单的配置示例：
+>
+> ```
+> bash
+> Copy code
+> # 设置前缀键为 Ctrl-a
+> unbind C-b
+> set-option -g prefix C-a
+> bind-key C-a send-prefix
+> 
+> # 启用鼠标支持
+> set-option -g mouse on
+> 
+> # 设置分割面板的快捷键
+> bind-key | split-window -h
+> bind-key - split-window -v
+> 
+> # 设置状态栏样式
+> set-option -g status-bg colour235
+> set-option -g status-fg white
+> set-option -g status-interval 5
+> ```
+>
+> ### 实用技巧
+>
+> 1. **持久会话**：使用 `tmux` 保持远程会话，即使网络连接断开也不影响正在进行的任务。
+> 2. **多任务并行**：在一个 `tmux` 会话中管理多个窗口和面板，提高工作效率。
+> 3. **自定义配置**：根据个人习惯自定义 `tmux` 配置文件，提升使用体验。
+>
+> ### 小结
+>
+> `tmux` 是一个功能强大的终端复用器，适合在远程工作和多任务环境中使用。通过掌握常用命令和快捷键，你可以大大提高终端操作的效率。尝试配置文件来个性化你的 `tmux` 使用体验，让它更符合你的工作习惯。
+
 ```shell
 # 新建会话
 - Start a new session:
 tmux
 
 # 新建命名会话
-- Start a new named session:
+# Start a new named session:
     tmux new -s name
 
 # 查看已经存在的会话
 - List existing sessions:
     tmux ls
 
-- Attach to the most recently used session:
+# 连接到最新会话
+# Attach to the most recently used session:
     tmux attach
 
 - Detach from the current session (inside a tmux session):
@@ -3511,6 +3837,14 @@ tmux
 
 - Kill a session by name:
     tmux kill-session -t name
+    
+# 重命名窗口
+tmux rename-session -t oldname newname
+ctrl + b + ,
+
+# 重命名会话
+tmux rename -t
+tmux rename-session -t oldname newname
 
 ```
 
@@ -3740,6 +4074,38 @@ pygmentize
 
 [官网: vsftpd conf](https://security.appspot.com/vsftpd/vsftpd_conf.html)
 
+### 核心配置
+
+```shell
+# 配置文件路径 /etc/vsftpd.conf
+
+# 允许写入
+write_enable=YES
+
+# 允许utf-8字符
+utf8_filesystem=YES
+
+# 配置为允许写入和允许ftp根目录为~用户home目录而不系统/目录
+chroot_local_user=YES
+allow_writeable_chroot=YES
+local_root=/home/molook/code
+# local_root=/home/$USER/code
+
+# 将FTP根目录映射用户家目录(采用多用户时禁用该二者选项)
+#chroot_local_user=YES
+#allow_writeable_chroot=YES
+
+# 如果仅使用单用户时(如本地系统用户) 可以直接修改root目录
+#user_sub_token=$USER
+#local_root=/home/$USER/ftp
+
+
+# 通过用户配置目录为每个用户配置root目录
+user_config_dir=/etc/vsftpd/user_configs
+```
+
+
+
 ### 常见需求
 
 ### 配置ssl 登录
@@ -3761,6 +4127,17 @@ pasv_min_port=20003
 pasv_max_port=20003
 pasv_address=39.174.67.232
 
+
+# 暂时禁用
+#rsa_cert_file=/etc/vsftpd/ftp.molook.cn.pem
+#rsa_private_key_file=/etc/vsftpd/ftp.molook.cn.key
+#ssl_enable=YES
+#force_local_data_ssl=YES
+#force_local_logins_ssl=YES
+#pasv_enable=YES
+#pasv_min_port=20002
+#pasv_max_port=20003
+#pasv_address=39.174.67.232
 
 # 匿名登录 
 
@@ -4096,18 +4473,7 @@ tcp_recv_buffer_bytes=3276800
 sudo apt install dbus-x11
 ```
 
-ti
 
-## tigervnc
-
-```shell
-sudo apt install tigervnc-standalone-server tigervnc-common
-
-```
-
-## tightvnc
-
-https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-vnc-on-ubuntu-22-04
 
 ## gnome-remote-desktop(推荐)
 
@@ -4117,6 +4483,18 @@ https://help.ubuntu.com/stable/ubuntu-help/sharing-desktop.html
 
 ```shell
 systemctl --user restart gnome-remote-desktop.service
+```
+
+## syncthing
+
+```shell
+# mac
+
+To start syncthing now and restart at login:
+  brew services start syncthing
+Or, if you don't want/need a background service you can just run:
+  /opt/homebrew/opt/syncthing/bin/syncthing -no-browser -no-restart
+
 ```
 
 
@@ -4138,7 +4516,7 @@ sudo certbot --nginx
 sudo service nginx restart
 ```
 
-
+## cloc-代码统计
 
 # 系统配置
 
@@ -4469,6 +4847,81 @@ umount /dev/sda2
 sudo fdisk /dev/sda
 
 
+```
+
+
+
+## 逻辑卷扩容
+
+```shell
+# prepare  取消挂载
+
+# 创建物理卷
+sudo pvcreate /dev/nvme0n1p2
+
+# 将其加入卷组
+sudo vgextend ubuntu-vg /dev/nvme0n1p2      
+
+# 扩展逻辑卷
+sudo lvextend -l +100%FREE /dev/mapper/ubuntu--vg-ubuntu--lv
+
+# 扩展文件系统
+sudo resize2fs /dev/mapper/ubuntu--vg-ubuntu--lv
+
+```
+
+
+
+
+
+## 远程挂载
+
+```shell
+sudo apt install 
+sudo apt-get install sshfs
+# 未避免密码输入 需要将 本地的公钥复制到挂载源服务器
+ssh-keygen -t rsa -b 4096 -C '142'
+
+ssh-copy-id molook@192.168.0.130
+
+
+# 临时挂载
+sudo sshfs -o allow_other molook@192.168.0.130:/mnt/molook /home/molook/crawler
+
+
+
+### 持久化挂载
+
+# dump 0, 1 是否需要备份
+# pass 0, 1 是否需要文件系统检查
+# options  挂载选项
+# type  文件系统类型
+# file system		源文件系统标识
+# mount point  目标挂载点
+# <file system> <mount point>   <type>  <options>       <dump>  <pass>
+molook@192.168.0.130:/mnt/molook /home/molook/crawler fuse.sshfs defaults,_netdev,allow_other 0 0
+```
+
+## nfs
+
+```shell
+# server
+sudo apt install nfs-kernel-server
+# 修改配置
+sudo vim /etc/exports
+/mnt/molook 192.168.0.0/24(rw,sync,no_subtree_check)
+
+# 保存并关闭文件，然后运行以下命令应用新的 NFS 配置：
+sudo exportfs -ra
+
+sudo systemctl start nfs-kernel-server
+sudo systemctl enable nfs-kernel-server
+
+# 验证
+sudo exportfs -v
+
+# macos
+sudo mount -t nfs 130:/home/molook/crawler /Users/wwfyde/crawler
 ```
 
 
@@ -5338,6 +5791,30 @@ name=Asa echo $name
 - `$_` – last parameter of previous command
 - `shift` – rename arguments, `$2` to `$1`, `$3` to `$2`, etc.; lower counter `$``#`
 - `xargs *command*` – read stdin and put it as parameters of *command*
+
+
+
+### 变量展开(Variables Expansion)
+
+https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html
+
+```text
+Table of Contents
+· Introduction
+· 1. ${parameter:-word}
+· 2. ${parameter-word}
+· 3. ${parameter:=word}
+· 4. ${parameter=word}
+· 5. ${parameter:?word}
+· 6. ${parameter?word}
+· 7. ${parameter:+word}
+· 8. ${parameter+word}
+· Conclusion
+```
+
+
+
+
 
 ## 表达式
 

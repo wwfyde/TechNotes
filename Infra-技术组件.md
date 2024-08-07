@@ -106,6 +106,17 @@ Power your metrics and alerting with the leading open-source monitoring solution
 
 ### 方式一 docker
 
+```shell
+docker run \
+    -p 9090:9090 --restart always  \
+    --name prometheus -e TZ=Asia/Shanghai \
+    -v ~/.config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml \
+    -v prometheus-data:/prometheus \
+    -d prom/prometheus
+```
+
+
+
 ### 方式二 直接下载二进制文件
 
 #### 使用 systemd 管理服务
@@ -285,6 +296,40 @@ ExecStart=/usr/local/bin/alertmanager \
 
 [Install]
 WantedBy=multi-user.target
+```
+
+
+
+# nvidia-exporter
+
+```shell
+docker run -d \
+  --name nvidia_smi_exporter \
+  --restart unless-stopped \
+  --device /dev/nvidiactl:/dev/nvidiactl \
+  --device /dev/nvidia-uvm:/dev/nvidia-uvm \
+  --device /dev/nvidia-uvm-tools:/dev/nvidia-uvm-tools \
+  --device /dev/nvidia0:/dev/nvidia0 \
+  -v /usr/lib/x86_64-linux-gnu/libnvidia-ml.so:/usr/lib/x86_64-linux-gnu/libnvidia-ml.so \
+  -v /usr/lib/x86_64-linux-gnu/libnvidia-ml.so.1:/usr/lib/x86_64-linux-gnu/libnvidia-ml.so.1 \
+  -v /usr/bin/nvidia-smi:/usr/bin/nvidia-smi \
+  -p 9835:9835 \
+  utkuozdemir/nvidia_gpu_exporter:1.2.0
+
+
+docker run -d \
+  --name nvidia_smi_exporter \
+  --restart always \
+  --device /dev/nvidiactl:/dev/nvidiactl \
+  --device /dev/nvidia-uvm:/dev/nvidia-uvm \
+  --device /dev/nvidia-uvm-tools:/dev/nvidia-uvm-tools \
+  --device /dev/nvidia0:/dev/nvidia0 \
+  --device /dev/nvidia1:/dev/nvidia1 \
+  -v /usr/lib/x86_64-linux-gnu/libnvidia-ml.so:/usr/lib/x86_64-linux-gnu/libnvidia-ml.so \
+  -v /usr/lib/x86_64-linux-gnu/libnvidia-ml.so.1:/usr/lib/x86_64-linux-gnu/libnvidia-ml.so.1 \
+  -v /usr/bin/nvidia-smi:/usr/bin/nvidia-smi \
+  -p 9835:9835 \
+  utkuozdemir/nvidia_gpu_exporter:1.2.0
 ```
 
 

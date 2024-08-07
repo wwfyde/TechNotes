@@ -7,6 +7,9 @@
 - Google Cloud API Design Guide
 - Microsoft REST API Guidelines
 - GitHub API 
+- https://docs.github.com/en/rest?apiVersion=2022-11-28
+- https://docs.github.com/en/rest/about-the-rest-api/api-versions?apiVersion=2022-11-28
+- https://docs.github.com/zh/rest/using-the-rest-api/getting-started-with-the-rest-api?apiVersion=2022-11-28
 
 ### Pictures
 

@@ -199,9 +199,62 @@ SHOW autocommit;
 
 [](https://www.postgresqltutorial.com/postgresql-administration/)
 
+## 用户和权限管理
+
+```postgresql
+-- 创建用户
+CREATE USER username WITH PASSWORD 'password';
+
+-- 赋予权限
+GRANT ALL PRIVILEGES ON DATABASE dbname TO username;
+```
+
 
 
 ## 备份恢复
+
+```postgresql
+-- 备份
+pg_dump dbname > dbname.sql
+
+-- 恢复
+psql dbname < dbname.sql
+```
+
+备份脚本
+
+```shell
+#!/bin/bash
+
+# Set variables for database connection
+PGUSER=your_username
+PGDATABASE=your_database_name
+
+# Set the path where you want to store the backup files
+BACKUP_DIR=/path/to/backup/directory
+
+# Get current date and time
+datestamp=$(date +'%Y-%m-%d')
+timestamp=$(date +'%H%M')
+
+# Execute pg_dump command to dump the database
+pg_dump -U "$PGUSER" -d "$PGDATABASE" > "$BACKUP_DIR/$PGDATABASE"_"$datestamp"_"$timestamp".sql
+
+```
+
+
+
+
+
+## 性能优化
+
+```postgresql
+-- 使用EXPLAIN分析查询性能：
+EXPLAIN SELECT column1, column2 FROM tablename WHERE condition;
+-- 调整PostgreSQL配置参数以优化性能。
+```
+
+
 
 ## ROLES & PRIVILEGES
 

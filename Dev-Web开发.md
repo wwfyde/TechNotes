@@ -135,6 +135,141 @@ jwt 是明文的, 但是他是签名的, 当收到自己签发出的token时, �
 
 # OAUTH2
 
+# **RFC**
+
+> [!Note]
+>
+> #### 什么是 RFC 7519？
+>
+> RFC 7519 定义了 JSON Web Token (JWT)，它是一种紧凑的、URL 安全的、用于在各方之间传输声明的方式。JWT 由三部分组成：头部 (Header)、载荷 (Payload) 和签名 (Signature)。
+>
+> #### JWT 的组成部分
+>
+> 1. **头部 (Header)**：
+>
+>     - 通常包含两个部分：令牌类型 (`typ`)，即 `JWT`，以及所使用的签名算法 (`alg`)，如 `HS256` 或 `RS256`。
+>
+>     - 示例：
+>
+>         ```
+>         json
+>         Copy code
+>         {
+>           "alg": "HS256",
+>           "typ": "JWT"
+>         }
+>         ```
+>
+> 2. **载荷 (Payload)**：
+>
+>     - 包含声明 (Claims)。声明是关于实体 (通常是用户) 以及其他数据的陈述。
+>
+>     - 声明有三种类型：注册声明 (Registered Claims)、公开声明 (Public Claims) 和私有声明 (Private Claims)。
+>
+>     - 注册声明（可选但推荐使用）包括：
+>
+>         - `iss` (issuer)：发布者
+>         - `sub` (subject)：主题
+>         - `aud` (audience)：接收者
+>         - `exp` (expiration time)：过期时间
+>         - `nbf` (not before)：生效时间
+>         - `iat` (issued at)：发布时间
+>         - `jti` (JWT ID)：唯一标识符
+>
+>     - 示例：
+>
+>         ```
+>         json
+>         Copy code
+>         {
+>           "sub": "1234567890",
+>           "name": "John Doe",
+>           "admin": true
+>         }
+>         ```
+>
+> 3. **签名 (Signature)**：
+>
+>     - 为了生成签名，你需要对头部和载荷进行编码，然后使用指定的算法和密钥进行签名。
+>
+>     - 生成过程如下：
+>
+>         ```
+>         plaintext
+>         Copy code
+>         HMACSHA256(
+>           base64UrlEncode(header) + "." + base64UrlEncode(payload),
+>           secret)
+>         ```
+>
+> #### JWT 的工作原理
+>
+> 1. **生成 JWT**：
+>     - 客户端使用头部、载荷和一个密钥生成 JWT。
+>     - 头部和载荷被 Base64Url 编码，然后用密钥签名。
+> 2. **传输 JWT**：
+>     - JWT 通常在 HTTP 头部中传输，例如 `Authorization: Bearer <token>`。
+>     - 也可以在 URL 参数或请求体中传输。
+> 3. **验证 JWT**：
+>     - 接收方使用相同的密钥和算法来验证 JWT 的签名是否正确。
+>     - 如果签名正确且未过期，接收方将信任声明内容。
+>
+> #### 安全注意事项
+>
+> 1. **选择合适的算法**：
+>     - 推荐使用 `HS256` 或 `RS256` 等安全算法。
+>     - 避免使用不安全的算法或将算法设置为 `none`。
+> 2. **保护签名密钥**：
+>     - 确保签名密钥的安全，不被未授权方获取。
+> 3. **验证所有声明**：
+>     - 检查 `exp`、`nbf`、`iss`、`aud` 等声明，确保 JWT 的有效性和可信度。
+>
+> #### 示例代码
+>
+> 以下是一个使用 Python 生成和验证 JWT 的示例：
+>
+> ```python
+> python
+> Copy code
+> import jwt
+> import datetime
+> 
+> # 秘钥
+> SECRET_KEY = "your_secret_key"
+> 
+> # 生成 JWT
+> def create_jwt():
+>     payload = {
+>         "sub": "1234567890",
+>         "name": "John Doe",
+>         "iat": datetime.datetime.utcnow(),
+>         "exp": datetime.datetime.utcnow() + datetime.timedelta(seconds=3600)
+>     }
+>     token = jwt.encode(payload, SECRET_KEY, algorithm="HS256")
+>     return token
+> 
+> # 验证 JWT
+> def verify_jwt(token):
+>     try:
+>         decoded = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+>         return decoded
+>     except jwt.ExpiredSignatureError:
+>         return "Token has expired"
+>     except jwt.InvalidTokenError:
+>         return "Invalid token"
+> 
+> # 测试生成和验证 JWT
+> token = create_jwt()
+> print("Generated Token:", token)
+> 
+> decoded = verify_jwt(token)
+> print("Decoded Token:", decoded)
+> ```
+>
+> 通过以上概述和示例代码，您可以快速了解和使用 JWT 来实现安全的令牌认证机制。
+
+
+
 # **最佳实践**
 
 ## https证书签发
@@ -186,6 +321,8 @@ Webhook 可以使用各种技术来实现，例如 HTTP POST 请求、MQTT 消�
 
 HTTP Status Code
 
+status_code
+
 ## 参考资料
 
 - https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
@@ -197,7 +334,7 @@ HTTP Status Code
 | 100     | Continue           |                                                              |
 | 200     |                    |                                                              |
 | 201     | Created            |                                                              |
-|         |                    |                                                              |
+| 204     |                    |                                                              |
 | 307     | Temporary redirect | 临时重定向                                                   |
 | **400** | bad_request        |                                                              |
 | **401** | unauthorized       | key missing or invalid                                       |

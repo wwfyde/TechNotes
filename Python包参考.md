@@ -1,5 +1,10 @@
 # Python Packages
 
+## tips
+
+- 复制选择器
+- 通过codegen 生成模版
+
 # Python Standard Libraries
 
 
@@ -1183,12 +1188,128 @@ A framework for network servers
 
 ## traceback-打印或读取栈回溯信息
 
+# Package Index
+
+> [Python toolboox](https://piptrends.com/python-toolbox?utm_source=substack&utm_medium=email)
+
+- Dev 
+    - **pre-commit**
+    - pip-compile
+    - coverage
+    - mypy
+    - poetry
+    - tox
+    - airflow
+    - lxml
+- Asynchronous Programming
+    - trio
+    - uvloop
+    - asyncio
+- Auth and crypto
+    - oauthlib
+    - python-jose
+    - passlib[bcrypt]
+    - cryptography
+- Coding
+    - isort
+    - black
+- Other
+    - dataclasses
+- Type Annotations: [typing-extensions](https://piptrends.com/package/typing-extensions)
+- click
+    - typer
+    - fire
+- rich
+- https://github.com/pyca/cryptography
+- [beautifulsoup](https://piptrends.com/package/beautifulsoup)
+- Job Scheduler
+    - airflow
+    - apscheduler
+    - schedule
+- log
+    - strcutlog
+    - loguru
+    - python-json-logger
+- rpc
+    - thrift
+- zappa
+- sh
+- [django-taggit](https://piptrends.com/package/django-taggit)
+- task queue: celery
+- jinja
+- boto3: third party api
+- web crawling(爬虫)
+    - [selenium](https://github.com/SeleniumHQ/selenium)
+    - playwright
+    - lxml
+    - beautifulsoup4
+    - xpath
+    - pyperclip
+- data/file processing
+    - pandas
+    - openpyxl
+    - xlsxwriter
+
+
+
+## AI
+
+- [tiktoken](https://github.com/openai/tiktoken)
+
+## Tools
+
+### pip-tools
+
+```shell
+pip install pip-tools
+
+# The pip-compile command lets you compile a requirements.txt file from your dependencies, specified in either pyproject.toml, setup.cfg, setup.py, or requirements.in.
+
+
+```
+
+### tox
+
+### pre-commit
+
+
+
+# Utils
+
+## tqdm
+
+## beautifulsoup4
+
+## requests
+
+# more_itertools
+
+# Rust
+
+## pyo3
+
+## polars
+
+## rpds-py
+
+## delta-rs
+
+https://github.com/delta-io/delta-rs
+
+## maturin
+
+[maturin](https://github.com/PyO3/maturin)
+
+
+
 # **asyncio**(std)
 
 ## Links
 
 - [Coroutines and Tasks](https://docs.python.org/3/library/asyncio-task.html)
 - [Python并发编程](Python并发编程)
+
+# cryptography
 
 # typing
 
@@ -1222,12 +1343,35 @@ A framework for network servers
 
 ### 泛型generic type
 
-带有参数类型的泛型
+> 泛型参数, 可以类似理解为函数参数, `[]` subscrpting 不是索引, 而是声明参数列表, 通常是按位置确定
+>
+> Generic[A, B, C] 表示泛型需要解释3个类型参数, 顺序和数量都有意义
+
+带有参数类型的泛型, 泛型就是值类型是一个定义时未确定具体类型, 使用时才确定的类型, 是一种更宽泛的类型约束, 可以是自定义的类型
+
+泛型可以增强类型安全和代码灵活性, 就是类型约束, 泛型可以使用自定义类型, 而不单单是内置类型
+
+>  [!tip]
+>
+> AI修正描述
+> **泛型** 是指在定义类、函数或数据结构时，不指定具体的数据类型，而是在使用时才指定具体的类型。它是一种更灵活和通用的类型约束，可以适用于各种自定义的类型以及内置类型。通过泛型，可以创建适用于多种类型的通用接口，从而提高代码的重用性和类型安全性。
 
 - dict
 - list
 - set
 - tuple
+
+### Type
+
+```python
+# ModelType 是一个泛型类型变量，受限于继承自 Base 的类型。
+ModelType = TypeVar("ModelType", bound=Base)  
+# CreateSchemaType 和 UpdateSchemaType 是泛型类型变量，受限于继承自 BaseModel 的类型。
+CreateSchemaType = TypeVar("CreateSchemaType", bound=BaseModel)
+UpdateSchemaType = TypeVar("UpdateSchemaType", bound=BaseModel)
+```
+
+
 
 
 
@@ -1306,9 +1450,11 @@ def example_func(*args: Tuple[int, str], **kwargs: Dict[str, int]) -> None:
 
 # ---
 
-
+## Protocol
 
 # **pydantic**
+
+data validate, data serialize
 
 类似Go, Rust, C中的结构体(struct), 也类似Python中的数据类(dataclass), 主要用于数据验证(validate),序列化(serialize)和json schema 生成, 主要是数据类型转换, 通用抽象层, 通用模型.  
 
@@ -1586,19 +1732,90 @@ def get_url():
 ## 参考资料
 
 - [GitHub官方代码示例](https://github.com/sqlalchemy/sqlalchemy/tree/main/examples)
+- [SQLAlchemy ORM](https://docs.sqlalchemy.org/en/20/orm/index.html)
+    - [ORM Mapped Class Configuration](https://docs.sqlalchemy.org/en/20/orm/mapper_config.html)
+- [SQLAlchemy Unified Tutorial](https://docs.sqlalchemy.org/en/20/tutorial/index.html)
+- [SQLAlchemy core](https://docs.sqlalchemy.org/en/20/core/index.html)
+    - statement and expression
+    - [The Type Hierarchy](https://docs.sqlalchemy.org/en/20/core/type_basics.html)
+
+
+
 - [Data Manipulation with the ORM](https://docs.sqlalchemy.org/en/20/tutorial/orm_data_manipulation.html)
 - [Session API](https://docs.sqlalchemy.org/en/20/orm/session_api.html)
 - [](https://docs.sqlalchemy.org/en/20/orm/session_basics.html#id1)
 - [tutorials](https://docs.sqlalchemy.org/en/20/tutorial/index.html)
-- 
+- [sqlalchemy asyncio](https://docs.sqlalchemy.org/en/20/orm/extensions/asyncio.html)
+- [Insert, Updates, Deletes](https://docs.sqlalchemy.org/en/20/core/dml.html)
+    增删改, 批量插入
+- [2.0 Migration - ORM Usage -API对比](https://docs.sqlalchemy.org/en/20/changelog/migration_20.html#migration-orm-usage)
+
+
+
+## 模型声明
+
+```python
+# 字段别名 __name_pos位置参数或name
+a = mapped_column(__type_pos, __name_pos, name='name_in_column')
+
+
+# 类别名
+aliased
+from sqlalchemy.orm import aliased
+user_cls = aliased(User, name="user_cls")
+
+
+```
+
+
 
 ## 基础增删改查
 
 
 
+### 增
+
+```python
+
+# 先初始化对象
+user_1 = Use(a=1)
+user_1.b = 2
+session.add(user_1)
+session.commit()
+session.refresh(user_1)
+
+
+# 通过 insert 语句
+sku_data = {'name': 'Sample Product', 'price': 100}
+stmt = insert(ProductSKU).values(sku_data)
+
+# 通过orm  当数据源是dict时
+product_sku = ProductSKU(**sku_data)
+session.add(product_sku)
+
+# 或者
+logger.info(str(item))
+for key, value in item.model_dump(exclude_unset=True).items():
+    setattr(item_db, key, value)
+    
+
+# 批量插入
+
+```
+
+
+
 ### 改
 
+更新
+
 分为 ORM风格和Core风格
+
+> [!Note]
+>
+> 更新时一定要先从数据库中查询再更新对象, 否则就是插入
+>
+> 或者使用execute
 
 ```python
 from sqlalchemy import update
@@ -1621,6 +1838,116 @@ db.execute(stmt)
 ```
 
 
+
+```python
+# query不推荐 legacy
+session.query.update
+
+session.obj.id = 1
+session.update
+
+session.add
+
+# 使用update语句
+from sqlalchemy import update
+
+stmt = (
+    update(user_table).
+    where(user_table.c.id == 5).
+    values(name='user #5')
+)
+
+db.execute(stmt)
+```
+
+```python
+
+from sqlalchemy import bindparam
+```
+
+
+
+### 查
+
+```python
+# 现在首推 select
+
+
+session.execute(
+  select(User)
+).scalars().all()
+
+# or
+
+session.scalars(
+  select(User)
+).all()
+
+
+# ORM 风格
+# 如果是 主键
+Session.get
+
+# select 也是orm 风格主推
+
+
+
+
+```
+
+### 删
+
+```python
+
+# ORM 风格
+Session.delete()
+
+# SQL 风格
+```
+
+
+
+
+
+```python 
+# 旧版本迁移
+# https://docs.sqlalchemy.org/en/20/changelog/migration_20.html#migration-20-query-usage
+
+```
+
+| [1.x style](https://docs.sqlalchemy.org/en/20/glossary.html#term-1.x-style) form | [2.0 style](https://docs.sqlalchemy.org/en/20/glossary.html#term-2.0-style) form | See Also                                                     |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `session.query(User).get(42)`                                | `session.get(User, 42)`                                      | [ORM Query - get() method moves to Session](https://docs.sqlalchemy.org/en/20/changelog/migration_20.html#migration-20-get-to-session) |
+| `session.query(User).all()`                                  | `session.execute(  select(User) ).scalars().all() # or session.scalars(  select(User) ).all()` | [ORM Query Unified with Core Select](https://docs.sqlalchemy.org/en/20/changelog/migration_20.html#migration-20-unify-select)[`Session.scalars()`](https://docs.sqlalchemy.org/en/20/orm/session_api.html#sqlalchemy.orm.Session.scalars)[`Result.scalars()`](https://docs.sqlalchemy.org/en/20/core/connections.html#sqlalchemy.engine.Result.scalars) |
+| `session.query(User).\  filter_by(name="some user").\  one()` | `session.execute(  select(User).  filter_by(name="some user") ).scalar_one()` | [ORM Query Unified with Core Select](https://docs.sqlalchemy.org/en/20/changelog/migration_20.html#migration-20-unify-select)[`Result.scalar_one()`](https://docs.sqlalchemy.org/en/20/core/connections.html#sqlalchemy.engine.Result.scalar_one) |
+| `session.query(User).\  filter_by(name="some user").\  first()` | `session.scalars(  select(User).  filter_by(name="some user").  limit(1) ).first()` | [ORM Query Unified with Core Select](https://docs.sqlalchemy.org/en/20/changelog/migration_20.html#migration-20-unify-select)[`Result.first()`](https://docs.sqlalchemy.org/en/20/core/connections.html#sqlalchemy.engine.Result.first) |
+| `session.query(User).options(  joinedload(User.addresses) ).all()` | `session.scalars(  select(User).  options(    joinedload(User.addresses)  ) ).unique().all()` | [ORM Rows not uniquified by default](https://docs.sqlalchemy.org/en/20/changelog/migration_20.html#joinedload-not-uniqued) |
+| `session.query(User).\  join(Address).\  filter(    Address.email == "e@sa.us"  ).\  all()` | `session.execute(  select(User).  join(Address).  where(    Address.email == "e@sa.us"  ) ).scalars().all()` | [ORM Query Unified with Core Select](https://docs.sqlalchemy.org/en/20/changelog/migration_20.html#migration-20-unify-select)[Joins](https://docs.sqlalchemy.org/en/20/orm/queryguide/select.html#orm-queryguide-joins) |
+| `session.query(User).\  from_statement(    text("select * from users")  ).\  all()` | `session.scalars(  select(User).  from_statement(    text("select * from users")  ) ).all()` | [Getting ORM Results from Textual Statements](https://docs.sqlalchemy.org/en/20/orm/queryguide/select.html#orm-queryguide-selecting-text) |
+| `session.query(User).\  join(User.addresses).\  options(    contains_eager(User.addresses)  ).\  populate_existing().all()` | `session.execute(  select(User)  .join(User.addresses)  .options(    contains_eager(User.addresses)  )  .execution_options(      populate_existing=True  ) ).scalars().all()` | [ORM Execution Options](https://docs.sqlalchemy.org/en/20/orm/queryguide/api.html#orm-queryguide-execution-options)[Populate Existing](https://docs.sqlalchemy.org/en/20/orm/queryguide/api.html#orm-queryguide-populate-existing) |
+| `session.query(User).\  filter(User.name == "foo").\  update(    {"fullname": "Foo Bar"},    synchronize_session="evaluate"  )` | `session.execute(  update(User)  .where(User.name == "foo")  .values(fullname="Foo Bar")  .execution_options(    synchronize_session="evaluate"  ) )` | [ORM-Enabled INSERT, UPDATE, and DELETE statements](https://docs.sqlalchemy.org/en/20/orm/queryguide/dml.html#orm-expression-update-delete) |
+| `session.query(User).count()`                                | `session.scalar(  select(func.count()).  select_from(User) ) # or session.scalar(  select(func.count(User.id)) )` | [`Session.scalar()`](https://docs.sqlalchemy.org/en/20/orm/session_api.html#sqlalchemy.orm.Session.scalar) |
+
+
+
+##  asyncio
+
+- [sqlalchemy asyncio](https://docs.sqlalchemy.org/en/20/orm/extensions/asyncio.html)
+- [ORM Session API Documentation](https://docs.sqlalchemy.org/en/20/orm/extensions/asyncio.html#orm-session-api-documentation)
+
+
+
+## Table 声明
+
+> [!Note]
+>
+> Above, when Declarative processes each class attribute, each [`mapped_column()`](https://docs.sqlalchemy.org/en/20/orm/mapping_api.html#sqlalchemy.orm.mapped_column) will derive additional arguments from the corresponding [`Mapped`](https://docs.sqlalchemy.org/en/20/orm/internals.html#sqlalchemy.orm.Mapped) type annotation on the left side, if present. Additionally, Declarative will generate an empty [`mapped_column()`](https://docs.sqlalchemy.org/en/20/orm/mapping_api.html#sqlalchemy.orm.mapped_column) directive implicitly, whenever a [`Mapped`](https://docs.sqlalchemy.org/en/20/orm/internals.html#sqlalchemy.orm.Mapped) type annotation is encountered that does not have a value assigned to the attribute (this form is inspired by the similar style used in Python [dataclasses](https://docs.python.org/3/library/dataclasses.html)); this [`mapped_column()`](https://docs.sqlalchemy.org/en/20/orm/mapping_api.html#sqlalchemy.orm.mapped_column) construct proceeds to derive its configuration from the [`Mapped`](https://docs.sqlalchemy.org/en/20/orm/internals.html#sqlalchemy.orm.Mapped) annotation present.
+> 上面，当 Declarative 处理每个类属性时，每个 `mapped_column()` 将从左侧相应的 `Mapped` 类型注释（如果存在）派生附加参数。此外，每当遇到没有为属性分配值的 `Mapped` 类型注释时，声明式都会隐式生成一个空的 `mapped_column()` 指令（这种形式的灵感来自于使用的类似样式）在 Python 数据类中）；此 `mapped_column()` 构造继续从存在的 `Mapped` 注释派生其配置。
+
+### Links
+
+- [Table Configuration with Declarative](https://docs.sqlalchemy.org/en/20/orm/declarative_tables.html#declarative-table-with-mapped-column)
+- [ORM Mapped Class Configuration](https://docs.sqlalchemy.org/en/20/orm/mapper_config.html)
 
 ## 核心特性
 
@@ -1651,6 +1978,29 @@ What Are These Relationship Attributes[¶](https://sqlmodel.tiangolo.com/tutoria
 
 
 
+## 常见需求
+
+```python
+# 统计
+
+session.scalar(
+  select(func.count()).
+  select_from(User).where(stmt.whereclause)
+)
+
+# 分页时 count 需要同步过滤 
+
+# or
+
+session.scalar(
+  select(func.count(User.id))
+)
+```
+
+
+
+
+
 # redis
 
 ## 最佳实践
@@ -1667,7 +2017,7 @@ decode_responses=True, 注意连接池
 
 ## json字符串
 
-
+# mymongo
 
 # redis
 
@@ -1733,7 +2083,7 @@ A task queue's input is a unit of work, called a task, dedicated worker processe
 
 # tenacity-重试库
 
-# `backoff`-回退/重试
+# `backoff`-回退/重试(Deprecated)
 
 # watchdog
 
@@ -1741,11 +2091,13 @@ pathlib
 
 # pyyaml
 
-# dateutil
+# **dateutil**
 
 # Arrow
 
 # **Cryptography**
+
+https://github.com/pyca/cryptography
 
 
 
@@ -1762,6 +2114,368 @@ pathlib
 
 
 # playwright
+
+## Links
+
+- [codegen](https://playwright.dev/python/docs/codegen)
+- [鼠标事件-mouse](https://playwright.dev/python/docs/api/class-mouse)
+
+### 必读
+
+- [其他选择器: https://playwright.dev/python/docs/other-locators](https://playwright.dev/python/docs/other-locators)
+
+
+
+### Articles/教程
+
+- [playwright 持久化登录]https://mp.weixin.qq.com/s/Ndxw_pqxosMmT5KTdbIN8g
+
+## features
+
+## use-scenarios
+
+- 文件下载
+- 图片下载
+- 截图
+
+## Tips
+
+- codegen
+- chrome devtools 节点复制各种风格的选择器(xpath, js, css)
+- 通过cookie, token等实现持久化登录
+
+
+
+## quickstart
+
+```shell
+pip install playwright
+
+playwright install
+
+
+
+获取新的打开的页面
+```
+
+headless 模式, 允许无浏览器界面运行
+
+### 调试模式
+
+await page.pause()
+
+> [!Note]
+>
+> ✨:robot: 在使用 Playwright 进行爬虫开发时，调试模式可以帮助你更方便地观察网页加载过程和调试代码。Playwright 提供了一些有用的功能来支持调试，包括无头模式、自动暂停以及浏览器开发工具。
+>
+> 以下是一些启用 Playwright 调试模式的技巧和方法：
+>
+> ### 1. 启用无头模式
+>
+> 无头模式（headless mode）是在没有图形界面的情况下运行浏览器。要禁用无头模式（即启用有头模式），可以设置 `headless=False`：
+>
+> ```
+> python
+> Copy code
+> browser = await p.chromium.launch(headless=False)
+> ```
+>
+> ### 2. 使用 `pause` 方法
+>
+> Playwright 提供了 `page.pause()` 方法，可以在脚本中暂停执行，并打开浏览器开发工具，允许你手动进行交互和调试。
+>
+> ```
+> python
+> Copy code
+> await page.pause()
+> ```
+>
+> ### 3. 调试时自动打开开发工具
+>
+> 你可以在启动浏览器时，自动打开开发工具：
+>
+> ```
+> python
+> Copy code
+> browser = await p.chromium.launch(headless=False, devtools=True)
+> ```
+>
+> ### 4. 使用 `DEBUG` 环境变量
+>
+> 通过设置 `DEBUG` 环境变量，你可以启用 Playwright 的调试日志输出。这在查看执行过程中发生的事件和步骤时非常有用。
+>
+> ```
+> bash
+> Copy code
+> DEBUG=pw:api python your_script.py
+> ```
+>
+> ### 示例脚本
+>
+> 下面是一个完整的示例脚本，展示了如何在调试模式下使用 Playwright：
+>
+> ```python
+> python
+> Copy code
+> import asyncio
+> from playwright.async_api import async_playwright
+> 
+> async def main():
+>     async with async_playwright() as p:
+>         # 启用有头模式并自动打开开发工具
+>         browser = await p.chromium.launch(headless=False, devtools=True)
+>         page = await browser.new_page()
+> 
+>         # 导航到目标网址
+>         await page.goto('https://filatz.tmall.com')
+> 
+>         # 使用 pause 方法暂停执行
+>         await page.pause()
+> 
+>         # 等待图片加载
+>         await page.wait_for_selector('img')
+> 
+>         # 获取所有图片的 src 属性
+>         img_elements = await page.query_selector_all('img')
+>         img_urls = [await img.get_attribute('src') for img in img_elements if await img.get_attribute('src')]
+> 
+>         # 输出抓取到的图片 URL
+>         for url in img_urls:
+>             print(url)
+> 
+>         await browser.close()
+> 
+> # 异步运行主函数
+> asyncio.run(main())
+> ```
+>
+> ### 调试技巧
+>
+> 1. **逐步调试：** 使用 `await page.pause()` 在脚本执行过程中暂停，允许你在当前状态下手动检查页面元素和状态。
+>
+> 2. **查看日志：** 设置 `DEBUG` 环境变量，可以查看详细的执行日志。
+>
+> 3. **使用浏览器开发工具：** 启动有头模式并自动打开开发工具，可以方便地检查 DOM 结构，网络请求，控制台输出等。
+>
+> 4. **截图和 PDF：** 在关键步骤处截取页面截图或生成 PDF，以便离线查看页面状态。
+>
+>     ```
+>     python
+>     Copy code
+>     await page.screenshot(path='screenshot.png')
+>     await page.pdf(path='page.pdf')
+>     ```
+>
+> 通过以上方法和技巧，你可以在开发和调试 Playwright 脚本时更加高效，快速找到并解决问题。如果有进一步的问题或需要更多的帮助，请随时告诉我。
+
+### 选择新打开的页面
+
+```python
+with context.expect_page() as new_page_info:
+	page.click("selector-for-link-or-button")
+
+new_page = new_page_info.value
+new_page.wait_for_load_state('load')
+new_page.goto("https://example.com/new-page")  # 这是一个示例操作
+
+```
+
+### locator 迭代
+
+```python
+# 方法一 element_handles(推荐)
+locators = await page.locator('css=your-selector').element_handles()
+for locator in locators:
+  ...
+
+# 方法二 使用 locator.count() 和 locator.nth() 方法
+
+	
+```
+
+
+
+## 元素操作与选择
+
+## 核心API
+
+goto-加载页面
+
+### wait_for_load_state
+
+#### load(Load)
+
+dom css 样式这些均加载完成
+
+#### domcontentloaded(DOMContentLoaded)
+
+
+
+## 常见需求
+
+### 拦截请求(Abort Request)
+
+> https://playwright.dev/python/docs/network#abort-requests
+
+### 拦截并记录请求
+
+### 取消请求
+
+
+
+### 获取数据
+
+#### 获取整个页面文档
+
+```python
+html_content = await page.content()
+    print(f"HTML content: {html_content}")
+```
+
+#### 使用xpath等解析文档
+
+beautifulsoup4
+
+lxml
+
+html.parse(标准库)
+
+```python
+  html = page.content()
+  tree = etree.HTML(html)
+  from lxml import etree
+
+
+```
+
+
+
+#### 文本数据: 通过text_cotent
+
+locator.text_content()
+
+```python
+h1_text = await page.locator('h1').text_content()
+    print(f"h1 text: {h1_text}")
+```
+
+#### 通过元素属性get_attribute
+
+```python
+    # 获取 a 元素的 href 属性
+    href = await page.locator('a').get_attribute('href')
+    print(f"href: {href}")
+```
+
+#### 通过evaluate方法执行js
+
+```python
+ # 使用 evaluate 方法执行 JavaScript 获取所有 a 元素的 href 属性
+    hrefs = await page.evaluate('Array.from(document.querySelectorAll("a")).map(a => a.href)')
+    print(f"hrefs: {hrefs}")
+```
+
+通过 `evaluate_all`获取一组数据
+
+#### 通过API
+
+### 爬取图片
+
+#### handle_route
+
+##### 内置的持久(复用playwright上下文)
+
+##### route.fetch
+
+#### page.on
+
+### dom-url
+
+通过 evaluate函数
+
+httpx 
+
+
+
+### 分页处理(pagination)
+
+#### 主要思想
+
+- 通过点击下一页
+- 通过URL查询参数迭代 API
+- 获取最大页数
+    - 通过API
+    - 通过页面元素
+
+- 并发提取页面
+
+
+
+
+
+### 屏幕滚动(scrolling)
+
+[Scrolling](https://playwright.dev/python/docs/input#scrolling)
+
+> 主要有三种思路
+>
+> page.scroll_into_view_if_needed()
+>
+> If you would like to control the scrolling more precisely, use [mouse.wheel()](https://playwright.dev/python/docs/api/class-mouse#mouse-wheel) or [locator.evaluate()](https://playwright.dev/python/docs/api/class-locator#locator-evaluate):
+
+Most of the time, Playwright will automatically scroll for you before doing any actions. Therefore, you do not need to scroll explicitly.
+
+```python
+# Scrolls automatically so that button is visible
+await page.get_by_role("button").click()
+```
+
+
+
+```python
+# Scroll the footer into view, forcing an "infinite list" to load more content
+await page.get_by_text("Footer text").scroll_into_view_if_needed()
+```
+
+
+
+```python
+# Position the mouse and scroll with the mouse wheel
+await page.get_by_test_id("scrolling-container").hover()
+await page.mouse.wheel(0, 10)
+
+# Alternatively, programmatically scroll a specific element
+await page.get_by_test_id("scrolling-container").evaluate("e => e.scrollTop += 100")
+```
+
+### 保存状态信息(state)
+
+> 主要通过
+>
+> [重用认证状态(Reuse Authentication State)](https://playwright.dev/python/docs/api-testing#reuse-authentication-state)
+>
+> [Reusing signed in state](https://playwright.dev/python/docs/auth#reusing-signed-in-state)
+
+```python
+request_context = playwright.request.new_context(http_credentials={"username": "test", "password": "test"})
+request_context.get("https://api.example.com/login")
+# Save storage state into a variable.
+state = request_context.storage_state()
+
+# Create a new context with the saved storage state.
+context = browser.new_context(storage_state=state)
+```
+
+
+
+## 常见问题
+
+- 并发问题;
+- 懒加载, 拦截image,加载
+
+
+
+
 
 
 
