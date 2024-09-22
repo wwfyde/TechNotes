@@ -8,7 +8,7 @@
 >
 > 替代产品: containerd, vagrant
 
- 
+l 
 
 
 
@@ -3918,9 +3918,15 @@ Docker提供了工具和平台来管理容器的生命周期：
 
 ```shell
 
-docker login
+docker login  --username=someone sub.domain.com
 
 docker tag
+
+docker images
+docker buildx build --platform linux/amd64 -t jinmao:0.1.6 --output type=docker,dest=dist/jinmao-0.1.6.tar .
+docker load -i dist/jinmao-0.1.6.tar
+ 3455  docker tag jinmao:0.1.6 registry.cn-hangzhou.aliyuncs.com/metac_server/jinmap:0.1.6
+ 3456  docker push registry.cn-hangzhou.aliyuncs.com/metac_server/jinmap:0.1.6
 ```
 
 
@@ -3968,6 +3974,22 @@ Environment="NO_PROXY=localhost,127.0.0.1"
 
 
 ### docker配置文件 (推荐)
+
+/etc/docker/daemon.json
+
+```json
+{
+    "proxies": {
+        "http-proxy": "http://10.31.0.181:7890",
+        "https-proxy": "http://10.31.0.181:7890",
+        "no-proxy": "*.test.example.com,.example.org,127.0.0.0/8, 10.31.0.1/16, ssrf_proxy"
+    }
+}
+```
+
+
+
+### 旧
 
 ~/.docker/config.json
 

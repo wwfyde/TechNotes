@@ -17,6 +17,8 @@
 
 # 环境配置
 
+机器学习环境一键安装 [lambda stack](https://lambdalabs.com/lambda-stack-deep-learning-software)
+
 ## pip
 
 [阿里巴巴镜像站](https://developer.aliyun.com/mirror/pypi)
@@ -104,6 +106,21 @@ package-mode = false  # 设置root 非package
 ```
 
 
+
+## nvidia-container-toolkit
+
+> [Nvidia Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/index.html)
+>
+> [NVIDIA container runtime library](https://github.com/NVIDIA/libnvidia-container)
+
+The NVIDIA Container Toolkit enables users to build and run GPU-accelerated containers. The toolkit includes a container runtime [library](https://github.com/NVIDIA/libnvidia-container) and utilities to automatically configure containers to leverage NVIDIA GPUs.
+
+![https://cloud.githubusercontent.com/assets/3028125/12213714/5b208976-b632-11e5-8406-38d379ec46aa.png](https://wwfyde.oss-cn-hangzhou.aliyuncs.com/images/202408211645707.png)
+
+```shell
+# 校验是否安装和配置成功
+sudo docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
+```
 
 
 
@@ -205,7 +222,21 @@ datetime.datetime.now()
 
 # 性能优化
 
-# 安全
+# 
+
+# 监控
+
+# 服务部署
+
+## 部署方式
+
+### systemd
+
+### docker
+
+### nohup-&
+
+### supervisor
 
 # 测试
 
@@ -2977,9 +3008,22 @@ Socket正如其英文原义那样，像一个多孔插座。
 
 # 文件处理
 
-```python
+> [!Tip]
+>
+> 相关库: `os`, `pathlib`
 
+## 递归遍历文件
+
+```python
+# pathlib.rglob(*)
+
+
+# os.walk
 ```
+
+
+
+
 
 # Python工匠
 

@@ -4138,6 +4138,28 @@ type有两种用法, 一种是返回对象的类型, 另一种则是生成一个
 
 ## pprint
 
+
+
+# 环境变量
+
+## PYTHONPATH
+
+指定 Python 解释器查找模块时要搜索的目录
+
+```shell
+PYTHONPATH=a:b
+```
+
+
+
+## PYTHONSTARTUP
+
+## PYTHONUNBUFFERED
+
+## PYTHONIOENCODING
+
+
+
 # Python配置和用法
 
 > https://docs.python.org/3/using/index.html
@@ -4157,6 +4179,48 @@ python -X dev
 
 
 ```
+
+# HOWTO(指南)
+
+## Enum(枚举)
+
+> [Enum 指南](https://docs.python.org/zh-cn/3/howto/enum.html)
+
+[`Enum`](https://docs.python.org/zh-cn/3/library/enum.html#enum.Enum) 是一组与互不相同的值分别绑定的符号名。类似于全局变量，但提供了更好用的 [`repr()`](https://docs.python.org/zh-cn/3/library/functions.html#repr)、分组、类型安全和一些其它特性。
+
+
+
+### 成员访问
+
+```python
+from enum import Enum
+
+class Weekday(int, Enum):
+    MONDAY = 1
+    TUESDAY = 2
+    WEDNESDAY = 3
+    THURSDAY = 4
+    FRIDAY = 5
+    SATURDAY = 6
+    SUNDAY = 7
+
+    
+# 通过名称访问枚举成员
+print(Weekday.MONDAY)
+
+# 通过值访问枚举成员
+print(Weekday(1))
+
+# 通过下标访问枚举成员
+Weekday['MONDAY']
+
+```
+
+
+
+### 性质
+
+枚举
 
 
 

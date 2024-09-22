@@ -1192,6 +1192,8 @@ A framework for network servers
 
 > [Python toolboox](https://piptrends.com/python-toolbox?utm_source=substack&utm_medium=email)
 
+## Basic
+
 - Dev 
     - **pre-commit**
     - pip-compile
@@ -1258,6 +1260,18 @@ A framework for network servers
 
 ## Tools
 
+library, projects,
+
+### poetry
+
+### pipx
+
+### coverage
+
+### hatch
+
+### rye
+
 ### pip-tools
 
 ```shell
@@ -1270,7 +1284,59 @@ pip install pip-tools
 
 ### tox
 
+
+
 ### pre-commit
+
+### taskipy-
+
+### art-ASCII文本
+
+## Document
+
+### markdown
+
+> [!Note]
+>
+> 备选高性能 mistune
+
+### pandoc
+
+### python-docx
+
+### pymupdf
+
+### PyPDFLoader(Langchain)
+
+
+
+## data process
+
+### pandas
+
+### polars
+
+
+
+## ploting
+
+### matplotlib
+
+### ploty
+
+
+
+## mathematics
+
+### numpy
+
+### sympy
+
+### scipy
+
+### matplotlib
+
+### pandas
 
 
 
@@ -1767,13 +1833,29 @@ user_cls = aliased(User, name="user_cls")
 
 ```
 
+## 连接
+
+### Links
+
+- 多数据库连接
+- [Working with Engines and Connections](https://docs.sqlalchemy.org/en/20/core/connections.html)
+
+### 重点
+
+## 会话
+
 
 
 ## 基础增删改查
 
+- [Working wit data](https://docs.sqlalchemy.org/en/20/tutorial/data.html)
+
 
 
 ### 增
+
+- [](https://docs.sqlalchemy.org/en/20/tutorial/data_insert.html#tutorial-core-insert)
+- [批量插入-bulk](https://docs.sqlalchemy.org/en/20/tutorial/orm_data_manipulation.html#tutorial-orm-bulk)
 
 ```python
 
@@ -1789,8 +1871,39 @@ session.refresh(user_1)
 sku_data = {'name': 'Sample Product', 'price': 100}
 stmt = insert(ProductSKU).values(sku_data)
 
+# 将字典插入
+# https://docs.sqlalchemy.org/en/20/core/connections.html#using-transactions
+connection.execute(some_table.insert(), {"x": 7, "y": "this is some data"})
+
+# 或者
+with engine.connect() as conn:
+...     result = conn.execute(
+...         insert(user_table),
+...         [
+...             {"name": "sandy", "fullname": "Sandy Cheeks"},
+...             {"name": "patrick", "fullname": "Patrick Star"},
+...         ],
+...     )
+...     conn.commit()
+
+# 或者
+with engine.connect() as conn:
+...     result = conn.execute(
+...         insert(address_table).values(user_id=scalar_subq),
+...         [
+...             {
+...                 "username": "spongebob",
+...                 "email_address": "spongebob@sqlalchemy.org",
+...             },
+...             {"username": "sandy", "email_address": "sandy@sqlalchemy.org"},
+...             {"username": "sandy", "email_address": "sandy@squirrelpower.org"},
+...         ],
+...     )
+...     conn.commit()
+
 # 通过orm  当数据源是dict时
-product_sku = ProductSKU(**sku_data)
+product_sku = ProductSKU(**sku_data)  
+product_sku = ProductSKU.model_validate(sku_data)  # 然后ProductSKU from_attribute=True
 session.add(product_sku)
 
 # 或者
@@ -1800,6 +1913,7 @@ for key, value in item.model_dump(exclude_unset=True).items():
     
 
 # 批量插入
+# https://docs.sqlalchemy.org/en/20/tutorial/orm_data_manipulation.html#tutorial-orm-bulk
 
 ```
 
@@ -1930,10 +2044,132 @@ Session.delete()
 
 
 
+## Transaction
+
+### Links
+
+- [Transactions and Connection Management[¶](https://docs.sqlalchemy.org/en/20/orm/session_transaction.html#transactions-and-connection-management)](https://docs.sqlalchemy.org/en/20/orm/session_transaction.html)
+
+### 事务
+
+> [!Tip]
+>
+> 将会话和事务写在一起
+
+```python
+# create session and add objects
+with Session(engine) as session, session.begin():
+    session.add(some_object)
+    session.add(some_other_object)
+# inner context calls session.commit(), if there were no exceptions
+# outer context calls session.close()
+
+
+```
+
+
+
 ##  asyncio
 
 - [sqlalchemy asyncio](https://docs.sqlalchemy.org/en/20/orm/extensions/asyncio.html)
 - [ORM Session API Documentation](https://docs.sqlalchemy.org/en/20/orm/extensions/asyncio.html#orm-session-api-documentation)
+
+## constraint-约束
+
+> [SQLAlchemy: Constraint-约束](https://docs.sqlalchemy.org/en/20/core/constraints.html)
+
+### ForeignKey
+
+```python
+from sqlalchemy import ForeignKey, ForeignKeyConstraint
+
+# on update, on delete
+child = Table(
+    "child",
+    metadata_obj,
+    Column(
+        "id",
+        Integer,
+        ForeignKey("parent.id", onupdate="CASCADE", ondelete="CASCADE"),
+        primary_key=True,
+    ),
+)
+
+composite = Table(
+    "composite",
+    metadata_obj,
+    Column("id", Integer, primary_key=True),
+    Column("rev_id", Integer),
+    Column("note_id", Integer),
+    ForeignKeyConstraint(
+        ["rev_id", "note_id"],
+        ["revisions.id", "revisions.note_id"],
+        onupdate="CASCADE",
+        ondelete="SET NULL",
+    ),
+)
+```
+
+
+
+## relationship
+
+[sqlalchemy:relationships](https://docs.sqlalchemy.org/en/20/orm/basic_relationships.html)
+
+### many-to-many
+
+[sqlalchemy:relationships#manyt-to-many](https://docs.sqlalchemy.org/en/20/orm/basic_relationships.html#many-to-many)
+
+关联表命名惯例: 
+
+方式一表名组合(user_course), 
+
+方式二业务场景(appointment(预约), 病人(patient), 医生(doctor)) 
+
+
+
+```python
+from __future__ import annotations
+
+from sqlalchemy import Column
+from sqlalchemy import Table
+from sqlalchemy import ForeignKey
+from sqlalchemy import Integer
+from sqlalchemy.orm import Mapped
+from sqlalchemy.orm import mapped_column
+from sqlalchemy.orm import DeclarativeBase
+from sqlalchemy.orm import relationship
+
+
+class Base(DeclarativeBase):
+    pass
+
+
+association_table = Table(
+    "association_table",
+    Base.metadata,
+    Column("left_id", ForeignKey("left_table.id"), primary_key=True),
+    Column("right_id", ForeignKey("right_table.id"), primary_key=True),
+)
+
+
+class Parent(Base):
+    __tablename__ = "left_table"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    children: Mapped[List[Child]] = relationship(
+        secondary=association_table, back_populates="parents"
+    )
+
+
+class Child(Base):
+    __tablename__ = "right_table"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    parents: Mapped[List[Parent]] = relationship(
+        secondary=association_table, back_populates="children"
+    )
+```
 
 
 
@@ -1980,6 +2216,8 @@ What Are These Relationship Attributes[¶](https://sqlmodel.tiangolo.com/tutoria
 
 ## 常见需求
 
+### 关于mysql 存储bool值, 选择Boolean即可, SQLAlchemy会自动将其映射为TINYINT(1)
+
 ```python
 # 统计
 
@@ -1997,7 +2235,35 @@ session.scalar(
 )
 ```
 
+### 多数据库binds
 
+Session.binds
+
+sessionmaker.binds
+
+动态绑定
+
+### 跨库查询
+
+> 分多引擎跨库和单引擎跨库
+
+## 常见问题
+
+### aiomysql循环异常关闭
+
+```python
+async def async_main():
+    engine = create_async_engine(
+        "mysql+aiomysql://root:toor@172.17.0.3/test",
+        echo=False,
+    )
+
+    (...)
+    await engine.dispose()
+
+
+asyncio.run(async_main())
+```
 
 
 
@@ -2317,9 +2583,13 @@ dom css 样式这些均加载完成
 
 > https://playwright.dev/python/docs/network#abort-requests
 
-### 拦截并记录请求
+> [!Tip]
+>
+> 可以同时对多个路由进行拦截
+>
+> 当路由范围过于广时可以通过正则表达式再次进行精确过滤, 如果希望对部分子路由进行放行则使用`route.continue_()`
 
-### 取消请求
+### 拦截并记录请求
 
 
 

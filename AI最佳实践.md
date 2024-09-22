@@ -13,7 +13,16 @@ tag: [机器学习, 神经网络, 深度学习, 知识图谱]
 
 - 
 
+# Links
 
+> 相关链接: AI技术原理
+
+## Papers
+
+## Blog
+
+- [Methods for adapting large language models](https://ai.meta.com/blog/adapting-large-language-models-llms/)
+- https://ai.meta.com/blog/how-to-fine-tune-llms-peft-dataset-curation/
 
 # Glossary
 
@@ -95,6 +104,7 @@ tag: [机器学习, 神经网络, 深度学习, 知识图谱]
   - **迭代过程**：在训练或生成过程中，模型会逐步调整其参数以优化特定的任务（例如图像生成）。每一次的调整过程被称为一次迭代。
   - **性能指标**：it/s 表示每秒钟模型能够完成多少次这样的迭代。这个指标可以用来衡量模型运行的速度。较高的值通常表示模型处理速度快，可以更快地完成任务。
   - **应用场景**：在生成图像的过程中，每次迭代可能涉及到对图像的一次修改、调整或改进。迭代次数可能与最终图像的质量和生成速度有关。
+- In-context learning(ICL, 上下文学习, 语境学习)
 
 
 
@@ -182,6 +192,24 @@ Tensors are a specialized data structure that are very similar to arrays and mat
 ### **LLMOps**
 
 [什么是LLMOps](https://docs.dify.ai/v/zh-hans/learn-more/extended-reading/what-is-llmops)
+
+
+
+# 认知建立
+
+> [!Note]
+>
+> CNN 主要用于图像处理和计算机视觉任务。
+>
+> RNN 和 Transformer 适用于序列数据和自然语言处理。
+>
+> GAN 主要用于生成任务。
+>
+> GNN 适用于图结构数据。
+>
+> 自编码器常用于降维和特征学习。
+>
+> 强化学习架构用于决策和控制问题。
 
 # Nvidia
 
@@ -381,22 +409,21 @@ ui-monospace, 'SF Mono'
 
 
 
-# 奇技淫巧
+# **奇技淫巧**
 
 
 
+## Items 
 
+### 个性化推荐
 
-# ML服务器创建
+### 学习
 
-## AWS
+- 费曼学习法, 中英文提问和回答
 
-- g4dn
-- ssh 登录
-- sudo apt-get update
-- sudo apt-get install build-essential
-- 安装cuda (包含驱动, 也可先安装驱动)
-- 安装
+# **微调(Fine Tune)**
+
+- 
 
 # 机器学习服务器和应用部署
 
@@ -412,7 +439,9 @@ ui-monospace, 'SF Mono'
 - nvcr.io/nvidia
 - [Nvidia 容器镜像库](https://gitlab.com/nvidia/container-images)
 - [NGC Catalog User Guide](https://docs.nvidia.com/ngc/gpu-cloud/ngc-catalog-user-guide/index.html)
-- [](https://docs.nvidia.com/ngc/gpu-cloud/ngc-catalog-user-guide/index.html)
+- [ngc-catalog-user-guide](https://docs.nvidia.com/ngc/gpu-cloud/ngc-catalog-user-guide/index.html)
+- [Official: Nvidia NIM](https://docs.nvidia.com/nim/index.html)
+- 
 
 ### 其他资料
 
@@ -458,7 +487,16 @@ sudo apt-get install -y docker nvidia-container-toolkit
 
 构建包含特定环境的容器
 
+## ML服务器创建
 
+### AWS
+
+- g4dn
+- ssh 登录
+- sudo apt-get update
+- sudo apt-get install build-essential
+- 安装cuda (包含驱动, 也可先安装驱动)
+- 安装**
 
 ## NVCR
 
@@ -525,6 +563,10 @@ ENV TZ=Asia/Shanghai
 
 
 # 常见需求
+
+## 分布式训练
+
+
 
 ## MoLook
 
@@ -596,40 +638,6 @@ planning -规划
 Hugging i: Soring A Task wit ason and as Fiend an Hugging - We, stal, a, 2023)
 
 multiagent collaboration-多智能体协作
-
-
-
-# LLM-API
-
-## misc
-
-平台对API调用请求没有设置速率限制，但会受到模型官方的速率限制。
-
-- [OpenAI ChatGPT](https://platform.openai.com/docs/guides/gpt/chat-completions-api)
-    - https://platform.openai.com/docs/guides/rate-limits/usage-tiers?context=tier-free
-- [Azure OpenAI API](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference)
-    - https://learn.microsoft.com/zh-CN/azure/ai-services/openai/quotas-limits
-    - https://learn.microsoft.com/zh-CN/azure/ai-services/openai/how-to/quota?tabs=rest
-- [Anthropic Claude](https://anthropic.com/)
-    - https://docs.anthropic.com/claude/reference/rate-limits
-- [Google Gemini ](https://developers.generativeai.google/)
-    - https://ai.google.dev/models/gemini?hl=zh-cn
-- [智谱 ChatGLM](https://bigmodel.cn/)
-    - https://maas.aminer.cn/dev/howuse/rate-limits/level?tab=0
-- [Moonshot AI](https://platform.moonshot.cn/)
-    - https://platform.moonshot.cn/docs/pricing#%E5%85%85%E5%80%BC%E4%B8%8E%E9%99%90%E9%80%9F
-
-## OpenAI
-
-### message
-
-#### system message
-
-Typically, a conversation will start with a system message that tells the assistant how to behave, followed by alternating user and assistant messages, but you are not required to follow this format.
-
-## Azure
-
-- https://learn.microsoft.com/en-us/azure/ai-services/openai/reference
 
 
 
@@ -914,3 +922,97 @@ https://magnific.ai/
 # **Claude**
 
 # NLP
+
+
+
+# 训练
+
+## Links
+
+- [civitai: quickstart-guide-to-flux-1](https://education.civitai.com/quickstart-guide-to-flux-1/)
+
+## Glossary
+
+### 微调（fine tuning）
+
+
+
+指训练模型并微调其性能。具体含义因用法而异，但在 Stable Diffusion 中，狭义的微调是指使用图像和caption进行训练模型。DreamBooth 可视为狭义微调的一种特殊方法。广义的微调包括 LoRA、Textual Inversion、Hypernetworks 等，包括训练模型的所有内容。
+
+### 步骤（step）
+
+
+
+粗略地说，每次在训练数据上进行一次计算即为一步。具体来说，“将训练数据的caption传递给当前模型，将生成的图像与训练数据的图像进行比较，稍微更改模型，以使其更接近训练数据”即为一步。
+
+### 批次大小（batch size）
+
+
+
+批次大小指定每个步骤要计算多少数据。批次计算可以提高速度。一般来说，批次大小越大，精度也越高。
+
+“批次大小×步数”是用于训练的数据数量。因此，建议减少步数以增加批次大小。
+
+（但是，例如，“批次大小为 1，步数为 1600”和“批次大小为 4，步数为 400”将不会产生相同的结果。如果使用相同的学习速率，通常后者会导致模型欠拟合。请尝试增加学习率（例如 `2e-6`），将步数设置为 500 等。）
+
+批次大小越大，GPU 内存消耗就越大。如果内存不足，将导致错误，或者在边缘时将导致训练速度降低。建议在任务管理器或 `nvidia-smi` 命令中检查使用的内存量进行调整。
+
+注意，一个批次是指“一个数据单位”。
+
+### 学习率
+
+
+
+学习率指的是每个步骤中改变的程度。如果指定一个大的值，学习速度就会加快，但是可能会出现变化太大导致模型崩溃或无法达到最佳状态的情况。如果指定一个小的值，学习速度会变慢，同时可能无法达到最佳状态。
+
+在fine tuning、DreamBooth、LoRA等过程中，学习率会有很大的差异，并且也会受到训练数据、所需训练的模型、批次大小和步骤数等因素的影响。建议从通常值开始，观察训练状态并逐渐调整。
+
+默认情况下，整个训练过程中学习率是固定的。但是可以通过调度程序指定学习率如何变化，因此结果也会有所不同。
+
+### Epoch
+
+
+
+Epoch指的是训练数据被完整训练一遍（即数据已经迭代一轮）。如果指定了重复次数，则在重复后的数据迭代一轮后，为1个epoch。
+
+1个epoch的步骤数通常为“数据量÷批次大小”，但如果使用Aspect Ratio Bucketing，则略微增加（由于不同bucket的数据不能在同一个批次中，因此步骤数会增加）。
+
+### 长宽比分桶（Aspect Ratio Bucketing）
+
+
+
+Stable Diffusion 的 v1 是以 512*512 的分辨率进行训练的，但同时也可以在其他分辨率下进行训练，例如 256*1024 和 384*640。这样可以减少裁剪的部分，希望更准确地学习图像和标题之间的关系。
+
+此外，由于可以在任意分辨率下进行训练，因此不再需要事先统一图像数据的长宽比。
+
+此值可以被设定，其在此之前的配置文件示例中已被启用（设置为 `true`）。
+
+只要不超过作为参数给出的分辨率区域（= 内存使用量），就可以按 64 像素的增量（默认值，可更改）在垂直和水平方向上调整和创建训练分辨率。
+
+在机器学习中，通常需要将所有输入大小统一，但实际上只要在同一批次中统一即可。 NovelAI 所说的分桶(bucketing) 指的是，预先将训练数据按照长宽比分类到每个学习分辨率下，并通过使用每个 bucket 内的图像创建批次来统一批次图像大小。
+
+
+
+
+
+## LoRA训练
+
+[kohyaSD-](https://github.com/kohya-ss/sd-scripts/blob/main/docs/train_README-zh.md)
+
+> kohya发音:  **こーや**（kohya）: [koːʝa] 或 [koːja]
+
+
+
+## 参数
+
+
+
+- train_batch_size: 增加会让训练epoch变多, 时间变长
+- num_repeats: 从目录中拿取, 除非 增加数据集
+- epoch: 
+
+
+
+# Flux
+
+cuda >= 12.4 + torch >=2.4.0

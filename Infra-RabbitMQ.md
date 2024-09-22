@@ -2,6 +2,17 @@
 
 - 官方文档https://www.rabbitmq.com/tutorials/tutorial-one-python.html
 
+
+
+## Links
+
+- [GitHub:RabbitMQ Tutorials](https://github.com/rabbitmq/rabbitmq-tutorials)
+- [RabbitMQ official Tutorials](https://www.rabbitmq.com/tutorials)
+
+
+
+
+
 ![img](https://wwfyde.oss-cn-hangzhou.aliyuncs.com/images/20210802140907.png)
 
 Producer sends messages to the "hello" queue. The consumer receives messages from that queue.
@@ -42,6 +53,30 @@ Producer sends messages to the "hello" queue. The consumer receives messages fro
 
 
 
+## 核心概念
+
+![image-20240908134108125](https://wwfyde.oss-cn-hangzhou.aliyuncs.com/images/202409081341828.png)
+
+### Broker
+
+**Broker：**接收客户端链接实体，实现 AMQP 消息队列和路由功能；
+
+### Virtual Host
+
+**Virtual Host：**是一个虚拟概念，权限控制的最小单位。一个 Virtual Host 里包含多个 Exchange 和 Queue；
+
+### Message(消息)
+
+### Producer(生产者)
+
+### Queue(队列)
+
+### Binding(绑定)
+
+### Routing Key(路由键)
+
+
+
 ## Items
 
 ### 消息队列(Message Queue)
@@ -68,3 +103,7 @@ Producer sends messages to the "hello" queue. The consumer receives messages fro
 ## 监控和日志记录
 
 ## 消息处理顺序性
+
+
+
+# 常见问题

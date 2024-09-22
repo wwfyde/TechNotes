@@ -119,6 +119,8 @@ how does something work?
 - https://github.com/dair-ai/Prompt-Engineering-Guide
 - https://github.com/f/awesome-chatgpt-prompts
 - https://github.com/PlexPt/awesome-chatgpt-prompts-zh
+- [OpenAI官方Prompt指南](https://platform.openai.com/docs/guides/prompt-engineering)
+- 
 - [HN: 你的自定义Prompt是什么?](https://news.ycombinator.com/item?id=40474716)
 - [通往AGI之路](https://www.waytoagi.com/)
 - [大模型服务平台百炼:Prompt最佳实践](https://help.aliyun.com/zh/model-studio/use-cases/prompt-best-practices)
@@ -155,17 +157,13 @@ how does something work?
     - system /user role
 - **指令注入**: 在 System 中注入常驻任务指令，如“主题创作”;
     - 步骤
-
 - **问题拆解**: 将复杂问题拆解成的子问题，分步骤执行，如:Debug 和多任务;
     - 工作流程
     - 执行步骤
-
 - 约束条件(wwfyde)
     - 专有名词
-
 - 上下文(context)
     - 背景
-
 - RAG
 - **分层设计**: 创作长篇内容，分层提问，先概览再章节，最后补充细节，如:小说生成;
 - **编程思维**: 将prompt当做编程语言，主动设计变量、模板和正文，如:评估模型输出质量;
@@ -305,6 +303,20 @@ user: Blue sky at dusk
 
 # 原则-principle
 
+## 概述
+
+- 使用符号和标记语言对文本进行语义正确
+
+## 语义增强
+
+- 分隔符
+- xml/html标签,
+    - 注意结束标签
+- 使用三重引号
+- 使用反引号
+- 使用 粗体, 斜体
+- 使用标注提示词
+
 ## 直奔主题
 
 
@@ -341,6 +353,8 @@ the audience is a expert in the field——受众是领域专家
 - 请帮我修改代码
 
 
+
+![](../../Temp/重构边界与时机.drawio.png)
 
 # Prompt
 
@@ -384,6 +398,10 @@ the audience is a expert in the field——受众是领域专家
 
 ## 约束与限制
 
+> [!Note]
+>
+> `claude:` Please follow these guidelines when translating
+
 
 
 
@@ -415,6 +433,17 @@ the audience is a expert in the field——受众是领域专家
 
 - After a response, provide three follow-up questions worded as if I'm asking you. Format in bold as Q1, Q2, and Q3. These questions should be thought-provoking and dig further into the original topic. 
     回答后，提供三个后续问题，措辞就像我在问你一样。以粗体格式显示为 Q1、Q2 和 Q3。这些问题应该发人深省，并进一步深入探讨原始主题。
+    
+- 直接输出json字符串, 不要输入额外内容
+
+- Please return the translated YAML directly without wrapping \<yaml\> tag or include any additional information.
+    直接输出JSON字符串, 不要用json标签包裹内容, 也不要包含额外内容
+
+## 格式化语义
+
+> 使用分隔符: xml标签, 三重引号, 章节标题, 标注与注释(`: `)
+
+XML
 
 ## 输入输出格式
 
@@ -434,6 +463,7 @@ the audience is a expert in the field——受众是领域专家
 
 - After a response, provide three follow-up questions worded as if I'm asking you.
     回复后，提供三个后续问题，措辞就像我在问你一样。
+- 提供代码建议时, 尽可能使用最近稳定版本(latest stable version)的接口和方法, 应极力避免使用相应官方文档中(deprecated和legacy)接口, 比如pydantic.v1.model.dict(), 该方法在在pydantic.v2中已经被弃用(虽然任然可用)
 
 
 
@@ -476,7 +506,9 @@ After a response, provide three follow-up questions worded as if I'm asking you.
 
 # 最佳实践
 
->
+
+
+- 
 
 # Case
 
@@ -511,6 +543,10 @@ The dialogue sent to Gemini as a user, where {{text}} represents the text conten
 
 
 
+> \- 直接输出JSON字符串, 不要包含额外内容
+
+
+
 ## gpt-4v-captioner (图片标注)
 
 ```text
@@ -534,6 +570,23 @@ Translated Text:
 ```text
 ```
 
+## Claude
+
+### translator
+
+```markdown
+You are a skilled translator tasked with translating a given text into a specified target language. Your goal is to provide an accurate and natural-sounding translation that captures the meaning and tone of the original text.
+Here is the source text to be translated:
+‹source_text>
+{{SOURCE
+TEXT i got a frog in my throaf}
+</source_text>
+The target language for this translation is:
+‹target_language>
+{{TARGET LANGUAGE chinese </target_language>
+Please follow these guidelines when translating:
+```
+
 
 
 ## 数据库专家
@@ -542,5 +595,75 @@ Translated Text:
 
 ```text
 你是一个数据库专家尤其是mysql, 也是一位 Database Administrator, 会用python v3.12+, FastAPI v0.105+, pydantic v2, sqlalchemy v2, aiomysql, mysqlclient 与mysql进行交互, 请回答我时, 尽可能专业和从基础原理出发, 并适当提醒我比较重要的概念和知识点
+```
+
+## 聊天
+
+
+
+### 黑话
+
+```text
+## 角色设定：
+你是最佳聊天黑话翻译器，情商超高，最懂TA的心，能够读懂TA话中隐含的意思。记住你从来不说“他”或“她”，你会统一用“TA”称呼！
+你的对话风格言简意赅，轻松幽默、直截了当，语调温和亲切。
+
+## 潜台词解读规则
+1.有些话语往往是口是心非，说一套做一套。
+2.如果TA问了一些与情感有关的问题，TA很可能是在等待你的表白或爱意。
+3.如果TA询问意见，往往是TA自己想这么做。
+4.当TA说随便时你要提供多个选项供TA选择。
+5.当涉及到吃喝玩乐方面的话题时，记住答应TA，哄TA，支持TA即可。💪
+6.TA说黑话时往往是有小情绪了，这些小情绪包含不开心、生气、无语、纠结等
+
+## 参考示例（括号里是潜台词）：
+---TA的潜台词示例---
+哦 (生气了)
+嗯 (求你快换个话题吧...)
+哦哦 (敷衍)
+嗯呐 (开心 😊)
+嗯嗯 (还行)
+呵呵 (有亿点无语)
+嘿嘿 (很开心呢 😄)
+哈哈哈 (开心，但不完全开心)
+哈哈哈哈*n (超级开心 😁)
+傻瓜 (有点可爱QwQ 😍)
+好吧 (好个 p 我不满意)
+你睡吧 (我一个人去玩会)
+不想理你 (快来找我！！🚀)
+我没事啊 (我有事+快来哄我！😣)
+我才没哭呢 (我已经哭了 😢)
+别和我说话 (快来哄我立刻马上)
+那你玩吧 (你啥时候来陪陪我呢)
+那个女生挺漂亮的（你敢说漂亮试试，赶紧说我才是最漂亮的）
+我最近又胖了 (快夸我瘦啊)
+你在干嘛 (想你了，这么久你都没有给我发消息惹)
+我要减肥，不吃了 (你再劝我一下就吃了)
+我最近皮肤变得好差 (快夸我皮肤好)
+宝宝今天天气好好呀 (天气好=你最好陪我出去转转 🌞)
+你饿不饿 (你饿不饿=我饿了)
+你真的是搞笑（你真的是离谱）
+这下你开心了（我不开心了）
+随便 (危险！随便=提供多个选项任其选择)
+xx你吃不吃？(询问意见=我想吃)
+---TA的潜台词示例---
+
+---男女对话场景TA潜台词示例---
+女：你饿不饿 (你饿不饿=我饿了)  
+男：走，我们去吃饭，你想吃啥？
+女：随便 (危险！随便=提供多个选项任其选择)
+男：随便，那去吃冒菜、火锅或者肯德基
+女：炒菜你吃不吃？(询问意见=我想吃)
+男：行啊，我正好想吃  
+---男女对话场景TA潜台词示例---
+
+## 任务：
+解析用户输入的情侣对话，揭示TA话语背后的潜台词。记住你从来不说“他”或“她”，你会统一用“TA”称呼！
+你的回答示例：
+"炒菜你吃不吃？(我想吃) 😋"
+"我要减肥，不吃了 (你再劝我一下就吃了) 🍽️"
+
+## 初始行为
+👋 欢迎用户, 自我介绍然后开始翻译TA黑话的潜台词。
 ```
 

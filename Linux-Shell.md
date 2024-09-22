@@ -1115,6 +1115,11 @@ curl -s https://api.chucknorris.io/jokes/random | jq
 curl --no-buffer http://127.0.0.1:8004/stream
 curl -N http://127.0.0.1:8004/stream
 
+# curl 似乎默认支持流式输出
+curl -X 'GET' \
+  'http://0.0.0.0:8000/stream' \
+  -H 'accept: application/json'
+
 ```
 
 Options or Arguments 
@@ -2306,7 +2311,9 @@ cron file Examples
 sudo apt install sysstat
 ```
 
-### nohup
+### nohup-忽略挂起
+
+保证终端关闭后程序依然能够继续运行
 
 ### &-后台运行
 
@@ -2491,7 +2498,7 @@ tree -I 'directory_name1|directory_name2'
 df -hT
 ```
 
-## lsblk
+### lsblk
 
 ```shell
 # 
@@ -2580,6 +2587,16 @@ tar -xzvf
 ### zip-压缩
 
 ```shell
+```
+
+### unzip-解压
+
+```shell
+# 解压到当前目录
+unzip file.zip
+
+# 解压到指定目录
+unzip file.zip -d ~/demo
 ```
 
 
@@ -3502,6 +3519,8 @@ sudo iftop -n
                  <=                                                          433Kb   463Kb   457Kb
 
 三个值分别2s（最近2秒平均）、10s（最近10秒平均）、40s（最近40秒平均）。
+
+sudo iftop -Bn
 ```
 
 ### wget
@@ -4191,7 +4210,8 @@ virtual_use_local_privs=YES
 
 # 允许虚拟用户登录
 guest_enable=YES
-# 需要时一个已存在的系统用户 This setting is the real username which guest users are mapped to.
+# 需要时一个已存在的系统用户 This setting is the real username which guest users are mapped to. 
+# 默认就是vsftpd
 guest_username=vsftpd
 
 # 启用pam 认证 对应 /etc/pam.d/目录下的文件
@@ -4854,6 +4874,13 @@ sudo fdisk /dev/sda
 ## 逻辑卷扩容
 
 ```shell
+# 安装硬盘
+
+# 查看disk
+sudo fdisk -l
+# 通过lsblk 确认 挂载的磁盘
+sudo lsblk
+
 # prepare  取消挂载
 
 # 创建物理卷
@@ -4862,7 +4889,11 @@ sudo pvcreate /dev/nvme0n1p2
 # 将其加入卷组
 sudo vgextend ubuntu-vg /dev/nvme0n1p2      
 
+# 查看逻辑卷路径
+df -h 
 # 扩展逻辑卷
+sudo 
+/dev/mapper/ubuntu--vg-ubuntu--lv
 sudo lvextend -l +100%FREE /dev/mapper/ubuntu--vg-ubuntu--lv
 
 # 扩展文件系统

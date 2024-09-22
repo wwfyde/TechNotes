@@ -185,8 +185,58 @@ sudo swapon /swapfile
 
 
 
+## 硬件方案
+
+> 基本方案:
+>
+> 1. CPU
+> 2. 内存
+> 3. 硬盘
+> 4. 网络接口
+> 5. 主板
+> 6. 散热器
+> 7. 显卡
+> 8. 机箱
+
+
+
+## Case1
+
+CPU：Intel Platinum 8350C（32C 2.6GHz 240W）* 2
+
+*内存：DDR4-3200 32G RDIMM*16
+
+机械硬盘：SATA-HDD 4T 7.2K NL*2*
+
+*固态硬盘：SATA-SSD 480G*1 + NVMe-SSD 1T*2*
+
+*网卡：25G 光口双口CX5*1 + 1G电口双口*1 *
+
+*
+
+---
+
+
+
+*CPU：Intel Platinum 8350C（32C 2.6GHZ 240W）*2  
+
+显卡：Nvidia A800-80G-400Wx8-NvlinkSW * 8  
+
+内存：DDR4-2933 64G RDIMM * 24
+
+*固态硬盘：SATA-SSD 480G*1  
+
+数据存储SSD：NVMe-SSD 3.84T*4  *
+
+*网卡：100G 光口双口*5  
+
+信泰项目要估算本地部署硬件成本。目前已知并发用户不超过50，要有生成队列处理，至少三台应用服务器，一台文件服务器。算力服务器另算。这里两个配置是否满足应用和文件需求，不满足如何改
+
+
+
 # 宝塔Linux面板
 
 ## 参考资料
 
 - [宝塔BT](https://www.bt.cn/new/index.html)
+- 

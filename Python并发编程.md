@@ -1643,7 +1643,44 @@ if __name__ == "__main__":
 
 PEP 3156 是Python 3.4 中引入异步I/O框架asyncio 的一个提案，提供了基于协程做异步I/O编写单线程并发代码的基础设施。随后在PEP492 中引入了 async/await语法 以及 PEP380中的yield from 语法，自此，Python有了原生的协程支持，**不再依赖外部第三方库**。
 
+# 快速上手
 
+Python有三中主要的并发编程方式: 多线程, 多进程和异步编程.
+
+## 原则
+
+- 任务划分, 确保任务之间的数据依赖最小化, 避免频繁的锁竞争
+- 数据共享问题
+- 使用进程池/线程池技术来管理线程池和进程池. 这些池可以帮助你有效地分配和管理并发任务, 避免创建和销毁线程或进程的开销. 
+- 优雅关闭: 线程与进程通常使用`join()`方法等待其完成, asyncio则使用await来等待任务结束. 
+
+## 应用场景
+
+多线程: 适合I/O密集型任务(IO-bound), 但因为GIL的存在, 线程再CPU密集型任务中不能充分利用多核CPU.
+
+多进程: 适合CPU密集型任务(CPU-bound), 可以利用多核CPU, 避免GIL限制.
+
+异步编程: 适合需要高并发处理的I/O密集型任务, 如大量的网络请求或事件驱动应用
+
+|          |      |      |
+| -------- | ---- | ---- |
+| 多线程   |      |      |
+| 多进程   |      |      |
+| 异步编程 |      |      |
+
+## 并发同步
+
+### Future对象
+
+### 回调函数
+
+### 同步原语:Event
+
+### 同步原语:Lock
+
+### 同步原语:信号量
+
+### 同步原语:条件对象(Condition)
 
 # asyncio
 
@@ -2263,6 +2300,44 @@ asyncio.run(display_date())
 #### asyncio(semaphore)
 
 #### ProcessPoolExecutor
+
+## 阻塞代码
+
+> 让程序以服务的方式运行的方法
+>
+> 
+
+### Python
+
+- time.sleep
+- I/O 
+- Lock
+- Queue.get()为空时
+- await 语句
+- socket.recv , socktet.accpet
+- Event
+
+### process
+
+- process.join
+
+### thread
+
+- threading.join
+
+### PoolExecutor
+
+- Future.result()
+- shutdown(wait=True)
+- concurrent.futures.as_completed
+- concurrent.futures.wait
+
+### subprocess
+
+- subprocess.run
+- subprocess.wait
+
+
 
 
 

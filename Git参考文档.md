@@ -1395,6 +1395,8 @@ git-checkout-index - Copy files from the index to the working tree
 
 # update-index
 
+# submodule
+
 
 
 # 最佳实践
@@ -1417,13 +1419,22 @@ git-checkout-index - Copy files from the index to the working tree
 gh pr create --base main --head your-branch-name --title "Your PR title" --body "Your PR description"
 ```
 
+## 提交信息
 
+- docs
+- fix
+- feat
+- release
 
 ## 提交信息
 
 ### 参考资料
 
 - https://gist.github.com/brianclements/841ea7bffdb01346392c
+
+- https://www.conventionalcommits.org/en/v1.0.0/
+
+- https://github.com/angular/angular/blob/main/CONTRIBUTING.md#commit
 
     
 

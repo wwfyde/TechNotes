@@ -108,7 +108,7 @@
 
 log,启动时重写, 恢复/重做日志
 
-### RDB
+### RDB-redis database
 
 替换rdb文件
 
