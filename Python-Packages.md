@@ -1252,11 +1252,55 @@ A framework for network servers
     - openpyxl
     - xlsxwriter
 
+## Data Science
+
+### matplotlib
+
+### plotly
+
 
 
 ## AI
 
 - [tiktoken](https://github.com/openai/tiktoken)
+
+
+
+## data process and compute
+
+### pandas
+
+### polars
+
+### dask
+
+### ray
+
+### latexify - 公式生成
+
+## ploting
+
+### matplotlib
+
+### ploty
+
+
+
+## mathematics
+
+### scikit-learn
+
+### numpy
+
+### sympy
+
+### scipy
+
+
+
+### matplotlib
+
+### pandas
 
 ## Tools
 
@@ -1310,35 +1354,9 @@ pip install pip-tools
 
 
 
-## data process
+### 
 
-### pandas
-
-### polars
-
-
-
-## ploting
-
-### matplotlib
-
-### ploty
-
-
-
-## mathematics
-
-### numpy
-
-### sympy
-
-### scipy
-
-### matplotlib
-
-### pandas
-
-
+## 
 
 # Utils
 
@@ -1526,6 +1544,25 @@ data validate, data serialize
 
 > In Pydantic, the term "validation" refers to the process of instantiating
 
+## Schema
+
+> [!Note]
+>
+> Dataclasses, TypedDicts, and more[¶](https://docs.pydantic.dev/latest/why/#dataclasses-typeddict-more)
+>
+> [Dataclasses, TypedDicts, and more](https://docs.pydantic.dev/latest/why/#dataclasses-typeddict-more)
+>
+> Pydantic provides four ways to create schemas and perform validation and serialization:
+>
+> 1. [`BaseModel`](https://docs.pydantic.dev/latest/concepts/models/) — Pydantic's own super class with many common utilities available via instance methods.
+> 2. [Pydantic dataclasses](https://docs.pydantic.dev/latest/concepts/dataclasses/) — a wrapper around standard dataclasses with additional validation performed.
+> 3. [`TypeAdapter`](https://docs.pydantic.dev/latest/api/type_adapter/#pydantic.type_adapter.TypeAdapter) — a general way to adapt any type for validation and serialization. This allows types like [`TypedDict`](https://docs.pydantic.dev/latest/api/standard_library_types/#typeddict) and [`NamedTuple`](https://docs.pydantic.dev/latest/api/standard_library_types/#typingnamedtuple) to be validated as well as simple types (like [`int`](https://docs.python.org/3/library/functions.html#int) or [`timedelta`](https://docs.python.org/3/library/datetime.html#datetime.timedelta)) — [all types](https://docs.pydantic.dev/latest/concepts/types/) supported can be used with [`TypeAdapter`](https://docs.pydantic.dev/latest/api/type_adapter/#pydantic.type_adapter.TypeAdapter).
+> 4. [`validate_call`](https://docs.pydantic.dev/latest/concepts/validation_decorator/) — a decorator to perform validation when calling a function.
+
+
+
+
+
 
 
 ## 常见需求
@@ -1631,6 +1668,23 @@ print(co_model)
 id=123 public_key='foobar' name='Testing' domains=['example.com', 'foobar.com']
 """
 ```
+
+### 定制序列化器
+
+> [!Note]
+>
+> https://docs.pydantic.dev/latest/concepts/serialization/#custom-serializers
+>
+> Pydantic provides several [functional serializers](https://docs.pydantic.dev/latest/api/functional_serializers/#pydantic.functional_serializers) to customise how a model is serialized to a dictionary or JSON.
+>
+> - [`@field_serializer`](https://docs.pydantic.dev/latest/api/functional_serializers/#pydantic.functional_serializers.field_serializer)
+> - [`@model_serializer`](https://docs.pydantic.dev/latest/api/functional_serializers/#pydantic.functional_serializers.model_serializer)
+> - [`PlainSerializer`](https://docs.pydantic.dev/latest/api/functional_serializers/#pydantic.functional_serializers.PlainSerializer)
+> - [`WrapSerializer`](https://docs.pydantic.dev/latest/api/functional_serializers/#pydantic.functional_serializers.WrapSerializer)
+>
+> Serialization can be customised on a field using the [`@field_serializer`](https://docs.pydantic.dev/latest/api/functional_serializers/#pydantic.functional_serializers.field_serializer) decorator, and on a model using the [`@model_serializer`](https://docs.pydantic.dev/latest/api/functional_serializers/#pydantic.functional_serializers.model_serializer) decorator.
+
+
 
 # dotenv
 
@@ -1844,8 +1898,444 @@ user_cls = aliased(User, name="user_cls")
 
 ## 会话
 
+## 查询
+
+- [ORM Query Guide](https://docs.sqlalchemy.org/en/20/orm/queryguide/index.html)
 
 
+## 联合查询
+
+
+```python
+
+from sqlalchemy.orm import with_loader_criteria
+
+stmt = select(User).options(
+    selectinload(User.addresses),
+    with_loader_criteria(Address, Address.email_address != 'foo'))
+)
+```
+
+### 示例
+```python
+from datetime import datetime  
+from typing import Optional  
+  
+from sqlalchemy import Integer, String, JSON, Boolean, DateTime, TIMESTAMP, func, Index, Text, Numeric, ForeignKey  
+from sqlalchemy.dialects.mysql import MEDIUMTEXT  
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship  
+  
+  
+class Base(DeclarativeBase):  
+    pass  
+  
+  
+class LLM(Base):  
+    __tablename__ = 'llm'  
+  
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)  
+    name: Mapped[str] = mapped_column(String(64), nullable=False, unique=True, comment='模型名称')  
+    description: Mapped[Optional[str]] = mapped_column(String(1024), nullable=True, comment='详细说明')  
+    provider: Mapped[Optional[str]] = mapped_column(String(32), nullable=True, comment='供应商, 渠道名称')  
+    provider_url: Mapped[Optional[str]] = mapped_column(String(100), nullable=True, comment='供应商URL')  
+    sample: Mapped[Optional[str]] = mapped_column(MEDIUMTEXT, nullable=True, comment='案例图片')  
+    base_url: Mapped[Optional[str]] = mapped_column(String(512), nullable=True, comment='基础URL')  
+    api_key: Mapped[Optional[str]] = mapped_column(String(128), nullable=True, comment='API Key')  
+    access_key: Mapped[Optional[str]] = mapped_column(String(128), nullable=True, comment='Access Key for AWS bedrock')  
+    secret_key: Mapped[Optional[str]] = mapped_column(String(128), nullable=True, comment='Secret Key for AWS bedrock')  
+    model: Mapped[Optional[str]] = mapped_column(String(64), nullable=True, comment='默认模型')  
+    extra_model: Mapped[Optional[dict]] = mapped_column(JSON, nullable=True)  
+    config: Mapped[Optional[dict]] = mapped_column(JSON, nullable=True, comment='配置列表')  
+    status: Mapped[Optional[bool]] = mapped_column(Boolean, nullable=True, comment='渠道状态')  
+    is_deleted: Mapped[Optional[bool]] = mapped_column(Boolean, nullable=True, comment='是否删除')  
+    expire_at: Mapped[Optional[datetime]] = mapped_column(DateTime, nullable=True, comment='过期时间')  
+    created_at: Mapped[datetime] = mapped_column(TIMESTAMP,  
+                                                 default=func.now(),  
+                                                 server_default=func.now(),  
+                                                 comment='创建时间')  
+    updated_at: Mapped[datetime] = mapped_column(TIMESTAMP,  
+                                                 default=func.now(),  
+                                                 server_default=func.now(),  
+                                                 onupdate=func.now(), comment='更新时间')  
+    llm_instructions: Mapped[list["LLMInstruction"]] = relationship('LLMInstruction', back_populates='llm',  
+                                                                    primaryjoin='LLMInstruction.llm_id == LLM.id')  
+  
+  
+class LLMInstruction(Base):  
+    __tablename__ = 'llm_instructions'  
+    __table_args__ = (  
+        Index('idx_llm_id', 'llm_id'),  
+        {'comment': '大语言模型的提示词表'}  
+    )  
+  
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)  
+    llm_id: Mapped[Optional[int]] = mapped_column(ForeignKey("llm.id"), comment="对应LLM的id字段")  
+    title: Mapped[Optional[str]] = mapped_column(String(200), nullable=True)  
+    description: Mapped[Optional[str]] = mapped_column(Text, nullable=True, comment='描述')  
+    tags: Mapped[Optional[dict]] = mapped_column(JSON, nullable=True)  
+    user_id: Mapped[Optional[str]] = mapped_column(String(32), nullable=True)  
+  
+    system_prompt: Mapped[Optional[str]] = mapped_column(MEDIUMTEXT, nullable=True)  
+    xml_format: Mapped[Optional[str]] = mapped_column(MEDIUMTEXT, nullable=True)  
+    temperature: Mapped[Optional[float]] = mapped_column(Numeric(3, 2), default=0.70, nullable=True)  
+    sample: Mapped[Optional[str]] = mapped_column(MEDIUMTEXT, nullable=True)  
+    create_at: Mapped[Optional[datetime]] = mapped_column(DateTime,  
+                                                          default=func.now(),  
+                                                          server_default=func.now(),  
+                                                          nullable=True)  
+  
+    update_at: Mapped[Optional[datetime]] = mapped_column(DateTime,  
+                                                          default=func.now(),  
+                                                          server_default=func.now(),  
+                                                          onupdate=func.now(),  
+                                                          nullable=True)  
+    deleted: Mapped[Optional[bool]] = mapped_column(Integer, default=False, nullable=True)  
+    llm: Mapped["LLM"] = relationship('LLM', back_populates='llm_instructions',  
+                                      primaryjoin='LLMInstruction.llm_id == LLM.id')  
+  
+  
+class Workflow(Base):  
+    __tablename__ = "workflows"  
+  
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)  
+    name: Mapped[str] = mapped_column(String(50), nullable=True)  
+    description: Mapped[str] = mapped_column(String(500), nullable=True, comment="详细说明", )  
+    user_id: Mapped[int] = mapped_column(Integer, nullable=True, comment="上传用户")  
+    workflow: Mapped[JSON] = mapped_column(JSON, nullable=True)  
+    config: Mapped[JSON] = mapped_column(JSON, nullable=True)  
+    task_type: Mapped[str] = mapped_column(String(50), nullable=True, comment="任务类型")  
+    status: Mapped[int] = mapped_column(Integer, nullable=True, comment="是否激活")  
+    sample: Mapped[str] = mapped_column(String(100), nullable=True, comment="案例图片")  
+    create_time: Mapped[datetime] = mapped_column(DateTime, default=datetime.now, nullable=True)  
+    update_time: Mapped[datetime] = mapped_column(DateTime, default=datetime.now, onupdate=datetime.now, nullable=True)  
+    hashcode: Mapped[str] = mapped_column(String(64), nullable=True)  
+    deleted: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)  
+    workflow_layout: Mapped[JSON] = mapped_column(JSON, nullable=True)  
+    misc: Mapped[JSON] = mapped_column(JSON, nullable=True)
+```
+
+```python
+from typing import Annotated  
+  
+from fastapi import APIRouter, Depends, Query, HTTPException  
+from sqlalchemy import select, delete, func, or_  
+from sqlalchemy.ext.asyncio import AsyncSession  
+from sqlalchemy.orm import joinedload  
+  
+from app.core.dependency import logger, get_current_active_user  
+from app.db_molook_uat.session import get_db_molook_uat_python_async  
+from app.models import User  
+from app.models_python.model import LLM, LLMInstruction  
+from app.schemas.llmconfig import LLMCreateSchema, LLMInstructionCreateSchema, LLMUpdateSchema, \  
+    LLMInstructionUpdateSchema  
+  
+router = APIRouter()  
+  
+  
+@router.get("/llms", summary="获取所有LLM配置")  
+async def get_llm(  
+        page: int = 1,  
+        page_size: int = 10,  
+        include_deleted: Annotated[bool, Query(description="是否包含已删除, 默认不包含")] = False,  
+        db: AsyncSession = Depends(get_db_molook_uat_python_async),  
+        current_user: User = Depends(get_current_active_user)  
+):  
+    stmt = select(LLM)  
+    if not include_deleted:  
+        stmt = stmt.where(or_(LLM.is_deleted != True, LLM.is_deleted.is_(None)))  
+  
+    print(f"{stmt.whereclause=}")  
+  
+    result = await db.execute(select(func.count(LLM.id)).select_from(LLM))  
+    if stmt.whereclause is not None:  
+        result = await db.execute(select(func.count(LLM.id)).select_from(LLM).where(stmt.whereclause))  
+    total_count = result.scalar()  
+    total_pages = (total_count + page_size - 1) // page_size  
+  
+    stmt = stmt.limit(page_size).offset((page - 1) * page_size)  
+  
+    logger.debug(stmt.compile(compile_kwargs={"literal_binds": True}))  
+  
+    result = await db.execute(stmt)  
+    items = result.scalars().all()  
+    return {  
+        "items": items,  
+        "total_count": total_count,  
+        "total_pages": total_pages,  
+        "current_page": page,  
+        "page_size": page_size,  
+        "current_count": len(items),  
+    }  
+  
+  
+@router.get("/llms/{llm_id}", summary="按ID获取LLM配置")  
+async def get_llm_by_id(  
+        llm_id: int,  
+        include_deleted: Annotated[bool, Query(description="是否包含已删除, 默认不包含")] = False,  
+        db: AsyncSession = Depends(get_db_molook_uat_python_async),  
+        current_user: User = Depends(get_current_active_user)  
+  
+):  
+    stmt = select(LLM).where(LLM.id == llm_id)  
+    if not include_deleted:  
+        stmt = stmt.where(or_(LLM.is_deleted != True, LLM.is_deleted.is_(None)))  
+    logger.debug(stmt.compile(compile_kwargs={"literal_binds": True}))  
+    result = await db.execute(stmt)  
+    result = result.scalars().one_or_none()  
+    print(result)  
+    return result  
+  
+  
+@router.get("/llm/search", deprecated=True)  
+async def get_llm_by_name(  
+        name: str,  
+        db: AsyncSession = Depends(get_db_molook_uat_python_async),  
+        current_user: User = Depends(get_current_active_user)  
+):  
+    stmt = select(LLM).where(LLM.name == name)  
+    result = await db.execute(stmt)  
+    result = result.scalars().one_or_none()  
+    print(result)  
+    return result  
+  
+  
+@router.delete("/llms/{llm_id}", summary="删除LLM配置")  
+async def delete_llm_by_id(  
+        llm_id: int,  
+        hard_delete: Annotated[bool, Query(description="硬删除")] = False,  
+        db: AsyncSession = Depends(get_db_molook_uat_python_async),  
+        current_user: User = Depends(get_current_active_user)  
+  
+):  
+    if hard_delete:  
+        stmt = delete(LLM).where(LLM.id == llm_id)  
+        result = await db.execute(stmt)  
+        await db.commit()  
+        if result.rowcount == 0:  
+            logger.warning(f"llm_id: {llm_id} not found")  
+            return False  
+        else:  
+            logger.info(f"llm_id: {llm_id} deleted")  
+            return True  
+    else:  
+        stmt = select(LLM).where(LLM.id == llm_id)  
+        result = await db.execute(stmt)  
+        result: LLM | None = result.scalars().one_or_none()  
+        if result is None:  
+            detail = f"llm_id: {llm_id} not found"            logger.warning(detail)  
+            raise HTTPException(status_code=400, detail=detail)  
+        else:  
+            result.is_deleted = True  
+            db.add(result)  
+            await db.commit()  
+            await db.refresh(result)  
+            return True  
+  
+  
+@router.post("/llms", summary="创建LLM配置")  
+async def create_llm(  
+        llm: LLMCreateSchema,  
+        db: AsyncSession = Depends(get_db_molook_uat_python_async),  
+        current_user: User = Depends(get_current_active_user)  
+  
+):  
+    llm_db = LLM()  
+    for key, value in llm.model_dump(exclude_unset=True).items():  
+        setattr(llm_db, key, value)  
+    db.add(llm_db)  
+    await db.commit()  
+    await db.refresh(llm_db)  
+    return llm_db  
+  
+  
+@router.put("/llms/{llm_id}", summary="按ID更新LLM配置")  
+async def update_llm(  
+        llm_id: int,  
+        llm: LLMUpdateSchema,  
+        db: AsyncSession = Depends(get_db_molook_uat_python_async),  
+        current_user: User = Depends(get_current_active_user)  
+):  
+    stmt = select(LLM).where(LLM.id == llm_id)  
+    result = await db.execute(stmt)  
+    llm_db = result.scalars().one_or_none()  
+    if llm_db is None:  
+        detail = f"llm_id: {llm_id} not found"        logger.warning(detail)  
+        raise HTTPException(status_code=400, detail=detail)  
+    else:  
+        for key, value in llm.model_dump(exclude_unset=True).items():  
+            setattr(llm_db, key, value)  
+        db.add(llm_db)  
+        await db.commit()  
+        await db.refresh(llm_db)  
+        return llm_db  
+  
+  
+@router.get("/llm_instructions", summary="获取LLM Instruction")  
+async def get_llm_instructions(  
+        page: int = 1,  
+        page_size: int = 10,  
+        include_deleted: Annotated[bool, Query(description="是否包含已删除, 默认不包含")] = False,  
+        db: AsyncSession = Depends(get_db_molook_uat_python_async),  
+        current_user: User = Depends(get_current_active_user)  
+  
+):  
+    s = "LLMInstruction, LLM.name, LLM.provider, LLM.description, LLM.model, LLM.base_url, LLM.config, LLM.api_key, LLM.status, LLM.metadata, LLM.access_key, LLM.secret_key, LLM.provider_url, LLM.sample"  
+    stmt = select(LLMInstruction, LLM).options(joinedload(LLMInstruction.llm)).join(LLM,  
+                                                                                    LLM.id == LLMInstruction.llm_id,  
+                                                                                    isouter=True)  
+    if not include_deleted:  
+        stmt = stmt.where(or_(LLMInstruction.deleted != True, LLMInstruction.deleted.is_(None)))  
+    result = await db.execute(  
+        select(func.count(LLMInstruction.id)).select_from(LLMInstruction).where(stmt.whereclause))  
+    if stmt.whereclause is None:  
+        result = await db.execute(select(func.count(LLMInstruction.id)).select_from(LLMInstruction))  
+    total_count = result.scalar()  
+    total_pages = (total_count + page_size - 1) // page_size  
+  
+    stmt = stmt.limit(page_size).offset((page - 1) * page_size)  
+    result = await db.execute(stmt)  
+    items = result.scalars().all()  
+    # return results  
+    return {  
+        "items": items,  
+        "total_count": total_count,  
+        "total_pages": total_pages,  
+        "current_page": page,  
+        "page_size": page_size,  
+    }  
+  
+  
+@router.get("/llm_instructions/{llm_instruction_id}", summary="按ID获取LLM Instruction")  
+async def get_llm_instruction_by_id(  
+        llm_instruction_id: int,  
+        include_deleted: Annotated[bool, Query(description="是否包含已删除, 默认不包含, 可不传该参数")] = False,  
+  
+        db: AsyncSession = Depends(get_db_molook_uat_python_async),  
+        current_user: User = Depends(get_current_active_user)  
+  
+):  
+    stmt = select(LLMInstruction, LLM).options(  
+        joinedload(LLMInstruction.llm)  
+    ).join(LLM,  
+           LLM.id == LLMInstruction.llm_id).where(  
+        LLMInstruction.id == llm_instruction_id)  
+  
+    if not include_deleted:  
+        stmt = stmt.where(or_(LLMInstruction.deleted != True, LLMInstruction.deleted.is_(None)))  
+  
+    print(stmt.compile(compile_kwargs={"literal_binds": True}))  
+    result = await db.execute(stmt)  
+    result = result.scalars().one_or_none()  
+    print(result)  
+    return result  
+  
+  
+@router.delete("/llm_instructions/{llm_instruction_id}", summary="删除LLM Instruction")  
+async def delete_llm_instruction_by_id(  
+        llm_instruction_id: int,  
+        hard_delete: Annotated[bool, Query(description="硬删除")] = False,  
+        db: AsyncSession = Depends(get_db_molook_uat_python_async),  
+        current_user: User = Depends(get_current_active_user)  
+  
+):  
+    """  
+    支持软删除, 默认采用软删除  
+    """    if not current_user:  
+        logger.warning("用户未登录")  
+        raise HTTPException(status_code=400, detail="用户未登录")  
+    if hard_delete:  
+        # 删除前,先检查是否存在切user_id 是否匹配  
+        stmt = select(LLMInstruction).where(LLMInstruction.id == llm_instruction_id)  
+        result = await db.execute(stmt)  
+        result = result.scalars().one_or_none()  
+        if result is None:  
+            detail = f"llm_instruction_id: {llm_instruction_id} not found"            logger.warning(detail)  
+            raise HTTPException(status_code=404, detail=detail)  
+        else:  
+            if str(current_user.id) != str(result.user_id):  
+                detail = f"用户{current_user.id}无权限修改{result.user_id}的数据"  
+                logger.warning(detail)  
+                raise HTTPException(status_code=400, detail=detail)  
+        stmt = delete(LLMInstruction).where(LLMInstruction.id == llm_instruction_id)  
+        result = await db.execute(stmt)  
+        await db.commit()  
+        if result.rowcount == 0:  
+            logger.warning(f"llm_instruction_id: {llm_instruction_id} not found")  
+            return 0  
+        else:  
+            logger.info(f"llm_instruction_id: {llm_instruction_id} deleted")  
+            return 1  
+    else:  
+        stmt = select(LLMInstruction).where(LLMInstruction.id == llm_instruction_id)  
+        result = await db.execute(stmt)  
+        result = result.scalars().one_or_none()  
+        if result is None:  
+            detail = f"llm_instruction_id: {llm_instruction_id} not found"            logger.warning(detail)  
+            raise HTTPException(status_code=404, detail=detail)  
+  
+        else:  
+            if str(current_user.id) != str(result.user_id):  
+                detail = f"用户{current_user.id}无权限修改{result.user_id}的数据"  
+                logger.warning(detail)  
+                raise HTTPException(status_code=400, detail=detail)  
+            result.deleted = True  
+            db.add(result)  
+            await db.commit()  
+            await db.refresh(result)  
+            return result  
+  
+  
+@router.post("/llm_instructions", summary="创建LLM Instruction")  
+async def create_llm_instruction(  
+        llm_instruction: LLMInstructionCreateSchema,  
+        db: AsyncSession = Depends(get_db_molook_uat_python_async),  
+        current_user: User = Depends(get_current_active_user)  
+  
+):  
+    if not current_user:  
+        logger.warning("用户未登录")  
+        raise HTTPException(status_code=400, detail="用户未登录")  
+  
+    llm_instruction_db = LLMInstruction()  
+    for key, value in llm_instruction.model_dump(exclude_unset=True).items():  
+        setattr(llm_instruction_db, key, value)  
+    llm_instruction_db.user_id = current_user.id  
+    db.add(llm_instruction_db)  
+    await db.commit()  
+    await db.refresh(llm_instruction_db)  
+    return llm_instruction_db  
+  
+  
+@router.put("/llm_instructions/{llm_instruction_id}", summary="按ID更新LLM Instruction")  
+async def update_llm_instruction(  
+        llm_instruction_id: int,  
+        llm_instruction: LLMInstructionUpdateSchema,  
+        db: AsyncSession = Depends(get_db_molook_uat_python_async),  
+        current_user: User = Depends(get_current_active_user)  
+  
+):  
+    if not current_user:  
+        logger.warning("用户未登录")  
+        raise HTTPException(status_code=400, detail="用户未登录")  
+  
+    stmt = select(LLMInstruction).where(LLMInstruction.id == llm_instruction_id)  
+    result = await db.execute(stmt)  
+    result = result.scalars().one_or_none()  
+    if result is None:  
+        detail = f"llm_instruction_id: {llm_instruction_id} not found"        logger.warning(detail)  
+        raise HTTPException(status_code=404, detail=detail)  
+    else:  
+        if str(current_user.id) != str(result.user_id):  
+            detail = f"用户{current_user.id}无权限修改{result.user_id}的数据"  
+            logger.warning(detail)  
+            raise HTTPException(status_code=400, detail=detail)  
+        for key, value in llm_instruction.model_dump(exclude_unset=True).items():  
+            setattr(result, key, value)  
+        db.add(result)  
+        await db.commit()  
+        await db.refresh(result)  
+        return result
+```
 ## 基础增删改查
 
 - [Working wit data](https://docs.sqlalchemy.org/en/20/tutorial/data.html)
@@ -2171,7 +2661,7 @@ class Child(Base):
     )
 ```
 
-
+## 
 
 ## Table 声明
 
@@ -2247,6 +2737,26 @@ sessionmaker.binds
 
 > 分多引擎跨库和单引擎跨库
 
+### 字段过滤器
+
+```python
+def field_filter(model: Type[T], data: dict | list[dict]) -> list[dict]:
+    """
+    过滤字段, 仅当字段存在于表中才会保存
+    """
+    if isinstance(data, dict):
+        data = [data]
+    new_data = []
+    for item in data:
+        new_data.append({key: value for key, value in item.items() if key in model.__table__.columns})
+    return new_data
+
+    # return {key: value for key, value in data.items() if key in model.__table__.columns}
+
+```
+
+
+
 ## 常见问题
 
 ### aiomysql循环异常关闭
@@ -2277,15 +2787,11 @@ asyncio.run(async_main())
 
 decode_responses=True, 注意连接池
 
-# mysql-connector-python
 
-## 返回字典类型
 
-## json字符串
+# pymongo
 
-# mymongo
 
-# redis
 
 # pika
 
@@ -2320,6 +2826,8 @@ client = OpenAI(
 # **Pillow**
 
 # OpenCV
+
+> [Guest Post: Four Ways To Quickly Display OpenCV Images During Debugging](https://blog.jetbrains.com/pycharm/2023/10/guest-post-four-ways-to-quickly-display-opencv-images-during-debugging/)
 
 
 
@@ -2750,6 +3258,8 @@ context = browser.new_context(storage_state=state)
 
 
 # ---
+
+# ploars
 
 # accelerate
 
