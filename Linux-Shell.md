@@ -1096,8 +1096,9 @@ curl -OsSL https://github.com/prometheus/alertmanager/releases/download/v0.26.0/
 # 安装
 sh -c "$(curl -fsSL https://install.ohmyz.sh/)"
 
-# 将内容打印到标准输出
+# 将内容打印到标准输出 测试代理是否正常
 curl -fsSL https://install.ohmyz.sh/
+curl -fsSL https://www.google.com
 
 # 上传文件使用 /application/x-www-form-urlencoded格式
 # -d 将会根据filename extension 自动选择conten-type
@@ -3447,13 +3448,24 @@ ss -tuln
 
 
 
-### nc
+### **nc**
 
 > [!tip]
 >
 > arbitrary TCP and UDP connections and listens
 >
-> 
+> Netcat is a featured networking utility which reads and writes data across network connections, using the TCP/IP protocol.
+> It is designed to be a reliable "back-end" tool that can be used directly or easily driven by other programs and scripts. At the same time, it is a feature-rich network debugging and exploration tool, since it can create almost any kind of connection you would need and has several interesting built-in capabilities.
+>
+> It provides access to the following main features:
+>
+> - Outbound and inbound connections, TCP or UDP, to or from any ports.
+> - Featured **tunneling mode** which allows also special tunneling such as UDP to TCP, with the possibility of specifying all network parameters (source port/interface, listening port/interface, and the remote host allowed to connect to the tunnel.
+> - Built-in port-scanning capabilities, with randomizer.
+> - Advanced usage options, such as buffered send-mode (one line every N seconds), and hexdump (to stderr or to a specified file) of trasmitted and received data.
+> - Optional RFC854 telnet codes parser and responder.
+
+https://netcat.sourceforge.net/
 
 > nc, netcat
 
@@ -4448,6 +4460,9 @@ local_umask=022
 
 ## certbot
 
+## ncdu-(文件删除)
+## dua/dust(du替代)
+
 ## ~~xrdp(不推荐)~~
 
 https://zhuanlan.zhihu.com/p/519648451
@@ -4507,6 +4522,12 @@ systemctl --user restart gnome-remote-desktop.service
 
 ## syncthing
 
+
+
+> [!Tip]
+>
+> [Ubuntu Official Instsall](https://apt.syncthing.net/) 
+
 ```shell
 # mac
 
@@ -4515,6 +4536,11 @@ To start syncthing now and restart at login:
 Or, if you don't want/need a background service you can just run:
   /opt/homebrew/opt/syncthing/bin/syncthing -no-browser -no-restart
 
+```
+
+```shell
+# ubuntu 
+# https://apt.syncthing.net/
 ```
 
 
@@ -4545,11 +4571,16 @@ sudo service nginx restart
 ```shell
 # 语言 方式一
 sudo dpkg-reconfigure locales
-sudo localectl set-locale LANG=zh_CN.UTF-8
-
+sudo localectl set-locale LANG=zh_CN.UTF-8 LC_CTYPE=zh_CN.UTF-8
+sudo localectl set-locale LC_CTYPE=zh_CN.UTF-8
+sudo localectl list-locales
 sudo apt-get install language-pack-zh-hans
+vim /etc/default/locale
+source /etc/default/locale
 
 # 方式二边界/etc/locale.gen或 locale-gen命令
+
+sudo vim /etc/default/locale
 
 locale 
 locale -a
@@ -4764,6 +4795,21 @@ echo $JAVA_HOME
 
 ```
 
+
+
+## 语言变更
+
+```shell
+# 首先，确保你的系统已经安装了中文语言包。使用以下命令安装中文语言包：
+sudo apt update
+sudo apt install language-pack-zh-hans language-pack-gnome-zh-hans
+
+# 更新语言设置
+sudo update-locale LANG=zh_CN.UTF-8
+```
+
+
+
 ## 实现开机启动
 
 编辑 `/etc/rc.local` 实现启动时读取命令和配置文件
@@ -4882,6 +4928,8 @@ sudo fdisk -l
 sudo lsblk
 
 # prepare  取消挂载
+# 清除分区表
+sudo wipefs -a /dev/nvme0n1
 
 # 创建物理卷
 sudo pvcreate /dev/nvme0n1p2
@@ -4892,8 +4940,7 @@ sudo vgextend ubuntu-vg /dev/nvme0n1p2
 # 查看逻辑卷路径
 df -h 
 # 扩展逻辑卷
-sudo 
-/dev/mapper/ubuntu--vg-ubuntu--lv
+# sudo /dev/mapper/ubuntu--vg-ubuntu--lv
 sudo lvextend -l +100%FREE /dev/mapper/ubuntu--vg-ubuntu--lv
 
 # 扩展文件系统
@@ -4902,6 +4949,24 @@ sudo resize2fs /dev/mapper/ubuntu--vg-ubuntu--lv
 ```
 
 
+
+## DDNS(Cloudflare)
+
+https://zhile.io/2023/09/04/copy-jetbra-in.html
+
+https://ednovas.xyz/2022/02/09/cfddns/
+
+ddns-go 
+
+注意手动添加 要解析的域名列表
+
+domains  同时注意TTL  阿里云10分钟可能不支持
+
+### 避免 自动307 http->https
+
+```shell
+ chrome://net-internals/#hsts
+```
 
 
 

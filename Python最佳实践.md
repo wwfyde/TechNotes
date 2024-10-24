@@ -15,6 +15,11 @@
 - [Python HOWTOs](https://docs.python.org/3/howto/index.html)
 - [Python FAQs](https://docs.python.org/3/faq/index.html)
 
+# 理解
+
+- 枚举
+    - 枚举的name是在Python程序中的有意义表示, value是对外部数据的存储和表示
+
 # 环境配置
 
 机器学习环境一键安装 [lambda stack](https://lambdalabs.com/lambda-stack-deep-learning-software)
@@ -23,9 +28,13 @@
 
 [阿里巴巴镜像站](https://developer.aliyun.com/mirror/pypi)
 
-[清华大学镜像: 推荐](https://mirrors.tuna.tsinghua.edu.cn/help/pypi/)
+[上海交大镜像站](https://mirror.sjtu.edu.cn/)
 
 可以直接修改配置文件, 也可通过命令生效, 也可以在安装时指定index-url
+
+
+
+
 
 ```shell
 # pip config set global.index-url https://mirrors.aliyun.com/pypi/simple
@@ -45,6 +54,8 @@ pip config list
 ```
 
 ```shell
+# ~/.config/pip/pipcnf
+
 [global]
 index-url=https://mirrors.cloud.aliyuncs.com/pypi/simple/
 
@@ -65,6 +76,15 @@ pip install --extra-index-url
 # 离线安装和下载
 pip download -d /path/to/directory somepackage
 pip install --no-index --find-links=pip-packages somepackage
+
+
+```
+
+```shell
+# 临时使用
+
+pip install -i https://mirror.sjtu.edu.cn/pypi/web/simple numpy
+
 
 ```
 
@@ -121,6 +141,8 @@ The NVIDIA Container Toolkit enables users to build and run GPU-accelerated cont
 # 校验是否安装和配置成功
 sudo docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
 ```
+
+
 
 
 
@@ -226,6 +248,12 @@ datetime.datetime.now()
 
 # 监控
 
+# Modern Python
+
+> advanced features
+
+
+
 # 服务部署
 
 ## 部署方式
@@ -261,6 +289,70 @@ from uvicorn.main import main
 if __name__ == "__main__":
     sys.argv[0] = re.sub(r"(-script\.pyw|\.exe)?$", "", sys.argv[0])
     sys.exit(main())
+```
+
+# dict
+
+> 效率提示
+
+提升效率的方法：
+
+使用适当的数据结构：
+
+- 对于频繁查找的数据，考虑使用字典而不是列表
+
+- 对于需要保持顺序的数据，考虑使用 collections.OrderedDict
+
+**索引化**：对于 list[dict]，可以预先创建一个以搜索键为键的字典
+
+
+
+  index = {item['id']: item for item in data}
+
+  result = index.get(1)
+
+使用 set 进行成员检查：
+
+如果只需要检查成员是否存在，set 比 list 快得多
+
+```
+```
+
+  my_set = set([1, 2, 3, 4, 5])
+
+  is_present = 3 in my_set # 非常快
+
+
+
+# list
+
+```python
+# 索引访问——index access
+my_list = [1, 2, 3, 4, 5]
+result = my_list[2]  # return 3
+
+# 线性查找——linear search
+result = next((x for x in my_list if x > 3), None)
+
+# 二分查找——binary search 
+# 适用于已排序的列表，O(log n) 时间复杂度
+import bisect
+sorted_list = [1, 2, 3, 4, 5]
+index = bisect.bisect_left(sorted_list, 3)
+
+
+# 列表推导式
+data = [{'id': 1, 'name': 'Alice'}, {'id': 2, 'name': 'Bob'}]
+   result = [item for item in data if item['id'] == 1]
+
+# filter函数
+result = list(filter(lambda x: x['id'] == 1, data))
+
+# next和生成器表达式
+result = next((item for item in data if item['id'] == 1), None)
+
+
+
 ```
 
 
@@ -500,7 +592,7 @@ X.Y     # Final release - 最终版 通常也是稳定版
 
 
 
-# 项目布局
+# **项目布局**
 
 [structuring your project](https://docs.python-guide.org/writing/structure/)
 
@@ -540,9 +632,191 @@ tests/
 
 ## library
 
+## libraries/frameworks
+
+例如：openai-python, redis-py, requests
+
+最佳实践：
+
+使用 src 布局
+
+包含详细的 README.md
+
+提供完整的文档
+
+包含测试目录
+
+使用 setup.py 或 pyproject.toml 进行包配置
+
+目录结构：
+
+```shell
+project_name/
+├── src/
+│   └── project_name/
+│       ├── __init__.py
+│       └── core.py
+├── tests/
+├── docs/
+├── README.md
+├── LICENSE
+├── setup.py 或 pyproject.toml
+└── requirements.txt
+```
 
 
 
+## tools(推荐)
+
+例如：logfire, black, flake8
+
+最佳实践：
+
+提供命令行接口
+
+包含使用示例
+
+考虑添加配置文件支持
+
+目录结构：
+
+```shell
+tool_name/
+├── tool_name/
+│   ├── __init__.py
+│   ├── cli.py
+│   └── core.py
+├── tests/
+├── README.md
+├── LICENSE
+├── setup.py 或 pyproject.toml
+└── requirements.txt
+```
+
+
+
+## applications
+
+例如：web 应用、桌面应用
+
+最佳实践：
+
+使用适当的框架（如 Flask, Django, PyQt）
+
+包含配置文件
+
+提供部署说明
+
+目录结构：
+
+```shell
+app_name/
+├── app_name/
+│   ├── __init__.py
+│   ├── main.py
+│   ├── models.py
+│   ├── views.py
+│   └── templates/
+├── tests/
+├── config/
+├── README.md
+├── requirements.txt
+└── Dockerfile (如果适用)
+```
+
+
+
+## projects(机器学习项目)
+
+例如：scikit-learn, pandas
+
+最佳实践：
+
+包含数据处理脚本
+
+提供模型训练和评估代码
+
+考虑添加 Jupyter notebooks
+
+目录结构：
+
+```python
+project_name/
+├── data/
+├── notebooks/
+├── src/
+│   ├── __init__.py
+│   ├── data_processing.py
+│   ├── model.py
+│   └── evaluation.py
+├── tests/
+├── README.md
+└── requirements.txt
+```
+
+
+
+## scripts
+
+```python
+script_collection/
+├── scripts/
+│   ├── script1.py
+│   └── script2.py
+├── utils/
+│   └── common.py
+├── README.md
+└── requirements.txt
+```
+
+
+
+## plugins/extensions
+
+
+
+# 配置管理
+
+> - 环境变量(通常优先级最高)
+> - yaml/comf配置文件
+> - 配置挂载点:  
+>   - /etc/app_name/config.yaml
+>   - /etc/app_name.conf
+>   - ~/.config/app_name.conf
+
+
+
+> ubuntu/linux 应用配置管理, 配置文件, 配置加载/挂载最佳实践
+
+
+
+## 加载配置
+
+- 挂载配置文件
+- 命令行指定配置文件
+  - prometheus  --config.file=/etc/prometheus/config.yaml
+- cli运行时传入环境变量
+- cli 运行时读取.env文件
+- systemd
+
+## 热重载
+
+> 一般是通过接口实现配置重新读取
+
+## 参考项目
+
+- [配置管理dynaconf](https://github.com/rochacbruno/dynaconf)
+- 使用 环境变量 `os.getenv`
+- 
+- 使用 模块 module  `dev.py `
+- 使用 文件 YAML
+- 使用 文件 JSON
+- 使用 文件 INI configparser
+- 使用 对象 object
+- 使用 对象 dict  
+- 使用pydantic 中的 BaseSettings
+- 使用 configmanager
+  - pip install configmanager
 
 # 文档规范
 
@@ -727,6 +1001,154 @@ tests/
 > 规范, 范例, 方式
 >
 > 中文: 熵增式语言
+
+A programming paradigm is a fundamental style of computer programming, serving as a way of building the structure and elements of computer programs.
+
+Programming paradigms that are often distinguished include imperative, declarative, functional, object-oriented, procedural, logic and symbolic programming.
+
+编程典范, 程序设计法, 编程风格
+
+## 声明式编程(declarative Programming)
+
+> 只关心`做什么`, 而不是`怎么做`, 应该对使用者隐藏`怎么做`
+>
+> 好处:
+>
+> 声明式编程和API的优势：
+>
+> - 可读性和可维护性：声明式代码通常更容易理解，因为它直接表达了意图。这提高了代码的可读性和可维护性。
+>
+> - 抽象复杂性：声明式方法隐藏了底层的复杂实现细节，让开发者专注于业务逻辑。
+>
+> - 减少副作用：由于声明式编程关注结果而不是过程，它通常会减少意外的副作用。
+>
+> - 并行化和优化：声明式代码给予系统更多优化空间，因为它只指定了"什么"而不是"如何"。
+
+声明式编程：
+
+声明式编程是一种编程范式，它关注的是"做什么"而不是"怎么做"。在声明式编程中，你描述你想要的结果，而不是详细指定达到结果的步骤。
+
+声明式API：
+
+声明式API是基于声明式编程原则设计的应用程序接口。它允许用户以描述性的方式指定他们想要实现的目标，而不需要详细说明如何实现。
+
+## 命令式编程
+
+## **过程式编程**
+
+## 逻辑编程
+
+
+
+## **模块化编程**
+
+**逻辑编程**（**逻辑程序设计**）是种[编程典范](https://zh.wikipedia.org/wiki/編程典範)，它设置答案须符合的规则来解决问题，而非设置步骤来解决问题。过程是
+
+
+
+不同的方法，可以看[Inductive logic programming](https://zh.wikipedia.org/w/index.php?title=Inductive_logic_programming&action=edit&redlink=1)。
+
+逻辑编程的要点是将正规的[逻辑](https://zh.wikipedia.org/wiki/邏輯)风格带入计算机程序设计之中。数学家和哲学家发现逻辑是有效的理论分析工具。很多问题可以自然地表示成一个理论。说需要解答一个问题，通常与解答一个新的假设是否跟现在的理论无冲突等价。逻辑提供了一个证明问题是真还是假的方法。创建证明的方法是人所皆知的，故逻辑是解答问题的可靠方法。逻辑编程系统则自动化了这个程序。[人工智能](https://zh.wikipedia.org/wiki/人工智能)在逻辑编程的发展中发挥了重要的影响。
+
+[猴子和香蕉问题](https://zh.wikipedia.org/w/index.php?title=猴子和香蕉問題&action=edit&redlink=1)是逻辑编程社群的著名问题。电脑须自行找出令猴子接触香蕉的可行方法，取代程序员指定猴子接触香蕉的路径和方法。
+
+**逻辑编程创建了描述一个问题里的世界的逻辑模型**。逻辑编程的目标是对它的模型创建新的陈述。世界上知识不断澎涨。传统来说，我们会将**一个问题陈述成单一的假设**。逻辑编程的程序透过证明这个假设在模型里是否为真来解决问题。
+
+一些经常用到逻辑编程工具的范畴：
+
+- [专家系统](https://zh.wikipedia.org/wiki/專家系統)，程序从一个巨大的模型中产生一个建议或答案。
+- [自动化证明定理](https://zh.wikipedia.org/w/index.php?title=自動化證明定理&action=edit&redlink=1)，程序产生一些新定理来扩展现有的理论。
+
+## **函数式编程**
+
+> 不能有副作用
+
+#### 定义
+
+函数式编程是种编程方式，它将电脑运算视为**函数计算**。函数编程语言最重要的基础是λ演算（lambda calculus），而且λ演算的函数可以接受函数当作输入（参数）和输出（返回值）。
+
+它将计算机运算视为 **函数运算**，并且避免使用程序状态以及易变对象。其中，[λ演算](https://zh.wikipedia.org/wiki/Λ演算)（lambda calculus）为该语言最重要的基础。而且，λ演算的函数可以接受函数当作输入（引数）和输出（传出值）。
+
+比起[指令式编程](https://zh.wikipedia.org/wiki/指令式編程)，函数式编程更加强调程序执行的结果而非执行的过程，倡导利用若干简单的执行单元让计算结果不断渐进，逐层推导复杂的运算，而不是设计一个复杂的执行过程。
+
+**核心思想**: 把运算过程写成嵌套函数调用(引用,计算,返回, 调用 )
+
+和指令式编程相比，函数式编程强调函数的计算比指令的执行重要。
+
+和过程化编程相比，函数式编程里函数的计算可随时调用。
+
+**惰性计算**(延迟计算): 表达式不是在引用变量时立即计算,而是在求值程序需要产生表达式的值时进行计算
+
+**函数也是一种数据类型**
+
+#### 特点
+
+**只用"表达式"，不用"语句"**
+
+"表达式"（expression）是一个单纯的运算过程，总是有返回值；"语句"（statement）是执行某种操作，没有返回值。函数式编程要求，只使用表达式，不使用语句。也就是说，每一步都是单纯的运算，而且都有返回值。
+
+原因是函数式编程的开发动机，一开始就是为了处理运算（computation），不考虑系统的读写（I/O）。"语句"属于对系统的读写操作，所以就被排斥在外。
+
+当然，实际应用中，不做I/O是不可能的。因此，编程过程中，函数式编程只要求把I/O限制到最小，不要有不必要的读写行为，保持计算过程的单纯性。
+
+**没有"副作用"** -- 结果确定且唯一
+
+所谓"副作用"（side effect），指的是函数内部与外部互动（最典型的情况，就是修改全局变量的值），产生运算以外的其他结果。
+
+函数式编程强调没有"副作用"，意味着函数要保持独立，所有功能就是返回一个新的值，没有其他行为，尤其是不得修改外部变量的值。
+
+**不修改状态**
+
+上一点已经提到，函数式编程只是返回新的值，不修改系统变量。因此，不修改变量，也是它的一个重要特点。
+
+在其他类型的语言中，变量往往用来保存"状态"（state）。不修改变量，意味着状态不能保存在变量中。函数式编程使用参数保存状态，最好的例子就是递归。下面的代码是一个将字符串逆序排列的函数，它演示了不同的参数如何决定了运算所处的"状态"。
+
+**引用透明性**
+
+函数程序通常还加强*引用透明性*，即如果提供同样的输入，那么函数总是返回同样的结果。就是说，表达式的值不依赖于可以改变值的全局状态。这使您可以从形式上推断程序行为，因为表达式的意义只取决于其子表达式而不是计算顺序或者其他表达式的副作用。这有助于验证正确性、简化算法，甚至有助于找出优化它的方法。
+
+#### 优点
+
+**代码简介, 开发快速**
+
+**接近自然语言, 易于理解**
+
+**更方便的代码管理**
+
+函数式编程不依赖、也不会改变外界的状态，只要给定输入参数，返回的结果必定相同。因此，每一个函数都可以被看做独立单元，很有利于进行单元测试（unit testing）和除错（debugging），以及模块化组合。
+
+(封装成独立单元, 状态恒定)
+
+**易于并发编程**
+
+函数式编程不需要考虑"死锁"（deadlock），因为它不修改变量，所以根本不存在"锁"线程的问题。不必担心一个线程的数据，被另一个线程修改，所以可以很放心地把工作分摊到多个线程，部署"并发编程"（concurrency）。
+
+**代码的热升级**
+
+函数式编程没有副作用，只要保证接口不变，内部实现是与外部无关的。所以，可以在运行状态下直接升级代码，不需要重启，也不需要停机。
+
+## **面向对象编程**
+
+对数据和功能的封装, 
+
+**面向过程**: 强调的是功能行为, 关注的是解决问题需要哪些步骤 
+**面向对象**: 将功能封装进对象, 强调具备了功能的对象关注的是解决问题需要哪些对象 
+
+## **结构化编程**
+
+> 不能跳转, 不能使用goto
+
+#### 原则
+
+自顶向下，逐步细化；
+
+清晰第一，效率第二；
+
+书写规范，缩进格式；
+
+基本结构，组合而成。
+
+## 泛型编程
 
 ## 代码层
 
@@ -965,7 +1387,27 @@ structured programming
 
 > 尽可能让命名有意义
 
+## 标准与规范
 
+- https://www.debian.org/doc/debian-policy/index.html
+- [Rust Official: Rust API 指南](https://rust-lang.github.io/api-guidelines/)
+- [The 12-Factor App](https://12factor.net/)
+- [语义化版本: ](https://semver.org/)
+- https://martinfowler.com/articles/continuousIntegration.html
+- [git flow, 分支策略](https://nvie.com/posts/a-successful-git-branching-model/)
+- [git  Conventional Commits](https://www.conventionalcommits.org/)
+  - git commit messages
+  - [Angular commit message format](https://github.com/angular/angular/blob/main/CONTRIBUTING.md#commit)
+- [Git 文档 - 贡献指南:](https://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project)
+  - https://cbea.ms/git-commit/
+- [RESTful API 设计指南](https://restfulapi.net/)
+- [Open API 规范](https://spec.openapis.org/oas/latest.html)
+- [SOLID 原则](https://en.wikipedia.org/wiki/SOLID)
+- [普适性设计原则（Universal Design Principles）](http://universaldesign.ie/What-is-Universal-Design/The-7-Principles/)
+- [函数式编程原则](https://github.com/hemanth/functional-programming-jargon)
+- [微服务架构模式](https://microservices.io/patterns/index.html)
+- [领域驱动设计DDD](https://domainlanguage.com/ddd/)
+- 
 
 ## 项目结构
 
@@ -1371,23 +1813,6 @@ config
 
 ConfigParser
 
-## 配置管理
-
-### 参考项目
-
-- [配置管理dynaconf](https://github.com/rochacbruno/dynaconf)
-- 使用 环境变量 `os.getenv`
-- 
-- 使用 模块 module  `dev.py `
-- 使用 文件 YAML
-- 使用 文件 JSON
-- 使用 文件 INI configparser
-- 使用 对象 object
-- 使用 对象 dict  
-- 使用pydantic 中的 BaseSettings
-- 使用 configmanager
-    - pip install configmanager
-
 
 ## 命令行开发
 
@@ -1707,133 +2132,7 @@ C++
 
 
 
-# 编程范式
 
-A programming paradigm is a fundamental style of computer programming, serving as a way of building the structure and elements of computer programs.
-
-Programming paradigms that are often distinguished include imperative, declarative, functional, object-oriented, procedural, logic and symbolic programming.
-
-编程典范, 程序设计法, 编程风格
-
-## 声明式编程
-
-## 命令式编程
-
-## **过程式编程**
-
-## 逻辑编程
-
-
-
-## **模块化编程**
-
-**逻辑编程**（**逻辑程序设计**）是种[编程典范](https://zh.wikipedia.org/wiki/編程典範)，它设置答案须符合的规则来解决问题，而非设置步骤来解决问题。过程是
-
-
-
-不同的方法，可以看[Inductive logic programming](https://zh.wikipedia.org/w/index.php?title=Inductive_logic_programming&action=edit&redlink=1)。
-
-逻辑编程的要点是将正规的[逻辑](https://zh.wikipedia.org/wiki/邏輯)风格带入计算机程序设计之中。数学家和哲学家发现逻辑是有效的理论分析工具。很多问题可以自然地表示成一个理论。说需要解答一个问题，通常与解答一个新的假设是否跟现在的理论无冲突等价。逻辑提供了一个证明问题是真还是假的方法。创建证明的方法是人所皆知的，故逻辑是解答问题的可靠方法。逻辑编程系统则自动化了这个程序。[人工智能](https://zh.wikipedia.org/wiki/人工智能)在逻辑编程的发展中发挥了重要的影响。
-
-[猴子和香蕉问题](https://zh.wikipedia.org/w/index.php?title=猴子和香蕉問題&action=edit&redlink=1)是逻辑编程社群的著名问题。电脑须自行找出令猴子接触香蕉的可行方法，取代程序员指定猴子接触香蕉的路径和方法。
-
-**逻辑编程创建了描述一个问题里的世界的逻辑模型**。逻辑编程的目标是对它的模型创建新的陈述。世界上知识不断澎涨。传统来说，我们会将**一个问题陈述成单一的假设**。逻辑编程的程序透过证明这个假设在模型里是否为真来解决问题。
-
-一些经常用到逻辑编程工具的范畴：
-
-- [专家系统](https://zh.wikipedia.org/wiki/專家系統)，程序从一个巨大的模型中产生一个建议或答案。
-- [自动化证明定理](https://zh.wikipedia.org/w/index.php?title=自動化證明定理&action=edit&redlink=1)，程序产生一些新定理来扩展现有的理论。
-
-## **函数式编程**
-
-> 不能有副作用
-
-#### 定义
-
-函数式编程是种编程方式，它将电脑运算视为**函数计算**。函数编程语言最重要的基础是λ演算（lambda calculus），而且λ演算的函数可以接受函数当作输入（参数）和输出（返回值）。
-
-它将计算机运算视为 **函数运算**，并且避免使用程序状态以及易变对象。其中，[λ演算](https://zh.wikipedia.org/wiki/Λ演算)（lambda calculus）为该语言最重要的基础。而且，λ演算的函数可以接受函数当作输入（引数）和输出（传出值）。
-
-比起[指令式编程](https://zh.wikipedia.org/wiki/指令式編程)，函数式编程更加强调程序执行的结果而非执行的过程，倡导利用若干简单的执行单元让计算结果不断渐进，逐层推导复杂的运算，而不是设计一个复杂的执行过程。
-
-**核心思想**: 把运算过程写成嵌套函数调用(引用,计算,返回, 调用 )
-
-和指令式编程相比，函数式编程强调函数的计算比指令的执行重要。
-
-和过程化编程相比，函数式编程里函数的计算可随时调用。
-
-**惰性计算**(延迟计算): 表达式不是在引用变量时立即计算,而是在求值程序需要产生表达式的值时进行计算
-
-**函数也是一种数据类型**
-
-#### 特点
-
-**只用"表达式"，不用"语句"**
-
-"表达式"（expression）是一个单纯的运算过程，总是有返回值；"语句"（statement）是执行某种操作，没有返回值。函数式编程要求，只使用表达式，不使用语句。也就是说，每一步都是单纯的运算，而且都有返回值。
-
-原因是函数式编程的开发动机，一开始就是为了处理运算（computation），不考虑系统的读写（I/O）。"语句"属于对系统的读写操作，所以就被排斥在外。
-
-当然，实际应用中，不做I/O是不可能的。因此，编程过程中，函数式编程只要求把I/O限制到最小，不要有不必要的读写行为，保持计算过程的单纯性。
-
-**没有"副作用"** -- 结果确定且唯一
-
-所谓"副作用"（side effect），指的是函数内部与外部互动（最典型的情况，就是修改全局变量的值），产生运算以外的其他结果。
-
-函数式编程强调没有"副作用"，意味着函数要保持独立，所有功能就是返回一个新的值，没有其他行为，尤其是不得修改外部变量的值。
-
-**不修改状态**
-
-上一点已经提到，函数式编程只是返回新的值，不修改系统变量。因此，不修改变量，也是它的一个重要特点。
-
-在其他类型的语言中，变量往往用来保存"状态"（state）。不修改变量，意味着状态不能保存在变量中。函数式编程使用参数保存状态，最好的例子就是递归。下面的代码是一个将字符串逆序排列的函数，它演示了不同的参数如何决定了运算所处的"状态"。
-
-**引用透明性**
-
-函数程序通常还加强*引用透明性*，即如果提供同样的输入，那么函数总是返回同样的结果。就是说，表达式的值不依赖于可以改变值的全局状态。这使您可以从形式上推断程序行为，因为表达式的意义只取决于其子表达式而不是计算顺序或者其他表达式的副作用。这有助于验证正确性、简化算法，甚至有助于找出优化它的方法。
-
-#### 优点
-
-**代码简介, 开发快速**
-
-**接近自然语言, 易于理解**
-
-**更方便的代码管理**
-
-函数式编程不依赖、也不会改变外界的状态，只要给定输入参数，返回的结果必定相同。因此，每一个函数都可以被看做独立单元，很有利于进行单元测试（unit testing）和除错（debugging），以及模块化组合。
-
-(封装成独立单元, 状态恒定)
-
-**易于并发编程**
-
-函数式编程不需要考虑"死锁"（deadlock），因为它不修改变量，所以根本不存在"锁"线程的问题。不必担心一个线程的数据，被另一个线程修改，所以可以很放心地把工作分摊到多个线程，部署"并发编程"（concurrency）。
-
-**代码的热升级**
-
-函数式编程没有副作用，只要保证接口不变，内部实现是与外部无关的。所以，可以在运行状态下直接升级代码，不需要重启，也不需要停机。
-
-## **面向对象编程**
-
-对数据和功能的封装, 
-
-**面向过程**: 强调的是功能行为, 关注的是解决问题需要哪些步骤 
-**面向对象**: 将功能封装进对象, 强调具备了功能的对象关注的是解决问题需要哪些对象 
-
-## **结构化编程**
-
-> 不能跳转, 不能使用goto
-
-#### 原则
-
-自顶向下，逐步细化；
-
-清晰第一，效率第二；
-
-书写规范，缩进格式；
-
-基本结构，组合而成。
-
-## 泛型编程
 
 # **开发原则**
 

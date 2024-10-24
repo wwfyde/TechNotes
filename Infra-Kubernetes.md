@@ -7,6 +7,8 @@
 - [Offical Site](https://kubernetes.io/)
 - [中文官网](https://kubernetes.io/zh-cn/)
 - [极客时间:深入剖析Kubernetes](https://time.geekbang.org/column/intro/116)
+- [Kubernetes official examples](https://github.com/kubernetes/examples)
+- [Helm Charts (用于更复杂的应用部署):](https://artifacthub.io/)
 
 [![img](https://wwfyde.oss-cn-hangzhou.aliyuncs.com/images/202310270016077.jpeg)](https://github.com/ByteByteGoHq/system-design-101/blob/main/images/k8s.jpeg)
 
@@ -24,7 +26,35 @@
 - 编排永远都是容器云项目的灵魂所在, 也是Kubernetes社区持久生命力的源泉.
 - 容器, 类似沙盒的概念, 使用`Cgroups` 和 `Namespace`概念股将应用进程隔离起来了
 
+## 
+
 ## 快速上手
+
+### 环境搭建
+
+```shell
+```
+
+
+
+### 基本流程
+
+
+
+### 构建镜像
+
+### 推送仓库
+
+### 创建部署
+
+### 创建服务
+
+### 应用资源
+
+```shell
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
+```
 
 
 
@@ -243,6 +273,8 @@ Pod是Kubernetes中最小的可部署单元，通常包含一个或多个相关�
 
 
 
+## Ingress
+
 # Glossary
 
 ## Lists
@@ -278,6 +310,14 @@ Pod是Kubernetes中最小的可部署单元，通常包含一个或多个相关�
 
 ## kubelet
 
+## kubeadm
+
+## kubectl
+
+## minikube-(dev)
+
+## helm
+
 ## kube-scripts
 
 ## istio
@@ -308,11 +348,19 @@ Pod是Kubernetes中最小的可部署单元，通常包含一个或多个相关�
 
 ## Loki
 
+## dcgm-exporter
+
+## k8s-device-plugin
+
 # Node
 
 # Pod
 
 # 容器
+
+# Deployment
+
+
 
 # 工作负载
 
@@ -322,11 +370,25 @@ Pod是Kubernetes中最小的可部署单元，通常包含一个或多个相关�
 
 - https://kubernetes.io/docs/concepts/services-networking/service/
 
+
+
+## introduction
+
+### 多维解释
+
+- Service 将 Pod 暴露为一个网络服务。'
+- Deployment创建好后, 可执行
+- 虽然Pod是最小可执行单位, 但是依然推荐将其运行到Deployments上
+
 # Storage
 
 ## 
 
 # 最佳实践
+
+- [](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
+- [](https://kubernetes.io/docs/concepts/services-networking/service/)
+- [配置](https://kubernetes.io/docs/concepts/configuration/overview/)
 
 ## kubectl
 

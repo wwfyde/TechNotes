@@ -166,6 +166,13 @@ GPT是一种基于深度学习的自然语言处理技术，利用了大规模�
 
 ## Lists
 
+- 偏置(bias)
+- 权重(weight)
+- 方差**方差 (Variance)**:
+- 拟合(fit)
+    - 过拟合
+    - 欠拟合
+
 - 神经网络(neural network):
     - 卷积神经网络
     - CNN 图像识别
@@ -216,7 +223,9 @@ GPT是一种基于深度学习的自然语言处理技术，利用了大规模�
     - 生成式 预训练 自注意力转换器
 - GenAI(Generative Artifical Intelligenc)—生成式人工智能
 - AGI(Artificial General Intelligence)—通用人工智能
-- 梯度(gradient
+- 梯度(gradient)
+- CoT(Chain of Thought)——思维链
+- GoT(Graph of Thought)——思维图
 
 
 ## Lingo
@@ -301,7 +310,12 @@ GPT是一种基于深度学习的自然语言处理技术，利用了大规模�
 
 - 幻觉(hallucinate
 
+- SOTA(State of the Art): 技术前沿, 最先进水平,顶尖水平
+
+  - **SOTA** 的英文全称是 **State of the Art**，意思是“技术前沿”或“最先进水平”。在人工智能和机器学习领域，SOTA 指的是当前在某个特定任务或基准上达到了最高性能的模型或算法。
+  
     
+  
 
 ## Items
 
@@ -660,6 +674,7 @@ https://www.tensorflow.org/tutorials/images/data_augmentation?hl=zh-cn
 ### 参考资料
 
 - [arxiv原文地址](https://arxiv.org/abs/2304.03442)
+- [GitHub--Generative Agents：Interactive Simulacra of Human Behavior](https://github.com/joonspk-research/generative_agents)
 
 
 
@@ -1887,7 +1902,13 @@ GPT
 
 - 正则化技术
 
-    
+
+
+# Neural Network
+
+## 人工神经网络(Artifical Neural Network, ANN)
+
+##   
 
 # OpenAI(LLM)
 
@@ -2096,7 +2117,7 @@ Visit our [pricing page](https://openai.com/api/pricing/) to learn about Embeddi
 
 # Agent-智能体
 
-# OpenAI
+# **OpenAI(LLM)**
 
 
 
@@ -2187,6 +2208,12 @@ GPT-4, including its optimized variant GPT-4O, is a powerful and versatile langu
 
 
 These capabilities make GPT-4O a versatile tool for various applications, from casual conversation and creative writing to technical support and data analysis.
+
+
+
+## Techs
+
+- [Prompt Cache](https://platform.openai.com/docs/guides/prompt-caching)
 
 
 

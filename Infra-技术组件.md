@@ -289,7 +289,19 @@ sudo dnf install grafana
 
 将 promtail 用户 添加到 syslog 和 adm 组 具体根据
 
+# Vector
 
+> **典型的数据类型**：
+>
+> **日志（Logs）**: 应用程序和系统生成的事件信息。
+>
+> **指标（Metrics）**: 数值化的数据，比如 CPU 使用率、内存占用、请求响应时间等。
+>
+> **追踪（Traces）**: 分布式系统中调用链路的追踪数据，用于分析请求在不同服务之间的传播情况。
+
+# OpenTelemetry
+
+> logfire
 
 # Alertmanager
 

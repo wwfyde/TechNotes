@@ -52,7 +52,7 @@ project_name/
 
 
 
-## tools
+## tools(推荐)
 
 例如：logfire, black, flake8
 

@@ -1940,7 +1940,9 @@ person.showname();
 person.showage();
 ```
 
-# TS语法
+# TypeScript
+
+
 
 ## 概述
 

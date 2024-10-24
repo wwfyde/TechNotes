@@ -358,7 +358,13 @@ the audience is a expert in the field——受众是领域专家
 
 # Prompt
 
+## 可选部分
 
+- Context(上下文)
+- 
+- Instruction(指令)
+- Tone(语调)
+- Response(响应)
 
 ## 指令-意图-目标
 
@@ -376,17 +382,15 @@ the audience is a expert in the field——受众是领域专家
 
 ### 最佳实践(指南)
 
-
-
 ## 背景-上下文(context)
 
-
+## 角色(Role)-Deprecated
 
 ## 指令(意图)
 
+## 主题(Subject)
 
-
-## 问题拆解
+## 问题拆解(CoT)
 
 > 多层次问题
 >
@@ -445,9 +449,9 @@ the audience is a expert in the field——受众是领域专家
 
 XML
 
-## 输入输出格式
+## 输入输出(I/O)
 
-
+## 
 
 ## 开放式问题
 
@@ -508,7 +512,32 @@ After a response, provide three follow-up questions worded as if I'm asking you.
 
 
 
-- 
+- Let's think through it step-by-step."
+
+- ```
+    
+    ```
+
+# 格式化输出
+
+- 只输出有效的 json，不要输出其他任何内容。
+  Only output valid json and nothing else.
+
+## cases
+
+### 苹果
+
+https://mp.weixin.qq.com/s/NH2tlKQ0PbE8KM5CiWWTKA
+
+![Image](https://mmbiz.qpic.cn/sz_mmbiz_png/qpAK9iaV2O3umJm82y5cTECnoxs3OoTvkHvI8fFY58bf4LmQBbqszWd5bsAUYhPeCudzp2GXTn3D9SszsHdA8Ww/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+
+这是一个邮件 AI 助手的 prompt 指令：
+
+> 你是一个有用的邮件助手，可以帮助从给定的邮件和简短回复片段中识别相关问题。给定一封邮件和回复片段，请提出邮件中明确询问的相关问题。这些问题的答案将由收件人选择，这将有助于减少在起草回复时的幻觉。请输出最重要的问题，并为每个问题提供一组可能的答案/选项。不要询问回复片段已回答的问题。问题应该简短，不超过 8 个字。答案也应该简短，大约 2 个词。请以 json 格式输出，包含一个字典列表，其中包含问题和答案作为键。如果邮件中没有提出问题，则输出一个空列表 []。只输出有效的 json，不要输出其他任何内容。
+
+
+
+
 
 # Case
 
@@ -516,8 +545,9 @@ After a response, provide three follow-up questions worded as if I'm asking you.
 
 - Write a script to automate sending daily email reports in Python, and walk me through how I would set it up.
     使用 Python 编写一个脚本来自动发送每日电子邮件报告，并引导我了解如何设置它。
+- Please return the translated YAML directly without wrapping `<yaml>` tag or include any additional information.
 
-
+## immersive translate
 
 ## 绘图绘图 Prompt 提问模型
 

@@ -1158,6 +1158,25 @@ git merge --squash new-feature
 
 Demo
 
+### 解决冲突
+
+```shell
+git checkout --ours <file>  # 接受我们的
+  
+  
+git checkout --theirs <file> # 接受即将到来的
+    
+git add <new-file>  # 保留新增的
+      
+git rm  <new-file>   # 删除文件
+
+
+# 或者
+git mergetool
+```
+
+
+
 # **stash**-贮藏
 
 ```shell
@@ -1268,6 +1287,8 @@ establish a new base level for ...
 
 [github docs](https://docs.github.com/zh/get-started/using-git/using-git-rebase-on-the-command-line)
 
+https://docs.github.com/en/get-started/using-git/about-git-rebase
+
 git-rebase - Reapply commits on top of another base tip
 
 
@@ -1314,6 +1335,32 @@ git rebase -
 
 
 ```
+
+## 修改历史提交
+
+```shell
+# 定位到某次提交的前一个提交
+git rebase -i ...~1
+
+# 编辑文档 完成自己想要的编辑后
+
+# 也可以不用执行, 但是会进入vim
+git add .
+# 或者  `git commit --amend --no-edit` 但是不会处理未跟踪的文件, git add . 则会
+
+# 修订提交
+git commit --ammend
+
+# 继续rebase progress
+git rebase --continue
+
+# 处理冲突
+git add .
+
+
+```
+
+
 
 # **Administration**
 

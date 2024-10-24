@@ -19,6 +19,8 @@ tag: [机器学习, 神经网络, 深度学习, 知识图谱]
 
 ## Papers
 
+
+
 ## Blog
 
 - [Methods for adapting large language models](https://ai.meta.com/blog/adapting-large-language-models-llms/)
@@ -249,6 +251,10 @@ CuDNN广泛应用于深度学习领域，包括：
 
 
 
+# CUDA
+
+
+
 # Conda
 
 ## 参考资料
@@ -394,6 +400,30 @@ torch.nn.Module
 
 # 利用多个GPU
 CUDA_VISBLE_DEVICE=0,1 python train.py # 使用0，1两
+```
+
+# Docker
+
+> links:
+>
+> [cuda-Dockerfile](https://gitlab.com/nvidia/container-images/cuda/blob/master/dist/12.6.1/ubuntu2404/devel/cudnn/Dockerfile)
+>
+> [gpus usage](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/docker-specialized.html)
+
+```shell
+docker pull nvidia/cuda:12.6.1-cudnn-devel-ubuntu24.04
+
+# 推荐
+docker pull nvidia/cuda:12.4.1-cudnn-devel-ubuntu22.04
+
+docker run --gpus all --name comfyui -it nvidia/cuda:12.4.1-cudnn-devel-ubuntu22.04
+
+# 使用其中一个GPU
+nvidia-smi -L  # 查看可用
+docker run --gpus all --rm -it nvidia/cuda:12.4.1-cudnn-devel-ubuntu22.04 /bin/bash 
+docker run --gpus device=0 --rm -it nvidia/cuda:12.4.1-cudnn-devel-ubuntu22.04 /bin/bash 
+docker run --gpus 2 --rm -it nvidia/cuda:12.4.1-cudnn-devel-ubuntu22.04 /bin/bash  # 指定数量
+docker run --gpus '"device=0,1"' --rm -it nvidia/cuda:12.4.1-cudnn-devel-ubuntu22.04 /bin/bash 
 ```
 
 

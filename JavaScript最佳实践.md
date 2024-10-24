@@ -63,4 +63,24 @@ npm config set registry https://mirrors.huaweicloud.com/repository/npm/
 
 
 
+# yarn
+
+# 插件
+
+> - [openai-node](https://github.com/openai/openai-node)
+
+## eslint
+
+## prettier
+
+## vite
+
+
+
+# Packages
+
+## vite
+
+## jest
+
 # 调试技巧

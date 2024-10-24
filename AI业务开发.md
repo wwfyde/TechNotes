@@ -12,7 +12,7 @@
 - 成本：预算有限
 - 其他：安全性、隐私性、公平性、GDPR合规性、DMA合规性等
 
-
+# LLMs API
 
 # RAG
 
@@ -23,3 +23,22 @@ Links https://www.databricks.com/glossary/retrieval-augmented-generation-rag
 
 
 millvus 索引
+
+
+
+# Agent
+
+##  原理:
+
+>  [!Tip]
+>
+> - [Function Calling - 智能体Agent的实现基础](https://mp.weixin.qq.com/s/2Z2DnbCXangUpFx2dLfogg)
+
+
+
+
+
+# Workflow
+
+
+

@@ -9,9 +9,17 @@
 - [Postgres Tutorials](https://www.postgresqltutorial.com)
 - [Postgres Python](https://www.postgresqltutorial.com/postgresql-python/)
 
+## 学习目标
+
+MVCC 多版本控制
+
 ## quickstart
 
 PostgreSQL is pronounced Post-Gres-Q-L. (For those curious about how to say "PostgreSQL", an [audio file](http://www.postgresql.org/files/postgresql.mp3) is available.)
+
+## 安装与配置
+
+
 
 ## 初始配置
 
@@ -193,6 +201,24 @@ SHOW autocommit;
 
 ```
 
+
+
+# Data Type
+
+# Topics
+
+## Index
+
+### partial index
+
+# Extensions
+
+# Features
+
+## 外部数据源(`Foreign Data Wrappers`（FDW）)
+
+## 并行查询
+
 # Administration
 
 
@@ -219,6 +245,11 @@ pg_dump dbname > dbname.sql
 
 -- 恢复
 psql dbname < dbname.sql
+
+-- 迁移
+pgloader
+aws dms
+-- Aliyun DTS(Data Transmission Servicem, 数据传输服务)
 ```
 
 备份脚本
@@ -252,6 +283,9 @@ pg_dump -U "$PGUSER" -d "$PGDATABASE" > "$BACKUP_DIR/$PGDATABASE"_"$datestamp"_"
 -- 使用EXPLAIN分析查询性能：
 EXPLAIN SELECT column1, column2 FROM tablename WHERE condition;
 -- 调整PostgreSQL配置参数以优化性能。
+
+-- 查询优化
+EXPLAIN ANALYZE
 ```
 
 
@@ -262,4 +296,51 @@ EXPLAIN SELECT column1, column2 FROM tablename WHERE condition;
 
 
 
+```shell
+# 备份/转存
+pg_dump
+
+# 恢复
+pg_restore
+```
+
+
+
+
+
 ## ADMINISTRATION TIPS
+
+# Performance Tips
+
+> 官方性能调优指南
+
+
+
+## Links
+
+- [Postgres: Performance Tips](https://www.postgresql.org/docs/current/performance-tips.html)
+
+
+
+# 最佳实践
+
+## 并发控制与锁机制
+
+> Postgres使用MVCC来处理并发事务，与MySQL的InnoDB引擎的实现方式不同，尤其是在并发高的时候要注意事务的隔离级别和锁机制。
+
+
+
+## 高可用与集群
+
+[High Availability, Load Balancing, and Replication](https://www.postgresql.org/docs/current/high-availability.html)
+
+**高可用性与集群**：学习PostgreSQL的`Streaming Replication`、`Patroni`等高可用性解决方案。
+
+
+
+## 数据库扩展与分片
+
+> scaling, sharding, partioning
+
+https://mp.weixin.qq.com/s/0h2IzFvulZQCLulPuWnNhw
+

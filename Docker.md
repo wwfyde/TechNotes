@@ -983,6 +983,10 @@ docker 利用了集装箱的思想 不断的堆积, 底层可以不断的被复�
 
 # Docker 命令
 
+https://docs.docker.com/reference/cli/docker/
+
+
+
 ## **容器相关**
 
 ## pull
@@ -991,7 +995,33 @@ docker 利用了集装箱的思想 不断的堆积, 底层可以不断的被复�
  docker pull --platform linux/amd64 node:20
 ```
 
+## 构建-build(legacy)
+
+https://docs.docker.com/reference/cli/docker/buildx/build/#build-arg
+
+使用 `docker buildx build`
+
+```shell
+docker build --build-arg A=1 --build-arg B=2
+
+docker buildx build --build-arg HTTP_PROXY=http://10.20.30.2:1234 --build-arg FTP_PROXY=http://40.50.60.5:4567 .
+```
+
+
+
 ## 构建-buildx
+
+### build
+
+```shell
+# 多平台构建
+docker buildx build --platform linux/amd64,linux/arm64 .
+
+# 多构建参数
+docker buildx build --build-arg HTTP_PROXY=http://10.20.30.2:1234 --build-arg FTP_PROXY=http://40.50.60.5:4567 .
+```
+
+
 
 ## 创建-create
 
@@ -1056,6 +1086,20 @@ docker start -a 1aac2527b6ea
 **docker run**        Run a command in a new container
 
 作用: 利用基于镜像创建并启动一个容器
+
+```shell
+# 覆盖CMD
+
+docker run ... echo hello world
+
+docker run --rm ubuntu pwd
+
+docker run --rm --gpus all nvidia/cuda:12.4.1-cudnn-devel-ubuntu22.04  nvidia-smi
+```
+
+
+
+
 
 ```shell
 # 语法格式/用法
@@ -2015,6 +2059,22 @@ docker run/create --volumes-from CONTAINER
 
 **开发环境应该是构建好的, 而不是运行容器时构建!**
 
+```shell
+
+# 安装时 不安装recommend
+apt-get install -y --no-install-recommends
+
+# 移除apt 安装缓存
+rm -rf /var/lib/apt/lists/*
+
+# 禁用package更新
+`apt-mark hold ${NV_CUDNN_PACKAGE_NAME}`
+
+# 安装pip 禁用缓存
+pip install --no-cache-dir -r requirements.txt
+
+```
+
 ## 快速上手
 
 - 基本思路: 编写好 `Dockerfile` 文件 >> 通过 `docker build` 创建镜像 >> 创建容器 >> 连接容器/镜像
@@ -2058,6 +2118,13 @@ useradd -s /bin/bash -m vscode
 groupadd docker
 usermod -aG docker vscode
 EOF
+```
+
+### 多阶段构建
+
+```shell
+# 将其他阶段构建的文件复制到新的stage中
+COPY --from=builder /app/myapp .
 ```
 
 
@@ -2562,6 +2629,16 @@ docker compose up --build
 
 
 ```
+
+## env
+
+```shell
+docker compose --env-file .env.production 
+```
+
+
+
+
 
 ## volume
 
@@ -3955,7 +4032,17 @@ docker load -i dist/jinmao-0.1.6.tar
 
 ### 使用镜像
 
+### 允许容器可访问代理
+
+> - 容器中运行 export
+> - docker run -e ENV_VAR1=11
+> - systemd配置
+>
+> 
+
 ### systemd中设置环境变量
+
+这样可以让所有容器也能访问代理
 
 ```shell
 systemctl status docker
@@ -4473,3 +4560,22 @@ export
 - https://docs.docker.com/develop/dev-best-practices/
 - https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
 
+
+
+
+
+# Docker-K8s
+
+通常 
+
+> **总结: Dockerfile 和 Kubernetes 对象的对应关系**
+>
+> 1.**Dockerfile 构建的镜像** 对应 Kubernetes 中的 **容器**（Container）.
+>
+> 2.在 Kubernetes 中, 容器通常会被打包到 **Pod** 中运行.
+>
+> 3.**Pod** 通常通过 **Deployment** 来管理, 从而实现更高层次的管理功能（如扩展、滚动更新等）.
+>
+> 4.**Service** 用于为这些 **Pod** 提供稳定的访问入口, 可以是集群内部访问（ClusterIP）, 或者通过 LoadBalancer 暴露到外部.
+>
+> 5.**ConfigMap** 和 **Secret** 帮助配置管理与敏感信息存储.

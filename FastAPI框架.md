@@ -19,6 +19,12 @@
 
 
 
+FastAPI stands on the shoulders of giants:
+
+- [Starlette](https://www.starlette.io/) for the web parts.
+- [Pydantic](https://docs.pydantic.dev/) for the data parts.
+
+
 
 # 核心概念
 

@@ -5,8 +5,19 @@
 - https://www.rust-lang.org
 - https://www.rust-lang.org/zh-CN/
 - https://doc.rust-lang.org/stable/book/
+- 语言参考: https://doc.rust-lang.org/stable/reference/
+- 标准库: https://doc.rust-lang.org/std/index.html
 - https://www.yuque.com/qyuhen/rust
 - [Rust By Example](https://doc.rust-lang.org/stable/rust-by-example/)
+- [Rust 测验](https://github.com/rust-lang/rustlings)
+  - https://rustlings.cool/
+- **Google Rust Course**: https://github.com/google/comprehensive-rust
+- rust 中文课程: https://github.com/sunface/rust-course
+- Awesome Rust: https://github.com/rust-unofficial/awesome-rust
+- https://deps.rs/
+
+### Articles
+
 
 
 
@@ -114,6 +125,254 @@ Rust 还有目前最优秀的异步处理模型，我相信假以时日，这种
 
 
 
+## 学习路线与目标
+
+> 看懂代码, 编写cli应用, 编写web/api服务器, 参与Rust开源贡献
+
+### 个人
+
+- 语法, 读懂代码
+- 标准库
+- 教程
+
+### AI
+
+学习Rust语言的确是一项很有价值的投资，特别是在系统编程和高性能开发领域。Rust在保证内存安全、并发处理等方面具有极大的优势，且其生态系统中很多库已经能够高效地支持Web开发。下面是一个逐级递进的Rust学习计划，帮助你快速上手，掌握读懂代码并写出Web业务代码的能力。
+
+
+
+**学习规划分为三个阶段：基础入门、进阶应用、Web开发应用。**
+
+
+
+**阶段 1: 基础入门 (1-2周)**
+
+
+
+**目标: 熟悉Rust语法和核心概念，能够读懂基础Rust代码**
+
+
+
+Rust和C/Go在语法上有一些相似之处，但Rust引入了更多的编译时安全检查，比如所有权（Ownership）和借用（Borrowing）。所以你需要熟悉这些独特概念。
+
+
+
+**学习内容:**
+
+
+
+​	1.	**Rust基础语法**
+
+​	•	**基础数据类型**: 整型、浮点型、字符串、布尔值等
+
+​	•	**控制结构**: if/else, match, loop, for 等
+
+​	•	**函数和模块**: Rust中函数的定义、参数、返回值、模块化组织代码
+
+​	•	**变量绑定与不可变性**: let 和 mut
+
+​	•	**所有权与借用（Ownership & Borrowing）**: 这是Rust的核心概念
+
+​	2.	**内存管理**
+
+​	•	所有权（Ownership）
+
+​	•	借用（Borrowing）和引用（References）
+
+​	•	生命周期（Lifetimes）
+
+​	3.	**Cargo & Crates (依赖管理工具)**
+
+​	•	安装与使用 Cargo，如何新建项目、运行项目
+
+​	•	如何使用 Cargo.toml 文件管理项目依赖
+
+​	•	如何引入外部的 crate（第三方库）
+
+
+
+**推荐学习资源:**
+
+
+
+​	•	[The Rust Programming Language (官方书籍)](https://doc.rust-lang.org/book/)
+
+​	•	[Rustlings](https://github.com/rust-lang/rustlings) 练习项目，非常适合Rust入门学习，通过实际动手练习来巩固概念。
+
+
+
+**实践项目建议:**
+
+
+
+​	•	完成Rustlings中的所有练习题。
+
+​	•	实现一个简单的命令行程序，如计算器或文本处理器，来巩固基础语法和内存管理。
+
+
+
+**阶段 2: 进阶应用 (2-4周)**
+
+
+
+**目标: 掌握Rust的复杂特性，并能够编写较为复杂的Rust代码**
+
+
+
+在掌握了基础语法后，需要进一步学习Rust的高级特性，并熟悉一些标准库的使用。
+
+
+
+**学习内容:**
+
+
+
+​	1.	**高级特性**
+
+​	•	**枚举（Enum）与模式匹配（Pattern Matching）**
+
+​	•	**结构体（Struct）与方法（Methods）**
+
+​	•	**Traits与泛型（Generics）**
+
+​	•	**错误处理**: Result, Option, 和 ? 操作符的使用
+
+​	2.	**并发编程**
+
+​	•	**线程（Threads）** 和 **消息传递（Channels）**
+
+​	•	**异步编程**: 初步了解Rust中的异步编程模型，可以了解 async/await 和 tokio 库的基本使用
+
+​	3.	**文件与网络IO**
+
+​	•	学习标准库中的 std::fs 和 std::net 模块
+
+​	•	实现文件读写和简单的网络编程
+
+
+
+**推荐学习资源:**
+
+
+
+​	•	[Rust by Example](https://doc.rust-lang.org/rust-by-example/) 官方示例教程，覆盖了Rust的各种特性
+
+​	•	[Programming Rust (O’Reilly)](https://www.oreilly.com/library/view/programming-rust-2nd/9781492052586/) 进阶的Rust书籍，适合进一步深入学习
+
+
+
+**实践项目建议:**
+
+
+
+​	•	实现一个多线程的下载器，支持断点续传。
+
+​	•	实现一个简单的TCP服务器，处理基本的客户端请求。
+
+
+
+**阶段 3: Web开发应用 (4-6周)**
+
+
+
+**目标: 掌握使用Rust开发Web应用的能力，并熟悉主流的Web框架**
+
+
+
+Rust的Web开发生态在近年来发展迅速，主要的Web框架包括 Actix-web 和 Axum。这些框架类似于你熟悉的Go中的 Gin 或Python中的 FastAPI。
+
+
+
+**学习内容:**
+
+
+
+​	1.	**选择并熟悉Web框架**
+
+​	•	**Actix-web** 或 **Axum**
+
+​	•	**异步编程模型**：Rust中的异步编程在Web开发中至关重要，熟悉 tokio 或 async-std 运行时
+
+​	•	如何定义路由、处理请求、返回响应
+
+​	•	中间件（Middlewares）的使用，如身份验证、日志记录
+
+​	2.	**数据库交互**
+
+​	•	学习如何与数据库进行交互：优先选择 SQLx 或 Diesel 作为ORM（对象关系映射）
+
+​	•	结合 PostgreSQL 进行数据库操作：插入、查询、更新、删除
+
+​	•	事务处理和异步数据库操作
+
+​	3.	**RESTful API**
+
+​	•	使用 Actix-web 或 Axum 实现一个完整的RESTful API
+
+​	•	学习如何处理请求参数、JSON 序列化/反序列化、表单提交等
+
+​	4.	**测试与部署**
+
+​	•	学习如何编写测试：单元测试、集成测试
+
+​	•	使用 Docker 构建Rust服务的容器化
+
+​	•	了解Rust的性能优化工具，如 cargo build --release 和 cargo flamegraph
+
+
+
+**推荐学习资源:**
+
+
+
+​	•	[Actix Web 官方文档](https://actix.rs/)
+
+​	•	[Axum Web Framework 官方文档](https://github.com/tokio-rs/axum)
+
+​	•	[SQLx 官方文档](https://docs.rs/sqlx/)
+
+
+
+**实践项目建议:**
+
+
+
+​	•	使用 Actix-web 或 Axum 实现一个简易的CRUD API，例如用户管理系统或博客系统。
+
+​	•	结合 SQLx 和 PostgreSQL 实现完整的数据库交互。
+
+​	•	使用 Docker 部署Rust Web应用。
+
+
+
+**学习路径总结与进阶建议**
+
+
+
+​	1.	**基础阶段**：1-2周内掌握Rust的基本语法、内存管理、所有权规则，搭建起Rust思维体系。
+
+​	2.	**进阶阶段**：2-4周内深入学习Rust的高级特性（如泛型、错误处理、并发编程），并应用于较为复杂的项目。
+
+​	3.	**Web开发应用**：4-6周内掌握Rust Web开发框架，如 Actix-web 或 Axum，并通过实际项目应用强化。
+
+
+
+Rust语言的学习曲线较为陡峭，尤其是在所有权和借用规则方面，但这也是其独特之处，正因为此，Rust能够提供极高的安全性和性能。通过上述学习计划，你可以逐步深入，掌握Rust编程的核心概念，特别是Web开发相关的技能，最终具备编写高效、内存安全的Web业务代码的能力。
+
+
+
+**后续问题建议：**
+
+
+
+​	1.	Rust中所有权和借用的机制如何在实际项目中提升内存管理的安全性？
+
+​	2.	在Web开发中，如何选择适合项目的Rust框架，例如Actix-Web和Axum之间的异同是什么？
+
+​	3.	Rust异步编程模型中的async/await相比于Go的协程在处理并发时有何优势？
+
+
+
 ## 应用场景
 
 - CLI
@@ -174,9 +433,10 @@ Rust 还有目前最优秀的异步处理模型，我相信假以时日，这种
 
 
 
-# 学习技巧
+# 效率技巧
 
 ```shell
+# 打开文档
 rustup doc
 ```
 
@@ -241,33 +501,55 @@ fn main() {
 
 # Glossary
 
+## Table
+
+| term   | CN     | Define                                                       | Link                                                         |
+| ------ | ------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| crate  | 箱, 包 |                                                              |                                                              |
+| module | 模块   | A module is a container for zero or more [items](https://doc.rust-lang.org/stable/reference/items.html). | - [module](https://doc.rust-lang.org/stable/reference/items/modules.html#modules) |
+| item   | 项目   |                                                              |                                                              |
+
+## 核心概念与观点
+
+- 所有权
+- 借用
+- 所有权和借用 本质上是将数据传递问题, 数据访问控制, 数据的生命周期
+
 ## List
 
-- 宏-macro: 模式匹配, 按照替换规则, 编译时批处理
+- **元编程** (metaprogramming) 的一种编程思想。元编程的核心是：编写能够生成、转换或操作代码的代码。它可以减少重复性工作，提升代码的可复用性和可维护性。
 
-    - 宏定义
+## Item
 
-        ```rust
-        macro_rules! swap {
-            ($x:expr, $y:expr) => {
-                {
-                    let temp = $x;
-                    $x = $y;
-                    $y = temp;
-                }
-            };
+### 宏(Macro)
+
+宏-macro: 模式匹配, 按照替换规则, 编译时批处理
+
+宏定义
+
+```rust
+macro_rules! swap {
+    ($x:expr, $y:expr) => {
+        {
+            let temp = $x;
+            $x = $y;
+            $y = temp;
         }
-        
-        ```
+    };
+}
 
-    - 宏调用
-        ```rust
-        let mut a = 5;
-        let mut b = 10;
-        swap!(a, b);
-        ```
+```
 
-- `::`-path operator: 路径操作符, scope resolution(域解析)
+宏调用
+```rust
+let mut a = 5;
+let mut b = 10;
+swap!(a, b);
+```
+
+
+
+Rust 宏和其他语言的宏（比如 C 语言的预处理器宏）不同，它是更为安全的，因为 Rust 的宏是基于语法解析的，而不是简单的文本替换。
 
 ## syntax
 
@@ -279,7 +561,7 @@ fn main() {
 # 永不类型(never type)
 ```
 
-### ::
+### `::`-path operator: 路径操作符, scope resolution(域解析)
 
 ### &-引用-reference
 
@@ -324,8 +606,19 @@ cargo run
 
 cargo run --bin
 
+# 运行 examples目录中的文件
+cargo run --example 
+
 
 cargo doc --open
+
+# 安装package到目录
+cargo install --path . --root ~/.local
+cargo install --path .  # cargo.toml 指定install.root = " ~/.local"
+
+
+#
+cargo new —lib
 
 ```
 
@@ -345,13 +638,188 @@ cargo doc --open
 | 运行高亮命令  | cmd+enter            | Run Highlight comands in IDE   |              |
 | Debug高亮命令 | cmd+shift+enter      | Debug Highlight comands in IDE |              |
 
+# Tools
+
+## cargo-expand
+
+- cargo expand：这是一个非常有用的工具，它可以显示宏展开后的代码，帮助你理解宏的展开过程。
+
+```shell
+cargo install cargo-expand
+cargo expand
+```
+
+
+
+# Crates
+
+> 【[link](https://u.geekbang.org/subject/rust/100754402?utm_campaign=geektime_search&utm_content=geektime_search&utm_medium=geektime_search&utm_source=geektime_search&utm_term=geektime_search)】: 在 Rust 生态中，prost 是发展最好的 protobuf 实现，而 tonic 是最佳的 gRPC 实现。由于 tonic 兼容 tower 生态，因此它和 axum 可以完美结合，共同提供服务。本周的内容会重点讲解 prost 和 tonic 的应用实践。
+
+## 
+
+## clap(cli)
+
+## axum
+
+## tikio
+
+## prost(protobuf)
+
+## tonic(gRPC)
+
+## tower
+
+
+
 # 语言参考
 
 ## Links
 
 - [语言参考(Language Reference)](https://doc.rust-lang.org/reference/)
+- 
 
+## 符号语义
 
+> [Rust 中的符号语义](https://doc.rust-lang.org/stable/reference/tokens.html#punctuation)
+
+Punctuation symbol tokens are listed here for completeness. Their individual usages and meanings are defined in the linked pages.
+
+| Symbol | Name       | Usage                                                        |
+| ------ | ---------- | ------------------------------------------------------------ |
+| `+`    | Plus       | [Addition](https://doc.rust-lang.org/stable/reference/expressions/operator-expr.html#arithmetic-and-logical-binary-operators), [Trait Bounds](https://doc.rust-lang.org/stable/reference/trait-bounds.html), [Macro Kleene Matcher](https://doc.rust-lang.org/stable/reference/macros-by-example.html) |
+| `-`    | Minus      | [Subtraction](https://doc.rust-lang.org/stable/reference/expressions/operator-expr.html#arithmetic-and-logical-binary-operators), [Negation](https://doc.rust-lang.org/stable/reference/expressions/operator-expr.html#negation-operators) |
+| `*`    | Star       | [Multiplication](https://doc.rust-lang.org/stable/reference/expressions/operator-expr.html#arithmetic-and-logical-binary-operators), [Dereference](https://doc.rust-lang.org/stable/reference/expressions/operator-expr.html#the-dereference-operator), [Raw Pointers](https://doc.rust-lang.org/stable/reference/types/pointer.html#raw-pointers-const-and-mut), [Macro Kleene Matcher](https://doc.rust-lang.org/stable/reference/macros-by-example.html), [Use wildcards](https://doc.rust-lang.org/stable/reference/items/use-declarations.html) |
+| `/`    | Slash      | [Division](https://doc.rust-lang.org/stable/reference/expressions/operator-expr.html#arithmetic-and-logical-binary-operators) |
+| `%`    | Percent    | [Remainder](https://doc.rust-lang.org/stable/reference/expressions/operator-expr.html#arithmetic-and-logical-binary-operators) |
+| `^`    | Caret      | [Bitwise and Logical XOR](https://doc.rust-lang.org/stable/reference/expressions/operator-expr.html#arithmetic-and-logical-binary-operators) |
+| `!`    | Not        | [Bitwise and Logical NOT](https://doc.rust-lang.org/stable/reference/expressions/operator-expr.html#negation-operators), [Macro Calls](https://doc.rust-lang.org/stable/reference/macros-by-example.html), [Inner Attributes](https://doc.rust-lang.org/stable/reference/attributes.html), [Never Type](https://doc.rust-lang.org/stable/reference/types/never.html), [Negative impls](https://doc.rust-lang.org/stable/reference/items/implementations.html) |
+| `&`    | And        | [Bitwise and Logical AND](https://doc.rust-lang.org/stable/reference/expressions/operator-expr.html#arithmetic-and-logical-binary-operators), [Borrow](https://doc.rust-lang.org/stable/reference/expressions/operator-expr.html#borrow-operators), [References](https://doc.rust-lang.org/stable/reference/types/pointer.html), [Reference patterns](https://doc.rust-lang.org/stable/reference/patterns.html#reference-patterns) |
+| `|`    | Or         | [Bitwise and Logical OR](https://doc.rust-lang.org/stable/reference/expressions/operator-expr.html#arithmetic-and-logical-binary-operators), [Closures](https://doc.rust-lang.org/stable/reference/expressions/closure-expr.html), Patterns in [match](https://doc.rust-lang.org/stable/reference/expressions/match-expr.html), [if let](https://doc.rust-lang.org/stable/reference/expressions/if-expr.html#if-let-expressions), and [while let](https://doc.rust-lang.org/stable/reference/expressions/loop-expr.html#predicate-pattern-loops) |
+| `&&`   | AndAnd     | [Lazy AND](https://doc.rust-lang.org/stable/reference/expressions/operator-expr.html#lazy-boolean-operators), [Borrow](https://doc.rust-lang.org/stable/reference/expressions/operator-expr.html#borrow-operators), [References](https://doc.rust-lang.org/stable/reference/types/pointer.html), [Reference patterns](https://doc.rust-lang.org/stable/reference/patterns.html#reference-patterns) |
+| `||`   | OrOr       | [Lazy OR](https://doc.rust-lang.org/stable/reference/expressions/operator-expr.html#lazy-boolean-operators), [Closures](https://doc.rust-lang.org/stable/reference/expressions/closure-expr.html) |
+| `<<`   | Shl        | [Shift Left](https://doc.rust-lang.org/stable/reference/expressions/operator-expr.html#arithmetic-and-logical-binary-operators), [Nested Generics](https://doc.rust-lang.org/stable/reference/items/generics.html) |
+| `>>`   | Shr        | [Shift Right](https://doc.rust-lang.org/stable/reference/expressions/operator-expr.html#arithmetic-and-logical-binary-operators), [Nested Generics](https://doc.rust-lang.org/stable/reference/items/generics.html) |
+| `+=`   | PlusEq     | [Addition assignment](https://doc.rust-lang.org/stable/reference/expressions/operator-expr.html#compound-assignment-expressions) |
+| `-=`   | MinusEq    | [Subtraction assignment](https://doc.rust-lang.org/stable/reference/expressions/operator-expr.html#compound-assignment-expressions) |
+| `*=`   | StarEq     | [Multiplication assignment](https://doc.rust-lang.org/stable/reference/expressions/operator-expr.html#compound-assignment-expressions) |
+| `/=`   | SlashEq    | [Division assignment](https://doc.rust-lang.org/stable/reference/expressions/operator-expr.html#compound-assignment-expressions) |
+| `%=`   | PercentEq  | [Remainder assignment](https://doc.rust-lang.org/stable/reference/expressions/operator-expr.html#compound-assignment-expressions) |
+| `^=`   | CaretEq    | [Bitwise XOR assignment](https://doc.rust-lang.org/stable/reference/expressions/operator-expr.html#compound-assignment-expressions) |
+| `&=`   | AndEq      | [Bitwise And assignment](https://doc.rust-lang.org/stable/reference/expressions/operator-expr.html#compound-assignment-expressions) |
+| `|=`   | OrEq       | [Bitwise Or assignment](https://doc.rust-lang.org/stable/reference/expressions/operator-expr.html#compound-assignment-expressions) |
+| `<<=`  | ShlEq      | [Shift Left assignment](https://doc.rust-lang.org/stable/reference/expressions/operator-expr.html#compound-assignment-expressions) |
+| `>>=`  | ShrEq      | [Shift Right assignment](https://doc.rust-lang.org/stable/reference/expressions/operator-expr.html#compound-assignment-expressions), [Nested Generics](https://doc.rust-lang.org/stable/reference/items/generics.html) |
+| `=`    | Eq         | [Assignment](https://doc.rust-lang.org/stable/reference/expressions/operator-expr.html#assignment-expressions), [Attributes](https://doc.rust-lang.org/stable/reference/attributes.html), Various type definitions |
+| `==`   | EqEq       | [Equal](https://doc.rust-lang.org/stable/reference/expressions/operator-expr.html#comparison-operators) |
+| `!=`   | Ne         | [Not Equal](https://doc.rust-lang.org/stable/reference/expressions/operator-expr.html#comparison-operators) |
+| `>`    | Gt         | [Greater than](https://doc.rust-lang.org/stable/reference/expressions/operator-expr.html#comparison-operators), [Generics](https://doc.rust-lang.org/stable/reference/items/generics.html), [Paths](https://doc.rust-lang.org/stable/reference/paths.html) |
+| `<`    | Lt         | [Less than](https://doc.rust-lang.org/stable/reference/expressions/operator-expr.html#comparison-operators), [Generics](https://doc.rust-lang.org/stable/reference/items/generics.html), [Paths](https://doc.rust-lang.org/stable/reference/paths.html) |
+| `>=`   | Ge         | [Greater than or equal to](https://doc.rust-lang.org/stable/reference/expressions/operator-expr.html#comparison-operators), [Generics](https://doc.rust-lang.org/stable/reference/items/generics.html) |
+| `<=`   | Le         | [Less than or equal to](https://doc.rust-lang.org/stable/reference/expressions/operator-expr.html#comparison-operators) |
+| `@`    | At         | [Subpattern binding](https://doc.rust-lang.org/stable/reference/patterns.html#identifier-patterns) |
+| `_`    | Underscore | [Wildcard patterns](https://doc.rust-lang.org/stable/reference/patterns.html#wildcard-pattern), [Inferred types](https://doc.rust-lang.org/stable/reference/types/inferred.html), Unnamed items in [constants](https://doc.rust-lang.org/stable/reference/items/constant-items.html), [extern crates](https://doc.rust-lang.org/stable/reference/items/extern-crates.html), [use declarations](https://doc.rust-lang.org/stable/reference/items/use-declarations.html), and [destructuring assignment](https://doc.rust-lang.org/stable/reference/expressions/underscore-expr.html) |
+| `.`    | Dot        | [Field access](https://doc.rust-lang.org/stable/reference/expressions/field-expr.html), [Tuple index](https://doc.rust-lang.org/stable/reference/expressions/tuple-expr.html#tuple-indexing-expressions) |
+| `..`   | DotDot     | [Range](https://doc.rust-lang.org/stable/reference/expressions/range-expr.html), [Struct expressions](https://doc.rust-lang.org/stable/reference/expressions/struct-expr.html), [Patterns](https://doc.rust-lang.org/stable/reference/patterns.html), [Range Patterns](https://doc.rust-lang.org/stable/reference/patterns.html#range-patterns) |
+| `...`  | DotDotDot  | [Variadic functions](https://doc.rust-lang.org/stable/reference/items/external-blocks.html), [Range patterns](https://doc.rust-lang.org/stable/reference/patterns.html#range-patterns) |
+| `..=`  | DotDotEq   | [Inclusive Range](https://doc.rust-lang.org/stable/reference/expressions/range-expr.html), [Range patterns](https://doc.rust-lang.org/stable/reference/patterns.html#range-patterns) |
+| `,`    | Comma      | Various separators                                           |
+| `;`    | Semi       | Terminator for various items and statements, [Array types](https://doc.rust-lang.org/stable/reference/types/array.html) |
+| `:`    | Colon      | Various separators                                           |
+| `::`   | PathSep    | [Path separator](https://doc.rust-lang.org/stable/reference/paths.html) |
+| `->`   | RArrow     | [Function return type](https://doc.rust-lang.org/stable/reference/items/functions.html), [Closure return type](https://doc.rust-lang.org/stable/reference/expressions/closure-expr.html), [Function pointer type](https://doc.rust-lang.org/stable/reference/types/function-pointer.html) |
+| `=>`   | FatArrow   | [Match arms](https://doc.rust-lang.org/stable/reference/expressions/match-expr.html), [Macros](https://doc.rust-lang.org/stable/reference/macros-by-example.html) |
+| `<-`   | LArrow     | The left arrow symbol has been unused since before Rust 1.0, but it is still treated as a single token |
+| `#`    | Pound      | [Attributes](https://doc.rust-lang.org/stable/reference/attributes.html) |
+| `$`    | Dollar     | [Macros](https://doc.rust-lang.org/stable/reference/macros-by-example.html) |
+| `?`    | Question   | [Question mark operator](https://doc.rust-lang.org/stable/reference/expressions/operator-expr.html#the-question-mark-operator), [Questionably sized](https://doc.rust-lang.org/stable/reference/trait-bounds.html#sized), [Macro Kleene Matcher](https://doc.rust-lang.org/stable/reference/macros-by-example.html) |
+| `~`    | Tilde      | The tilde operator has been unused since before Rust 1.0, but its token may still be used |
+
+## [Delimiters](https://doc.rust-lang.org/stable/reference/tokens.html#delimiters)
+
+Bracket punctuation is used in various parts of the grammar. An open bracket must always be paired with a close bracket. Brackets and the tokens within them are referred to as “token trees” in [macros](https://doc.rust-lang.org/stable/reference/macros-by-example.html). The three types of brackets are:
+
+| Bracket | Type                   |
+| ------- | ---------------------- |
+| `{` `}` | Curly braces           |
+| `[` `]` | Square brackets 方括号 |
+| `(` `)` | Parentheses 括弧       |
+
+| **符号** | **中文**       | **EN**                | **Python** | **Go** | **C**               | **用法**                 |
+| -------- | -------------- | --------------------- | ---------- | ------ | ------------------- | ------------------------ |
+| **::**   | 路径分隔符     | Path separator        | .          | .      | ::                  | std::io::Result          |
+| **->**   | 返回类型指示符 | Return type indicator | ->         | ->     | ->                  | fn example() -> i32      |
+| **<-**   | 通道接收       | Channel receive       | 无         | <-     | 无                  | let value = <-channel    |
+| **&&**   | 逻辑与         | Logical AND           | and        | &&     | &&                  | if x && y { ... }        |
+| **\|\|** | 逻辑或         | Logical OR            | or         | \|\|   | \|\|                | if x \|\| y { ... }      |
+| **=**    | 赋值           |                       | =          | =      | =                   | let a = 12;              |
+| **==**   | 相等           | Equal to              | ==         | ==     | ==                  | if x == y { ... }        |
+| **!=**   | 不相等         | Not equal to          | !=         | !=     | !=                  | if x != y { ... }        |
+| **;**    | 语句结束       | Statement terminator  |            | ;      | ;                   | let x = 5;               |
+| **let**  | 变量声明       | Variable declaration  |            | var    | 无                  | let x = 10;              |
+| **fn**   | 函数声明       | Function declaration  | def        | func   | void/int/float/etc. | fn greet() { ... }       |
+| !        | 宏调用         | macro                 |            |        |                     | println!("hello, 世界!") |
+
+## 关键字(keyword)
+
+> - https://kaisery.github.io/trpl-zh-cn/appendix-01-keywords.html
+
+- `as` - 强制类型转换，消除特定包含项的 trait 的歧义，或者对 `use` 语句中的项重命名
+- `async` - 返回一个 `Future` 而不是阻塞当前线程
+- `await` - 暂停执行直到 `Future` 的结果就绪
+- `break` - 立刻退出循环
+- `const` - 定义常量或不变裸指针（constant raw pointer）
+- `continue` - 继续进入下一次循环迭代
+- `crate` - 在模块路径中，代指 crate root
+- `dyn` - 动态分发 trait 对象
+- `else` - 作为 `if` 和 `if let` 控制流结构的 fallback
+- `enum` - 定义一个枚举
+- `extern` - 链接一个外部函数或变量
+- `false` - 布尔字面值 `false`
+- `fn` - 定义一个函数或 **函数指针类型** (*function pointer type*)
+- `for` - 遍历一个迭代器或实现一个 trait 或者指定一个更高级的生命周期
+- `if` - 基于条件表达式的结果分支
+- `impl` - 实现自有或 trait 功能
+- `in` - `for` 循环语法的一部分
+- `let` - 绑定一个变量
+- `loop` - 无条件循环
+- `match` - 模式匹配
+- `mod` - 定义一个模块
+- `move` - 使闭包获取其所捕获项的所有权
+- `mut` - 表示引用、裸指针或模式绑定的可变性
+- `pub` - 表示结构体字段、`impl` 块或模块的公有可见性
+- `ref` - 通过引用绑定
+- `return` - 从函数中返回
+- `Self` - 定义或实现 trait 的类型的类型别名
+- `self` - 表示方法本身或当前模块
+- `static` - 表示全局变量或在整个程序执行期间保持其生命周期
+- `struct` - 定义一个结构体
+- `super` - 表示当前模块的父模块
+- `trait` - 定义一个 trait
+- `true` - 布尔字面值 `true`
+- `type` - 定义一个类型别名或关联类型
+- `union` - 定义一个 [union](https://doc.rust-lang.org/reference/items/unions.html) 并且是 union 声明中唯一用到的关键字
+- `unsafe` - 表示不安全的代码、函数、trait 或实现
+- `use` - 引入外部空间的符号
+- `where` - 表示一个约束类型的从句
+- `while` - 基于一个表达式的结果判断是否进行循环
+
+### [保留做将来使用的关键字](https://kaisery.github.io/trpl-zh-cn/appendix-01-keywords.html#保留做将来使用的关键字)
+
+如下关键字没有任何功能，不过由 Rust 保留以备将来的应用。
+
+- `abstract`
+- `become`
+- `box`
+- `do`
+- `final`
+- `macro`
+- `override`
+- `priv`
+- `try`
+- `typeof`
+- `unsized`
+- `virtual`
+- `yield`
 
 
 
@@ -360,6 +828,347 @@ cargo doc --open
 > [!note]
 >
 > Type System
+
+## Links
+
+- [Rust Language References: Type System](https://doc.rust-lang.org/stable/reference/types.html)
+
+## Vec
+
+## HashMap
+
+# **Rust book**
+
+- [patterns and matching](https://doc.rust-lang.org/book/ch18-00-patterns.html)
+
+# 编程技术
+
+编程工具, 编程思想, 
+
+
+
+# 常见问题
+
+## 代码规范
+
+## 多二进制文件
+
+主要有两种方式, 一是bin目录中, 二是在cargo中声明多个`[[bin]]`
+
+```shell
+
+```
+
+## 理解哪些概念和问题和观点后有助于提升自己的rust编程能力?
+
+## python类与实例化等效实现
+
+```python
+class Person:
+    def __init__(self, name: str, age: int):
+        self.name = name
+        self.age = age
+
+    def greet(self):
+        return f"Hello, I'm {self.name} and I'm {self.age} years old."
+    def grow(self):
+      self.age += 1
+
+# 实例化
+person = Person("Alice", 30)
+print(person.greet())
+```
+
+```rust
+struct Person {
+    name: String,
+    age: u32,
+}
+
+impl Person {
+    fn new(name: String, age: u32) -> Self {
+        Person { name, age }
+    }
+
+    fn greet(&self) -> String {
+        format!("Hello, my name is {} and I'm {} years old.", self.name, self.age)
+    }
+
+    fn have_birthday(&mut self) {
+        self.age += 1;
+    }
+}
+```
+
+
+
+## Rust是如何组织代码的
+
+Rust 通过多种模块化和代码组织方式来管理项目的结构，使代码易于维护和扩展。以下是 Rust 代码组织的主要模型和概念：
+
+
+
+**1. 模块 (Modules)**
+
+
+
+Rust 使用模块（mod）来组织代码，将代码分成多个逻辑单元。模块的核心目的是 **分隔命名空间**，防止名称冲突，并 **提高代码可读性** 和 **可维护性**。
+
+
+
+​	•	**定义模块**：使用 mod 关键字定义模块。模块可以嵌套，可以在文件内部或外部定义。
+
+
+
+```rust
+mod my_module {
+  pub fn say_hello() {
+    println!("Hello from my_module!");
+  }
+}
+
+fn main() {
+  my_module::say_hello();
+}
+
+
+```
+
+
+
+
+
+​	•	**子模块**：模块可以有子模块，子模块也可以有子模块。通过模块树可以组织复杂的项目。
+
+
+
+mod outer {
+
+  mod inner {
+
+​    pub fn inner_function() {
+
+​      println!("Inside inner function");
+
+​    }
+
+  }
+
+  pub fn outer_function() {
+
+​    println!("Inside outer function");
+
+  }
+
+}
+
+fn main() {
+
+  outer::outer_function();
+
+}
+
+
+
+
+
+
+
+**2. 包 (Packages)**
+
+
+
+包（Package）是一个 **用于发布和分发代码的单元**，它包含一个 Cargo.toml 文件和多个库或二进制 crate。一个包可以包含 **0 到多个二进制 crate**，但只能有 **一个库 crate**。
+
+
+
+​	•	**Cargo.toml**：这是 Rust 的包管理工具 Cargo 使用的配置文件，它定义了项目的依赖项、元数据（如版本号和作者）以及构建选项。
+
+
+
+[package]
+
+name = "my_package"
+
+version = "0.1.0"
+
+edition = "2021"
+
+
+
+[dependencies]
+
+serde = "1.0"
+
+
+
+
+
+
+
+**3. Crates (箱)**
+
+
+
+Crates 是 Rust 中的 **最小的编译单元**，每个 crate 生成一个独立的库或二进制文件。它可以是一个库 crate（lib.rs）或者二进制 crate（main.rs）。Crates 是通过 extern crate 引入的，这使得它们成为可以在其他项目中复用的模块。
+
+
+
+​	•	**库 Crate**：用于定义可以被其他 crate 使用的库。它通常包含在 src/lib.rs 文件中。
+
+​	•	**二进制 Crate**：定义一个可执行文件，通常包含在 src/main.rs 文件中。
+
+
+
+**4. 路径 (Paths) 和可见性 (Visibility)**
+
+
+
+Rust 使用路径来引用不同模块和结构。路径有两种类型：**绝对路径** 和 **相对路径**。
+
+
+
+​	•	**绝对路径**：从 crate 根开始，例如 crate::module_name::function_name。
+
+​	•	**相对路径**：从当前模块开始，例如 self::function_name 或 super::parent_function_name。
+
+
+
+默认情况下，模块和函数是私有的。可以通过使用 pub 关键字来公开它们，从而使它们可以被其他模块或 crate 使用。
+
+
+
+mod my_module {
+
+  pub fn public_function() {
+
+​    println!("This is a public function");
+
+  }
+
+  fn private_function() {
+
+​    println!("This is a private function");
+
+  }
+
+}
+
+fn main() {
+
+  my_module::public_function();
+
+  // my_module::private_function(); // Error: function is private
+
+}
+
+
+
+**5. 工作区 (Workspaces)**
+
+
+
+Rust 的工作区是 **多个相关包的集合**，它们共享一个 Cargo.lock 文件，允许它们在同一版本下协调依赖。工作区使得多个 crate 可以在同一项目中协同开发。
+
+
+
+工作区通过在 **根目录的 Cargo.toml** 文件中声明，包含多个子包：
+
+
+
+[workspace]
+
+members = [
+
+  "crate1",
+
+  "crate2",
+
+]
+
+
+
+**6. 使用外部 crate**
+
+
+
+Rust 项目可以使用来自 Crates.io 的外部 crate，通过 Cargo.toml 文件中的依赖配置来实现。这些依赖项会在构建时自动下载和编译。
+
+
+
+例如，使用 serde 库来处理 JSON 数据：
+
+
+
+[dependencies]
+
+serde = "1.0"
+
+serde_json = "1.0"
+
+
+
+然后在代码中引入外部 crate：
+
+
+
+extern crate serde;
+
+use serde::Serialize;
+
+
+
+**7. 宏 (Macros)**
+
+
+
+Rust 支持两类宏：**声明式宏**（macro_rules!）和 **过程宏**。它们提供了灵活的 **代码生成** 机制，用来减少重复代码、创建领域特定语言（DSL）等。
+
+
+
+声明式宏：
+
+
+
+macro_rules! say_hello {
+
+  () => {
+
+​    println!("Hello, Rust!");
+
+  };
+
+}
+
+fn main() {
+
+  say_hello!();
+
+}
+
+
+
+**8. 智能指针和所有权系统**
+
+
+
+Rust 通过所有权系统管理内存，主要概念有：
+
+
+
+​	•	**所有权（Ownership）**：每个值都有一个所有者。
+
+​	•	**借用（Borrowing）**：通过引用共享数据，不转移所有权。
+
+​	•	**生命周期（Lifetimes）**：保证引用在其使用期间是有效的。
+
+
+
+**总结**
+
+
+
+Rust 的代码组织围绕模块化、包管理、可见性控制、工作区等核心概念展开。通过这些机制，开发者可以高效地管理项目代码，并在多个项目间共享通用逻辑。更多详情可以参考 Rust 官方文档中的模块和路径系统章节 。
 
 # 零散记录
 

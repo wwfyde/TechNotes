@@ -1254,11 +1254,19 @@ A framework for network servers
 
 ## Data Science
 
+> 然而，Polars 正在迎头赶上，它与这些软件包的互操作性逐月增长。Polars 现在兼容多种绘图库，包括 `plotly`、`matplotlib`（使用 Series 时除外）、`seaborn`、`altair` 和 `hvplot`，这意味着它现在作为探索性数据分析库也很好用。
+
 ### matplotlib
 
 ### plotly
 
+bokeh
 
+### seaborn
+
+### altair
+
+### hvplot
 
 ## AI
 
