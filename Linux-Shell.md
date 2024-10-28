@@ -5325,6 +5325,12 @@ scp get-pip.py wwfyde@192.168.30.190:c:/
 
 ## 
 
+
+
+# AI
+
+## kubeflow
+
 # 系统服务
 
 ## abrt

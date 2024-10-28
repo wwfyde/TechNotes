@@ -12,6 +12,12 @@
 - 成本：预算有限
 - 其他：安全性、隐私性、公平性、GDPR合规性、DMA合规性等
 
+## Tools
+
+- [pytorch-lightning](https://github.com/Lightning-AI/pytorch-lightning)
+
+# Glossary
+
 # LLMs API
 
 # RAG

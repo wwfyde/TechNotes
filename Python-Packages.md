@@ -2785,6 +2785,8 @@ asyncio.run(async_main())
 
 
 
+# jinja2
+
 # redis
 
 ## 最佳实践
@@ -2808,6 +2810,10 @@ decode_responses=True, 注意连接池
 # anyio
 
 # httpx
+
+# cookiecutter
+
+pickle
 
 # openai
 
@@ -2861,13 +2867,19 @@ A task queue's input is a unit of work, called a task, dedicated worker processe
 
 # apscheduler
 
-
+# 代码增强
 
 # tenacity-重试库
 
+# returns-返回 
+
+# box
+
+python-benete
+
 # `backoff`-回退/重试(Deprecated)
 
-# watchdog
+# **watchdog**
 
 pathlib
 
@@ -2880,6 +2892,10 @@ pathlib
 # **Cryptography**
 
 https://github.com/pyca/cryptography
+
+https://github.com/Legrandin/pycryptodome
+
+
 
 
 
@@ -3261,11 +3277,13 @@ context = browser.new_context(storage_state=state)
 
 
 
-
+# beautifulsoup(recommend)
 
 
 
 # ---
+
+# sympy(3 )
 
 # ploars
 
