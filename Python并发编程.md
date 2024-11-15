@@ -2291,6 +2291,12 @@ asyncio.run(display_date())
 
 # 多进程
 
+
+
+# concurrent.futures
+
+# Celery
+
 # 最佳实践
 
 ## 常见需求

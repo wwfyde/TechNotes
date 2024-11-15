@@ -1,5 +1,9 @@
 # JavaScript最佳实践
 
+## 技术栈
+
+> https://andreasbm.github.io/web-skills/
+
 ## 安装配置
 
 ### nvm
@@ -65,7 +69,11 @@ npm config set registry https://mirrors.huaweicloud.com/repository/npm/
 
 # yarn
 
-# 插件
+# 技术标准
+
+## htmx
+
+# toolchain
 
 > - [openai-node](https://github.com/openai/openai-node)
 
@@ -75,6 +83,8 @@ npm config set registry https://mirrors.huaweicloud.com/repository/npm/
 
 ## vite
 
+## redux(不推荐)
+
 
 
 # Packages
@@ -82,6 +92,54 @@ npm config set registry https://mirrors.huaweicloud.com/repository/npm/
 ## vite
 
 ## jest
+
+## three.js
+
+## zod
+
+## core.js
+
+## moment-日期处理
+
+## lodash
+
+## echarts
+
+## dotenv
+
+## underscore
+
+
+
+# Frameworks
+
+## React
+
+## Next
+
+## Ant.design
+
+## Vue
+
+# CSS
+
+## sass
+
+## tailwind
+
+
+
+
+
+# 开发增强
+
+## MDX
+
+
+
+
+
+
 
 # 调试技巧
 

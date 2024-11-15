@@ -20,13 +20,23 @@
 
 # LLMs API
 
+
+
+# Document
+
+## PDF
+
+https://github.com/lumina-ai-inc/chunkr
+
+https://github.com/VikParuchuri/surya
+
 # RAG
 
 Links https://www.databricks.com/glossary/retrieval-augmented-generation-rag
 
 
 
-
+qdrant
 
 millvus 索引
 
@@ -34,17 +44,34 @@ millvus 索引
 
 # Agent
 
+## 资料
+
+- LightRAG
+- StructRAG
+- GraphRAG
+
 ##  原理:
 
 >  [!Tip]
 >
-> - [Function Calling - 智能体Agent的实现基础](https://mp.weixin.qq.com/s/2Z2DnbCXangUpFx2dLfogg)
+>  - [Function Calling - 智能体Agent的实现基础](https://mp.weixin.qq.com/s/2Z2DnbCXangUpFx2dLfogg)
+>  - https://www.53ai.com/news/zhinengkefu/2024072276502.html
 
 
 
 
 
 # Workflow
+
+
+
+
+
+# Infras
+
+
+
+## GPU按需调度
 
 
 

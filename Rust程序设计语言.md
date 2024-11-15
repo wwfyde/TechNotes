@@ -847,6 +847,17 @@ Bracket punctuation is used in various parts of the grammar. An open bracket mus
 
 
 
+# Web/Backend
+
+
+
+# CLI
+
+- https://rust-cli.github.io/book/index.html
+- [Rust 中的命令行应用, (官方文档中文翻译linked from official)](https://suibianxiedianer.github.io/rust-cli-book-zh_CN/)
+
+
+
 # 常见问题
 
 ## 代码规范

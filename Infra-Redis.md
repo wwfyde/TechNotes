@@ -20,6 +20,8 @@
 ## Articles and Blogs
 
 - [Redis Queue](https://redis.com/glossary/redis-queue/)
+- [Redis Queue 20241029](https://redis.io/glossary/redis-queue/)
+- [Redis: Solutions, Messagings LOW-LATENCY MESSAGE QUEUE & BROKER SOFTWARE](https://redis.io/solutions/messaging/)
 
 ## Glossary
 

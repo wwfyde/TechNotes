@@ -4,7 +4,7 @@
 
 ## Links
 
-- 
+- https://github.com/zhanymkanov/fastapi-best-practices
 
 ### 文章记录
 

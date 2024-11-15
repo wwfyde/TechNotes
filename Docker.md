@@ -2610,6 +2610,18 @@ RUN echo moo > oink
 # /oink.
 ```
 
+## COPY
+
+```shell
+# 将当前目录的所有文件服务复制到工作目录
+COPY . . 
+
+# 将指定目录复制到目标目录
+COPY dir ./dir/
+```
+
+
+
 # Compose
 
 

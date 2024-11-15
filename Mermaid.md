@@ -125,3 +125,34 @@ flowchart LR
 
 ```
 
+## 时序图
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant API
+    participant DB
+    
+    User->>Frontend: 点击登录
+    Frontend->>API: POST /login
+    API->>DB: 查询用户
+    DB-->>API: 返回用户数据
+    API-->>Frontend: 返回token
+    Frontend-->>User: 显示成功
+```
+
+## 状态图
+
+
+
+```mermaid
+stateDiagram-v2
+    [*] --> Idle
+    Idle --> Processing: 提交
+    Processing --> Success: 成功
+    Processing --> Failed: 失败
+    Success --> Idle: 重置
+    Failed --> Idle: 重试
+```
+

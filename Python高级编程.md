@@ -2927,6 +2927,22 @@ Return a string of *size* random bytes suitable for cryptographic use.
 
 
 
+# 泛型Generic
+
+核心知识
+
+泛型变量, 泛型类, 泛型函数
+
+协变, 逆变
+
+泛型与继承
+
+## 泛型变量
+
+## 泛型类
+
+
+
 # 正则表达式RE
 
 
