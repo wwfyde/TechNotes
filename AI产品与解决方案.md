@@ -8,6 +8,17 @@
 
 
 
+## 绘图
+
+
+
+SD
+
+MJ
+
+Adobe
+
+OpenAI DALLE
 ## 训练 
 
 

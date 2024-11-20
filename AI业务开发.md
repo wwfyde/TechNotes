@@ -40,7 +40,9 @@ qdrant
 
 millvus 索引
 
+https://github.com/langflow-ai/langflow
 
+https://x.com/akshay_pachaar/status/1783114329199718558
 
 # Agent
 

@@ -312,6 +312,8 @@ GPT是一种基于深度学习的自然语言处理技术，利用了大规模�
 
     - *Kayn: 类似提示词强度*
 
+- classifier-free guidance (CFG) 
+
 - Noise(噪音, 噪声)
 
 - 前向扩散

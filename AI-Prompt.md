@@ -125,6 +125,7 @@ how does something work?
 - [HN: 你的自定义Prompt是什么?](https://news.ycombinator.com/item?id=40474716)
 - [通往AGI之路](https://www.waytoagi.com/)
 - [大模型服务平台百炼:Prompt最佳实践](https://help.aliyun.com/zh/model-studio/use-cases/prompt-best-practices)
+- [如何用Prompt更好与LLM进行沟通](https://arxiv.org/pdf/2312.16171)
 
 ## 指南-Guideline
 
