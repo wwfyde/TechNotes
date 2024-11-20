@@ -117,6 +117,7 @@ how does something work?
 - https://aws.amazon.com/what-is/prompt-engineering/
 - https://fork-way.feishu.cn/sheets/shtcn1IbUR0wZeRydb3DOuBfJle?from=from_copylink
 - https://github.com/dair-ai/Prompt-Engineering-Guide
+- https://github.com/dair-ai/Prompt-Engineering-Guide
 - https://github.com/f/awesome-chatgpt-prompts
 - https://github.com/PlexPt/awesome-chatgpt-prompts-zh
 - [OpenAI官方Prompt指南](https://platform.openai.com/docs/guides/prompt-engineering)

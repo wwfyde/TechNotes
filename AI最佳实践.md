@@ -402,6 +402,16 @@ torch.nn.Module
 CUDA_VISBLE_DEVICE=0,1 python train.py # 使用0，1两
 ```
 
+# 加速
+
+## tensorRT
+
+## Deepspeed
+
+## Accelerate
+
+
+
 # Docker
 
 > links:

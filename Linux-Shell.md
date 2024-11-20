@@ -1435,6 +1435,10 @@ unset https_proxy
 
 ## **系统管理**
 
+> 包括用户与权限管理
+
+
+
 ### 参考资料
 
 - [系统管理员指南-监控和自动化](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/system_administrators_guide/part-monitoring_and_automation)
@@ -1520,7 +1524,7 @@ addgroup --system <groupname>
 
 
 
-### adduser
+### adduser-交互
 
 ```shell
 adduser -S --ingroup <groupname> <username>
@@ -1540,6 +1544,10 @@ sudo adduser --system --uid 5001 --gid 5001 --home /home/kayn --shell /bin/bash 
 # kayn is not in the sudoers file.  This incident will be reported.
 
 ```
+
+### useradd-docker
+
+### groupadd-docker
 
 ### timedatectl-时区控制
 
@@ -1652,6 +1660,11 @@ sudo chroot /target/root /bin/bash
 
 ```shell
 # 添加命令链接  link:命令位置 name:命令名 path:要链接的命令 priority:优先级
+
+update-alternatives --list editor
+sudo update-alternatives --config editor
+sudo update-alternatives --set editor /usr/bin/code  # z
+
 update-alternatives --install [link] [name] [path] [priority]
 update-alternatives --install /usr/bin/python python /usr/bin/python3 1
 
@@ -1718,8 +1731,6 @@ yum localinstall *.rpm
 
 
 ### dnf
-
-## 安全管理
 
 用户和权限管理
 
@@ -3174,6 +3185,9 @@ history [line]
 history
 # 查看所有命令
 history 0 | less 
+
+# 显示日期, for zsh
+history -E
 
 ```
 

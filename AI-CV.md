@@ -17,12 +17,15 @@
 - checkpoint(检查点)
 - embedding
 - confusion model-扩散模型
+- face restoration——面部修复, 人脸复原
 
 ## Domain
 
 ### image style
 
 - realistic-写实的
+
+
 
 # Prompt Engineering
 
@@ -47,4 +50,10 @@ DALL·E 2 is an AI system that can create realistic images and art from a descri
 
 
 
-# 
+# codeformer
+
+# GFPGAN
+
+# 人脸修复
+
+[综合的人脸修复, 相关的论文](https://github.com/TaoWangzj/Awesome-Face-Restoration)

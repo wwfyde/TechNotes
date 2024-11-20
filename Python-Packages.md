@@ -3,11 +3,9 @@
 ## tips
 
 - 复制选择器
-- 通过codegen 生成模版
+- 通过codegen 生成模版g
 
 # Python Standard Libraries
-
-
 
 ## os-操作系统
 
@@ -2851,6 +2849,12 @@ client = OpenAI(
 > [Guest Post: Four Ways To Quickly Display OpenCV Images During Debugging](https://blog.jetbrains.com/pycharm/2023/10/guest-post-four-ways-to-quickly-display-opencv-images-during-debugging/)
 
 
+
+# gradio
+
+> 更新组件值
+
+gr.Textbox.update(value=name)
 
 # celery
 

@@ -2277,6 +2277,19 @@ echo $HOME'
 RUN /bin/bash -c 'source $HOME/.bashrc; echo $HOME'
 
 RUN ["/bin/bash", "-c", "echo hello"]
+
+# 多行命令
+RUN <<EOF
+useradd -s /bin/bash -m vscode
+groupadd docker
+usermod -aG docker vscode
+EOF
+
+# 方式二 次选 -S --system
+RUN <<EOF
+addgroup -S docker
+adduser -S --shell /bin/bash --ingroup docker vscode
+EOF
 ```
 
 ### CMD
@@ -2292,6 +2305,8 @@ CMD ["executable", "param1", "param2"]  # exec form 推荐
 CMD ["param1", "param2"]  # as default parameters toENTRYPOINT
 CMD command param1 param2  # shell form
 ```
+
+### COPY
 
 ### LABEL
 

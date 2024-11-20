@@ -227,8 +227,9 @@ GPT是一种基于深度学习的自然语言处理技术，利用了大规模�
 - CoT(Chain of Thought)——思维链
 - GoT(Graph of Thought)——思维图
 
-
 ## Lingo
+
+### universal
 
 - Lora
   - LoRA（Low-Rank Adaptation）是一种用于大型神经网络模型的参数高效调整技术
@@ -301,6 +302,15 @@ GPT是一种基于深度学习的自然语言处理技术，利用了大规模�
 - U-Net model()
 
 - cfg scale(提示词 强度)
+    - 图像的一致性参数
+
+    - 提示词引导系数
+
+    - 数值较低时, 生成更自由, 
+
+    - 数值较高时, 生成结果更贴合输入提示, 生成的
+
+    - *Kayn: 类似提示词强度*
 
 - Noise(噪音, 噪声)
 
@@ -313,7 +323,11 @@ GPT是一种基于深度学习的自然语言处理技术，利用了大规模�
 - SOTA(State of the Art): 技术前沿, 最先进水平,顶尖水平
 
   - **SOTA** 的英文全称是 **State of the Art**，意思是“技术前沿”或“最先进水平”。在人工智能和机器学习领域，SOTA 指的是当前在某个特定任务或基准上达到了最高性能的模型或算法。
-  
+
+
+### sd
+
+- 重绘幅度
 
 ### Agent
 
@@ -338,6 +352,18 @@ Intelligent agent(智能代理)
 > 1. 感知（Perception）是指Agent从环境中收集信息并从中提取相关知识的能力。
 > 2. 规划（Planning）是指Agent为了某一目标而作出的决策过程。
 > 3. 行动（Action）是指基于环境和规划做出的动作。
+
+## LLM
+
+## data
+
+ETL (Extract, Transform, Load) 的解释
+
+抽取 转换, 加载
+
+ETL 是 **数据集成（Data Integration）** 的核心流程，用于从各种数据源中抽取数据、转换为目标格式，然后加载到最终目标系统（如数据仓库或数据库）。这是数据工程中常见的操作流程，特别是在 **数据仓库（Data Warehouse）** 和 **数据分析** 场景中被广泛应用。
+
+- 数据工程
 
 ## Items
 

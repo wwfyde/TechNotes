@@ -38,6 +38,9 @@
 
 ```shell
 # pip config set global.index-url https://mirrors.aliyun.com/pypi/simple
+# 阿里云
+pip config set global.index-url https://mirrors.aliyun.com/pypi/simple
+
 pip config set global.index-url https://mirror.nju.edu.cn/pypi/web/simple
 
 pip config set global.index-url https://mirror.sjtu.edu.cn/pypi/web/simple
