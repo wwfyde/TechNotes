@@ -2544,7 +2544,15 @@ Keep the following things in mind about volumes in the `Dockerfile`.
   instruction does not support specifying a `host-dir` parameter. You must specify the mountpoint when you create or run
   the container.
 
-### USER
+### USER-切换用户
+
+
+
+```shell
+USER ${user}
+```
+
+
 
 ### WORKDIR
 
@@ -4176,6 +4184,14 @@ docker save -o prom.tar 5c435642ca4d
 # 思路一 将阶段一的容器作为阶段二的base容器
 
 # 思路二 将阶段一构建的文件复制到阶段二中
+```
+
+## 远程docker with GPU 
+
+```shell
+
+docker context use remote-gpu
+docker info
 ```
 
 

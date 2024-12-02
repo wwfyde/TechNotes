@@ -6,7 +6,13 @@
 
 ## 安装配置
 
-### nvm
+# fnm
+
+```
+curl -fsSL https://fnm.vercel.app/install | bash
+```
+
+# nvm
 
 ```shell
 brew install nvm
@@ -65,13 +71,38 @@ npm config set registry https://mirrors.huaweicloud.com/repository/npm/
 
 ```
 
+```shell
+# 全局安装 甚至会自动安装
+npx vite@4 ..
+
+npx 
+```
+
 
 
 # yarn
 
+```shell
+corepack disable 
+corepack enable
+
+corepack prepare yarn@4 --activate
+```
+
+
+
+# 配置
+
+```shell
+```
+
+
+
 # 技术标准
 
 ## htmx
+
+
 
 # toolchain
 
@@ -85,17 +116,31 @@ npm config set registry https://mirrors.huaweicloud.com/repository/npm/
 
 ## redux(不推荐)
 
+## vitepress
+
+## mdx+next
+
 
 
 # Packages
 
 ## vite
 
+## axios-推荐
+
+可选 fetch
+
+使用axios 拦截器与
+
+配合 React Query 进行异步数据请求管理。
+
+Axios 支持拦截器，更容易与 FastAPI 的接口集成。
+
 ## jest
 
 ## three.js
 
-## zod
+## zod-表单数据类型检查和验证, 配合typescript
 
 ## core.js
 
@@ -109,15 +154,19 @@ npm config set registry https://mirrors.huaweicloud.com/repository/npm/
 
 ## underscore
 
+## animate.css
+
 
 
 # Frameworks
 
 ## React
 
-## Next
+## Next(推荐)
 
 ## Ant.design
+
+## umi(结合antd)
 
 ## Vue
 
@@ -125,15 +174,31 @@ npm config set registry https://mirrors.huaweicloud.com/repository/npm/
 
 ## sass
 
-## tailwind
+## tailwind(推荐)
 
 
+
+# icons
+
+## **Heroicons**：与 TailwindCSS 完美搭配。
+
+## **React Icons**：多样化图标选择，轻量简单。
 
 
 
 # 开发增强
 
 ## MDX
+
+## yarn
+
+## **pnpm**
+
+
+
+## Volta
+
+## umi
 
 
 

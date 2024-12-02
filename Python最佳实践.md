@@ -147,7 +147,19 @@ sudo docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
 
 
 
+# 开发工具
 
+## uv
+
+## ruff
+
+## pytest
+
+## hatch
+
+## venv
+
+## pipx
 
 # 异常处理
 
@@ -627,6 +639,8 @@ tests/
 
 一般比如 utils包, 通常还会有一个 utils.py作为主要入口, 也包括了`__init__.py`
 
+
+
 ## project
 
 ## application
@@ -776,7 +790,23 @@ script_collection/
 
 ## plugins/extensions
 
+# 模块设计
 
+模块分层, 模块划分, 模块拆分
+
+常用逻辑: 
+
+- 多层次划分
+
+- 按服务拆分, 一个服务一个文件及
+
+- 按切面划分(aspect: models, schemas), 
+
+- 按业务领域划分(service: user, item, order), 
+
+- 文件夹划分: 通常一个文件夹代表一个package, 要么包含同意的业务, 要么包含统一的切面
+
+  
 
 # 配置管理
 
@@ -3749,7 +3779,9 @@ log = Log(app_root_dir + '/log/' + app_name + ".log", 1).getLogger()
 
 
 
+# 状态机
 
+> task_state
 
 
 

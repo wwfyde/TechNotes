@@ -5,6 +5,7 @@
 ## Links
 
 - https://github.com/zhanymkanov/fastapi-best-practices
+- https://github.com/Kludex/fastapi-tips
 
 ### 文章记录
 
