@@ -7,6 +7,16 @@
 - https://github.com/zhanymkanov/fastapi-best-practices
 - https://github.com/Kludex/fastapi-tips
 
+### 参考项目
+
+- [langflow](https://github.com/langflow-ai/langflow)
+- [bisheng](https://github.com/langflow-ai/langflow)
+- [langchain-extract](https://github.com/langchain-ai/langchain-extract)
+
+#### DDD架构参考
+
+- https://github.com/NEONKID/fastapi-ddd-example
+
 ### 文章记录
 
 - [rate-limit: 限流, Rate limiting using Python and Redis](https://dev.to/astagi/rate-limiting-using-python-and-redis-58gk)
@@ -27,6 +37,10 @@ FastAPI stands on the shoulders of giants:
 
 
 
+## 
+
+
+
 # 核心概念
 
 ## 概要
@@ -42,7 +56,9 @@ FastAPI stands on the shoulders of giants:
     - API函数
     - 请求处理函数
     - 操作函数
-
+    - controller
+    - endpoints的集合是 routers, 换句话说, 通过routers来组织endpoint
+    
 - path parameter: 路径参数, url中的路径的参数
 - query parameter: 查询参数, 路径操作函数中的参数中的非路径参数, 默认是查询参数
 
@@ -408,7 +424,28 @@ if __name__ == "__main__":
 
 [advanced-middleware](https://fastapi.tiangolo.com/advanced/middleware/)
 
+# 依赖注入
 
+
+
+> FastAPI的依赖注入 主要可以用于 注入 服务层对象, 数据库连接等等
+>
+> Other common terms for this same idea of "dependency injection" are:
+> 其他表示“依赖注入”这一相同概念的常见术语有：
+>
+> - resources
+> - providers
+> - services
+> - injectables
+> - components
+
+
+
+# 初始化
+
+
+
+创建APP的时候初始化服务层对象, 以方便
 
 # 高级用法
 

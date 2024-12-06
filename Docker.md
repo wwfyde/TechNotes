@@ -2696,7 +2696,7 @@ volumes:
 
 
 # postgres
- healthcheck:
+healthcheck:
       test: [ "CMD", "pg_isready" ]
       interval: 1s
       timeout: 3s
@@ -2707,6 +2707,12 @@ volumes:
 healthcheck:
       test: [ "CMD", "redis-cli", "ping" ]
 
+# rabbitmq
+healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "status"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
 
 ```
 

@@ -1594,6 +1594,8 @@ css3新单位，相对于视口的宽度或高度中较小的那个
 
 [MDN-HTTP](https://developer.mozilla.org/zh-CN/docs/Web/HTTP)
 
+- https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers
+
 ## GET or POST
 
 使用 `POST` 的情况

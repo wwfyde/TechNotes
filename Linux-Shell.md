@@ -1433,6 +1433,18 @@ unset https_proxy
 
 ### read
 
+### EOF
+
+here doc
+
+```shell
+<<EOF 携带前面空白行
+
+<<-EOF 去除空白符
+```
+
+
+
 ## **系统管理**
 
 > 包括用户与权限管理
@@ -2892,6 +2904,24 @@ echo -e "Column 1\tColumn 2"
 
 
 ### cat
+
+
+
+```shell
+# 打印多行到标准输出
+cat <<EOF
+This is a multiline input
+that ends when EOF is encountered.
+EOF
+
+# 方式
+cat <<EOF > output.txt
+This text will be written to output.txt
+And it will stop when EOF is reached.
+EOF
+```
+
+
 
 ### head
 
@@ -5763,7 +5793,7 @@ test.sh
 | `{a, b}` | Brace expansion        | 分组; 代码块                                                 |                               |
 | {}       | Block of code          | 代码块                                                       |                               |
 | `|`      | pipe                   | 将左边的输出作为右边的输入使用<br />one's output piped as another's input |                               |
-|          |                        |                                                              |                               |
+| EOF      |                        |                                                              |                               |
 |          |                        |                                                              |                               |
 |          |                        |                                                              |                               |
 

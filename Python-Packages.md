@@ -1713,6 +1713,19 @@ id=123 public_key='foobar' name='Testing' domains=['example.com', 'foobar.com']
 
 # **pytest**
 
+> [!Note]
+>
+> `pytest.fixture` 是 `pytest` 中的一种机制，用来设置测试所需的预先条件或资源，能够在多个测试函数之间共享。它可以看作是一个用于提供测试所需数据、对象或者初始化状态的设置函数，同时还可以确保在测试结束后清理资源（通过 `yield` 或者清理代码）。
+>
+> Fixture 的主要用途包括：
+>
+> - 提供测试数据
+> - 设置资源，如数据库、模拟服务器或配置文件
+> - 初始化共享状态
+> - 在测试后进行资源清理（teardown）
+
+
+
 # alembic
 
 > [!tip]
