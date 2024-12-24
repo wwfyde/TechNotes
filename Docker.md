@@ -4059,13 +4059,17 @@ docker load -i dist/jinmao-0.1.6.tar
 
 ## 代理
 
-> Configure Docker to use a proxy server: https://docs.docker.com/network/proxy/
+> Configure Docker to use a proxy server:
+>
+> -https://docs.docker.com/network/proxy/
 >
 > https://docs.docker.com/config/daemon/systemd/
 >
 > https://docs.docker.com/config/daemon/#configure-the-docker-daemon
 >
 > - https://docs.docker.com/config/daemon/proxy/
+> - https://docs.docker.com/engine/cli/proxy/
+> - https://docs.docker.com/engine/cli/proxy/#configure-proxy-settings-per-daemon
 
 > [!warning]
 >
@@ -4115,6 +4119,21 @@ Environment="NO_PROXY=localhost,127.0.0.1"
 }
 ```
 
+### Mac配置
+
+`~/.docker/config.json`
+
+```json
+{
+  "proxies": {
+  		"default": {
+    		"httpProxy": "http://host.docker.internal:7890",
+    		"httpsProxy": "http://host.docker.internal:7890",
+    		"noProxy": "*.test.example.com,.example.org,127.0.0.0/8"
+  		}
+	}
+}
+```
 
 
 ### 旧
@@ -4154,13 +4173,17 @@ Linux 中应该使用`https://docs.docker.com/config/daemon/#configure-the-docke
 }
 ```
 
+mc
 
+``
 
 ### docker build时环境变量
 
 > [!tip]
 >
-> 这种模式下`127.0.0.1` `localhost` `192.168.0.1`这样的代理无效
+> 这种模式下`127.0.0.1` `localhost` 这样的代理无效
+>
+> `192.168.0.1` 可以 
 
 ## 网关(宿主机)
 

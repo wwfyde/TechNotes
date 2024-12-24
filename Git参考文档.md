@@ -490,7 +490,7 @@ git config --global core.editor /usr/bin/vim
 
 # 配置中文路径显示问题 
 git config --global core.quotePath false
-git config --global core.quotepath false
+
 
 # 启用有帮助的彩色命令行输出(默认启用)
 git config --global color.ui auto

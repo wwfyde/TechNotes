@@ -10,8 +10,9 @@
 ### 参考项目
 
 - [langflow](https://github.com/langflow-ai/langflow)
-- [bisheng](https://github.com/langflow-ai/langflow)
+- [bisheng](https://github.com/dataelement/bisheng)
 - [langchain-extract](https://github.com/langchain-ai/langchain-extract)
+- [Arize-ai/phoenix](https://github.com/Arize-ai/phoenix)
 
 #### DDD架构参考
 
@@ -553,6 +554,12 @@ class Author(Base):
 
 
 # 最佳实践
+
+
+
+- 使用root-path 为路由添加额外的路径` uvicorn  --root-path /api/v1`
+  - https://fastapi.tiangolo.com/advanced/behind-a-proxy/#checking-the-current-root_path
+- 全局依赖
 
 # Tips
 
