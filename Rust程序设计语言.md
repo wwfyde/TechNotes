@@ -16,6 +16,11 @@
 - Awesome Rust: https://github.com/rust-unofficial/awesome-rust
 - https://deps.rs/
 
+### 参考项目
+
+- [A blazing fast inference solution for text embeddings models](https://github.com/huggingface/text-embeddings-inference)
+  - rust + auxm 编写的后端
+
 ### Articles
 
 
@@ -161,33 +166,33 @@ Rust和C/Go在语法上有一些相似之处，但Rust引入了更多的编译�
 
 
 
-​	1.	**Rust基础语法**
+1.	**Rust基础语法**
 
-​	•	**基础数据类型**: 整型、浮点型、字符串、布尔值等
+- **基础数据类型**: 整型、浮点型、字符串、布尔值等
 
-​	•	**控制结构**: if/else, match, loop, for 等
+- **控制结构**: if/else, match, loop, for 等
 
-​	•	**函数和模块**: Rust中函数的定义、参数、返回值、模块化组织代码
+- **函数和模块**: Rust中函数的定义、参数、返回值、模块化组织代码
 
-​	•	**变量绑定与不可变性**: let 和 mut
+- **变量绑定与不可变性**: let 和 mut
 
-​	•	**所有权与借用（Ownership & Borrowing）**: 这是Rust的核心概念
+- **所有权与借用（Ownership & Borrowing）**: 这是Rust的核心概念
 
-​	2.	**内存管理**
+2.	**内存管理**
 
-​	•	所有权（Ownership）
+- 所有权（Ownership）
 
-​	•	借用（Borrowing）和引用（References）
+- 借用（Borrowing）和引用（References）
 
-​	•	生命周期（Lifetimes）
+- 生命周期（Lifetimes）
 
-​	3.	**Cargo & Crates (依赖管理工具)**
+3.	**Cargo & Crates (依赖管理工具)**
 
-​	•	安装与使用 Cargo，如何新建项目、运行项目
+- 安装与使用 Cargo，如何新建项目、运行项目
 
-​	•	如何使用 Cargo.toml 文件管理项目依赖
+- 如何使用 Cargo.toml 文件管理项目依赖
 
-​	•	如何引入外部的 crate（第三方库）
+- 如何引入外部的 crate（第三方库）
 
 
 
@@ -195,9 +200,9 @@ Rust和C/Go在语法上有一些相似之处，但Rust引入了更多的编译�
 
 
 
-​	•	[The Rust Programming Language (官方书籍)](https://doc.rust-lang.org/book/)
+- [The Rust Programming Language (官方书籍)](https://doc.rust-lang.org/book/)
 
-​	•	[Rustlings](https://github.com/rust-lang/rustlings) 练习项目，非常适合Rust入门学习，通过实际动手练习来巩固概念。
+- [Rustlings](https://github.com/rust-lang/rustlings) 练习项目，非常适合Rust入门学习，通过实际动手练习来巩固概念。
 
 
 
@@ -205,9 +210,9 @@ Rust和C/Go在语法上有一些相似之处，但Rust引入了更多的编译�
 
 
 
-​	•	完成Rustlings中的所有练习题。
+- 完成Rustlings中的所有练习题。
 
-​	•	实现一个简单的命令行程序，如计算器或文本处理器，来巩固基础语法和内存管理。
+- 实现一个简单的命令行程序，如计算器或文本处理器，来巩固基础语法和内存管理。
 
 
 
@@ -227,27 +232,27 @@ Rust和C/Go在语法上有一些相似之处，但Rust引入了更多的编译�
 
 
 
-​	1.	**高级特性**
+1.	**高级特性**
 
-​	•	**枚举（Enum）与模式匹配（Pattern Matching）**
+- **枚举（Enum）与模式匹配（Pattern Matching）**
 
-​	•	**结构体（Struct）与方法（Methods）**
+- **结构体（Struct）与方法（Methods）**
 
-​	•	**Traits与泛型（Generics）**
+- **Traits与泛型（Generics）**
 
-​	•	**错误处理**: Result, Option, 和 ? 操作符的使用
+- **错误处理**: Result, Option, 和 ? 操作符的使用
 
-​	2.	**并发编程**
+2.	**并发编程**
 
-​	•	**线程（Threads）** 和 **消息传递（Channels）**
+- **线程（Threads）** 和 **消息传递（Channels）**
 
-​	•	**异步编程**: 初步了解Rust中的异步编程模型，可以了解 async/await 和 tokio 库的基本使用
+- **异步编程**: 初步了解Rust中的异步编程模型，可以了解 async/await 和 tokio 库的基本使用
 
-​	3.	**文件与网络IO**
+3.	**文件与网络IO**
 
-​	•	学习标准库中的 std::fs 和 std::net 模块
+- 学习标准库中的 std::fs 和 std::net 模块
 
-​	•	实现文件读写和简单的网络编程
+- 实现文件读写和简单的网络编程
 
 
 
@@ -255,9 +260,9 @@ Rust和C/Go在语法上有一些相似之处，但Rust引入了更多的编译�
 
 
 
-​	•	[Rust by Example](https://doc.rust-lang.org/rust-by-example/) 官方示例教程，覆盖了Rust的各种特性
+- [Rust by Example](https://doc.rust-lang.org/rust-by-example/) 官方示例教程，覆盖了Rust的各种特性
 
-​	•	[Programming Rust (O’Reilly)](https://www.oreilly.com/library/view/programming-rust-2nd/9781492052586/) 进阶的Rust书籍，适合进一步深入学习
+- [Programming Rust (O’Reilly)](https://www.oreilly.com/library/view/programming-rust-2nd/9781492052586/) 进阶的Rust书籍，适合进一步深入学习
 
 
 
@@ -265,9 +270,9 @@ Rust和C/Go在语法上有一些相似之处，但Rust引入了更多的编译�
 
 
 
-​	•	实现一个多线程的下载器，支持断点续传。
+- 实现一个多线程的下载器，支持断点续传。
 
-​	•	实现一个简单的TCP服务器，处理基本的客户端请求。
+- 实现一个简单的TCP服务器，处理基本的客户端请求。
 
 
 
@@ -287,37 +292,37 @@ Rust的Web开发生态在近年来发展迅速，主要的Web框架包括 Actix-
 
 
 
-​	1.	**选择并熟悉Web框架**
+1.	**选择并熟悉Web框架**
 
-​	•	**Actix-web** 或 **Axum**
+- **Actix-web** 或 **Axum**
 
-​	•	**异步编程模型**：Rust中的异步编程在Web开发中至关重要，熟悉 tokio 或 async-std 运行时
+- **异步编程模型**：Rust中的异步编程在Web开发中至关重要，熟悉 tokio 或 async-std 运行时
 
-​	•	如何定义路由、处理请求、返回响应
+- 如何定义路由、处理请求、返回响应
 
-​	•	中间件（Middlewares）的使用，如身份验证、日志记录
+- 中间件（Middlewares）的使用，如身份验证、日志记录
 
-​	2.	**数据库交互**
+2.	**数据库交互**
 
-​	•	学习如何与数据库进行交互：优先选择 SQLx 或 Diesel 作为ORM（对象关系映射）
+- 学习如何与数据库进行交互：优先选择 SQLx 或 Diesel 作为ORM（对象关系映射）
 
-​	•	结合 PostgreSQL 进行数据库操作：插入、查询、更新、删除
+- 结合 PostgreSQL 进行数据库操作：插入、查询、更新、删除
 
-​	•	事务处理和异步数据库操作
+- 事务处理和异步数据库操作
 
-​	3.	**RESTful API**
+3.	**RESTful API**
 
-​	•	使用 Actix-web 或 Axum 实现一个完整的RESTful API
+- 使用 Actix-web 或 Axum 实现一个完整的RESTful API
 
-​	•	学习如何处理请求参数、JSON 序列化/反序列化、表单提交等
+- 学习如何处理请求参数、JSON 序列化/反序列化、表单提交等
 
-​	4.	**测试与部署**
+4.	**测试与部署**
 
-​	•	学习如何编写测试：单元测试、集成测试
+- 学习如何编写测试：单元测试、集成测试
 
-​	•	使用 Docker 构建Rust服务的容器化
+- 使用 Docker 构建Rust服务的容器化
 
-​	•	了解Rust的性能优化工具，如 cargo build --release 和 cargo flamegraph
+- 了解Rust的性能优化工具，如 cargo build --release 和 cargo flamegraph
 
 
 
@@ -325,11 +330,11 @@ Rust的Web开发生态在近年来发展迅速，主要的Web框架包括 Actix-
 
 
 
-​	•	[Actix Web 官方文档](https://actix.rs/)
+- [Actix Web 官方文档](https://actix.rs/)
 
-​	•	[Axum Web Framework 官方文档](https://github.com/tokio-rs/axum)
+- [Axum Web Framework 官方文档](https://github.com/tokio-rs/axum)
 
-​	•	[SQLx 官方文档](https://docs.rs/sqlx/)
+- [SQLx 官方文档](https://docs.rs/sqlx/)
 
 
 
@@ -337,11 +342,11 @@ Rust的Web开发生态在近年来发展迅速，主要的Web框架包括 Actix-
 
 
 
-​	•	使用 Actix-web 或 Axum 实现一个简易的CRUD API，例如用户管理系统或博客系统。
+- 使用 Actix-web 或 Axum 实现一个简易的CRUD API，例如用户管理系统或博客系统。
 
-​	•	结合 SQLx 和 PostgreSQL 实现完整的数据库交互。
+- 结合 SQLx 和 PostgreSQL 实现完整的数据库交互。
 
-​	•	使用 Docker 部署Rust Web应用。
+- 使用 Docker 部署Rust Web应用。
 
 
 
@@ -349,11 +354,11 @@ Rust的Web开发生态在近年来发展迅速，主要的Web框架包括 Actix-
 
 
 
-​	1.	**基础阶段**：1-2周内掌握Rust的基本语法、内存管理、所有权规则，搭建起Rust思维体系。
+1.	**基础阶段**：1-2周内掌握Rust的基本语法、内存管理、所有权规则，搭建起Rust思维体系。
 
-​	2.	**进阶阶段**：2-4周内深入学习Rust的高级特性（如泛型、错误处理、并发编程），并应用于较为复杂的项目。
+2.	**进阶阶段**：2-4周内深入学习Rust的高级特性（如泛型、错误处理、并发编程），并应用于较为复杂的项目。
 
-​	3.	**Web开发应用**：4-6周内掌握Rust Web开发框架，如 Actix-web 或 Axum，并通过实际项目应用强化。
+3.	**Web开发应用**：4-6周内掌握Rust Web开发框架，如 Actix-web 或 Axum，并通过实际项目应用强化。
 
 
 
@@ -365,11 +370,11 @@ Rust语言的学习曲线较为陡峭，尤其是在所有权和借用规则方�
 
 
 
-​	1.	Rust中所有权和借用的机制如何在实际项目中提升内存管理的安全性？
+1.	Rust中所有权和借用的机制如何在实际项目中提升内存管理的安全性？
 
-​	2.	在Web开发中，如何选择适合项目的Rust框架，例如Actix-Web和Axum之间的异同是什么？
+2.	在Web开发中，如何选择适合项目的Rust框架，例如Actix-Web和Axum之间的异同是什么？
 
-​	3.	Rust异步编程模型中的async/await相比于Go的协程在处理并发时有何优势？
+3.	Rust异步编程模型中的async/await相比于Go的协程在处理并发时有何优势？
 
 
 
@@ -927,7 +932,7 @@ Rust 使用模块（mod）来组织代码，将代码分成多个逻辑单元。
 
 
 
-​	•	**定义模块**：使用 mod 关键字定义模块。模块可以嵌套，可以在文件内部或外部定义。
+- **定义模块**：使用 mod 关键字定义模块。模块可以嵌套，可以在文件内部或外部定义。
 
 
 
@@ -949,7 +954,7 @@ fn main() {
 
 
 
-​	•	**子模块**：模块可以有子模块，子模块也可以有子模块。通过模块树可以组织复杂的项目。
+- **子模块**：模块可以有子模块，子模块也可以有子模块。通过模块树可以组织复杂的项目。
 
 
 
@@ -993,7 +998,7 @@ fn main() {
 
 
 
-​	•	**Cargo.toml**：这是 Rust 的包管理工具 Cargo 使用的配置文件，它定义了项目的依赖项、元数据（如版本号和作者）以及构建选项。
+- **Cargo.toml**：这是 Rust 的包管理工具 Cargo 使用的配置文件，它定义了项目的依赖项、元数据（如版本号和作者）以及构建选项。
 
 
 
@@ -1025,9 +1030,9 @@ Crates 是 Rust 中的 **最小的编译单元**，每个 crate 生成一个独�
 
 
 
-​	•	**库 Crate**：用于定义可以被其他 crate 使用的库。它通常包含在 src/lib.rs 文件中。
+- **库 Crate**：用于定义可以被其他 crate 使用的库。它通常包含在 src/lib.rs 文件中。
 
-​	•	**二进制 Crate**：定义一个可执行文件，通常包含在 src/main.rs 文件中。
+- **二进制 Crate**：定义一个可执行文件，通常包含在 src/main.rs 文件中。
 
 
 
@@ -1039,9 +1044,9 @@ Rust 使用路径来引用不同模块和结构。路径有两种类型：**绝�
 
 
 
-​	•	**绝对路径**：从 crate 根开始，例如 crate::module_name::function_name。
+- **绝对路径**：从 crate 根开始，例如 crate::module_name::function_name。
 
-​	•	**相对路径**：从当前模块开始，例如 self::function_name 或 super::parent_function_name。
+- **相对路径**：从当前模块开始，例如 self::function_name 或 super::parent_function_name。
 
 
 
@@ -1167,11 +1172,11 @@ Rust 通过所有权系统管理内存，主要概念有：
 
 
 
-​	•	**所有权（Ownership）**：每个值都有一个所有者。
+- **所有权（Ownership）**：每个值都有一个所有者。
 
-​	•	**借用（Borrowing）**：通过引用共享数据，不转移所有权。
+- **借用（Borrowing）**：通过引用共享数据，不转移所有权。
 
-​	•	**生命周期（Lifetimes）**：保证引用在其使用期间是有效的。
+- **生命周期（Lifetimes）**：保证引用在其使用期间是有效的。
 
 
 
