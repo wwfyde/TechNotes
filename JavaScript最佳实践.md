@@ -6,12 +6,6 @@
 
 ## 安装配置
 
-# fnm
-
-```
-curl -fsSL https://fnm.vercel.app/install | bash
-```
-
 # nvm
 
 ```shell
@@ -80,13 +74,49 @@ npx
 
 
 
+# pnpm
+
+
+
 # yarn
+
+> 主语 pnp 模式与`node-modules`模式
 
 ```shell
 corepack disable 
 corepack enable
 
 corepack prepare yarn@4 --activate
+```
+
+# vite
+
+## vite.config.ts
+
+```shell
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import path from 'path';
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+      '@assets': path.resolve(__dirname, './src/assets'),
+      '@components': path.resolve(__dirname, './src/components'),
+    },
+  },
+  plugins: [react()]
+})
+```
+
+# umi
+
+```shell
+# 使用umi max 创建项目 
+npx create-umi@latest
+
 ```
 
 
@@ -156,6 +186,8 @@ Axios 支持拦截器，更容易与 FastAPI 的接口集成。
 
 ## animate.css
 
+## react-infinite-scroll-component(无限加载)
+
 
 
 # Frameworks
@@ -203,6 +235,23 @@ Axios 支持拦截器，更容易与 FastAPI 的接口集成。
 
 
 
+
+# **最佳实践**
+
+## 布局技巧
+
+```css
+flex: '1 1 0%',
+overflow: 'hidden auto',
+```
+
+
+
+## 滚动问题
+
+> [!Important]
+>
+> 使用 `react-infinite-scroll-component` 库来实现, 如果是ant-design, 结合List使用
 
 
 

@@ -1875,7 +1875,10 @@ javascript之前是没有模块的功能的，之前做js模块化开发，是�
 ```js
 // model.js文件中导出
 var person = {name: 'tom', age: 18}
-export default {person}  // 支持被导入
+var demo = {use: true}
+export default person  // 支持被导入 import person from "./model"
+export default {person}  // 支持被导入 import {person} from "./model"
+export default {person, demo}  // 支持被导入 import {demo,person} from "./model"
 
 // index.js文件夹中导入
 import person from 'js/model.js'
@@ -2764,6 +2767,9 @@ throw 语句用来抛出一个用户自定义的异常。当前函数的执行�
 [运算符](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Expressions_and_Operators)-**operator**
 
 ## `...`_Spread_[展开语法](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Spread_syntax)
+
+```
+```
 
 ## 运算符优先级
 
