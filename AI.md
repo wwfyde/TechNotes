@@ -355,6 +355,10 @@ Intelligent agent(智能代理)
 > 2. 规划（Planning）是指Agent为了某一目标而作出的决策过程。
 > 3. 行动（Action）是指基于环境和规划做出的动作。
 
+## 深度学习
+
+- IPAdapter(图像提示适配器, Image Prompt Adapter)
+
 ## LLM
 
 ## data
@@ -380,6 +384,27 @@ ETL 是 **数据集成（Data Integration）** 的核心流程，用于从各种
 **神经网络 (Neural Network)**: 在深度学习中, 模型通常由多层 **神经元 (Neurons)** 组成, 模拟人脑的结构和工作方式。每一层从前一层获取信息, 经过处理后传递给下一层, 最终输出结果。这种层层传递和处理信息的方式使模型能够学习和捕捉数据中的复杂模式和特征。
 
 ### 神经网络(Neural Network)
+
+> [!note]
+> 多维认知
+> 
+
+> 神经网络的核心组件包括： 
+> 层：线性层、卷积层、循环层等。
+
+激活函数：ReLU、Sigmoid、Softmax 等。
+
+损失函数：MSE、交叉熵等。
+
+优化器：SGD、Adam 等。
+
+正则化：L2 正则化、Dropout 等。
+
+初始化方法：Xavier、He 初始化等。
+
+反向传播：训练神经网络的核心算法。
+
+数据预处理：归一化、标准化、数据增强等。
 
 ### 知识图谱(knowledge graph)
 

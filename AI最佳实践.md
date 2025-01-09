@@ -215,16 +215,24 @@ Tensors are a specialized data structure that are very similar to arrays and mat
 
 # Nvidia
 
+()
+
 ## Nvidia Driver(可选)
 
 如果需要安装cuda可以直接通过cuda安装Nvidia Driver
+
+> [!important]
+>
+> 推荐通过cuda toolkit 安装
 
 ## CUDA toolkit
 
 ```shell
 # 安装必要构建依赖
 sudo apt-get update
-sudo apt-get install build-essential pkg-config
+sudo apt-get install build-essential pkg-config dkms
+
+# 注意gcc版本, 
 
 # 
 
@@ -343,6 +351,13 @@ conda env remove --name gan
 
 ## 常见问题
 
+### bash 中激活虚拟环境
+
+```shell
+source "$HOME/miniconda3/etc/profile.d/conda.sh"
+conda activate comfyui
+```
+
 ### zsh或terminal默认不启动base
 
 ```shell
@@ -445,6 +460,13 @@ docker run --gpus '"device=0,1"' --rm -it nvidia/cuda:12.4.1-cudnn-devel-ubuntu2
 ```shell
 # Safari 浏览器中支持SF Mono
 ui-monospace, 'SF Mono'
+```
+
+```
+jupyter notebook --no-browser --port=8888 --ip=0.0.0.0
+
+jupyter notebook password
+
 ```
 
 

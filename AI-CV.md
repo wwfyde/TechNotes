@@ -3,6 +3,8 @@
 > [!note]
 >
 > 计算机视觉, Computer Vision
+>
+> AI Vision
 
 # Glossary
 
@@ -24,6 +26,49 @@
 ### image style
 
 - realistic-写实的
+
+
+
+# 领域知识
+
+## 平台
+
+- 创客帖
+- 美图设计室
+
+## 应用
+
+换装-clothes changer, outfit change
+
+
+
+## 图像处理与应用
+
+### 图像分割
+
+#### SAM2
+
+### DeepLabv3+
+
+### 图像生成
+
+### 图像提示与控制
+
+#### IP-Adapter
+
+#### ControlNet
+
+#### OpenPose
+
+### 图像修复(inpaint)
+
+### 图像超分辨率(super-resolution)
+
+
+
+
+
+
 
 
 
@@ -57,3 +102,22 @@ DALL·E 2 is an AI system that can create realistic images and art from a descri
 # 人脸修复
 
 [综合的人脸修复, 相关的论文](https://github.com/TaoWangzj/Awesome-Face-Restoration)
+
+
+
+# AnimateDiff
+
+
+
+# SAM2
+
+
+
+
+
+# facefusion
+
+https://github.com/facefusion/facefusion
+
+
+
