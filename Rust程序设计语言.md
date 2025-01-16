@@ -376,6 +376,15 @@ Rust语言的学习曲线较为陡峭，尤其是在所有权和借用规则方�
 
 3.	Rust异步编程模型中的async/await相比于Go的协程在处理并发时有何优势？
 
+## 安装配置
+
+```shell
+export RUSTUP_UPDATE_ROOT=https://mirrors.tuna.tsinghua.edu.cn/rustup/rustup
+export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
+# 官方安装命令, 即使国内依然使用该脚本,不过需要先添加环境变量
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
 
 
 ## 应用场景
@@ -861,7 +870,19 @@ Bracket punctuation is used in various parts of the grammar. An open bracket mus
 - https://rust-cli.github.io/book/index.html
 - [Rust 中的命令行应用, (官方文档中文翻译linked from official)](https://suibianxiedianer.github.io/rust-cli-book-zh_CN/)
 
+# Topics
 
+## 所有权与借用
+
+### questions
+
+- `self`, `&self` 和 `&mut self`区别
+
+- ```
+  
+  ```
+
+# 最佳实践
 
 # 常见问题
 

@@ -4061,7 +4061,7 @@ docker load -i dist/jinmao-0.1.6.tar
 
 > Configure Docker to use a proxy server:
 >
-> -https://docs.docker.com/network/proxy/
+> 
 >
 > https://docs.docker.com/config/daemon/systemd/
 >
@@ -4069,6 +4069,7 @@ docker load -i dist/jinmao-0.1.6.tar
 >
 > - https://docs.docker.com/config/daemon/proxy/
 > - https://docs.docker.com/engine/cli/proxy/
+>   - [弃用]https://docs.docker.com/network/proxy/
 > - https://docs.docker.com/engine/cli/proxy/#configure-proxy-settings-per-daemon
 
 > [!warning]
@@ -4120,6 +4121,8 @@ Environment="NO_PROXY=localhost,127.0.0.1"
 ```
 
 ### Mac配置
+
+> 可能仅 对 docker cli 生效
 
 `~/.docker/config.json`
 
@@ -4177,6 +4180,31 @@ mc
 
 ``
 
+### build加速
+
+```shell
+1）通过指定构建参数：
+docker-compose build \
+    --build-arg http_proxy=http://proxy.exaple.com \
+    --build-arg https_proxy=http://proxy.exaple.com
+2）通过设置环境变量：
+
+# docker-compose.yaml
+
+build:
+  context: .
+  args:
+    - http_proxy=http://proxy.exaple.com
+    - https_proxy=http://proxy.exaple.com
+————————————————
+
+                            版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。
+                        
+原文链接：https://blog.csdn.net/u013670453/article/details/115958915
+```
+
+
+
 ### docker build时环境变量
 
 > [!tip]
@@ -4184,6 +4212,8 @@ mc
 > 这种模式下`127.0.0.1` `localhost` 这样的代理无效
 >
 > `192.168.0.1` 可以 
+
+
 
 ## 网关(宿主机)
 

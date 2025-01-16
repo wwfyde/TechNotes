@@ -1242,6 +1242,12 @@ ssh -o ServerAliveInterval=60
 >
 > 也可以通过`top` `ping` 等来让会话保活
 
+## Options
+
+| 选项 | 含义                                                         |
+| ---- | ------------------------------------------------------------ |
+| -N | Do not execute a remote command. This is useful for just forwarding ports. |
+
 ## ssh_config
 
 基本路径`~/.ssh/config` 和 `/etc/ssh/ssh_config`

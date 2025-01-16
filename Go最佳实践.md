@@ -843,7 +843,19 @@ which godoc
 godoc -http=:6060
 ```
 
+## golangci-lint
 
+https://github.com/golangci/golangci-lint
+
+> 来自[阿里同学都在用的开发环境和工具](https://mp.weixin.qq.com/s/2qgs4JYOJFCmrxHMxtctyA)
+
+## goimports
+
+```
+go install golang.org/x/tools/cmd/goimports@latest
+```
+
+> 来自[阿里同学都在用的开发环境和工具](https://mp.weixin.qq.com/s/2qgs4JYOJFCmrxHMxtctyA)
 
 # 零散记录
 

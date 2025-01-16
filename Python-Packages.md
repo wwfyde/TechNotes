@@ -1270,6 +1270,20 @@ bokeh
 
 - [tiktoken](https://github.com/openai/tiktoken)
 
+- jupyter_contrib_nbextensions
+
+- ipywidgets
+
+- #### **plotly**
+
+- #### **jupyter-resource-usage**
+
+  - 
+
+- ```
+  
+  ```
+
 
 
 ## data process and compute
@@ -1341,6 +1355,8 @@ pip install pip-tools
 ### taskipy-
 
 ### art-ASCII文本
+
+### tach
 
 ## Document
 
@@ -2863,6 +2879,10 @@ client = OpenAI(
 
 
 
+# opencv-contrib-python
+
+
+
 # gradio
 
 > 更新组件值
@@ -3307,6 +3327,8 @@ context = browser.new_context(storage_state=state)
 
 # ---
 
+# pytorch
+
 # sympy(3 )
 
 # ploars
@@ -3314,4 +3336,22 @@ context = browser.new_context(storage_state=state)
 # accelerate
 
 # transformers
+
+主要用于文本处理, 比如prompt
+
+`transformers` 负责处理文本提示，将其转换为模型可以理解的 embedding 向量。
+
+`diffusers` 负责图像的扩散和去噪过程，以及与文本 embedding 的交互，最终生成图像。
+
+`xformers` 则负责优化 Transformer 模型的 attention 机制，提高模型的内存效率和速度。
+
+# diffusers
+
+主要用于diffusion模型的添加噪声和去除噪声,来生成图像
+
+# xformers
+
+`xformers` 库由 Facebook AI Research（现 Meta AI）开发，主要用于优化 Transformer 模型的内存效率和速度。
+
+
 

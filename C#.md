@@ -10,6 +10,7 @@
 
 - Learn back-end web development with minimal APIs
   - https://dotnet.microsoft.com/en-us/learn/back-end-web-dev
+- https://github.com/ardalis/CleanArchitecture
 
 
 
