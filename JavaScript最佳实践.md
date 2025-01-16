@@ -4,6 +4,10 @@
 
 > https://andreasbm.github.io/web-skills/
 
+## 参考项目
+
+- https://github.com/langgenius/dify
+
 ## 安装配置
 
 # nvm
@@ -93,10 +97,13 @@ corepack prepare yarn@4 --activate
 
 ## vite.config.ts
 
+> `pnpm add -D @types/node` 以解决 path __dirname 报错
+
 ```shell
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path';
+// pnpm add -D @types/node
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -119,7 +126,11 @@ npx create-umi@latest
 
 ```
 
+# create-next-app
 
+> next 模版 https://nextjstemplates.com/templates?type=free
+>
+> https://vercel.com/templates
 
 # 配置
 
@@ -198,9 +209,26 @@ Axios 支持拦截器，更容易与 FastAPI 的接口集成。
 
 ## Ant.design
 
+```shell
+# 完整版ant-design-pro
+pnpm dlx @ant-design/pro-cli create ant-design-admin
+```
+
+
+
 ## umi(结合antd)
 
 ## Vue
+
+## ui
+
+## radix-ui
+
+> openai, claude 有使用, 
+>
+> roadmap.sh 推荐
+
+
 
 # CSS
 

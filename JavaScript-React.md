@@ -178,6 +178,19 @@ Module.function1();
 Module.function2();
 ```
 
+# 最佳实践
+
+
+
+## 状态管理
+
+> [!Note]
+>
+> - `context API` + `useReducer` (Hooks)
+> - zustand
+
+
+
 # 问题记录
 
 ```js
