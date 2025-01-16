@@ -5,6 +5,8 @@
 - https://comfy.org
 - [ComfyUI Wiki速查手册](https://comfyui-wiki.com/zh/workflows/img2img)
 - [[ComfyUI_examples](https://comfyanonymous.github.io/ComfyUI_examples/)](https://comfyanonymous.github.io/ComfyUI_examples/)
+-  AGI空间站 https://agispace.feishu.cn/wiki/QlvMww0qriUX0qkZVJlcv0qHnbh
+- 通往AGI之路 https://waytoagi.feishu.cn/wiki/QPe5w5g7UisbEkkow8XcDmOpn8e
 
 ## systemd
 
@@ -98,7 +100,7 @@ ComfyUI_essentials             ComfyUI-KJNodes                ComfyUI_UltimateSD
   - https://github.com/crystian/ComfyUI-Crystools
   - 现实每个节点的执行时间
 - custom
-  - 吸附到网格
+  - 吸附到网格snap to grid
 
 - cg-use-everywhere
   -将节点放置在任何位置
