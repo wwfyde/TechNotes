@@ -5,6 +5,7 @@
 - 《JavaScript权威指南》- 京东读书
 - [Mozilla **JavaScript参考与指南**](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript)
 - [MDN JavaScript Reference](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference)
+- [推荐: JavaScript Info](https://zh.javascript.info/)
 
 ## 整体概述
 
@@ -264,6 +265,86 @@ Document -> html(root) -> body
 
 - 视口(viewport)
 - 空白(blank, white space): 空白包括空格(spac), 制表符(tabs)和换行符(new lines)
+
+## CheatSheet
+
+```css
+/*@-Rules @规则 */
+/*
+@规则的作用
+模块化: 通过@import引入多个样式文件，提高代码的可维护性。
+响应式设计: 使用@media根据不同设备和屏幕尺寸应用不同的样式。
+自定义字体: 导入自定义字体，丰富网页的视觉效果。
+动画效果: 使用@keyframes创建各种动画效果。
+条件样式: 使用@supports检查浏览器支持情况，避免兼容性问题。
+打印样式: 为打印输出定义特殊的样式。
+
+@规则是CSS中一个强大的工具，它扩展了CSS的表达能力，使得我们可以创建更加灵活和复杂的样式。通过了解不同的@规则及其用法，你可以更好地控制网页的样式，实现各种各样的视觉效果。
+
+@media: 根据不同的媒体类型（如屏幕、打印机）应用不同的样式。
+
+*/
+
+/* 绝对单位 */
+px    /* 像素 */
+pt    /* 点 */
+cm    /* 厘米 */
+mm    /* 毫米 */
+in    /* 英寸 */
+
+/* 相对单位 */
+em    /* 相对于父元素字体大小 */
+rem   /* 相对于根元素字体大小 */
+%     /* 百分比 */
+vw    /* 视口宽度的1% */
+vh    /* 视口高度的1% */
+
+/* 单行或多行注释 */
+
+/*
+  多行
+  注释
+  示例
+*/
+
+/* 颜色函数 */
+color: rgb(255, 0, 0);
+color: rgba(255, 0, 0, 0.5);
+color: hsl(0, 100%, 50%);
+color: hsla(0, 100%, 50%, 0.5);
+
+/* 计算函数 */
+width: calc(100% - 20px);
+width: min(100%, 500px);
+width: max(50%, 300px);
+width: clamp(300px, 50%, 500px);
+
+/* 变换函数 */
+transform: translate(50px, 100px);
+transform: rotate(45deg);
+transform: scale(1.5);
+
+/* 渐变函数 */
+background: linear-gradient(to right, red, blue);
+background: radial-gradient(circle, red, blue);
+
+
+/* 定义变量 */
+:root {
+  --primary-color: #007bff;
+  --spacing: 1rem;
+}
+
+/* 使用变量 */
+.element {
+  color: var(--primary-color);
+  margin: var(--spacing);
+  /* 带默认值 */
+  padding: var(--padding, 1rem);
+}
+```
+
+
 
 ## CSS概述
 

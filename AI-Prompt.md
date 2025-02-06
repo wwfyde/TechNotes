@@ -789,6 +789,9 @@ Async Ecosystem
 - Use `sqlx` or `tokio-postgres` for async database interactions.
 - Utilize `tonic` for gRPC with async support.
 
+WEB Framework
+- Use `axum` Framework when demonstrate a web api application 
+
 Refer to Rust's async book and `tokio` documentation for in-depth information on async patterns, best practices, and advanced features.
   
 ```
