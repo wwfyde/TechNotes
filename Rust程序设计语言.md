@@ -15,6 +15,12 @@
 - rust 中文课程: https://github.com/sunface/rust-course
 - Awesome Rust: https://github.com/rust-unofficial/awesome-rust
 - https://deps.rs/
+- docs.rs
+- crate.io
+
+### 最佳实践
+
+- [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/about.html)
 
 ### 参考项目
 
@@ -456,9 +462,19 @@ rustup doc
 
 
 
-# 核心特性
+# 概念特性
 
 > 核心思想、核心原理、核心特性、适用场景、核心概念
+
+## table
+
+|         |            |      |
+| ------- | ---------- | ---- |
+| package | cargo.toml |      |
+|         |            |      |
+|         |            |      |
+
+
 
 ## trait
 
@@ -528,6 +544,7 @@ fn main() {
 - 所有权
 - 借用
 - 所有权和借用 本质上是将数据传递问题, 数据访问控制, 数据的生命周期
+- 移动, 借用, 克隆
 
 ## List
 
@@ -600,11 +617,48 @@ Rust 宏和其他语言的宏（比如 C 语言的预处理器宏）不同，它
 
 ### 预导入(preclude)
 
+# Cheatsheet
+
+> [**Rust Language Cheat Sheet**]](https://cheats.rs/)
+
+
+
+# Cargo
+
+
+
+## 执行
+
+```toml
+
+
+# 自定义可执行对象
+# cargo run --bin app1
+[[bin]]
+name = "app1"
+path = "custom-bin/app1.rs"
+```
+
+
+
+```shell
+
+
+```
+
 
 
 # Toolchain
 
 ## rustup
+
+```shell
+# clippy
+
+# fmt
+```
+
+
 
 ## cargo
 
@@ -638,6 +692,15 @@ cargo new —lib
 
 
 
+### package管理
+
+```shell
+# 搜索crate.io
+cargo search 
+```
+
+
+
 ## rustc
 
 
@@ -656,6 +719,8 @@ cargo new —lib
 
 ## cargo-expand
 
+> 用于展开宏和派生代码的工具，帮助开发者理解生成代码。
+
 - cargo expand：这是一个非常有用的工具，它可以显示宏展开后的代码，帮助你理解宏的展开过程。
 
 ```shell
@@ -663,7 +728,37 @@ cargo install cargo-expand
 cargo expand
 ```
 
+## rustfmt
 
+## clippy
+
+> 代码管理, 静态分析
+>
+> 静态分析工具，用于发现代码中的潜在问题和非惯用写法。
+
+
+
+## cargo-tree
+
+> cargo-tree
+>
+> 以树状图显示项目的依赖关系，方便排查依赖问题。
+
+## cargo-watch
+
+> 自动运行命令，如重新编译或测试，支持快速迭代。
+
+
+
+## cargo-tarpaulin
+
+> 代码覆盖率工具。
+
+## just
+
+
+
+## make
 
 # Crates
 
@@ -683,7 +778,9 @@ cargo expand
 
 ## tower
 
+## config
 
+## serde
 
 # 语言参考
 
@@ -855,9 +952,17 @@ Bracket punctuation is used in various parts of the grammar. An open bracket mus
 
 - [patterns and matching](https://doc.rust-lang.org/book/ch18-00-patterns.html)
 
-# 编程技术
+# 编程技术与规范
 
 编程工具, 编程思想, 
+
+## 文档注释
+
+```rust
+/// 表示外部文档outer function
+
+//! inner documentation: 用于编写crate/mod 文档
+```
 
 
 
@@ -883,6 +988,17 @@ Bracket punctuation is used in various parts of the grammar. An open bracket mus
   ```
 
 # 最佳实践
+
+## 错误处理
+
+### 原则
+
+- 错误类型设计
+
+- 错误传播
+  - 优先使用 `Result<T, E>` 而非 `panic!`
+  - 用 `?` 运算符简化错误传播
+  - 库代码中避免使用 `unwrap()/expect()`
 
 # 常见问题
 
@@ -1207,7 +1323,5 @@ Rust 通过所有权系统管理内存，主要概念有：
 
 Rust 的代码组织围绕模块化、包管理、可见性控制、工作区等核心概念展开。通过这些机制，开发者可以高效地管理项目代码，并在多个项目间共享通用逻辑。更多详情可以参考 Rust 官方文档中的模块和路径系统章节 。
 
-# 零散记录
 
-20240409 cargo-expand rustover
 
