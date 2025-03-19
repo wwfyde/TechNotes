@@ -7,8 +7,10 @@
 > [官方最佳实践: best practices](https://docs.docker.com/develop/)
 >
 > 替代产品: containerd, vagrant
+>
+> 
 
-l 
+
 
 
 
@@ -4057,11 +4059,11 @@ docker load -i dist/jinmao-0.1.6.tar
 
 
 
-## 代理
+## 代理Proxy
 
 > Configure Docker to use a proxy server:
 >
-> 
+> https://docs.docker.com/engine/cli/proxy
 >
 > https://docs.docker.com/config/daemon/systemd/
 >
@@ -4104,9 +4106,18 @@ Environment="HTTPS_PROXY=http://10.31.0.181:7890/"
 Environment="NO_PROXY=localhost,127.0.0.1"
 ```
 
+### 容器访问宿主机(host)网络
+
+```shell
+host.docker.internal
+host.orb.internal
+```
 
 
-### docker配置文件 (推荐)
+
+### docker daemon配置文件 (推荐)
+
+> 影响范围: `docker pull`,  `docker push` , `docker search`
 
 /etc/docker/daemon.json
 
@@ -4122,7 +4133,13 @@ Environment="NO_PROXY=localhost,127.0.0.1"
 
 ### Mac配置
 
-> 可能仅 对 docker cli 生效
+> [!warning]
+>
+> [Docker Desktop for Mac Proxy](https://docs.docker.com/desktop/settings-and-maintenance/settings/#proxies)
+>
+> You cannot configure the proxy settings using the Docker daemon configuration file (`daemon.json`), and we recommend you do not configure the proxy settings via the Docker CLI configuration file (`config.json`).
+>
+> To manage proxy configurations for Docker Desktop, configure the settings in the Docker Desktop app or use [Settings Management](https://docs.docker.com/security/for-admins/hardened-desktop/settings-management/).
 
 `~/.docker/config.json`
 
@@ -4180,14 +4197,49 @@ mc
 
 ``
 
+### Docker Daemon 代理配置的影响范围
+
+docker daemon 的代理配置影响以下命令：
+
+- **docker pull**：拉取镜像时，守护进程通过代理访问 registry。
+- **docker push**：推送镜像时，守护进程通过代理访问 registry。
+- **docker search**：搜索镜像时，守护进程通过代理访问 registry。
+- 其他需要守护进程与外部 registry 通信的命令。
+
+**不直接影响的命令**：
+
+- **docker build**：构建过程中的代理由 --build-arg 或 Dockerfile 配置。
+- **docker run**：运行时的代理由容器内部配置决定。
+
+### orbstack
+
+> https://github.com/orbstack/orbstack/issues/1305
+
+config path: `~/.orbstack/config/docker.json`
+
+```json
+
+{
+  "proxies" : {
+      "https-proxy" : "http:\/\/127.0.0.1:7890",
+      "http-proxy" : "http:\/\/127.0.0.1:7890",
+      "no-proxy" : "*.test.example.com,.example.org,localhost,127.0.0.0\/8"
+  }
+}
+```
+
+
+
 ### build加速
 
 ```shell
-1）通过指定构建参数：
+# 1）通过指定构建参数：
 docker-compose build \
-    --build-arg http_proxy=http://proxy.exaple.com \
-    --build-arg https_proxy=http://proxy.exaple.com
-2）通过设置环境变量：
+    --build-arg http_proxy=http://127.0.0.1:7890 \
+    --build-arg https_proxy=http://127.0.0.1:7890
+
+
+## 2）通过设置环境变量：
 
 # docker-compose.yaml
 
@@ -4196,11 +4248,7 @@ build:
   args:
     - http_proxy=http://proxy.exaple.com
     - https_proxy=http://proxy.exaple.com
-————————————————
 
-                            版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。
-                        
-原文链接：https://blog.csdn.net/u013670453/article/details/115958915
 ```
 
 
@@ -4212,6 +4260,30 @@ build:
 > 这种模式下`127.0.0.1` `localhost` 这样的代理无效
 >
 > `192.168.0.1` 可以 
+
+
+
+### 容器运行时代理
+
+> [Docker: Run containers with a proxy configuration](https://docs.docker.com/engine/cli/proxy/#run-containers-with-a-proxy-configuration)
+
+```shell
+
+# vim ~/.docker/config.json
+docker  run 
+
+docker run --rm alpine sh -c 'env | grep -i  _PROXY'
+
+https_proxy=http://proxy.example.com:3129
+HTTPS_PROXY=http://proxy.example.com:3129
+http_proxy=http://proxy.example.com:3128
+HTTP_PROXY=http://proxy.example.com:3128
+no_proxy=*.test.example.com,.example.org,127.0.0.0/8
+NO_PROXY=*.test.example.com,.example.org,127.0.0.0/8
+
+```
+
+
 
 
 
@@ -4480,7 +4552,7 @@ docker run \
 # -v ~/docker/redis/log:/var/log/redis \
 
 docker run --restart always \
--p 6379:6379 --name redis -d redis
+-p 6379:6379 -e TZ=Asia/Shanghai --name redis -d redis
 
 # mysql  
 docker run  -p 3306:3306 -h mysql --name mysql \
@@ -4504,8 +4576,8 @@ docker run --restart always -p 43306:3306 -h mysql --name mysql5 \
 
 # postgres
 docker run -p 5432:5432 -h postgres --name postgres \
--v /Users/wwfyde/docker/postgres/data:/var/lib/postgresql/data \
--e TZ=Asia/Shanghai -e POSTGRES_PASSWORD=wawawa -d postgres
+-v $HOME/docker/postgres/data:/var/lib/postgresql/data \
+-e TZ=Asia/Shanghai -e POSTGRES_PASSWORD=postgres -d postgres:16
 # default username : postgres
 # -e POSTGRES_USER=molook 
 # -e POSTGRES_USER=molook -e POSTGRES_DB=molook \
