@@ -1,5 +1,12 @@
 # Vue最佳实践
 
+
+
+# quickstart
+
+- 使用组合式API
+- `<script setup lang="ts">`
+
 # 常见需求
 
 按需加载
