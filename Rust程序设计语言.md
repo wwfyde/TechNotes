@@ -5,29 +5,43 @@
 - https://www.rust-lang.org
 - https://www.rust-lang.org/zh-CN/
 - https://doc.rust-lang.org/stable/book/
+- [**★**Rust语言速查表](https://cheats.rs/)
 - 语言参考: https://doc.rust-lang.org/stable/reference/
 - 标准库: https://doc.rust-lang.org/std/index.html
+- [Book]Blog推荐: https://effective-rust.com (先读官方文Book, 这本进阶)
+  - https://bitfieldconsulting.com/posts
+  - 大卫·德赖斯代尔（David Drysdale）的这本优秀著作准确地回答了这个问题，并提供了许多实用的技巧和解释。这就像与 Rustacean 专家配对，他可以倾身说出诸如“尝试使用迭代器而不是循环”或“这里使用宏有意义的地方，以及没有意义的地方”之类的话。
+  - 这本书充满了关于如何像母语一样说 Rust 的好建议，并且还为进一步学习提供了一些很好的起点：例如，David 建议您通读所有[Clippy lints](https://rust-lang.github.io/rust-clippy/master/index.html) 。这是一个很好的建议，我现在将其传授给我自己的学生。
+
 - https://www.yuque.com/qyuhen/rust
-- [Rust By Example](https://doc.rust-lang.org/stable/rust-by-example/)
-- [Rust 测验](https://github.com/rust-lang/rustlings)
+- [**推荐** Rust By Example](https://doc.rust-lang.org/stable/rust-by-example/)
+- [推荐Rust by practice](https://github.com/sunface/rust-by-practice)
+  - ripgrep
+  - 中文: https://practice-zh.course.rs/elegant-code-base.html
+
+- [**★**Rust 测验 rust exercise](https://github.com/rust-lang/rustlings)
   - https://rustlings.cool/
+- [**★**100道练习题](https://rust-exercises.com/100-exercises/)
 - **Google Rust Course**: https://github.com/google/comprehensive-rust
-- rust 中文课程: https://github.com/sunface/rust-course
+- **★**rust 中文课程: https://github.com/sunface/rust-course
+  - Rust语言圣经:https://github.com/sunface/rust-course
+
 - Awesome Rust: https://github.com/rust-unofficial/awesome-rust
 - https://deps.rs/
-- docs.rs
-- crate.io
-
-### 最佳实践
-
-- [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/about.html)
+- Rust roadmap
+- ripgrep 代码量少 适合阅读
+- [清华大学 rust程序训练](https://lab.cs.tsinghua.edu.cn/rust/)
 
 ### 参考项目
 
 - [A blazing fast inference solution for text embeddings models](https://github.com/huggingface/text-embeddings-inference)
   - rust + auxm 编写的后端
+- https://github.com/loco-rs/loco
+  - 比较全面的 axum后端
 
 ### Articles
+
+- [JetBrain::Blog::2024 年如何学习 Rust：掌握 Rust 编程的完整入门指南](https://blog.jetbrains.com/zh-hans/rust/2024/12/24/how-to-learn-rust/)
 
 
 
@@ -47,6 +61,8 @@
 > 策略: 泛读, 精读, 实践
 >
 > 架构
+
+![极客时间Rust训练营](https://wwfyde.oss-cn-hangzhou.aliyuncs.com/images/202505221722206.png)
 
 精准学习+刻意练习
 
@@ -135,6 +151,12 @@ Rust 还有目前最优秀的异步处理模型，我相信假以时日，这种
 - 并发处理, 类型系统和泛型编程, 并发安全
 
 
+
+## 学习大纲
+
+语法
+
+标准库
 
 ## 学习路线与目标
 
@@ -385,10 +407,17 @@ Rust语言的学习曲线较为陡峭，尤其是在所有权和借用规则方�
 ## 安装配置
 
 ```shell
+# https://mirrors.tuna.tsinghua.edu.cn/help/rustup/
+# 清华
 export RUSTUP_UPDATE_ROOT=https://mirrors.tuna.tsinghua.edu.cn/rustup/rustup
 export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
 # 官方安装命令, 即使国内依然使用该脚本,不过需要先添加环境变量
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+# 中科大 `https://rcore-os.cn/arceos-tutorial-book/ch01-02.html`
+export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
+export RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup
+curl https://sh.rustup.rs -sSf | sh
 ```
 
 
@@ -460,19 +489,31 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 rustup doc
 ```
 
+# quickstart
 
+## 重点知识
 
-# 概念特性
+所有权
 
-> 核心思想、核心原理、核心特性、适用场景、核心概念
+生命周期
+
+## 多维观点
+
+- Rust macro 是一种语法解析, 而不是一般的文本替换
+
+## 实践
+
+# 知识概念
+
+> 核心思想、核心原理、核心特性、适用场景、核心概念, 知识与认知
 
 ## table
 
-|         |            |      |
-| ------- | ---------- | ---- |
-| package | cargo.toml |      |
-|         |            |      |
-|         |            |      |
+## misc
+
+- cargo.toml相当于声明了一个package, 可以通过workspace来组织多个cargo.toml
+
+
 
 
 
@@ -527,24 +568,65 @@ fn main() {
 ### 多维解释
 
 - trait是用来定义共享行为的重要概念
+- 翻译: 特征(推荐), 一般不翻译
 - 在Rust中, trait用来定义某些类型的共同行为它类似于其他编程语言中的接口（interface）或抽象类（abstract class），但具有更加灵活和强大的功能。通过 trait，您可以定义某种类型所必须具备的方法，然后在具体类型中实现这些方法，从而**使得不同类型之间可以共享相同的行为**。
+- 从trait命名看其用法
+  - Drawable
+
+- **Trait Object 实现运行时多态**
+
+
+
+## 宏macro
 
 # Glossary
 
 ## Table
 
-| term   | CN     | Define                                                       | Link                                                         |
-| ------ | ------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| crate  | 箱, 包 |                                                              |                                                              |
-| module | 模块   | A module is a container for zero or more [items](https://doc.rust-lang.org/stable/reference/items.html). | - [module](https://doc.rust-lang.org/stable/reference/items/modules.html#modules) |
-| item   | 项目   |                                                              |                                                              |
+| term           | CN          | Define                                                       | Link                                                         |
+| -------------- | ----------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| crate          | 箱, 包      |                                                              |                                                              |
+| module         | 模块        | A module is a container for zero or more [items](https://doc.rust-lang.org/stable/reference/items.html). | - [module](https://doc.rust-lang.org/stable/reference/items/modules.html#modules) |
+| item           | 项目        |                                                              |                                                              |
+| derive         | 派生        |                                                              |                                                              |
+| trait          | 特征        |                                                              |                                                              |
+| prelude        | 预导入/前奏 | use your_crate::prelude::*;                                  |                                                              |
+| implementation | 实现        | iml                                                          |                                                              |
 
 ## 核心概念与观点
 
 - 所有权
+
 - 借用
+
 - 所有权和借用 本质上是将数据传递问题, 数据访问控制, 数据的生命周期
-- 移动, 借用, 克隆
+
+- 实现(impl)
+  - 固有实现
+  - trait实现
+
+- 方法
+  - 固有方法
+  - 工厂方法
+  - trait方法
+
+- 堆分配智能指针(Box)**Box<T>：堆分配智能指针（Heap-Allocated Smart Pointer）**
+
+  - Box<T> 是 Rust 标准库提供的一个智能指针，用于在堆（heap）上分配内存。Box 指向的数据在堆上，Box 本身（指针）在栈（stack）上。
+
+  - > **Box**：用于在堆上存储数据的所有权类型。
+    > **智能指针（Smart Pointer）**：除了像常规指针那样存储内存地址，还拥有额外元数据和功能（如自动释放内存）。
+
+
+
+## 读法规范
+
+- `&a`: 引用a, 借用a,reference to a, borrow a
+  - 取A的引用, a的引用, 本质是a的地址, 存的是一个地址16进制地址
+- `*a`: 解引用a, dereference a, 
+  - star x, asterisk x 
+  - 星a, 星号a, 取a指向的值, 对a进行解引用
+
 
 ## List
 
@@ -617,52 +699,17 @@ Rust 宏和其他语言的宏（比如 C 语言的预处理器宏）不同，它
 
 ### 预导入(preclude)
 
-# Cheatsheet
-
-> [**Rust Language Cheat Sheet**]](https://cheats.rs/)
-
-
-
-# Cargo
-
-
-
-## 执行
-
-```toml
-
-
-# 自定义可执行对象
-# cargo run --bin app1
-[[bin]]
-name = "app1"
-path = "custom-bin/app1.rs"
-```
-
-
-
-```shell
-
-
-```
-
-
-
 # Toolchain
 
 ## rustup
 
-```shell
-# clippy
-
-# fmt
-```
-
-
-
 ## cargo
 
 Cargo is Rust's build system and package manager.
+
+> 一个`cargo.toml`对应一个包 用 `-p, --package`执行
+>
+> [Cargo Book](https://doc.rust-lang.org/cargo/)
 
 
 
@@ -680,6 +727,10 @@ cargo run --example
 
 cargo doc --open
 
+# ???TODO
+cargo run --release
+
+
 # 安装package到目录
 cargo install --path . --root ~/.local
 cargo install --path .  # cargo.toml 指定install.root = " ~/.local"
@@ -692,14 +743,44 @@ cargo new —lib
 
 
 
-### package管理
+| 命令              | 作用                                  | 示例                            |
+| ----------------- | ------------------------------------- | ------------------------------- |
+| `cargo new`       | 创建一个新的 Rust 项目                | `cargo new my_project`          |
+| `cargo build`     | 编译项目和其依赖                      | `cargo build --release`         |
+| `cargo run`       | 编译并运行 Rust 项目                  | `cargo run`                     |
+| `cargo test`      | 运行项目的测试                        | `cargo test`                    |
+| `cargo doc`       | 为项目的依赖生成文档                  | `cargo doc --open`              |
+| `cargo update`    | 更新 `Cargo.lock` 文件中的依赖版本    | `cargo update`                  |
+| `cargo check`     | 快速检查代码能否编译                  | `cargo check`                   |
+| `cargo clean`     | 清除编译生成的文件                    | `cargo clean`                   |
+| `cargo publish`   | 将包发布到 crates.io                  | `cargo publish`                 |
+| `cargo bench`     | 运行基准测试                          | `cargo bench`                   |
+| `cargo fetch`     | 下载项目依赖的 crate，但不进行编译    | `cargo fetch`                   |
+| `cargo install`   | 安装和管理 Rust 二进制文件            | `cargo install [crate_name]`    |
+| `cargo uninstall` | 卸载通过 Cargo 安装的 Rust 二进制文件 | `cargo uninstall [crate_name]`  |
+| `cargo package`   | 准备一个本地 crate 以便发布           | `cargo package`                 |
+| `cargo search`    | 在 crates.io 上搜索 crate             | `cargo search [search_query]`   |
+| `cargo login`     | 使用 API token 登录 crates.io         | `cargo login [token]`           |
+| `cargo owner`     | 管理 crate 的所有者                   | `cargo owner --add [username]`  |
+| `cargo init`      | 在现有目录中初始化新的 Rust 项目      | `cargo init my_project`         |
+| `cargo version`   | 显示 Cargo 的版本信息                 | `cargo version`                 |
+| `cargo vendor`    | 将所有依赖复制到本地目录              | `cargo vendor`                  |
+| `cargo metadata`  | 输出 JSON 格式的项目元数据            | `cargo metadata`                |
+| `cargo tree`      | 显示项目依赖树                        | `cargo tree`                    |
+| `cargo fix`       | 自动修复 Rust 代码中的警告            | `cargo fix`                     |
+| `cargo audit`     | 审核 Cargo.lock 以查找不安全的依赖    | `cargo audit`                   |
+| `cargo rustc`     | 提供对 rustc 编译器参数的访问         | `cargo rustc -- [options]`      |
+| `cargo rustdoc`   | 为项目运行 rustdoc 工具               | `cargo rustdoc -- [options]`    |
+| `cargo clippy`    | 运行 clippy 来进行代码审查            | `cargo clippy`                  |
+| `cargo fmt`       | 使用 rustfmt 格式化代码               | `cargo fmt`                     |
+| `cargo miri`      | 运行 miri 以执行内存安全检查          | `cargo miri test`               |
+| `cargo outdated`  | 检查过时的依赖                        | `cargo outdated`                |
+| `cargo release`   | 自动化 crate 发布流程                 | `cargo release`                 |
+| `cargo add`       | 向 Cargo.toml 添加新依赖              | `cargo add [crate_name]`        |
+| `cargo rm`        | 从 Cargo.toml 中移除依赖              | `cargo rm [crate_name]`         |
+| `cargo upgrade`   | 升级 Cargo.toml 的依赖版本            | `cargo upgrade -p [crate_name]` |
 
-```shell
-# 搜索crate.io
-cargo search 
-```
-
-
+请注意，一些命令如 `cargo audit`, `cargo clippy`, `cargo fmt`, `cargo miri`, `cargo outdated`, `cargo release`, `cargo add`, `cargo rm`, 和 `cargo upgrade` 实际上是由第三方提供的 Cargo 扩展（也称为 "cargo 子命令"），并可能需要单独安装。
 
 ## rustc
 
@@ -719,8 +800,6 @@ cargo search
 
 ## cargo-expand
 
-> 用于展开宏和派生代码的工具，帮助开发者理解生成代码。
-
 - cargo expand：这是一个非常有用的工具，它可以显示宏展开后的代码，帮助你理解宏的展开过程。
 
 ```shell
@@ -728,37 +807,19 @@ cargo install cargo-expand
 cargo expand
 ```
 
-## rustfmt
+## cargo-nextest
 
-## clippy
+## cargo-edit
 
-> 代码管理, 静态分析
->
-> 静态分析工具，用于发现代码中的潜在问题和非惯用写法。
+升级包并写入cargo.toml
 
-
-
-## cargo-tree
-
-> cargo-tree
->
-> 以树状图显示项目的依赖关系，方便排查依赖问题。
-
-## cargo-watch
-
-> 自动运行命令，如重新编译或测试，支持快速迭代。
+```shell
+cargo install cargo-edit
+```
 
 
 
-## cargo-tarpaulin
 
-> 代码覆盖率工具。
-
-## just
-
-
-
-## make
 
 # Crates
 
@@ -778,9 +839,9 @@ cargo expand
 
 ## tower
 
-## config
+## strum-枚举派生
 
-## serde
+A small rust library for adding custom derives to enums
 
 # 语言参考
 
@@ -932,7 +993,34 @@ Bracket punctuation is used in various parts of the grammar. An open bracket mus
 - `virtual`
 - `yield`
 
+## 枚举
 
+枚举成员成为 variant 有多种类型
+
+## Attribute(属性)
+
+> - [Rust Attribute](https://doc.rust-lang.org/reference/attributes.html)
+
+| **分类**        | **代表属性**                                          | **作用 / 典型场景**    |
+| --------------- | ----------------------------------------------------- | ---------------------- |
+| **派生**        | #[derive(Debug, Clone)]                               | 自动实现常用 trait     |
+| **条件编译**    | #[cfg(target_os = "linux")], #[cfg_attr(test, trace)] | 支持多平台、多 profile |
+| **Lint**        | #[allow(unused)], #[deny(warnings)]                   | 编译警告/错误级别管理  |
+| **宏**          | #[macro_use], #[macro_export]                         | 宏引入与导出           |
+| **测试**        | #[test], #[ignore], #[bench]                          | 单元测试 / 基准测试    |
+| **异步**        | #[tokio::test], #[tokio::main]                        | 在 async 运行时中启动  |
+| **文档**        | #![doc(html_root_url = "...")], ///                   | 影响 rustdoc 输出      |
+| **安全/不安全** | #[repr(C)], #[no_mangle]                              | FFI、布局、符号控制    |
+| **编译器特性**  | #![feature(generic_const_exprs)]                      | Nightly gate           |
+
+| **能力层级**   | **典型属性**                            | **强大之处**                                                |
+| -------------- | --------------------------------------- | ----------------------------------------------------------- |
+| ✅ **静态标记** | #[allow(dead_code)]                     | *零宏*，给编译器/工具一个布尔开关                           |
+| 🛠️ **配置裁剪** | #[cfg(target_os = "linux")]             | 单源码跨平台，把不需要的代码连 AST 都不保留                 |
+| 🔧 **后端指令** | #[repr(transparent)], #[inline(always)] | 控制 ABI/布局/性能，代替手写 asm 或链接脚本                 |
+| 🌀 **派生宏**   | #[derive(Clone, Serialize)]             | 一行代码生成百行实现，且与 trait 系统完美耦合               |
+| 🛠️ **属性宏**   | #[instrument], #[tokio::test]           | 拿到 **整个函数 token stream**，可插桩、改签名、生成多版本… |
+| 🧩 **跨语言桥** | #[no_mangle], #[link_section]           | 把 Rust 融进 C/Obj-C/JS/WASM 生态，无缝 FFI                 |
 
 # 类型系统
 
@@ -952,21 +1040,13 @@ Bracket punctuation is used in various parts of the grammar. An open bracket mus
 
 - [patterns and matching](https://doc.rust-lang.org/book/ch18-00-patterns.html)
 
-# 编程技术与规范
+# 编程技术
 
 编程工具, 编程思想, 
 
-## 文档注释
-
-```rust
-/// 表示外部文档outer function
-
-//! inner documentation: 用于编写crate/mod 文档
-```
 
 
-
-# Web/Backend
+# API
 
 
 
@@ -989,18 +1069,50 @@ Bracket punctuation is used in various parts of the grammar. An open bracket mus
 
 # 最佳实践
 
-## 错误处理
+## 项目布局
 
-### 原则
+```shell
+src/
+├── main.rs          # 应用入口
+├── lib.rs           # 核心模块导出（可选）
+├── config/          # 配置管理
+│   ├── mod.rs       # 配置结构体、加载逻辑
+│   └── env.rs       # 环境变量处理
+├── routes/          # 路由定义
+│   ├── mod.rs       # 聚合所有子路由（v1, v2, admin...）
+│   ├── health.rs    # 健康检查路由
+│   └── users.rs     # 用户相关路由
+├── handlers/        # 请求处理函数（Controller层）
+│   ├── mod.rs       # 处理器聚合
+│   ├── health.rs    # 健康检查逻辑
+│   └── users.rs     # 用户相关逻辑
+├── services/        # 业务逻辑（Service层）
+│   ├── mod.rs       # 服务聚合
+│   └── users.rs     # 用户服务
+├── models/          # 数据结构（DTO/实体）
+│   ├── mod.rs       # 模型聚合
+│   ├── user.rs      # 用户模型
+│   └── error.rs     # 统一错误类型（推荐用 thiserror）
+├── repositories/    # 数据访问层（Repository/DAO）
+│   ├── mod.rs       # 数据库操作聚合
+│   └── user.rs      # 用户数据访问
+├── middleware/      # 自定义中间件
+│   ├── mod.rs       # 中间件聚合
+│   └── auth.rs      # 认证中间件
+├── state/           # 全局应用状态（AppState）
+│   └── mod.rs       # 状态定义与初始化
+└── utils/           # 工具类（日志、加密等）
+    └── mod.rs       # 工具函数聚合
+```
 
-- 错误类型设计
 
-- 错误传播
-  - 优先使用 `Result<T, E>` 而非 `panic!`
-  - 用 `?` 运算符简化错误传播
-  - 库代码中避免使用 `unwrap()/expect()`
 
 # 常见问题
+
+## List
+
+- 宏与函数定义
+  - 变量后面加个!表示这是一个宏而不是函数, 比如`println!`
 
 ## 代码规范
 
@@ -1191,29 +1303,23 @@ Rust 使用路径来引用不同模块和结构。路径有两种类型：**绝�
 
 
 
+```rust
 mod my_module {
-
   pub fn public_function() {
-
-​    println!("This is a public function");
-
-  }
-
-  fn private_function() {
-
-​    println!("This is a private function");
+		println!("This is a public function");
 
   }
 
+fn private_function() {
+    println!("This is a private function");
+  }
 }
 
 fn main() {
-
   my_module::public_function();
-
   // my_module::private_function(); // Error: function is private
-
 }
+```
 
 
 
@@ -1323,5 +1429,7 @@ Rust 通过所有权系统管理内存，主要概念有：
 
 Rust 的代码组织围绕模块化、包管理、可见性控制、工作区等核心概念展开。通过这些机制，开发者可以高效地管理项目代码，并在多个项目间共享通用逻辑。更多详情可以参考 Rust 官方文档中的模块和路径系统章节 。
 
+# 零散记录
 
+20240409 cargo-expand rustover
 
