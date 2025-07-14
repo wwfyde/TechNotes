@@ -3675,7 +3675,9 @@ CREATE TABLE StudentCourses (
 
 ```
 
+## 分布式
 
+vitess
 
 # MySQL必知必会>学习笔记
 

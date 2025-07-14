@@ -1210,7 +1210,7 @@ docker run -d redis
 docker run -d --rm redis
 docker run -d --rm --name haha redis echo 'haha'
 
--e TZ=Aisa/Shanghai
+-e TZ=Asia/Shanghai
 
 
 
@@ -2664,6 +2664,10 @@ docker compose up
 # 启动时并重构镜像
 docker compose up --build 
 
+# 启动集群
+
+docker compose -p backend up --scale 3
+
 
 ```
 
@@ -2715,10 +2719,26 @@ healthcheck:
       interval: 5s
       timeout: 10s
       retries: 5
+ 
+ 
+ # minio
+     healthcheck:
+      test: [ 'CMD', 'curl', '-f', 'http://localhost:9000/minio/health/live' ]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+      
+# 一般地 通过curl 来判断服务是否正常运行
 
 ```
 
+## profiles
 
+> [Docker::docs::Using profiles with Compose](https://docs.docker.com/compose/how-tos/profiles/)
+
+ 通过定义profiles 实现按需启动 仅在通过profile指定时运行该容器, 比如: `docker compose --profile debug up`
+
+或者在运行时 指定要启动的service name
 
 # Swarm
 
@@ -4057,7 +4077,10 @@ docker load -i dist/jinmao-0.1.6.tar
 
 ## registry
 
+## Mirror
 
+> - https://github.com/DaoCloud/public-image-mirror
+> - https://gist.github.com/y0ngb1n/7e8f16af3242c7815e7ca2f0833d3ea6
 
 ## 代理Proxy
 
@@ -4108,9 +4131,38 @@ Environment="NO_PROXY=localhost,127.0.0.1"
 
 ### 容器访问宿主机(host)网络
 
+- https://docs.orbstack.dev/machines/network#connecting-to-mac-servers
+
 ```shell
 host.docker.internal
 host.orb.internal
+
+# Connecting to Docker containers
+# linux -> mac docker 
+curl docker.orb.internal
+```
+
+### linux
+
+```shell
+sudo ufw allow from 172.17.0.0/16 to any port 7890
+
+# 注意不要全局设环境变量 必须成套出现 否则可能无法访问
+environment:
+  HTTP_PROXY: http://host.docker.internal:7890
+  HTTPS_PROXY: http://host.docker.internal:7890
+  http_proxy: http://host.docker.internal:7890
+  https_proxy: http://host.docker.internal:7890
+
+
+extra_hosts:
+      - "host.docker.internal:host-gateway"
+      
+--add-host
+
+
+
+
 ```
 
 
@@ -4283,6 +4335,15 @@ NO_PROXY=*.test.example.com,.example.org,127.0.0.0/8
 
 ```
 
+```shell
+# 命令行中
+docker run --env HTTP_PROXY="http://proxy.example.com:3128" redis
+```
+
+```shell
+# docker compose 中
+```
+
 
 
 
@@ -4416,6 +4477,12 @@ services:
             timeout: 20s
             retries: 10
 ```
+
+## 备份与迁移
+
+> backup and migration
+
+
 
 
 
@@ -4554,6 +4621,9 @@ docker run \
 docker run --restart always \
 -p 6379:6379 -e TZ=Asia/Shanghai --name redis -d redis
 
+# redis-stack
+docker run -e TZ=Asia/Shanghai -p 6381:6379 --name redis-stack -d redis/redis-stack-server
+
 # mysql  
 docker run  -p 3306:3306 -h mysql --name mysql \
 -v ~/docker/mysql/config:/etc/mysql/conf.d \
@@ -4584,8 +4654,14 @@ docker run -p 5432:5432 -h postgres --name postgres \
 # --restart always 
 # -v /Users/wwfyde/docker/postgres/data:/var/lib/postgresql/data \
 
-docker run --rm -d  -e POSTGRES_PASSWORD=wawawa -e POSTGRES_USER=molook -e POSTGRES_DB=molook  postgres
+docker run --rm -d  -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres -e POSTGRES_DB=postgres  postgres
 
+# 已启动容器 设置为自动更新
+# docker update --restart always postgres
+
+
+# nginx
+docker run -d --name nginx  nginx:stable
 
 # mongo
 docker run --name mongo -p 27017:27017  \

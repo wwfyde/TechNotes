@@ -38,7 +38,15 @@ FastAPI stands on the shoulders of giants:
 
 
 
-## 
+## 概览
+
+> - Background tasks for long-running processes
+> -  Rate limiting using libraries like slowapi
+> - Real-time features with WebSockets
+> - Writing automated tests using Pytest and HTTPX
+> - Integrating caching with Redis
+> - Adding middleware and custom exception handlers
+> - Logging and application monitoring
 
 
 
@@ -440,7 +448,11 @@ if __name__ == "__main__":
 > - injectables
 > - components
 
+# 全局共享状态
 
+> 全局服务, 全局状态, 
+>
+> 全局共享状态 与 多worker问题, 通常应该为每个worker 维护一个全局对象, 否则应使用Redis等分布式方案
 
 # 初始化
 
@@ -498,6 +510,8 @@ async def read_unicorn(name: str):
     return {"unicorn_name": name}
 ```
 
+
+
 # Model设计
 
 ## Many-to-Many
@@ -549,6 +563,28 @@ class Author(Base):
     name = Column(String, nullable=False)
     books = relationship("Book", secondary="book_authors", back_populates='authors')
 
+```
+
+
+
+# project-layout
+
+```shell
+app/
+├── api/              # Web相关模块（路由、依赖、错误处理）
+│   ├── dependencies/ – 路由依赖定义
+│   ├── errors/       – 全局错误处理
+│   └── routes/       – API路由定义
+├── core/             # 应用核心配置（配置文件、启动事件、日志）
+├── db/               # 数据库相关（迁移脚本、CRUD仓库）
+│   ├── migrations/   – Alembic 数据库迁移
+│   └── repositories/ – 封装所有数据库CRUD操作
+├── models/           # Pydantic模型定义
+│   ├── domain/       – 核心领域模型（内部使用）
+│   └── schemas/      – 用于接口的模式（输入/输出Schema）
+├── resources/        # 资源文件（如响应消息模板）
+├── services/         # 业务服务（非简单CRUD的业务逻辑）
+└── main.py           # 应用入口，创建 FastAPI 实例并配置 [oai_citation:5‡github.com](https://github.com/nsidnev/fastapi-realworld-example-app#:~:text=Project%20structure) [oai_citation:6‡github.com](https://github.com/nsidnev/fastapi-realworld-example-app#:~:text=%E2%94%82%C2%A0%C2%A0%20%E2%94%9C%E2%94%80%E2%94%80%20migrations%20%20,FastAPI%20application%20creation%20and%20configuration)
 ```
 
 
@@ -699,3 +735,7 @@ async def read_textures(
 
 
 # SQLAlchemy
+
+# fastapi-cache
+
+https://github.com/long2ice/fastapi-cache

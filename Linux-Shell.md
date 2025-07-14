@@ -2345,6 +2345,12 @@ sudo apt install sysstat
 
 保证终端关闭后程序依然能够继续运行
 
+```shell
+ nohup python run.py > /var/log/loki.log 2>&1 &
+```
+
+
+
 ### &-后台运行
 
 
@@ -2802,6 +2808,19 @@ ftp [-P <port>] user@host
 
 ### dirname
 
+### xdg-open
+
+```shell
+# 没有双击，没有双击，没有双击 👎
+# 用默认程序打开文件
+xdg-open file   # Linux 系统
+open file       # MacOS 系统
+```
+
+
+
+
+
 ### eject-eject removable media
 
 ## 文本管理
@@ -3257,6 +3276,16 @@ tee /etc/docker/daemon.json <<-'EOF'
 }
 EOF
 
+cat << EOF | tee -a ${CARGO_HOME:-$HOME/.cargo}/config.toml
+[source.crates-io]
+replace-with = 'mirror'
+
+[source.mirror]
+registry = "sparse+https://mirrors.tuna.tsinghua.edu.cn/crates.io-index/"
+EOF
+
+
+
 # Copy `stdin` to each file, and also to `stdout`:
     echo "example" | tee path/to/file
 
@@ -3268,6 +3297,7 @@ EOF
 
 - Create a directory called "example", count the number of characters in "example" and write "example" to the terminal:
     echo "example" | tee >(xargs mkdir) >(wc -c)
+    
 
 ```
 
@@ -3586,6 +3616,20 @@ sudo iftop -Bn
 ```
 
 ### wget
+
+```shell
+wget https://huggingface.co/Comfy-Org/flux1-dev/resolve/main/flux1-dev-fp8.safetensors?download=true  
+
+# wget 会自动根据 文件获取远程名称  等价于 curl --remote-name https://example.com/files/report.pdf
+
+# 指定文件名
+
+# 这样会获得建议名
+wget --content-disposition https://example.com/download?id=123
+
+```
+
+
 
 ### **tcpdump**
 
@@ -4881,6 +4925,45 @@ ehco '' > filename
 > filename
 ```
 
+## 系统清理
+
+```shell
+# 查看磁盘挂载点占用
+df -hT
+# 
+du -h –-max-depth=1
+du -h --max-depth=1 | sort -hr
+
+# docker
+docker system df -v  # 各类对象（镜像、卷、缓存）实际占了多少空间、有哪些仍被引用。
+docker image prune
+docker image prune -af 
+docker builder prune
+
+# uv
+uv cache clean
+
+# pip
+pip cache clean
+
+# apt
+apt clean
+
+apt autoremove  --purge # 清理孤儿包
+
+# cargo 
+
+# rustup
+
+# go
+
+# miniconda anaconda
+conda clean --all --yes
+
+```
+
+
+
 ## 日志管理
 
 函数执行日志输出
@@ -5394,6 +5477,29 @@ scp get-pip.py wwfyde@192.168.30.190:c:/
 ## abrt
 
 ## systemd
+
+
+
+### exmaple
+
+```shell
+[Unit]
+Description=Comfy Server Service
+After=network.target
+
+[Service]
+User=molook
+WorkingDirectory=/home/molook/code/ComfyUI
+Environment="HF_ENDPOINT=https://hf-mirror.com"
+ExecStart=/usr/bin/bash -c "source /home/molook/miniconda3/etc/profile.d/conda.sh;conda activate comfyui;python main.py --listen 0.0.0.0 --cuda-device 0 --port 8188"
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+```
+
+
 
 ## syslog
 

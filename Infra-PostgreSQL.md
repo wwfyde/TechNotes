@@ -6,7 +6,9 @@
 
 - []()
 - Postgres Docs
-- [Postgres Tutorials](https://www.postgresqltutorial.com)
+- [★Postgres Tutorials(Neon) ](https://neon.tech/postgresql/tutorial)
+- [Postgres 基本语句](https://neon.tech/postgresql/postgresql-getting-started)
+- [Postgres Tutorials - 已跳转至Neon](https://www.postgresqltutorial.com)
 - [Postgres Python](https://www.postgresqltutorial.com/postgresql-python/)
 
 ## 学习目标
@@ -78,6 +80,79 @@ A number of postgresql.conf settings affect performance. For more details, see A
 ## 日志和错误
 
 https://www.postgresql.org/docs/current/runtime-config-logging.html
+
+# 数据库设计
+
+## 规约
+
+> 参考自(阿里巴巴Java开发手册(泰山版).pdf)
+
+- 【强制】 表达是与否概念的字段，必须使用 is_xxx 的方式命名，数据类型是 unsigned tinyint（1 表示是，0 表示否）。
+
+  - 说明：任何字段如果为非负数，必须是 unsigned。
+  - 注意：POJO 类中的任何布尔类型的变量，都不要加 is 前缀，所以，需要在<resultMap>设置从 is_xxx 到Xxx 的映射关系。数据库表示是与否的值，使用 tinyint 类型，坚持 is_xxx 的命名方式是为了明确其取值含义与取值范围。
+  - 正例：表达逻辑删除的字段名 is_deleted，1 表示删除，0 表示未删除。
+
+- 【强制】表名、字段名必须使用小写字母或数字，禁止出现数字开头，禁止两个下划线中间只出现数字。数据库字段名的修改代价很大，因为无法进行预发布，所以字段名称需要慎重考虑。
+
+  - 说明：MySQL 在 Windows 下不区分大小写，但在 Linux 下默认是区分大小写。因此，数据库名、表名、字段名，都不允许出现任何大写字母，避免节外生枝。
+  - 正例：aliyun_admin，rdc_config，level3_name
+  - 反例：AliyunAdmin，rdcConfig，level_3_name
+
+- 【强制】表名不使用复数名词。
+
+  说明：表名应该仅仅表示表里面的实体内容，不应该表示实体数量，对应于 DO 类名也是单数形式，符合
+
+  表达习惯。
+
+- 【强制】禁用保留字，如 desc、range、match、delayed 等，请参考 MySQL 官方保留字。
+
+- 【强制】主键索引名为 `pk_字段名`；唯一索引名为 uk字段名；普通索引名则为 `idx_字段名`
+
+  - 说明：pk_ 即 primary key；uk_ 即 unique key；idx_ 即 index 的简称。
+
+- 【强制】小数类型为 decimal，禁止使用 float 和 double。
+
+  - 说明：在存储的时候，float 和 double 都存在精度损失的问题，很可能在比较值的时候，得到不正确的结果。如果存储的数据范围超过 decimal 的范围，建议将数据拆成整数和小数并分开存储。
+
+- 【强制】如果存储的字符串长度几乎相等，使用 char 定长字符串类型。
+
+- 【强制】varchar 是可变长字符串，不预先分配存储空间，长度不要超过 5000，如果存储长度大于此值，定义字段类型为 text，独立出来一张表，用主键来对应，避免影响其它字段索引效率。
+
+- 【强制】表必备三字段：id, gmt_create, gmt_modified。
+
+  - 说明：其中 id 必为主键，类型为 bigint unsigned、单表时自增、步长为 1。gmt_create, gmt_modified的类型均为 datetime 类型，前者现在时表示主动式创建，后者过去分词表示被动式更新。
+
+## 主键
+
+- INT 大部分场景可用
+- UUID v7> v4 和INT一样的检索性能
+
+推荐
+
+```sql
+-- 推荐新项目采用 GENERATED [ALWAYS|BY DEFAULT] AS IDENTITY 语法，符合 SQL 标准，迁移性好、权限更细粒度。
+CREATE TABLE orders (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    ...
+);
+```
+
+
+
+## relationship
+
+一对多(one-to-many):  一个父表的**一行**可以对应子表的**多行**, 在子表中添加一个外键(Foreign Key, FK) 指向父表
+
+```sql
+```
+
+
+
+```python
+# 使用SQLAlchemy
+
+```
 
 
 
@@ -205,6 +280,10 @@ SHOW autocommit;
 
 # Data Type
 
+integer > serial
+
+
+
 # Topics
 
 ## Index
@@ -320,9 +399,42 @@ pg_restore
 
 - [Postgres: Performance Tips](https://www.postgresql.org/docs/current/performance-tips.html)
 
+# 语句
 
+## select
+
+```postgresql
+select * from customer;
+select first_name || ' ' ||last_name full_name, email from customer;
+
+-- 表达式 + column 别名
+select first_name || ' ' ||last_name full_name, email from customer;
+
+select now();
+
+-- 这样是计算联合唯一的数据
+select distinct column1, column2 from table_name
+```
+
+## filter
+
+## create
+
+## insert
+
+## join
+
+## group
+
+# tools
+
+## neon
+
+## citus
 
 # 最佳实践
+
+
 
 ## 并发控制与锁机制
 
@@ -343,4 +455,12 @@ pg_restore
 > scaling, sharding, partioning
 
 https://mp.weixin.qq.com/s/0h2IzFvulZQCLulPuWnNhw
+
+
+
+# 案例
+
+## 历史版本revision
+
+image, image_version  one-to-many
 

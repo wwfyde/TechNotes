@@ -1,6 +1,6 @@
 # Nginx
 
-> 
+> 推荐阿里巴巴开源替代 tengine
 >
 > 
 
@@ -107,6 +107,59 @@ nginx -t
 
 
 
+# 配置示例
+
+```ini
+server {
+  listen 43045 ssl http2;
+  server_name oper.molook.cn;
+  ssl_certificate /etc/nginx/ssl/oper.molook.cn.crt;
+  ssl_certificate_key /etc/nginx/ssl/oper.molook.cn_rsa.key;
+  ssl_protocols TLSv1.2 TLSv1.3;
+  ssl_prefer_server_ciphers on;
+
+  client_max_body_size 100M;
+
+  location / {
+    root /usr/share/nginx/html;
+    index index.html index.htm;
+    try_files $uri $uri/ /index.html =404;  # 单文件应用
+  }
+  location /api {
+    proxy_pass http://backend:8001;
+    proxy_set_header Host $http_host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_redirect http:// https://;
+
+  }
+}
+
+server {
+  listen 8004 ssl http2;
+  server_name oper.molook.cn;
+  ssl_certificate /etc/nginx/ssl/oper.molook.cn.pem;
+  ssl_certificate_key /etc/nginx/ssl/oper.molook.cn.key;
+  ssl_protocols TLSv1.2 TLSv1.3;
+  ssl_prefer_server_ciphers on;
+  client_max_body_size 100M;
+
+  location / {
+        proxy_pass http://backend:8001;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_redirect http:// https://;
+
+    }
+}
+
+```
+
+
+
 # 配置详解
 
 ## 综合
@@ -146,6 +199,8 @@ server {
 # None
 Host = localhost:8004, 0.0.0.0:8004; 
 proxy_set_header Host $http_host;
+
+proxy_set_header Host $host;
 ```
 
 
@@ -179,3 +234,14 @@ try_files $uri $uri/ /index.html =404;
 ### access.log
 
 查看端口访问
+
+
+
+## Nginx配置不正确
+
+```shell
+proxy_set_header Host $host; # 未配置 导致部分URL访问失败
+```
+
+## 文件大小
+

@@ -36,9 +36,13 @@
 
 - [emmet](https://code.visualstudio.com/docs/languages/emmet) 实现代码块
 
+
+
 # package manager
 
-## nvm
+## nvm(legacy)
+
+> 使用pnpm
 
 ```shell
 brew install nvm
@@ -106,7 +110,7 @@ npx
 
 
 
-## pnpm
+## **pnpm**(推荐)
 
 
 
@@ -559,7 +563,9 @@ pnpm dlx @ant-design/pro-cli create ant-design-admin
 
 
 
+## Mantine(UI)
 
+## HeroUI
 
 # CSS
 

@@ -321,6 +321,39 @@ DELETE	/device-management/devices/{id} : Delete device by "id"
 
 
 
+## upsert 
+
+推荐统一API, 设计时分两种场景, 如果 create严格则 只能更新, 如果创建不严格比如爬虫插入数据时则
+
+
+
+
+
+如果严格区分
+
+可以使用 参数显式指定, 或者使用单独的endpoint
+
+```http
+
+
+
+PUT /v1/products/{id}?upsert=True  # 推荐
+
+PUT /v1/products/{id}/upsert
+PUT /v1/products/upsert
+
+POST /v1/resources:upsert        # Google 明确语义为 upsert
+
+
+
+# Upsert 用户
+PUT /users/123?upsert=true
+{
+  "name": "Charlie"
+}
+-> 200 OK (更新) 或 201 Created (创建)
+```
+
 
 
 # 响应示例

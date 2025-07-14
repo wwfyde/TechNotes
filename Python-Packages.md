@@ -1190,6 +1190,42 @@ A framework for network servers
 
 > [Python toolboox](https://piptrends.com/python-toolbox?utm_source=substack&utm_medium=email)
 
+## 分类方法
+
+> 工具库(utility libraries)
+>
+> 框架与库
+>
+> 工具库
+>
+> 开发工具
+>
+> 构建工具
+
+
+
+- 数据处理
+  - arrow
+  - pydantic
+- 功能增强
+  - python-dotenv
+  - cachetools
+  - tenacity
+  - typer
+  - click
+- 开发增强
+
+### 开发工具
+
+- 代码质量与格式化
+  - isort
+- project管理
+- 开发环境工具(js)
+  - vite
+  - prettier
+- 构建打包
+- 依赖管理
+
 ## Basic
 
 - Dev 
@@ -1912,7 +1948,9 @@ def get_url():
 - [2.0 Migration - ORM Usage -API对比](https://docs.sqlalchemy.org/en/20/changelog/migration_20.html#migration-orm-usage)
 - [Working with Data](https://docs.sqlalchemy.org/en/20/tutorial/data.html)
 
+## 原理与架构
 
+- relationship完全作用于Python层, 因此不需要迁移
 
 ## 模型声明
 
@@ -2509,6 +2547,27 @@ db.execute(stmt)
 ```python
 
 from sqlalchemy import bindparam
+```
+
+### upsert
+
+- https://docs.sqlalchemy.org/en/20/dialects/postgresql.html#postgresql-insert-on-conflict
+
+```python
+>>> from sqlalchemy.dialects.postgresql import insert
+>>> insert_stmt = insert(my_table).values(
+...     id="some_existing_id", data="inserted value"
+... )
+>>> do_nothing_stmt = insert_stmt.on_conflict_do_nothing(index_elements=["id"])
+>>> print(do_nothing_stmt)
+INSERT INTO my_table (id, data) VALUES (%(id)s, %(data)s)
+ON CONFLICT (id) DO NOTHING
+>>> do_update_stmt = insert_stmt.on_conflict_do_update(
+...     constraint="pk_my_table", set_=dict(data="updated value")
+... )
+>>> print(do_update_stmt)
+INSERT INTO my_table (id, data) VALUES (%(id)s, %(data)s)
+ON CONFLICT ON CONSTRAINT pk_my_table DO UPDATE SET data = %(param_1)s
 ```
 
 

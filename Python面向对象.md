@@ -5,6 +5,16 @@
 - [Python-教程: 类](https://docs.python.org/zh-cn/3/tutorial/classes.html)
 - [Python Tutorials Class]()
 
+## 面向对象
+
+
+
+> [!Note]
+>
+> Object-oriented programs are made up of objects. An *object* packages both data and the procedures that operate on that data. The procedures are typically called *methods* or *operations*.
+>
+> 面向对象的程序由对象组成。一个 **对象** 包含数据和操作这些数据的过程。这些过程通常被称为 **方法** 或 **操作**。
+
 ## 类的设计思想
 
 > 使用面向对象开发前 , 应该首先分析需求 , 确定一下 , 程序中需要包含哪些类 !
@@ -69,7 +79,7 @@ Python 的面向对象编程（OOP）是一种编程范式，它使用“对象�
 >
 > •**接口隔离原则 (Interface Segregation Principle)**：不应强迫客户端依赖它们不使用的方法。
 >
-> •**依赖倒置原则 (Dependency Inversion Principle)**：应依赖于抽象而不是具体实现。
+> •**依赖反转原则 (Dependency Inversion Principle)**：应依赖于抽象而不是具体实现。
 
 
 

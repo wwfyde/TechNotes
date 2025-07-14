@@ -121,6 +121,8 @@ OAuth JWT
 
 ## API网关
 
+# **quickstart**
+
 # 编程规范
 
 ## 命名规范
@@ -856,6 +858,12 @@ go install golang.org/x/tools/cmd/goimports@latest
 ```
 
 > 来自[阿里同学都在用的开发环境和工具](https://mp.weixin.qq.com/s/2qgs4JYOJFCmrxHMxtctyA)
+
+## dlv(delve)
+
+## gopls
+
+Vscode 插件默认使用gopls
 
 # 零散记录
 

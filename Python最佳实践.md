@@ -91,6 +91,18 @@ pip install -i https://mirror.sjtu.edu.cn/pypi/web/simple numpy
 
 ```
 
+```shell
+# 强制安装
+pip install --ignore-installed --no-deps --force-reinstall
+
+# --no-deps                   Don't install package dependencies.
+# --force-reinstall           Reinstall all packages even if they are already up-to-date.
+  
+# 对同名依赖一律当作“未安装”。
+# -I, --ignore-installed      Ignore the installed packages, overwriting them. This can break your system if the existing package is of a different version or was installed with a different package manager!
+
+```
+
 
 
 ## pipx
@@ -150,6 +162,29 @@ sudo docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
 # 开发工具
 
 ## uv
+
+- [lock and sync](https://docs.astral.sh/uv/concepts/projects/sync/)
+- [manage dependencies](https://docs.astral.sh/uv/concepts/projects/dependencies/)
+
+```shell
+# 配置全局默认Python版本 实质上写入`~/.config/uv/.python-version`w文件
+uv python pin --global 3.12
+
+## 升级
+# https://github.com/astral-sh/uv/issues/6794
+uv sync --upgrade  # implies lock
+uv add -U fastapi
+uv lock -U  
+uv lock --upgrade-package  openai
+uv pip show 
+uv pip install -U
+
+uv lock --check  # 判断哪些是更新的	
+```
+
+
+
+
 
 ## ruff
 
@@ -266,6 +301,17 @@ datetime.datetime.now()
 # Modern Python
 
 > advanced features
+
+## types
+
+```shell
+types-pyyaml
+types-requests
+types-cachetools
+types-pillow
+```
+
+
 
 
 
@@ -3976,6 +4022,21 @@ except Exception as exc:
 
 # 加密和签名
 
+hmac, hashlib, cryptography, token, api签名认证
+
+> hmac/hashlib - HMAC-SHA256 消息认证码
+>
+> HMAC（Hash-based Message Authentication Code，基于哈希的消息认证码）
+
+```python
+def generate_hmac_sha256(key: bytes, message: bytes) -> str:
+    """HMAC-SHA256 计算消息认证码"""
+    signature = hmac.new(key, message, hashlib.sha256).hexdigest()
+    return signature
+```
+
+ed25519
+
 # 踩坑记录
 
 
@@ -3983,3 +4044,6 @@ except Exception as exc:
 ## 20230710 递归导入错误(recursion import)
 
 可能是因为, 文件名与包名相同导致的, 这会将文件名加入导入路径
+
+
+

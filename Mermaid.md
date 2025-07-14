@@ -24,16 +24,16 @@
 
 ### table
 
-|  Concepts  |   中文   | definition |
-| :--------: | :------: | ---------- |
-| flowcharts |  流程图  |            |
-|   nodes    |   节点   |            |
-|    grap    |          |            |
-|     TB     | 从上往下 | top        |
-|     TD     | 从上往下 |            |
-|     BT     | 从下往上 |            |
-|     LR     | 从左往右 |            |
-|     RL     | 从右往左 |            |
+| Concepts  |   中文   | definition |
+| :-------: | :------: | ---------- |
+| flowchart |  流程图  |            |
+|   node    |   节点   |            |
+|   grap    |          |            |
+|    TB     | 从上往下 | top        |
+|    TD     | 从上往下 |            |
+|    BT     | 从下往上 |            |
+|    LR     | 从左往右 |            |
+|    RL     | 从右往左 |            |
 
 ### list of Glossary
 

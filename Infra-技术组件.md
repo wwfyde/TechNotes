@@ -299,6 +299,12 @@ sudo dnf install grafana
 >
 > **追踪（Traces）**: 分布式系统中调用链路的追踪数据，用于分析请求在不同服务之间的传播情况。
 
+# quickwit
+
+# Tantivy
+
+# elasticsearch
+
 # OpenTelemetry
 
 > logfire

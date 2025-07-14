@@ -479,7 +479,7 @@ git config --global user.name
 git config --global --unset
 
 # 配置邮箱
-git config --global user.email 'wwfyde@163.com'
+git config --global user.email 'wwfyde@gmail.com'
 
 # 配置用户名
 git config --global user.name 'wwfyde'
