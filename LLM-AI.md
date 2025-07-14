@@ -42,9 +42,9 @@ tag: [机器学习, 神经网络, 深度学习, 知识图谱]
 >
 > •**微积分 (Calculus)**: 梯度计算、链式法则在反向传播算法中非常重要。
 >
-> ​	•	**概率论与统计学 (Probability and Statistics)**: 概率分布、贝叶斯定理、假设检验等有助于理解模型的输出和不确定性。
+> •**概率论与统计学 (Probability and Statistics)**: 概率分布、贝叶斯定理、假设检验等有助于理解模型的输出和不确定性。
 >
-> ​	•	**优化理论 (Optimization Theory)**: 梯度下降算法、学习率、损失函数等优化问题的概念是训练模型的核心部分。
+> •**优化理论 (Optimization Theory)**: 梯度下降算法、学习率、损失函数等优化问题的概念是训练模型的核心部分。
 >
 > 
 >
@@ -52,11 +52,11 @@ tag: [机器学习, 神经网络, 深度学习, 知识图谱]
 >
 > 
 >
-> ​	•	**Python**: 深度学习框架（如TensorFlow、PyTorch）的首选编程语言，掌握基础编程、数据结构和面向对象编程。
+> •**Python**: 深度学习框架（如TensorFlow、PyTorch）的首选编程语言，掌握基础编程、数据结构和面向对象编程。
 >
-> ​	•	**NumPy/Pandas**: 数据处理和分析工具，方便进行矩阵运算和数据预处理。
+> •**NumPy/Pandas**: 数据处理和分析工具，方便进行矩阵运算和数据预处理。
 >
-> ​	•	**Jupyter Notebooks**: 用于数据探索、实验记录和模型训练的环境，特别适合可视化和调试。
+> - **Jupyter Notebooks**: 用于数据探索、实验记录和模型训练的环境，特别适合可视化和调试。
 >
 > 
 >
@@ -64,11 +64,11 @@ tag: [机器学习, 神经网络, 深度学习, 知识图谱]
 >
 > 
 >
-> ​	•	**监督学习/无监督学习 (Supervised/Unsupervised Learning)**: 需要掌握基本的学习类型和训练流程。
+> - **监督学习/无监督学习 (Supervised/Unsupervised Learning)**: 需要掌握基本的学习类型和训练流程。
 >
-> ​	•	**过拟合和欠拟合 (Overfitting and Underfitting)**: 理解模型训练过程中如何控制模型的复杂度。
+> - **过拟合和欠拟合 (Overfitting and Underfitting)**: 理解模型训练过程中如何控制模型的复杂度。
 >
-> ​	•	**交叉验证和超参数优化 (Cross-validation and Hyperparameter Tuning)**: 模型评估和参数调整是训练中关键的步骤。
+> - **交叉验证和超参数优化 (Cross-validation and Hyperparameter Tuning)**: 模型评估和参数调整是训练中关键的步骤。
 >
 > 
 >
@@ -167,8 +167,11 @@ GPT是一种基于深度学习的自然语言处理技术，利用了大规模�
 ## Lists
 
 - 偏置(bias)
+
 - 权重(weight)
+
 - 方差**方差 (Variance)**:
+
 - 拟合(fit)
     - 过拟合
     - 欠拟合
@@ -177,55 +180,126 @@ GPT是一种基于深度学习的自然语言处理技术，利用了大规模�
     - 卷积神经网络
     - CNN 图像识别
     - RNN NLP领域
+
 - 机器学习(Machine Learning): 
+
 - 深度学习
+
 - 迁移学习
+
 - 强化学习
+
 - 监督学习(supervised learning)
+
 - 无监督学习
+
 - 对比学习
+
 - **模型**(model)
     - [[Microsoft](https://learn.microsoft.com/zh-cn/windows/ai/windows-ml/what-is-a-machine-learning-model)]机器学习模型是一个文件，在经过训练后可以识别特定类型的模式。 你可以用一组数据训练模型，为它提供一种算法，模型利用该算法学习这些数据并进行推理。
     - 表示一个知识, 数据的结构
     - **模型**是机器学习中用来预测或分类的数学结构，它定义了输入与输出之间的映射关系。模型可以是线性的，也可以是复杂的非线性结构，如深度神经网络。
     - 模型是一种数学函数或计算框架, 模型决定了输入到输出的过程
     - 模型是一种简化. 它是对现实时间的解释——把与解决问题密切相关的方面抽象出来, 而忽略无关的细节. 
+
 - 大语言模型(Large Language Models, LLM)
     - [Nvidia LLM](https://www.nvidia.com/en-us/glossary/large-language-models/)
     - [Cloudflare LLM](https://www.cloudflare.com/learning/ai/what-is-large-language-model/)
+
 - 生成式AI(Generative AI, GenAI)
     - [GenAI](https://aws.amazon.com/what-is/generative-ai/)
+
 - 损失函数(Loss Fuction)
+
 - 优化算法
     - **梯度下降法（Gradient Descent）**
+
 - **激活函数**(Activate Function)
+
 - 监督学习
+
 - 无监督学习
+
 - 迁移学习(transfer learning)
+
 - 参数
+
 - 算法
+
 - 训练(Train)
+
 - 推理(infer/reasoning)
+
 - 评估(Evaluate)
+
 - 预测(Predict)
+
 - 分类(classification, classify)
+
 - 提示(Prompt): 提示词
+
 - 思维链(Chain-of-Thought, CoT)
+
 - 思维树(Tree-of-Thoughts, ToT)
+
 - 标量(scalar)
+
 - 向量(vector)
+
 - 矩阵(matrix)
+
 - 卷积(convolution)
-- 
+
+- 均值(mean) μ: 集中程度
+
+- 方差(variance)σ: 离散程度
+
+- 建模(): 构造函数
+
+    - 线性、逻辑回归、决策树、神经网络
+    - 使用框架,骨架来解决问题
+        - 模型的形式(form, schema)
+
 - transformer
+
 - attention
+
 - GPT(Generative Pre-trained Transformers):生成式预训练转换器
     - 生成式 预训练 自注意力转换器
+
 - GenAI(Generative Artifical Intelligenc)—生成式人工智能
+
 - AGI(Artificial General Intelligence)—通用人工智能
+
 - 梯度(gradient)
+
 - CoT(Chain of Thought)——思维链
+
 - GoT(Graph of Thought)——思维图
+
+- 线性回归(linear regression)
+
+    - 回归方法, 回归均值, 回归模型
+
+    - Francis Galton 在研究父母与子女身高关系时，发现极端身高的子女往往向群体平均值“回归”。
+
+        这一观察结果促使他提出“回归均值”的概念，后被用来描述预测模型中输入值与输出值之间趋向于平均水平的现象。
+
+    - 想象当一个人身高远高于平均水平时，依据历史数据预测，其子女的身高可能不会如此极端，而更接近平均值。这就是“回归”现象的直观体现。
+
+    - 因此，回归方法在建立模型时，也会体现出这种“向均值回归”的特性，尤其在数据存在噪声和随机波动时更为明显。
+
+- **回归方法** 则是利用统计或机器学习技术，通过构建数学模型，描述并预测自变量与因变量之间关系的一种方法。
+
+- 残差块
+
+- 奇异值
+
+- 前馈神经网络
+
+- 量纲(unit), 无量纲数据, 只有相对大小
+
+- 标准化(standardization)
 
 ## Lingo
 
@@ -355,9 +429,31 @@ Intelligent agent(智能代理)
 > 2. 规划（Planning）是指Agent为了某一目标而作出的决策过程。
 > 3. 行动（Action）是指基于环境和规划做出的动作。
 
-## 深度学习
+## 机器学习(ML)
+
+## 深度学习(DL)
 
 - IPAdapter(图像提示适配器, Image Prompt Adapter)
+
+### 参数与超参数
+
+> hyperparameter
+
+
+
+## 神经网络
+
+### 正则化
+
+### 拟合与过拟合
+
+## 强化学习
+
+分组相对策略优化（Group Relative Policy Optimization, GRPO）
+
+强化学习(Reinforcement Learning, RL)
+
+监督微调(Spervised Fine-Tune, SFT)
 
 ## LLM
 
@@ -776,7 +872,41 @@ https://www.tensorflow.org/tutorials/images/data_augmentation?hl=zh-cn
     - Adam
     - RMSProp
 
+# 学习笔记
 
+## 认知
+
+### 神经网络
+
+- 为什么能做推理和训练
+  - **学习模式 (Learning Pattern):**
+    神经网络通过不断调整参数，将输入数据映射到输出空间，捕捉其中的规律和特征，从而在看到新数据时进行推理。
+    - **中文:** 模型通过训练积累了数据模式，能在推理时基于学到的规律做出预测。
+    - **English:** The model learns patterns from training data, allowing it to generalize and make predictions on new data.
+  - **数据驱动 (Data-driven):**
+    数据中的信息使模型自动发现复杂的非线性关系，进而输出预想中的结果。
+    - **中文**: 大量标注数据提供了正确示例，模型便能“学会”如何映射输入到正确的输出。
+    - **English:** Large amounts of labeled data provide examples, enabling the model to learn the mapping from inputs to desired outputs.
+
+### 训练
+
+- 模型初始化时，参数通常被随机初始化。
+- 训练过程中，前向传播计算预测结果，再通过损失函数比较预测值和真实值的差异。
+- 利用反向传播 (Backpropagation) 和梯度下降 (Gradient Descent) 更新参数，使得损失逐步降低。
+- 经过多次迭代后，参数就能反映出数据中的模式和规律。
+
+### 推理 (Inference):**
+
+- 在推理阶段，使用训练好的参数，模型固定不变地将新输入映射到输出空间。
+- 这时，模型已“学会”如何通过这些参数捕捉输入中的信息，并给出相应的预测。
+
+### 参数:
+
+
+
+- 参数是通常以矩阵或张量的方式存在
+- 参数在推理时的作用
+  - 用于变换(运算), 从而在各层中得出特征
 
 # 机器学习基础
 

@@ -3,6 +3,13 @@
 > *Prompt engineering is the art of communicating with a generative large language model.
 > 提示工程是与生成式大型语言模型通信的艺术。*
 
+## Links
+
+- [Claude Prompt Engineering](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering)
+- DeepSeek
+  - [DeepSeek提示库: 样例, 系统提示](https://api-docs.deepseek.com/zh-cn/prompt-library/)
+
+
 ## 引子-启发-涌现-提示-引导-牵引-扩展-扩散-门道-模式-模范-钥匙-方法论-智能-自我意识-思路-学习-精髓-原理-规范-抽象-激发-产生-指南
 
 角色设定, 样本学习
@@ -97,7 +104,7 @@ how does something work?
 ###  **SOLID Principles**
 
 - **简介**：五大面向对象设计原则，旨在促进软件的可维护性、灵活性和可扩展性。
-- **关键点**：单一职责、开闭原则、里氏替换、接口隔离和依赖倒置。
+- **关键点**：单一职责、开闭原则、里氏替换、接口隔离和依赖反转。
 
 ###  **Design Patterns**
 
@@ -132,6 +139,8 @@ how does something work?
 - https://docs.vectorshift.ai/vectorshift/platform/pipelines/large-language-models-llms#prompt-engineering-guidelines
 
 - The tone you want the model to use (e.g., Respond in a professional manner).
+
+- [prompt engineering guide 2025](https://www.lakera.ai/blog/prompt-engineering-guide#why-prompt-engineering-matters)
 
 ## 技巧
 
@@ -309,23 +318,127 @@ user: Blue sky at dusk
 
 - 使用符号和标记语言对文本进行语义正确
 
+## 总结
+
+- *Be Clear, Direct, and Specific*
+- `wwfyde`: Schema, bound, rule, define, structure, content, type, feature, restrict, constraint
+
 ## 语义增强
 
+> [!Note]
+>
+> - [Use XML tags to structure your prompts](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/use-xml-tags)
+>
+> Claude推荐使用xml标签,
+
 - 分隔符
+- Use XML tags to separate instructions from context
+- 段落分隔
 - xml/html标签,
     - 注意结束标签
 - 使用三重引号
 - 使用反引号
 - 使用 粗体, 斜体
 - 使用标注提示词
+- 使用Jinja2 模版语法`{{variable}}` 占位变量(placeholder)
+- `{context_data}` 语法, graphrag
+- 使用 `---Goal---`分割
+- response_type: str = "multiple paragraphs"
+
+## 原则方案1
+
+> https://www.vellum.ai/blog/prompt-engineering-tips-for-claude
+
+Use XML tags to separate instructions from context
+
+tags
+
+```xml
+Summarize the main ideas from a provided text.
+
+<text> {input input here} </text>
+```
+
+
+
+- Be direct, concise and as specific as possible
+
+```xml
+You’re Jack, the best content writer in the world. Summarize the main ideas from the provided article text within the <text> tags, and only output the main conclusions in a 4 bulleted list. Follow the format provided below:
+
+<format>
+→ idea 1
+→ idea 2
+→ idea 3
+</format>
+
+
+Here is an example on how to respond in a standard interaction:
+<example>
+{input examples here}
+</example>
+
+
+<text> {input input here} </text>
+
+```
+
+7. ### Let Claude say "I don't know"
+
+```xml
+Answer the following question only if you know the answer or can make a well-informed guess; otherwise tell me you don't know it.
+```
+
+### 8. Long documents before instructions
+
+If you’re dealing with longer documents, always ask your question at the end of the prompt. For very long prompts Claude gives accent to the end of your prompt, so you need to add important instructions at the end. This is extremely [important](https://docs.anthropic.com/claude/docs/claude-2p1-guide#prompting-techniques-for-claude-21) for Claude 2.1.
+
+```
+<doc>
+{input document here}
+</doc>
+
+
+You’re Jack, the best content writer in the world. Summarize the main ideas from the provided article text within the <text> tags, and only output the main conclusions in a 4 bulleted list. Follow the format provided below:
+```
+
+### 9. Think step by step
+
+You can significantly improve the accuracy, by adding the phrase “Think step by step” that will force Claude to think step by step, and follow intermediate steps to arrive to the final answer. This is called zero-shot chain of thought prompting and we wrote more on that in this [blog post.](https://www.vellum.ai/blog/chain-of-thought-prompting-cot-everything-you-need-to-know)
+
+‍
+
+### 10. Break complex tasks into steps
+
+Claude might perform poorly at complex tasks that are composed of several subtasks. If you know who those subtasks are, you can help Claude by providing a step by step instructions. Something like:
+
+```xml
+You’re Jack, the best content writer in the world. Summarize the main ideas from the provided article text within the <text> tags, and only output the main conclusions in a 4 bulleted list. Follow the format provided below:
+
+<text> {input input here} </text>
+
+
+Please follow this steps:
+
+1. Write a one paragraph summary for {{text}}
+2. Write 4 bulleted list with the main conclusions for {{text}}
+```
 
 ## 直奔主题
 
+## 系统消息
+
+## 指令
 
 
-##  受众意图(角色设定)
+
+##  角色设定(受众意图)
 
 the audience is a expert in the field——受众是领域专家
+
+role-based
+
+- Use **role-based** prompts to align the model’s voice and behavior with a specific context, like a legal advisor, data analyst, or customer support agent.
 
 ## 提出假设和条件
 
@@ -336,7 +449,23 @@ the audience is a expert in the field——受众是领域专家
 
 ## 任务分解
 
+step by step
+
+let's solve this step by step ,
+
+ask the model to reason step by step
+
+- Choose **chain-of-thought** prompts for tasks that require logic, analysis, or step-by-step reasoning—like math, troubleshooting, or decision-making.
+
 ## 肯定胜过否定
+
+## 上下文感知
+
+context-aware, context-rich
+
+## 补全模式
+
+completion-style
 
 ## 迭代改进
 
@@ -354,9 +483,15 @@ the audience is a expert in the field——受众是领域专家
 
 - 请帮我修改代码
 
+- try to use packages from `@pyproject.toml`
+  *尝试使用`@pyproject.toml`中的包*
+  - https://www.bilibili.com/video/BV1sMWyeSEPz?spm_id_from=333.788.videopod.sections&vd_source=b3b3cc64dca9a4669718deabb723b230
+
+- use mock data as documents
 
 
-![](../../Temp/重构边界与时机.drawio.png)
+
+
 
 # Prompt
 
@@ -510,6 +645,16 @@ After a response, provide three follow-up questions worded as if I'm asking you.
 
 
 
+# 使用LLM编写代码
+
+LLMs for Coding
+
+## Links
+
+- [How I use LLMs to help me write code](https://simonwillison.net/2025/Mar/11/using-llms-for-code/?utm_source=hackernewsletter&utm_medium=email&utm_term=fav)
+
+
+
 # 最佳实践
 
 
@@ -519,6 +664,8 @@ After a response, provide three follow-up questions worded as if I'm asking you.
 - ```
     
     ```
+
+
 
 # 格式化输出
 
@@ -576,6 +723,26 @@ https://mp.weixin.qq.com/s/NH2tlKQ0PbE8KM5CiWWTKA
 ## 迭代步数
 
 一般推荐12-25步, 过高 细节并不会显著增加
+
+# 系统提示
+
+即梦
+
+```markdown
+
+```
+
+
+
+# 视觉Prompt
+
+
+
+**把用户痛点转化为视觉隐喻**: 用破碎存钱罐表现资产安全
+
+**给抽象概念找物质载体**: 
+
+
 
 # Case
 

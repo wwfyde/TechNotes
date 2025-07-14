@@ -1,9 +1,384 @@
----
-title: AI人工智能基础
-synonym: [人工智能, 人工智慧]
-tag: [机器学习, 神经网络, 深度学习, 知识图谱]
+# LLM开发
 
----
+## Links
+
+### Local
+
+- [llm-examples](/Users/wwfyde/Projects/llm-examples)
+
+## 需求
+
+- AI落地
+
+## Key Point
+
+- 任务规划引擎
+- Agent 架构
+- Task
+- 聚类算法
+
+## 多维认知
+
+
+
+### 对比
+
+**检索增强生成（RAG）**通过动态知识融合技术突破大模型的静态知识边界；
+
+**智能体（Agent）**借助自主决策与多任务协同能力重构人机协作范式；
+
+**多模态大模型**则依托跨模态语义理解技术解锁复杂场景的落地潜力。
+
+
+
+**RAG：**大模型的动态知识引擎，解决模型静态知识边界、时效性与可信度问题。
+
+**Agent：**大模型的智能执行中枢，赋予模型自主规划、决策与工具调用能力。
+
+**多模态：**大模型的感知升级底座，突破单一模态理解限制，实现真实世界全息认知。
+
+
+
+知识增强（RAG）→ 行为智能（Agent）→ 感知升级（多模态）→ 完整智能体
+
+
+
+## Stack
+
+- playwright
+- browser-use
+
+## Tools
+
+- sglang
+- vllm
+- deepspeed
+- ollama
+- cherry studio
+
+MCP HOST: 
+
+
+
+## 应用落地
+
+- 内容生成
+- 自动化处理-Agent
+
+# Glossary
+
+意图识别(intent Classification) intent recognition
+
+意图识别（Intent Classification），是一种自然语言处理技术，用于分析用户的输入并将其映射到某个预定义的意图类别。这种技术在问答机器人、智能客服、虚拟助手等领域被广泛使用。其目的是通过分析用户的文本或语音输入，识别用户的询问、请求或指示真正的目的，从而提供个性化、准确的服务。
+
+## Agent
+
+task goal
+
+`AI agents`, `Agentic AI`
+
+### Links
+
+- [微信::智东西::Agent综述论文火了，10大技术路径一文看尽](https://mp.weixin.qq.com/s/ilLpFYkhVEZHEHmUopwGxg)
+- [微信::TsingtaoAI::三大行业案例：AI大模型+Agent实践全景](https://mp.weixin.qq.com/s/qbtG1OwAR1iRsE19IQQM1Q)
+- [Anthropic::Blog::build-effective-agents](https://www.anthropic.com/engineering/building-effective-agents)
+- [OpenAI::Blog::a-practical-guide-to-building-agents](https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf)
+- [lovart Design Agent](https://www.lovart.ai/)
+  - [https://waytoagi.feishu.cn/wiki/Qs6KwiWs3imK9lk91aFcceWinwc](https://waytoagi.feishu.cn/wiki/Qs6KwiWs3imK9lk91aFcceWinwc)
+- [Anthropic::article::Agents solutions](https://www.anthropic.com/solutions/agents)
+
+### 定义
+
+- *An agent is a system that uses a model to decide how to act in an environment in pursuit of a goal.*
+- [Ahthropic](https://www.anthropic.com/engineering/building-effective-agents): "Agent" can be defined in several ways. Some customers define agents as fully autonomous systems that operate independently over extended periods, using various tools to accomplish complex tasks.
+  - **Workflows** are systems where LLMs and tools are orchestrated through predefined code paths.
+  - **Agents**, on the other hand, are systems where LLMs dynamically direct their own processes and tool usage, maintaining control over how they accomplish tasks.
+
+- Agentic工作流: 为实现特定任务或目标而设计的一系列连接步骤
+- Agentic AI uses sophisticated reasoning and iterative planning to autonomously solve complex, multi-step problems.
+- RPA与Agent
+- Tool Use(function call): 
+- Tool Use, in which an LLM is given functions it can request to call for gathering information, taking action, or manipulating data, is a key design pattern of AI agentic workflows. -- Andrew.N
+
+### 特性
+
+- Agent的架构模块的划分略有差异，但基本上包含了：感知，记忆，规划，行动四个核心的要素。
+
+
+
+## 架构
+
+[三大行业案例：AI大模型+Agent实践全景](https://mp.weixin.qq.com/s/qbtG1OwAR1iRsE19IQQM1Q)
+
+![img](https://wwfyde.oss-cn-hangzhou.aliyuncs.com/images/202506091402312.png)
+
+## 概念
+
+block
+
+workflow
+
+agent
+
+gate
+
+route
+
+parallelization/
+
+## 开发思路
+
+构建 块(blocks), 工作流(workflows), 智能体(agents) 基础构建块
+
+块: The basic building block of agentic systems is an LLM enhanced with augmentations such as retrieval, tools, and memory. Our current models can actively use these capabilities—generating their own search queries, selecting appropriate tools, and determining what information to retain.
+
+![d3083d3f40bb2b6f477901cc9a240738d3dd1371-2401x1000:https://www.anthropic.com/_next/image?url=https%3A%2F%2Fwww-cdn.anthropic.com%2Fimages%2F4zrzovbb%2Fwebsite%2Fd3083d3f40bb2b6f477901cc9a240738d3dd1371-2401x1000.png&w=3840&q=75](https://wwfyde.oss-cn-hangzhou.aliyuncs.com/images/202506071046899.webp)
+
+
+
+# 模型参考
+
+## 价格
+
+> - 
+
+| 模型 | 所属家族 |      |      |      |      |      |      |
+| ---- | -------- | ---- | ---- | ---- | ---- | ---- | ---- |
+|      | OpenAI   |      |      |      |      |      |      |
+|      | QWen     |      |      |      |      |      |      |
+|      |          |      |      |      |      |      |      |
+
+
+
+# LLM
+
+![https://www.anthropic.com/_next/image?url=https%3A%2F%2Fwww-cdn.anthropic.com%2Fimages%2F4zrzovbb%2Fwebsite%2Fd3083d3f40bb2b6f477901cc9a240738d3dd1371-2401x1000.png&w=3840&q=75](https://wwfyde.oss-cn-hangzhou.aliyuncs.com/images/202504231643553.png)
+
+## 特性对比
+
+|        | 代码 | 多模态 |      |
+| ------ | ---- | ------ | ---- |
+| Claude | ★☆   |        |      |
+| OpenAI |      |        |      |
+| Gemini |      |        |      |
+
+
+
+### Claude
+
+### gemini
+
+
+
+### OpenAI
+
+# API
+
+## Links
+
+- [AWS Bedrock Price](https://aws.amazon.com/bedrock/pricing/)
+- [OpenAI Price]()
+
+## Azure
+
+## Bedrock
+
+## OpenAI
+
+### Links
+
+- [API结构化输出示例——Introducing Structured Outputs in the API](https://openai.com/index/introducing-structured-outputs-in-the-api/)
+- [OpenAI: 结构化输出Structured Outputs](https://platform.openai.com/docs/guides/structured-outputs/introduction?lang=python)
+- [语音转文本Whisper——(Speech to text)](https://platform.openai.com/docs/guides/speech-to-text/speech-to-text)
+
+### 各家API
+
+- [OpenAI ChatGPT](https://platform.openai.com/docs/guides/gpt/chat-completions-api)
+  - https://platform.openai.com/docs/guides/rate-limits/usage-tiers?context=tier-free
+- [Azure OpenAI API](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference)
+  - https://learn.microsoft.com/zh-CN/azure/ai-services/openai/quotas-limits
+  - https://learn.microsoft.com/zh-CN/azure/ai-services/openai/how-to/quota?tabs=rest
+- [Anthropic Claude](https://anthropic.com/)
+  - https://docs.anthropic.com/claude/reference/rate-limits
+- [Google Gemini ](https://developers.generativeai.google/)
+  - https://ai.google.dev/models/gemini?hl=zh-cn
+- [智谱 ChatGLM](https://bigmodel.cn/)
+  - https://maas.aminer.cn/dev/howuse/rate-limits/level?tab=0
+- [Moonshot AI](https://platform.moonshot.cn/)
+  - https://platform.moonshot.cn/docs/pricing#%E5%85%85%E5%80%BC%E4%B8%8E%E9%99%90%E9%80%9F
+
+## 结构化输出(Structured Output)
+
+## 最佳实践
+
+- https://github.com/atomic14/command_line_chatgpt
+
+> [!note]
+>
+> 平台对API调用请求没有设置速率限制，但会受到模型官方的速率限制。
+
+## Embeddings
+
+> [Embeddings](https://platform.openai.com/docs/guides/embeddings)
+
+```python
+from openai import OpenAI
+client = OpenAI()
+
+response = client.embeddings.create(
+    input="Your text string goes here",
+    model="text-embedding-3-small"
+)
+
+print(response.data[0].embedding)
+```
+
+## OpenAI
+
+### message
+
+#### system message
+
+Typically, a conversation will start with a system message that tells the assistant how to behave, followed by alternating user and assistant messages, but you are not required to follow this format.
+
+## Claude
+
+## Azure
+
+- https://learn.microsoft.com/en-us/azure/ai-services/openai/reference
+
+
+
+# API Price
+
+- [OpenAI API Pricing](https://openai.com/api/pricing/)
+- [Anthropic API Pricing (Claude)](https://www.anthropic.com/pricing)
+
+| 模型名称             | model id | 渠道商 | 基座模型 | 参数量 | input price | output price | cache price | 发布日期 | 网址 | 开源 | 发布者 | 备注 | 价格网址 |
+| -------------------- | -------- | ------ | -------- | ------ | ----------- | ------------ | ----------- | -------- | ---- | ---- | ------ | ---- | -------- |
+| gpt-4o               |          |        |          |        | $5          | $20          | $0.75       |          |      |      |        |      |          |
+| gpt-4o-mini          |          |        |          |        | $0.6        | $2.4         |             |          |      |      |        |      |          |
+| gpt-4.1              |          |        |          |        | $5          | $12          |             |          |      |      |        |      |          |
+| gpt-4.1-mini         |          |        |          |        | $0.4        | $1.6         |             |          |      |      |        |      |          |
+| gpt-4.1-nano         |          |        |          |        | $0.1        | $0.4         |             |          |      |      |        |      |          |
+| claude-sonnet-4      |          |        |          |        | $3          | $15          |             |          |      |      |        |      |          |
+| claude-opus-4        |          |        |          |        | $15         | $75          |             |          |      |      |        |      |          |
+| qwen-vl-32b-instruct |          | 通义   |          | 125K   | ¥8          | $24          |             |          |      |      |        |      |          |
+
+
+
+# Embedding
+
+嵌入, 向量化, 向量表示, 特征
+
+## Links
+
+- [Qdrant Embedding](https://qdrant.tech/documentation/embeddings/)
+- [多模态嵌入 mteb](http://huggingface.co/spaces/mteb/leaderboard)
+
+
+
+# Tools
+
+
+
+- ollama
+- cherry studio
+- vllm
+- sglang
+- 
+
+# MCP
+
+[灵积MCP广场](https://www.modelscope.cn/mcp)
+
+[HF Agent Course](https://huggingface.co/learn/agents-course/unit0/introduction)
+
+
+
+
+
+# Workflow
+
+
+
+# RAG
+
+# Dify
+
+
+
+# 业务开发
+
+
+
+## LLM应用衡量指标
+
+- 可靠性：99.9%的系统正常运行时间，遵循结构化输出标准
+- 安全性：不产生冒犯性、不适宜工作场所或有害的内容
+- 事实一致性：忠实于所提供的上下文，不虚构信息
+- 实用性：满足用户的实际需求和请求
+- 可扩展性：符合时延服务等级协议，能够支撑的吞吐量
+- 成本：预算有限
+- 其他：安全性、隐私性、公平性、GDPR合规性、DMA合规性等
+
+## Tools
+
+- [pytorch-lightning](https://github.com/Lightning-AI/pytorch-lightning)
+
+# Glossary
+
+# LLMs API
+
+
+
+# Document
+
+## PDF
+
+https://github.com/lumina-ai-inc/chunkr
+
+https://github.com/VikParuchuri/surya
+
+# RAG
+
+Links https://www.databricks.com/glossary/retrieval-augmented-generation-rag
+
+
+
+qdrant
+
+millvus 索引
+
+https://github.com/langflow-ai/langflow
+
+https://x.com/akshay_pachaar/status/1783114329199718558
+
+
+
+
+
+fastgpt, dify, ragflow, lamma_index
+
+
+
+ragflow 意图识别开发
+
+
+
+
+
+# Workflow
+
+
+
+
+
+# Infras
+
+
+
+## GPU按需调度
 
 
 
@@ -11,7 +386,17 @@ tag: [机器学习, 神经网络, 深度学习, 知识图谱]
 
 ## Resources
 
-- 
+### post
+
+- marktechpost
+- 3Blue1Brown
+- [dair-ai](https://github.com/dair-ai/ML-Papers-of-the-Week)
+- https://theresanaiforthat.com/
+- [人工智能杂志](https://aimagazine.com/)
+- [抱抱脸每日论文](https://huggingface.co/papers)
+- [机器学习大师](https://machinelearningmastery.com/)
+
+
 
 # Links
 
@@ -25,6 +410,9 @@ tag: [机器学习, 神经网络, 深度学习, 知识图谱]
 
 - [Methods for adapting large language models](https://ai.meta.com/blog/adapting-large-language-models-llms/)
 - https://ai.meta.com/blog/how-to-fine-tune-llms-peft-dataset-curation/
+- [《人工智能杂志》评选出的展示全球人工智能最新发展的十大博客](https://mp.weixin.qq.com/s/mFzz3JkVOeqIJczw8B9zLQ)
+
+## Videos
 
 # Glossary
 
@@ -35,38 +423,38 @@ tag: [机器学习, 神经网络, 深度学习, 知识图谱]
 ## Lists
 
 - 神经网络(neural network):
-    - [AWS 什么是神经网络](https://aws.amazon.com/cn/what-is/neural-network/)
-    - [YouTube 什么是神经网络](https://www.youtube.com/watch?v=aircAruvnKk)
-        - 为何人脑能够将不一样的(3), 但相似的视觉信号识别为相同的东西, 但是有能区别不同的视觉信号, 模式识别
-        - 当程序中要对模式识别的信息(3)进行视觉表示时该如何处理
-        - 神经元更像是一个函数
-        - ReLU(线性整流函数)
-    - 神经元
-    - 节点(知识/材料/概念), 连接(联系):
-    - 生物学
-        - 人脑：神经网络可以比作人脑，其中节点代表神经元，连接代表突触连接。
-        - 神经元: 节点可以形象化为神经元，接收来自其他神经元的信号，并将其传递给下一个神经元
-        - 突触：连接可以形象化为突触，是神经元之间传递信号的桥梁。
-    - **计算类比:**
-        - 函数：神经网络可以比作一个函数，将输入数据映射到输出数据。
-        - 节点：节点可以形象化为函数中的计算单元，执行加减乘除等运算。
-        - 连接：连接可以形象化为函数中的参数，控制计算过程。
-    - 形象标识
-    - 抽象表示: 节点是一个向量, 包含该的属性, 例如激活值(activation), 权重(weight)等; 连接是一个矩阵, 代表不同节点连接之间的连接权重; 层: 可以比作神经网络中的不同功能模块，例如输入层、隐藏层和输出层。
-        - **权重:** 可以比作连接两个神经元的突触的强度，决定了信号传递的强度。
-        - **激活函数:** 可以比作神经元的兴奋程度，决定了神经元是否会将信号传递给下一个神经元。
-        - **偏置(bias):** 可以比作神经元的阈值，决定了神经元需要多少信号才会被激活. **偏置实际上是对神经元激活状态的控制**。。
-        - **训练:** 可以比作训练一个运动员，通过不断地练习和调整，提高神经网络的性能。
-        - **神经元:** 可以比作一个生物细胞，接收来自其他神经元的信号，并将其传递给下一个神经元。
-        - 权重矩阵*向量偏置就
-    - Python(PyTorch)中的表示: 节点(nn.Module), 连接(nn.Parameter)
+  - [AWS 什么是神经网络](https://aws.amazon.com/cn/what-is/neural-network/)
+  - [YouTube 什么是神经网络](https://www.youtube.com/watch?v=aircAruvnKk)
+    - 为何人脑能够将不一样的(3), 但相似的视觉信号识别为相同的东西, 但是有能区别不同的视觉信号, 模式识别
+    - 当程序中要对模式识别的信息(3)进行视觉表示时该如何处理
+    - 神经元更像是一个函数
+    - ReLU(线性整流函数)
+  - 神经元
+  - 节点(知识/材料/概念), 连接(联系):
+  - 生物学
+    - 人脑：神经网络可以比作人脑，其中节点代表神经元，连接代表突触连接。
+    - 神经元: 节点可以形象化为神经元，接收来自其他神经元的信号，并将其传递给下一个神经元
+    - 突触：连接可以形象化为突触，是神经元之间传递信号的桥梁。
+  - **计算类比:**
+    - 函数：神经网络可以比作一个函数，将输入数据映射到输出数据。
+    - 节点：节点可以形象化为函数中的计算单元，执行加减乘除等运算。
+    - 连接：连接可以形象化为函数中的参数，控制计算过程。
+  - 形象标识
+  - 抽象表示: 节点是一个向量, 包含该的属性, 例如激活值(activation), 权重(weight)等; 连接是一个矩阵, 代表不同节点连接之间的连接权重; 层: 可以比作神经网络中的不同功能模块，例如输入层、隐藏层和输出层。
+    - **权重:** 可以比作连接两个神经元的突触的强度，决定了信号传递的强度。
+    - **激活函数:** 可以比作神经元的兴奋程度，决定了神经元是否会将信号传递给下一个神经元。
+    - **偏置(bias):** 可以比作神经元的阈值，决定了神经元需要多少信号才会被激活. **偏置实际上是对神经元激活状态的控制**。。
+    - **训练:** 可以比作训练一个运动员，通过不断地练习和调整，提高神经网络的性能。
+    - **神经元:** 可以比作一个生物细胞，接收来自其他神经元的信号，并将其传递给下一个神经元。
+    - 权重矩阵*向量偏置就
+  - Python(PyTorch)中的表示: 节点(nn.Module), 连接(nn.Parameter)
 - 强化学习
 - 卷积神经网络
 - 递归神经网络
 - 深度神经网络
 - 机器学习(Machine Learning): 
   - 机器学习的三个核心概念: 数据、模型和学习
-  - ![机器学习的核心概念](https://wwfyde.oss-cn-hangzhou.aliyuncs.com/images/202311211634305.png)
+  - ![机器学习的核心概念](https://wwfyde.oss-cn-hangzhou.aliyuncs.com/images/202505261445108.png)
 - **模型**(model)
   - [[Microsoft](https://learn.microsoft.com/zh-cn/windows/ai/windows-ml/what-is-a-machine-learning-model)]机器学习模型是一个文件，在经过训练后可以识别特定类型的模式。 你可以用一组数据训练模型，为它提供一种算法，模型利用该算法学习这些数据并进行推理。
   - 表示一个知识, 数据的结构
@@ -402,12 +790,12 @@ conda activate
 ## Glossary
 
 - 构建快(building blocks)
-    - Tensor
-    - Autograd Module
-    - **Neural Network Module** 
-    - **Optimizers**
-    - **Data Loading and Processing**
-    - **UDA Support for GPU Computing**:
+  - Tensor
+  - Autograd Module
+  - **Neural Network Module** 
+  - **Optimizers**
+  - **Data Loading and Processing**
+  - **UDA Support for GPU Computing**:
 
 ```shell
 # 创建模型, 也是一个神经网络节点
@@ -492,8 +880,8 @@ jupyter notebook password
 ## 参考资料
 
 - [NVIDIA Container Toolkit](https://github.com/NVIDIA/nvidia-container-toolkit)
-    - [安装指南](https://docs.nvidia.com/ngc/container-toolkit/install-guide.html)
-    - https://github.com/NVIDIA/nvidia-container-toolkit
+  - [安装指南](https://docs.nvidia.com/ngc/container-toolkit/install-guide.html)
+  - https://github.com/NVIDIA/nvidia-container-toolkit
 
 - [NVIDIA GPU Cloud (NGC)](https://www.nvidia.com/en-us/gpu-cloud/)
 - [AWS Deep Learning Containers](https://github.com/aws/deep-learning-containers)
@@ -515,7 +903,7 @@ jupyter notebook password
 
 ## 概述
 
-![img](https://wwfyde.oss-cn-hangzhou.aliyuncs.com/images/202401231030127.png)
+![img](https://wwfyde.oss-cn-hangzhou.aliyuncs.com/images/202505261445201.png)
 
 
 
@@ -573,6 +961,7 @@ sudo apt-get install -y docker nvidia-container-toolkit
 ### 创建Dockerfile
 
 ```shell
+
 ```
 
 ### 保存镜像
@@ -778,15 +1167,15 @@ Web browser
 
 ### pictures
 
-![image-20240318155433522](https://wwfyde.oss-cn-hangzhou.aliyuncs.com/images/202403181554628.png)
+![image-20240318155433522](https://wwfyde.oss-cn-hangzhou.aliyuncs.com/images/202505261445208.png)
 
-![LangChain Universe v0.1.0](https://wwfyde.oss-cn-hangzhou.aliyuncs.com/images/202403181619767.jpeg)
+![LangChain Universe v0.1.0](https://wwfyde.oss-cn-hangzhou.aliyuncs.com/images/202505261445223.jpeg)
 
-![Image](https://wwfyde.oss-cn-hangzhou.aliyuncs.com/images/202403181631760.jpeg)
+![Image](https://wwfyde.oss-cn-hangzhou.aliyuncs.com/images/202505261445234.jpeg)
 
-![LangSmith Platform Overview v0.2.0](https://wwfyde.oss-cn-hangzhou.aliyuncs.com/images/202403182107864.jpeg)
+![LangSmith Platform Overview v0.2.0](https://wwfyde.oss-cn-hangzhou.aliyuncs.com/images/202505261445341.jpeg)
 
-![langchain_stack](https://wwfyde.oss-cn-hangzhou.aliyuncs.com/images/202403181617468.svg)
+![langchain_stack](https://wwfyde.oss-cn-hangzhou.aliyuncs.com/images/202505261445749.svg)
 
 ## Core Concepts
 
@@ -974,7 +1363,7 @@ WantedBy=multi-user.target
 ## Productivity Tips
 
 - drag a image that generated by comfyui will automatically load the workflow.
-    拖拽ComfyUI生成的图片到界面将会自动加载Workflow
+  拖拽ComfyUI生成的图片到界面将会自动加载Workflow
 - comfyui只支持单GPU, 一个进程不支持多CPU
 
 # Magnific AI
