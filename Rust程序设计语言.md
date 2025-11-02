@@ -8,6 +8,7 @@
 - [**★**Rust语言速查表](https://cheats.rs/)
 - 语言参考: https://doc.rust-lang.org/stable/reference/
 - 标准库: https://doc.rust-lang.org/std/index.html
+- [Rust::Book::异步编程](https://rust-lang.github.io/async-book/intro.html): https://rust-lang.github.io/async-book/intro.html
 - [Book]Blog推荐: https://effective-rust.com (先读官方文Book, 这本进阶)
   - https://bitfieldconsulting.com/posts
   - 大卫·德赖斯代尔（David Drysdale）的这本优秀著作准确地回答了这个问题，并提供了许多实用的技巧和解释。这就像与 Rustacean 专家配对，他可以倾身说出诸如“尝试使用迭代器而不是循环”或“这里使用宏有意义的地方，以及没有意义的地方”之类的话。
@@ -28,7 +29,7 @@
 
 - Awesome Rust: https://github.com/rust-unofficial/awesome-rust
 - https://deps.rs/
-- Rust roadmap
+- roadmap
 - ripgrep 代码量少 适合阅读
 - [清华大学 rust程序训练](https://lab.cs.tsinghua.edu.cn/rust/)
 
@@ -61,6 +62,13 @@
 > 策略: 泛读, 精读, 实践
 >
 > 架构
+
+> [!important]
+>
+> - 参与真实项目, realworld-projects
+>   - Most resources only scratch the surface—they don’t prepare you for real-world projects.
+> - a clear roadmap
+>   - Without a clear roadmap, it’s easy to waste months on the wrong things.
 
 ![极客时间Rust训练营](https://wwfyde.oss-cn-hangzhou.aliyuncs.com/images/202505221722206.png)
 
@@ -418,6 +426,10 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
 export RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup
 curl https://sh.rustup.rs -sSf | sh
+
+
+### https://rsproxy.cn  
+# 第二种镜像方案
 ```
 
 
@@ -506,6 +518,8 @@ rustup doc
 # 知识概念
 
 > 核心思想、核心原理、核心特性、适用场景、核心概念, 知识与认知
+>
+> concepts
 
 ## table
 
@@ -705,83 +719,6 @@ Rust 宏和其他语言的宏（比如 C 语言的预处理器宏）不同，它
 
 ## cargo
 
-Cargo is Rust's build system and package manager.
-
-> 一个`cargo.toml`对应一个包 用 `-p, --package`执行
->
-> [Cargo Book](https://doc.rust-lang.org/cargo/)
-
-
-
-```shell
-cargo new project_name
-cargo new --lib project_name
-cargo build
-cargo run 
-
-cargo run --bin
-
-# 运行 examples目录中的文件
-cargo run --example 
-
-
-cargo doc --open
-
-# ???TODO
-cargo run --release
-
-
-# 安装package到目录
-cargo install --path . --root ~/.local
-cargo install --path .  # cargo.toml 指定install.root = " ~/.local"
-
-
-#
-cargo new —lib
-
-```
-
-
-
-| 命令              | 作用                                  | 示例                            |
-| ----------------- | ------------------------------------- | ------------------------------- |
-| `cargo new`       | 创建一个新的 Rust 项目                | `cargo new my_project`          |
-| `cargo build`     | 编译项目和其依赖                      | `cargo build --release`         |
-| `cargo run`       | 编译并运行 Rust 项目                  | `cargo run`                     |
-| `cargo test`      | 运行项目的测试                        | `cargo test`                    |
-| `cargo doc`       | 为项目的依赖生成文档                  | `cargo doc --open`              |
-| `cargo update`    | 更新 `Cargo.lock` 文件中的依赖版本    | `cargo update`                  |
-| `cargo check`     | 快速检查代码能否编译                  | `cargo check`                   |
-| `cargo clean`     | 清除编译生成的文件                    | `cargo clean`                   |
-| `cargo publish`   | 将包发布到 crates.io                  | `cargo publish`                 |
-| `cargo bench`     | 运行基准测试                          | `cargo bench`                   |
-| `cargo fetch`     | 下载项目依赖的 crate，但不进行编译    | `cargo fetch`                   |
-| `cargo install`   | 安装和管理 Rust 二进制文件            | `cargo install [crate_name]`    |
-| `cargo uninstall` | 卸载通过 Cargo 安装的 Rust 二进制文件 | `cargo uninstall [crate_name]`  |
-| `cargo package`   | 准备一个本地 crate 以便发布           | `cargo package`                 |
-| `cargo search`    | 在 crates.io 上搜索 crate             | `cargo search [search_query]`   |
-| `cargo login`     | 使用 API token 登录 crates.io         | `cargo login [token]`           |
-| `cargo owner`     | 管理 crate 的所有者                   | `cargo owner --add [username]`  |
-| `cargo init`      | 在现有目录中初始化新的 Rust 项目      | `cargo init my_project`         |
-| `cargo version`   | 显示 Cargo 的版本信息                 | `cargo version`                 |
-| `cargo vendor`    | 将所有依赖复制到本地目录              | `cargo vendor`                  |
-| `cargo metadata`  | 输出 JSON 格式的项目元数据            | `cargo metadata`                |
-| `cargo tree`      | 显示项目依赖树                        | `cargo tree`                    |
-| `cargo fix`       | 自动修复 Rust 代码中的警告            | `cargo fix`                     |
-| `cargo audit`     | 审核 Cargo.lock 以查找不安全的依赖    | `cargo audit`                   |
-| `cargo rustc`     | 提供对 rustc 编译器参数的访问         | `cargo rustc -- [options]`      |
-| `cargo rustdoc`   | 为项目运行 rustdoc 工具               | `cargo rustdoc -- [options]`    |
-| `cargo clippy`    | 运行 clippy 来进行代码审查            | `cargo clippy`                  |
-| `cargo fmt`       | 使用 rustfmt 格式化代码               | `cargo fmt`                     |
-| `cargo miri`      | 运行 miri 以执行内存安全检查          | `cargo miri test`               |
-| `cargo outdated`  | 检查过时的依赖                        | `cargo outdated`                |
-| `cargo release`   | 自动化 crate 发布流程                 | `cargo release`                 |
-| `cargo add`       | 向 Cargo.toml 添加新依赖              | `cargo add [crate_name]`        |
-| `cargo rm`        | 从 Cargo.toml 中移除依赖              | `cargo rm [crate_name]`         |
-| `cargo upgrade`   | 升级 Cargo.toml 的依赖版本            | `cargo upgrade -p [crate_name]` |
-
-请注意，一些命令如 `cargo audit`, `cargo clippy`, `cargo fmt`, `cargo miri`, `cargo outdated`, `cargo release`, `cargo add`, `cargo rm`, 和 `cargo upgrade` 实际上是由第三方提供的 Cargo 扩展（也称为 "cargo 子命令"），并可能需要单独安装。
-
 ## rustc
 
 
@@ -844,6 +781,8 @@ cargo install cargo-edit
 A small rust library for adding custom derives to enums
 
 # 语言参考
+
+> 语法, syntax
 
 ## Links
 
@@ -943,6 +882,8 @@ Bracket punctuation is used in various parts of the grammar. An open bracket mus
 - `continue` - 继续进入下一次循环迭代
 - `crate` - 在模块路径中，代指 crate root
 - `dyn` - 动态分发 trait 对象
+  - dyn 表示**动态分发 trait 对象**，即类型在编译时不确定、运行时才能确定的 trait 实现对象。
+
 - `else` - 作为 `if` 和 `if let` 控制流结构的 fallback
 - `enum` - 定义一个枚举
 - `extern` - 链接一个外部函数或变量
@@ -1036,6 +977,12 @@ Bracket punctuation is used in various parts of the grammar. An open bracket mus
 
 ## HashMap
 
+
+
+# stdlib
+
+# ecosystem
+
 # **Rust book**
 
 - [patterns and matching](https://doc.rust-lang.org/book/ch18-00-patterns.html)
@@ -1068,42 +1015,6 @@ Bracket punctuation is used in various parts of the grammar. An open bracket mus
   ```
 
 # 最佳实践
-
-## 项目布局
-
-```shell
-src/
-├── main.rs          # 应用入口
-├── lib.rs           # 核心模块导出（可选）
-├── config/          # 配置管理
-│   ├── mod.rs       # 配置结构体、加载逻辑
-│   └── env.rs       # 环境变量处理
-├── routes/          # 路由定义
-│   ├── mod.rs       # 聚合所有子路由（v1, v2, admin...）
-│   ├── health.rs    # 健康检查路由
-│   └── users.rs     # 用户相关路由
-├── handlers/        # 请求处理函数（Controller层）
-│   ├── mod.rs       # 处理器聚合
-│   ├── health.rs    # 健康检查逻辑
-│   └── users.rs     # 用户相关逻辑
-├── services/        # 业务逻辑（Service层）
-│   ├── mod.rs       # 服务聚合
-│   └── users.rs     # 用户服务
-├── models/          # 数据结构（DTO/实体）
-│   ├── mod.rs       # 模型聚合
-│   ├── user.rs      # 用户模型
-│   └── error.rs     # 统一错误类型（推荐用 thiserror）
-├── repositories/    # 数据访问层（Repository/DAO）
-│   ├── mod.rs       # 数据库操作聚合
-│   └── user.rs      # 用户数据访问
-├── middleware/      # 自定义中间件
-│   ├── mod.rs       # 中间件聚合
-│   └── auth.rs      # 认证中间件
-├── state/           # 全局应用状态（AppState）
-│   └── mod.rs       # 状态定义与初始化
-└── utils/           # 工具类（日志、加密等）
-    └── mod.rs       # 工具函数聚合
-```
 
 
 
