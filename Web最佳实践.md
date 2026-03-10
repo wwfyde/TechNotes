@@ -3,6 +3,8 @@
 > 非构建开发模式: raw/plain/classic/pure html 原始/经典, 不用任何构建的原始HTML
 >
 > build system: modern web development with build step
+>
+> Vanilla JavaScript
 
 
 
@@ -36,7 +38,13 @@
 
 - [emmet](https://code.visualstudio.com/docs/languages/emmet) 实现代码块
 
+# exersize
 
+> 小测验
+
+## 响应式菜单
+
+> [web-examples::responsive-menu](/Users/wwfyde/projects/web-examples/examples/responsive-menu)
 
 # package manager
 
@@ -141,6 +149,45 @@ corepack enable
 corepack prepare yarn@4 --activate
 ```
 
+
+
+# pnpm
+
+
+
+```shell
+# 清理全局缓存
+pnpm store prune
+```
+
+## 依赖管理
+
+```shell
+pnpn install -D vite
+pnpm upgrade vite  # 不会更新大版本
+pnpm install -D vite@latest
+pnpm upgrade # 升级全部依赖
+```
+
+
+
+## install
+
+> links: https://pnpm.io/installation
+
+```shell
+# macos & linux
+curl -fsSL https://get.pnpm.io/install.sh | sh -
+
+# install nodejs
+pnpm env use --global lts
+pnpm env list
+
+
+```
+
+
+
 # plugin
 
 ## eslint
@@ -178,6 +225,14 @@ https://prettier.io/docs/integrating-with-linters
 
 
 # vite
+
+## links
+
+- [Vite::Docs::Env Variables and Modes ](https://vite.dev/guide/env-and-mode)
+
+## quick refs
+
+> convention, best practice, guide, quickstart, getting started, introduction, cheatsheet, tips
 
 ## start
 
@@ -349,6 +404,19 @@ hide logs during additional invocations in strict mode
 
 - hit count % 2
 
+## 实时预览
+
+- Preview.js(第三方)
+- pnpm + simple browser
+- storybook 专业级 测试组件效果
+- onlook - 新兴 可视化编辑
+- react-scan
+
+## 定位到源码
+
+- code-inspector-plugin
+  - 通过option +shift 点击 定位到源码
+
 # **Solutions**
 
 ## SSG
@@ -385,6 +453,10 @@ hide logs during additional invocations in strict mode
 
 > - [openai-node](https://github.com/openai/openai-node)
 
+## oxlint
+
+## oxfmt
+
 ## eslint
 
 ### plugin
@@ -419,9 +491,15 @@ hide logs during additional invocations in strict mode
 
 
 
+## react-scan(推荐)
+
+react scan toolbar
 
 
 
+## react-inspector
+
+- 官方远程
 
 # **Packages**
 
@@ -484,13 +562,43 @@ https://github.com/nextauthjs/next-auth
 
 > 这是客户端状态管理库, 服务端通常还是使用React Context 
 
-## marked
+## markedow
 
-## highlight.js
+### react-markdown
 
-## shiki(语法高亮)
+> remark-gfm rehype-highlight
+>
+> 与markdown-it 类似  更推荐react-markdown
+
+```shell
+npm install react-markdown remark-gfm rehype-highlight
+```
+
+
+
+
+
+### highlight.js(语法高亮)
+
+### shiki(语法高亮)
 
 > modern
+
+### tiptap(可编辑方案)
+
+### mdx
+
+
+
+## 
+
+## react-flow
+
+## model-viewer
+
+## @chuangkit/chuangkit-design
+
+使用
 
 # 开发增强
 
@@ -510,7 +618,9 @@ ts-node
 
 > code quality
 
-- [prettier-plugin-organize-imports](https://github.com/simonhaenisch/prettier-plugin-organize-imports)
+- [~~prettier-plugin-organize-imports~~](https://github.com/simonhaenisch/prettier-plugin-organize-imports)
+- @trivago/prettier-plugin-sort-imports
+- 
 
 ## 调试增强
 
@@ -545,8 +655,6 @@ pnpm dlx @ant-design/pro-cli create ant-design-admin
 
 > 主流也是Shadcn UI
 
-## ui
-
 ## radix-ui
 
 > openai, claude 有使用, 
@@ -561,17 +669,29 @@ pnpm dlx @ant-design/pro-cli create ant-design-admin
 
 [headlessui](https://github.com/tailwindlabs/headlessui)
 
+## shacn/ui(最广)
 
+## HeroUI(美观)
 
 ## Mantine(UI)
 
-## HeroUI
+
+
+## Naive UI
+
+xfun, xiaofang.design 采用的该设计方案
+
+
+
+## Konva.js(canvas)
+
+
+
+## Fabric.js(canvas)
 
 # CSS
 
-## scss
 
-> 推荐scss
 
 ## tailwind(推荐)
 
@@ -581,7 +701,11 @@ pnpm dlx @ant-design/pro-cli create ant-design-admin
 
 # icons
 
+## lucide-react: 首选
+
 ## **Heroicons**：与 TailwindCSS 完美搭配。
+
+
 
 ## **React Icons**：多样化图标选择，轻量简单。
 
@@ -638,6 +762,38 @@ pnpm dlx @ant-design/pro-cli create ant-design-admin
   - next-mdx-remote
 
 
+
+# **布局Layout**
+
+## 核心思想
+
+- 响应式布局
+- 桌面端可折叠侧边栏、移动端抽屉式侧栏
+- 粘性子导航/筛选区
+- 问题问题
+  - 整体布局
+  - 约束card宽度和水平居中
+  - 控制宽高
+  - 控制外观
+  - 控制间距
+  - 控制样式和字体
+
+
+## 核心属性
+
+- h-full 是相对父元素,如果父元素没有高度则无效
+- h-screen 是相对视口
+
+## 粘性定位
+
+> 粘性导航
+
+- 父容器需要是可滚动的
+- 需要父层容器 用于定义宽度 用于布局, 控制显式与隐藏
+- top 是相对视口(viewpoint)的
+- 防止滚动到底部时跟随滚动
+
+
 # 开发增强
 
 ## MDX
@@ -673,6 +829,30 @@ overflow: 'hidden auto',
 >
 > 使用 `react-infinite-scroll-component` 库来实现, 如果是ant-design, 结合List使用
 
+## UI选择
+
+- [20250928] vue 生态 用 naive ui 的比较多, 
+- react 生态 优先选择, next+shadcn+tailwind 
+- 后台管理平台则推荐  ant design pro
+
+
+
+## fetch CORS跨域问题
+
+
+
+fetch 存在天然的CORS跨域限制, 当使用 fetch 图片时, 如果 cdn 没有设置 `Access-Control-Allow-Origin: * ` 很容易出问题
+
+
+
+
+
+# 零散记录
+
+使用 State 胜过 原理
+
+`State Change -> Effect` 往往比 `Event -> Callback` 更容易维护
+
 
 
 # 调试技巧
@@ -682,3 +862,10 @@ overflow: 'hidden auto',
 # 参考项目
 
 [shuttle.rs 官网源码](https://github.com/shuttle-hq/www)	
+
+
+
+
+
+
+

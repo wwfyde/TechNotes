@@ -15,7 +15,7 @@
 - 《Linux Command Line and Shell Scripting》(Books existing)
 - 《Linux命令行与Shell脚本编程大全》(Books existing)
 
-# Glossary
+# uGlossary
 
 ### FHS（Filesystem Hierarchy Standard）
 
@@ -1202,6 +1202,7 @@ ssh -o ProxyCommand='nc -x localhost:7890 %h %p' user@host
 ### 端口转发
 
 # 本地端口转发(将本地端口请求转发到远程端口, 将远程端口映射到本地)
+# 本地转发local forwarding（ssh -L）= 把“本机某个端口”的流量，通过 SSH 隧道，转发到“远程主机的某个端口”去处理。
 ssh -L [本地端口]:[远程地址]:[远程端口] [用户]@[SSH服务器]
 
 ssh -L 8188:192.168.0.138:8188 jump
@@ -1210,6 +1211,7 @@ ssh -L 9999:example.org:80 -N -T username@remote_host
 
 
 # 远程端口转发(将本地端口映射到公网端口)
+# 远程转发remote forwarding(ssh -R) = 把"远程端口"的流量 通过SSH隧道, 转发到"本机端口"来处理
 ssh -R [公网服务器端口]:localhost:[本地端口] [公网服务器用户]@[公网服务器地址]
 
 # 通过jump/bastion server 访问
@@ -1564,6 +1566,16 @@ sudo adduser --system --uid 5001 --gid 5001 --home /home/kayn --shell /bin/bash 
 ```
 
 ### useradd-docker
+
+> 更适合在脚本中使用
+
+```shell
+groupadd -r postgres --gid==999; 
+# -r == --system 创建一个系统用户
+useradd -r -g postgres --uid=999 --home-dir=/var/lib/postgresql --shell=/bin/bash postgres
+```
+
+
 
 ### groupadd-docker
 
@@ -4187,6 +4199,10 @@ pygmentize
 
 ## ripgrep(grep)
 
+## delta
+
+## procs
+
 ## watchman
 
 ## proxychains
@@ -4935,10 +4951,12 @@ du -h –-max-depth=1
 du -h --max-depth=1 | sort -hr
 
 # docker
-docker system df -v  # 各类对象（镜像、卷、缓存）实际占了多少空间、有哪些仍被引用。
+
+docker system prune -f -v  # 各类对象（镜像、卷、缓存）实际占了多少空间、有哪些仍被引用。
 docker image prune
 docker image prune -af 
-docker builder prune
+docker builder prune -f
+docker container prune -f 
 
 # uv
 uv cache clean

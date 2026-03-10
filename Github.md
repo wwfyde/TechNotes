@@ -225,6 +225,25 @@ saved:
 topic:python topic:machine-learning
 ```
 
+## syntax
+
+```shell
+```
+
+
+
+# Github项目类别
+
+Monorepo(使用workspace)
+
+package(纯库仓库)
+
+app (单应用)
+
+多app
+
+
+
 
 
 # Actions

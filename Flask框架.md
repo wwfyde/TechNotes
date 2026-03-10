@@ -1906,6 +1906,10 @@ current_app.logger.error('error')
 
 > 当前应用程序的 logger 会根据应用程序的调试状态去调整日志级别
 
+# qucikstart
+
+dify 为例 使用了 flask_restful marshal_with, field 来对response json 进行schema
+
 # flask项目操作流程
 
 ## 项目研究和分析和准备

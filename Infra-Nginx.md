@@ -46,6 +46,38 @@ sudo systemctl reload nginx 重新加载配置
 
 ## Configuration
 
+## teninge
+
+> ngx_http_upstream_session_sticky_module
+
+```shell
+./configure --add-module=./modules/ngx_http_upstream_check_module --add-module=./modules/ngx_http_upstream_session_sticky_module --add-module=./modules/ngx_http_upstream_dynamic_module
+```
+
+
+
+```shell
+sudo tee /lib/systemd/system/tengine.service <<EOF
+[Unit]
+Description=Tengine - enhanced web server
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/nginx/sbin/nginx -c /usr/local/tengine/conf/nginx.conf
+ExecReload=/usr/local/nginx/sbin/nginx -s reload
+ExecStop=/usr/local/nginx/sbin/nginx -s quit
+PIDFile=/usr/local/nginx/logs/nginx.pid
+
+[Install]
+WantedBy=multi-user.target
+EOF
+```
+
+## session_sticky
+
+https://github.com/xuges/nginx-sticky-module-ng  
+
 # Topics
 
 ## 反向代理(Reverse Proxy)
@@ -126,7 +158,7 @@ server {
     try_files $uri $uri/ /index.html =404;  # 单文件应用
   }
   location /api {
-    proxy_pass http://backend:8001;
+    proxy_pass http://127.0.0.1:7003;
     proxy_set_header Host $http_host;
     proxy_set_header X-Real-IP $remote_addr;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;

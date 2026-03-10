@@ -15,14 +15,141 @@
 - [Python HOWTOs](https://docs.python.org/3/howto/index.html)
 - [Python FAQs](https://docs.python.org/3/faq/index.html)
 
-# 理解
+# 概念原理
 
 - 枚举
     - 枚举的name是在Python程序中的有意义表示, value是对外部数据的存储和表示
+    - 
 
-# 环境配置
+## 问题引导
+
+- python类的创建过程?
+  - 当解释器执行 class Foo(...) 时，会依次发生：
+    1. 收集类体内定义的变量和方法，形成 namespace；
+    2. 调用元类的 `__new__` 方法生成类；
+    3. 调用元类的 `__init__` 方法初始化类。
+
+# **环境配置**
 
 机器学习环境一键安装 [lambda stack](https://lambdalabs.com/lambda-stack-deep-learning-software)
+
+## uv
+
+- [lock and sync](https://docs.astral.sh/uv/concepts/projects/sync/)
+- [manage dependencies](https://docs.astral.sh/uv/concepts/projects/dependencies/)
+
+```shell
+# 配置全局默认Python版本 实质上写入`~/.config/uv/.python-version`文件
+uv python pin --global 3.12
+uv python install 3.12 --default
+
+# 添加依赖
+
+
+
+## 升级
+# https://github.com/astral-sh/uv/issues/6794
+uv sync --upgrade  # implies lock
+uv add -U fastapi
+
+# 强制升级依赖到最新版本
+uv add "httpx>0.1.0" --upgrade-package httpx
+uv lock -U  
+uv lock --upgrade-package  openai
+uv pip show 
+uv pip install -U
+
+uv lock --check  # 判断哪些是更新的	
+
+
+# 工具安装
+ uv tool install ty@latest
+  uv tool install ruff@latest
+
+
+# uv pin
+uv python pin 3.14
+uv python pin 3.14t
+
+
+```
+
+### 依赖管理
+
+```shell
+# 移除一些不必要的依赖 避免安装失败
+--excludes  
+uv tool install
+
+uv pip install --excludes 
+
+uv sync --frozen
+
+# 对已有依赖进行升级
+uv lock --upgrade-package requests
+uv sync
+
+
+uv tree --invert --package numpy
+
+uv add --exclude-newer-package exclude-newer-package
+
+
+# 依赖覆盖Dependency overrides
+# tool.uv  解决依赖冲突
+[tool.uv]
+# 强制覆盖 依赖约束
+override-dependencies = ["werkzeug==2.3.0"]
+
+
+[tool.uv]
+# 如果某些包在 3.14 下无法从源码构建，尝试优先寻找 wheel
+prefer-binary = true
+
+```
+
+
+
+### 项目配置
+
+```toml
+# pyproject.toml
+[[tool.uv.index]]
+url = https://mirrors.aliyun.com/pypi/simple
+default = true  # 最高优先级
+
+[[tool.uv.index]]
+url = https://mirrors.aliyun.com/pypi/simple
+```
+
+
+
+### 全局配置
+
+```toml
+# ~/.config/uv/uv.toml
+[[index]]
+url = https://mirrors.aliyun.com/pypi/simple
+default = true
+```
+
+### uvx
+
+```shell
+uv tool install ruff
+uvx ruff
+
+uvx --with 
+uvx --from 
+```
+
+
+
+### 最佳实践
+
+- 将主pyproject.toml设置为workspace 自身不包含包, 这适合多应用多库的场景
+  - package=false
+- uv run api
 
 ## pip
 
@@ -157,36 +284,31 @@ The NVIDIA Container Toolkit enables users to build and run GPU-accelerated cont
 sudo docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
 ```
 
-
-
-# 开发工具
-
-## uv
-
-- [lock and sync](https://docs.astral.sh/uv/concepts/projects/sync/)
-- [manage dependencies](https://docs.astral.sh/uv/concepts/projects/dependencies/)
-
 ```shell
-# 配置全局默认Python版本 实质上写入`~/.config/uv/.python-version`w文件
-uv python pin --global 3.12
+# install or run
+uv tool install huggingface_hub
+uvx --from huggingface_hub hf auth whoami  # no install
 
-## 升级
-# https://github.com/astral-sh/uv/issues/6794
-uv sync --upgrade  # implies lock
-uv add -U fastapi
-uv lock -U  
-uv lock --upgrade-package  openai
-uv pip show 
-uv pip install -U
-
-uv lock --check  # 判断哪些是更新的	
+hf download 
+hf auth login
+hf download deepseek-ai/DeepSeek-OCR --local-dir ./DeepSeek-OCR  # 不使用缓存系统, 非元数据格式
 ```
 
 
 
-
-
 ## ruff
+
+```shell
+# 安装ruff 并更新 
+uv tool install ruff@latest
+
+# brew
+brew install ruff 
+brew uppgrade ruff
+
+uv add --dev ruff
+
+```
 
 ## pytest
 
@@ -195,6 +317,21 @@ uv lock --check  # 判断哪些是更新的
 ## venv
 
 ## pipx
+
+
+
+# 项目管理
+
+## Tips
+
+- 使用workspace共享代码, 一个项目中包含多个APP的大型项目中
+  - 核心思想时, 将共享代码设计成`workspace package` 
+
+
+
+# 依赖管理
+
+
 
 # 异常处理
 
@@ -260,7 +397,27 @@ except Exception as e:
     print(f"Error: {e}")
 ```
 
+
+
+# 代码质量
+
+静态分析, 类型安全, 调试, 测试, 性能分析, 自动化hook, 文档注释
+
+# 静态分析
+
+> 使用类型注解, 类型安全
+
+
+
 # 调试分析
+
+> print
+>
+> pprint
+>
+> rich
+>
+> ic(iceCream)
 
 
 
@@ -292,9 +449,33 @@ datetime.datetime.now()
 
 
 
+## sentry(生产测试)
+
+# 测试
+
+> 单测, 集成测试, 覆盖率分析
+
+
+
+pytest 
+
+
+
+## 
+
+
+
 # 性能优化
 
 # 
+
+# 风格指南
+
+convention, best practices
+
+# 自动化hooks
+
+## pre-commit
 
 # 监控
 
@@ -1355,6 +1536,12 @@ Entity-实体-领域模型-业务
 #### <u>设计</u>
 
 逻辑设计, 数据结构设计
+
+
+
+## 原则
+
+- Explicit is better than implicit(显式优于隐式)
 
 # 编程思想
 

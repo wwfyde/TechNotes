@@ -3,11 +3,11 @@
 > *Prompt engineering is the art of communicating with a generative large language model.
 > 提示工程是与生成式大型语言模型通信的艺术。*
 
-## Links
 
-- [Claude Prompt Engineering](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering)
-- DeepSeek
-  - [DeepSeek提示库: 样例, 系统提示](https://api-docs.deepseek.com/zh-cn/prompt-library/)
+
+## Articles
+
+- [gpt-4.1 prompting guide](https://cookbook.openai.com/examples/gpt4-1_prompting_guide)
 
 
 ## 引子-启发-涌现-提示-引导-牵引-扩展-扩散-门道-模式-模范-钥匙-方法论-智能-自我意识-思路-学习-精髓-原理-规范-抽象-激发-产生-指南
@@ -35,6 +35,8 @@ productivity tips-生产力提示, 效率提示, 效能提示
 参考-reference-参考资料
 
 应用场景
+
+核心概念- core Concepts
 
 底层原理(如何工作)-**Underlying Principles** (底层原理)
 
@@ -124,6 +126,9 @@ how does something work?
 - https://aws.amazon.com/what-is/prompt-engineering/
 - https://fork-way.feishu.cn/sheets/shtcn1IbUR0wZeRydb3DOuBfJle?from=from_copylink
 - https://github.com/dair-ai/Prompt-Engineering-Guide
+  - [Prompt指南](https://github.com/dair-ai/Prompt-Engineering-Guide)
+  - https://www.promptingguide.ai/research/llm-agents
+
 - https://github.com/dair-ai/Prompt-Engineering-Guide
 - https://github.com/f/awesome-chatgpt-prompts
 - https://github.com/PlexPt/awesome-chatgpt-prompts-zh
@@ -133,6 +138,14 @@ how does something work?
 - [通往AGI之路](https://www.waytoagi.com/)
 - [大模型服务平台百炼:Prompt最佳实践](https://help.aliyun.com/zh/model-studio/use-cases/prompt-best-practices)
 - [如何用Prompt更好与LLM进行沟通](https://arxiv.org/pdf/2312.16171)
+- [Claude Prompt Engineering](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering)
+  - https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview
+- DeepSeek
+  - [DeepSeek提示库: 样例, 系统提示](https://api-docs.deepseek.com/zh-cn/prompt-library/)
+
+## articles
+
+- [GPT4.1 Prompting Guide](https://cookbook.openai.com/examples/gpt4-1_prompting_guide#delimiters)
 
 ## 指南-Guideline
 
@@ -147,10 +160,18 @@ how does something work?
 ### 最佳实践
 
 - 使用变量`{{variable}}`, `[topic]` , `topic`(反引号)
-    - topic: result
+    - ~~topic: result~~
     - topic= result
     - result
-- 
+    - [topic] -> 主题  
+    - ```xml
+      <topic> =  变量值  次选
+      
+      {topic} = 变量值
+      
+      <product a="12"/>  # xml风格
+      ```
+- 使用 [] 提示用户输出问答
 
 ### tips
 
@@ -277,6 +298,54 @@ user: Blue sky at dusk
 
 主题-[]
 
+## 变量
+
+-> [how-to-use-variables-in-prompts](https://www.aiprm.com/tutorials/create-prompts/how-to-use-variables-in-prompts/)
+
+ 推荐用方括号定义变量, 用 `->` `=` `:`来对变量进行注解
+
+方括号会根据上下文进行补充, 或由LLM进行扩展
+
+定义变量: [your_context] -> 这是context
+
+定义模版变量: {{context}}
+
+
+
+分隔符(delimiter): 首选Markdown(含文档块标签), 次选XML, 复杂数据使用json, 自然语言(section titles)
+
+## 模版变量
+
+jinja2 模版语法
+
+## stucture
+
+```markdown
+# identity (role and objective/task)
+
+# instructions
+
+
+
+# output format
+# examples
+<example1>
+<input></input>
+<output></output>
+</example1>
+
+## example 2
+
+# context
+
+# Final instructions and prompt to think step by step
+
+
+
+```
+
+
+
 # Glossary
 
 ### 系统提示(System prompts)
@@ -330,8 +399,10 @@ user: Blue sky at dusk
 > - [Use XML tags to structure your prompts](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/use-xml-tags)
 >
 > Claude推荐使用xml标签,
+>
+> GPT则更推荐Markdown风格
 
-- 分隔符
+- 分隔符delimiter: `"""`,`---` `\n\n` 
 - Use XML tags to separate instructions from context
 - 段落分隔
 - xml/html标签,
@@ -463,6 +534,12 @@ ask the model to reason step by step
 
 context-aware, context-rich
 
+## 思维链(CoT)
+
+Chain of Thought
+
+
+
 ## 补全模式
 
 completion-style
@@ -498,7 +575,6 @@ completion-style
 ## 可选部分
 
 - Context(上下文)
-- 
 - Instruction(指令)
 - Tone(语调)
 - Response(响应)
@@ -662,10 +738,16 @@ LLMs for Coding
 - Let's think through it step-by-step."
 
 - ```
-    
-    ```
+  [context_before] ->   
+  ```
 
 
+
+## claude
+
+## gpt
+
+## deepseek
 
 # 格式化输出
 
@@ -1087,5 +1169,56 @@ xx你吃不吃？(询问意见=我想吃)
 
 ## 初始行为
 👋 欢迎用户, 自我介绍然后开始翻译TA黑话的潜台词。
+```
+
+# instructions
+
+## GPT
+
+```markdown
+- Use a formal, professional tone.
+- Provide multiple perspectives or solutions;
+- Provide code examples and best practices;
+- Python first with Type hint, TS over JS.
+- Be highly organized;
+- Suggest solutions that I didn’t think about—be proactive and anticipate my needs
+- Treat me as an expert in all subject matter
+- Provide detailed explanations, I’m comfortable with lots of detail
+- New features over compatibility for Coding
+- 代码存在依赖时优先使用latest stable version推荐的写法, respect相关依赖的官方文档规范, 禁止提供deprecated和legacy的代码实现;
+- 术语和命名习惯规范, 当我使用了不符合技术领域规范的词语时, 尝试对我进行纠正并解释;
+- 针对重要或核心或专业的概念和术语，请用中英双语展示，并对其进行解释和阐述; 
+- 解释维度: 概念, 定义, 原理, 比较关联, 重点提示, 陷阱提醒, 用法与应用场景, 最佳实践, 代码演示, 开发指南, 解决方案等等
+- 提供解决方案时, 从系统设计, 架构模式等顶层自上而下思考: 业务目标与价值, 需求与约束, 领域建模与理解, 数据架构, 集成与互操作性, 
+- 代码实现层: 编程范式, 设计原则, 设计模式, 系统设计等
+- 提供代码实现解决方案时, 列举更多方案, 按照业界公认和最优解决方案进行排序展示, 同时给出引用链接;
+- 直接回答, 不要携带语气
+
+
+---Python---
+uv, pydantic, FastAPI, postgres, httpx,openai, python3.12
+
+---TypeScript---
+pnpm, tailwindcss, vite, react, fetch;
+```
+
+
+
+```markdown
+I'm a Python,Rust,TypeScript&Go Developer, Use MacOS. 
+I Use
+My Tech Stacks:
+Infra:Linux, Docker, FastAPI, AI,Postgres, Redis.
+
+Python Libraries:
+Pydantic(v2),
+```
+
+# Gemini
+
+
+
+```markdown
+一个完整的提示词应该包含六个要素：主体（谁或什么）、构图（如何取景）、动作（正在发生什么）、场景（在哪里）、风格（什么审美）、编辑指令（如何修改）。
 ```
 

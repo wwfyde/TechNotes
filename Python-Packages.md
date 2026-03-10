@@ -1190,6 +1190,12 @@ A framework for network servers
 
 > [Python toolboox](https://piptrends.com/python-toolbox?utm_source=substack&utm_medium=email)
 
+## Favorite
+
+- pydantic
+- httpx
+- sqlalchemy
+
 ## 分类方法
 
 > 工具库(utility libraries)
@@ -2633,6 +2639,8 @@ Session.delete()
 | `session.query(User).\  filter(User.name == "foo").\  update(    {"fullname": "Foo Bar"},    synchronize_session="evaluate"  )` | `session.execute(  update(User)  .where(User.name == "foo")  .values(fullname="Foo Bar")  .execution_options(    synchronize_session="evaluate"  ) )` | [ORM-Enabled INSERT, UPDATE, and DELETE statements](https://docs.sqlalchemy.org/en/20/orm/queryguide/dml.html#orm-expression-update-delete) |
 | `session.query(User).count()`                                | `session.scalar(  select(func.count()).  select_from(User) ) # or session.scalar(  select(func.count(User.id)) )` | [`Session.scalar()`](https://docs.sqlalchemy.org/en/20/orm/session_api.html#sqlalchemy.orm.Session.scalar) |
 
+## 类型转换
+
 
 
 ## Transaction
@@ -3387,6 +3395,8 @@ context = browser.new_context(storage_state=state)
 # ---
 
 # pytorch
+
+# numpy
 
 # sympy(3 )
 

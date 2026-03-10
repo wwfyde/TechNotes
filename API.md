@@ -29,6 +29,16 @@
 
 ![D859272B-5D73-433E-B33F-3A47FFF56BED_1_102_o](https://wwfyde.oss-cn-hangzhou.aliyuncs.com/images/202403181012708.jpeg)
 
+## API References
+
+
+
+- https://huggingface.github.io/text-embeddings-inference/
+- https://api.smith.langchain.com/docs
+- https://docs.stripe.com/api
+- https://docs.digitalocean.com/reference/api/digitalocean
+- https://developer.paypal.com/api/rest/current-resources/
+
 ## 设计原则
 
 
@@ -162,6 +172,12 @@
 
 # 参考规范
 
+## X/Twitter
+
+x-api
+
+
+
 ## GitHub
 
 https://docs.github.com/en/rest/using-the-rest-api/getting-started-with-the-rest-api?apiVersion=2022-11-28
@@ -205,7 +221,13 @@ https://learn.microsoft.com/en-us/graph/use-the-api
 
 
 
+
+
 # **最佳实践**
+
+## 零散记录
+
+- 使用下划线字段, json中, 这样和数据库的字段名更一致
 
 ## 路由方案 
 
@@ -226,6 +248,24 @@ GET https://api.github.com/search/issues?q={query}{&page,per_page,sort,order}
 ### 参考文档
 
 - https://platform.openai.com/docs/guides/rate-limits?context=tier-free
+
+
+
+# 路由设计
+
+```shell
+
+APP_ENV
+
+# 子资源
+/orders/{id}/cancel
+/orders/{id}/pay
+/users/{id}/reset-password
+
+# 改状态 用更新来表达
+	•	PATCH /users/{id}
+    •	PATCH /orders/{id}
+```
 
 
 
@@ -250,7 +290,7 @@ GET https://api.github.com/search/issues?q={query}{&page,per_page,sort,order}
 {
     "code" : 0,
     "success": true,
-    "msg" : "成功",
+    "message" : "成功",
     "data": {
          "temporary_id":"12121"; //笔记临时id
         }
@@ -535,4 +575,30 @@ In the above example, a request to an analytics endpoint was made with an invali
 | 400       | UNKNOWN_CRITERIA_TYPE                                     |
 | 403       | USER_NOT_FOUND                                            |
 | 404       | WEB_EVENT_TAG_NOT_FOUND                                   |
+
+# code
+
+```json
+{
+    "error": {
+        "code": 503,
+        "message": "No capacity available for model gemini-3-pro-high on the server",
+        "status": "UNAVAILABLE",
+        "details": [
+            {
+                "@type": "type.googleapis.com/google,rpc.Errorinfo",
+                "reason": "MODEL CAPACITY EXHAUSTED",
+                "domain": "cloudcode-pa.googleapis.com",
+                "metadata": {
+                    "model": "gemini-3-pro-high"
+                }
+            },
+            {
+                "@type": "type.googleapis.com/google.rpc.Retrylnfo",
+                "retryDelay": "39s"
+            }
+        ]
+    }
+}
+```
 

@@ -1,6 +1,32 @@
 # LLM开发
 
+相关链接: AI技术原理
+
 ## Links
+
+- marktechpost
+- 3Blue1Brown
+- [dair-ai](https://github.com/dair-ai/ML-Papers-of-the-Week)
+- https://theresanaiforthat.com/
+- [人工智能杂志](https://aimagazine.com/)
+- [抱抱脸每日论文](https://huggingface.co/papers)
+- [机器学习大师](https://machinelearningmastery.com/)
+
+## Projects
+
+- [Chainlit: Build Conversational AI in minutes](https://github.com/Chainlit/chainlit)
+
+## Papers
+
+
+
+## Blog
+
+- [Methods for adapting large language models](https://ai.meta.com/blog/adapting-large-language-models-llms/)
+- https://ai.meta.com/blog/how-to-fine-tune-llms-peft-dataset-curation/
+- [《人工智能杂志》评选出的展示全球人工智能最新发展的十大博客](https://mp.weixin.qq.com/s/mFzz3JkVOeqIJczw8B9zLQ)
+
+## Videos
 
 ### Local
 
@@ -134,6 +160,22 @@ parallelization/
 
 ![d3083d3f40bb2b6f477901cc9a240738d3dd1371-2401x1000:https://www.anthropic.com/_next/image?url=https%3A%2F%2Fwww-cdn.anthropic.com%2Fimages%2F4zrzovbb%2Fwebsite%2Fd3083d3f40bb2b6f477901cc9a240738d3dd1371-2401x1000.png&w=3840&q=75](https://wwfyde.oss-cn-hangzhou.aliyuncs.com/images/202506071046899.webp)
 
+## 问题引导
+
+- f ->x = f(x) (预测下一个token)
+  - 改变f就是训练
+  - 改变参数f就是训练(training)或者学习(learning)
+  - 改输入x(训练人类): 切语言模型合适的输入, 让语言模型得到预期的输出结果
+- prompt engineering 与context engineering 区别
+  - 关注点不一样
+  - 核心就是改变输入来使结果符合预期, 改善
+  - 指派任务, 指导模型, 约束条件, 输出格式
+  - in-context learning
+
+
+
+# 常见问题
+
 
 
 # 模型参考
@@ -249,6 +291,12 @@ Typically, a conversation will start with a system message that tells the assist
 
 
 
+## Gemini 
+
+- [](https://ai.google.dev/gemini-api/docs/openai)
+
+
+
 # API Price
 
 - [OpenAI API Pricing](https://openai.com/api/pricing/)
@@ -286,7 +334,10 @@ Typically, a conversation will start with a system message that tells the assist
 - cherry studio
 - vllm
 - sglang
-- 
+
+
+
+
 
 # MCP
 
@@ -325,10 +376,6 @@ Typically, a conversation will start with a system message that tells the assist
 ## Tools
 
 - [pytorch-lightning](https://github.com/Lightning-AI/pytorch-lightning)
-
-# Glossary
-
-# LLMs API
 
 
 
@@ -373,46 +420,6 @@ ragflow 意图识别开发
 
 
 
-
-# Infras
-
-
-
-## GPU按需调度
-
-
-
-# AI
-
-## Resources
-
-### post
-
-- marktechpost
-- 3Blue1Brown
-- [dair-ai](https://github.com/dair-ai/ML-Papers-of-the-Week)
-- https://theresanaiforthat.com/
-- [人工智能杂志](https://aimagazine.com/)
-- [抱抱脸每日论文](https://huggingface.co/papers)
-- [机器学习大师](https://machinelearningmastery.com/)
-
-
-
-# Links
-
-> 相关链接: AI技术原理
-
-## Papers
-
-
-
-## Blog
-
-- [Methods for adapting large language models](https://ai.meta.com/blog/adapting-large-language-models-llms/)
-- https://ai.meta.com/blog/how-to-fine-tune-llms-peft-dataset-curation/
-- [《人工智能杂志》评选出的展示全球人工智能最新发展的十大博客](https://mp.weixin.qq.com/s/mFzz3JkVOeqIJczw8B9zLQ)
-
-## Videos
 
 # Glossary
 
@@ -647,10 +654,6 @@ CuDNN广泛应用于深度学习领域，包括：
 
 
 
-# CUDA
-
-
-
 # Conda
 
 ## 参考资料
@@ -832,7 +835,7 @@ docker pull nvidia/cuda:12.4.1-cudnn-devel-ubuntu22.04
 docker run --gpus all --name comfyui -it nvidia/cuda:12.4.1-cudnn-devel-ubuntu22.04
 
 # 使用其中一个GPU
-nvidia-smi -L  # 查看可用
+nvidia-smi -L  # 查看ID和uuidz
 docker run --gpus all --rm -it nvidia/cuda:12.4.1-cudnn-devel-ubuntu22.04 /bin/bash 
 docker run --gpus device=0 --rm -it nvidia/cuda:12.4.1-cudnn-devel-ubuntu22.04 /bin/bash 
 docker run --gpus 2 --rm -it nvidia/cuda:12.4.1-cudnn-devel-ubuntu22.04 /bin/bash  # 指定数量
@@ -1090,7 +1093,9 @@ Hugging i: Soring A Task wit ason and as Fiend an Hugging - We, stal, a, 2023)
 
 multiagent collaboration-多智能体协作
 
+## links
 
+- https://github.com/langchain-ai/deepagents
 
 # GPT
 
@@ -1130,11 +1135,7 @@ multiagent collaboration-多智能体协作
 
 约会话题-智谱AI
 
-# GPTs
 
-Web browser
-
-### 
 
 # Workflow
 
@@ -1146,9 +1147,7 @@ Web browser
 
 - [Dify 工作流](https://docs.dify.ai/v/zh-hans/guides/workflow)
 
-# CV
 
-# **YOLO**
 
 # Huggingface
 
@@ -1187,283 +1186,281 @@ Web browser
 
 ### LangServe-deploy
 
-# midjourney
 
-conj
 
-Dynamic Wang
+## 常见问题
 
-过拟合
+- 注入参数约束
+  - 使用graph
+  - 使用动态提示词, 通过context 注入
+  - 使用state_schema
+- 一个用户可以有多个会话,而 一个会话每个会话开启一个agent
+- checkpointer: 短期记忆, 创建一个agent 多次调用, 用于维持会话状态
+- store: 长期记忆, 整个用户都有效
+- 重新create_agent 后 AgentState 会丢失, 所以一个会话重新创建一个AgentState
+- langchain 通过 thread_id 来隔离短期记忆
+- 核心对象
+  - user_id
+  - session_id
+  - 
+  - conversation_id(thread_id)
+  - profile_id
 
-awportrait
+# Langraph
 
-lightportrait
+## Tips
 
-AI 局部修改视频
+- 流程控制, 比如并行时的执行, 
 
-UGC状态
+## 常见问题
 
-runway
+- 如何持久化状态
+- 流程控制, 是
+- 定义条件边, 通过还是来确定 builder.add_conditional_edges('a', func)
+  - 条件边函数()
+  - 通过Command来控制边, 在节点来判断返回next_node
 
-robotic @google
 
-AI 足球解说员
+## 特性
 
+- 边(Edge)定义控制流, 但他们并不控制Node可以访问的数据
 
+## Core Concepts
 
-Midjourney是如何处理提示的
+### State
 
-## Links
+所有节点共享State
 
-- [Midjourney Latest Updates](https://www.midjourney.com/updates)
-- [Midjourney/Getting Startted/Prompts](https://docs.midjourney.com/docs/prompts)
-- [Midjourney/Writing-Prompts/Prompts](https://docs.midjourney.com/docs/prompts-2)
+### Node
 
- 
+### Edages
 
-## Introduction
+Serial(串行), parallel
 
-文生图, 图生图
+conditional
 
-### Feature
+### Checkpointing/Memory
 
-训练数据包含了大量已有作品
+### Human in the loop: interrupts
 
-图像质量高, 可以生成各种风格的图像
+### Middleware
 
-### 对比Stability AI 
+### Dynamic prompt
 
+human in the loop
 
 
-### 用法
 
-主要通过指令进行图像生成、调整和优化, 支持提示词,参数
 
-## Prompts
 
-|                                  |          |      |
-| -------------------------------- | -------- | ---- |
-| flat view                        | 平铺视图 |      |
-| clear colors                     | 颜色清洗 |      |
-| in the style of seamless pattern | 无缝图案 |      |
-| high resolution                  | 高分辨率 |      |
-| detailed details                 | 细节详尽 |      |
 
 
+# **Agent**
 
-### Word Choice
+> LLM Agents
 
-### Plural words and Collective Nouns
+- [Claude: 无框架高效构建Agent](https://www.anthropic.com/engineering/building-effective-agents)
+- [Claude Agent Solutions](https://www.anthropic.com/solutions/agents)
+- [AWS Bedrock Agents](https://aws.amazon.com/bedrock/agents/)
+- [What Are Agentic Workflows?](https://weaviate.io/blog/what-are-agentic-workflows)
+- Camel Agent
+- owl
 
-### Prompt Length and Details
 
-## Commands
 
-### imagine
+## Link
 
-### describe
+### 博客
 
-### settings
+- [如何评价当前的 AI Agent 落地效果普遍不佳的问题？](https://www.zhihu.com/question/13476251758)
+- [公众号::智东西::Agent综述论文火了，10大技术路径一文看尽](https://mp.weixin.qq.com/s/ilLpFYkhVEZHEHmUopwGxg)
+- [Bilibili::沧海九粟::12要素智能体]()
+- [Bilibili::沧海九粟::什么是Agentic工作](https://www.bilibili.com/video/BV1nj5MzyE73)
+  -  a **workflow** is a series of connected steps designed to achieve a specific task or goal. 
 
-### blend(混合)
+## projects
 
-图像编写提示词
+### OpenManus
 
+[Github::FoundationAgents::OpenManus](https://github.com/FoundationAgents/OpenManus)
 
+## 观点
 
+- 构建Agent的目标是解决特定问题
+- Tool Use, in which an LLM is given functions it can request to call for gathering information, taking action, or manipulating data, is a key design pattern of AI agentic workflows. --Andrew.Ng
+- prompt as function(提示即函数)
+- 构建AI应用的三大核心要素：模型、数据和智能体
+  - [google::vertex](https://cloud.google.com/?hl=zh-cn): 您可以使用 Vertex AI 来编排生产 AI 的三大核心要素：模型、数据和智能体。
 
 
-## Parameter
+## 资料
 
+- LightRAG
+- StructRAG
+- GraphRAG
+- agno
 
+##  原理
 
-|                     |                                 |                                   |                               |
-| ------------------- | ------------------------------- | --------------------------------- | ----------------------------- |
-|                     |                                 |                                   |                               |
-| no                  | --no item1, item2, item3        | what not to include in your image | 不应该包含某些                |
-| ar                  | --ar<br />--aspect ratio        |                                   | 宽高比                        |
-| chaos               | --chaos 0<br />--chaos 30       |                                   | 混乱度, 创造性                |
-| tile                |                                 |                                   | 无缝<br />tile 模式下无法放大 |
-| stylize             | --stylize 100<br />--stylize 50 |                                   | 风格化                        |
-| quality             | --q 1                           |                                   | 精细度                        |
-| style_reference     | --sref <br />--sw 0-1000(100)   |                                   | 风格引用                      |
-|                     |                                 |                                   |                               |
-| character_reference | --cref <br />--sw 0-100(100)    |                                   | 特征应用                      |
+>  [!Tip]
+>
+>  - [Function Calling - 智能体Agent的实现基础](https://mp.weixin.qq.com/s/2Z2DnbCXangUpFx2dLfogg)
+>  - https://www.53ai.com/news/zhinengkefu/2024072276502.html
 
 
 
+## 个人总结
 
+- 构建Agent的多种模式
+  - 无框架模式
+    - openai, qwen, 
+  - 框架 
+    -  UI-TARS
+    -  agno
 
-### funning
+- models
+  - doubao, qwen, openai
 
-```shell
-# imagine prompt
-illustration with a solid color backgorund , the subject a about the 17 on dragon ball --chaos 40 
-```
+- UI
+  - ag-ui
+  - copilotkit
 
-## 风格
+- Agent模式
+  - ReAct
+    - thought -> action -> observation
+    - 思考 -> 行动 -> 观察
 
-## 描画, 
+  - function call 
+  - MCP 
+  - A2A
 
-## 文心一格
-
-## 多模态搜索
-
-### 光厂
-
-## Trik
-
-
-
-
-
-# Stable Diffusion
-
-## 杂记
-
-缺点: 质感比较差, 模糊, 油腻感
-
-## Extensions
-
-
-
-
-
-# WebUI
-
-```shell
-./webui.sh --listen --api --ckpt-dir ~/code/ComfyUI/models/checkpoints
-```
-
-
-
-systemd
-
-```ini
-[Unit]
-Description=Stable Diffusion Web UI Service
-After=network.target
-
-[Service]
-User=molook
-WorkingDirectory=/home/molook/code/stable-diffusion-webui
-ExecStart=bash webui.sh --listen --api --ckpt-dir ~/code/ComfyUI/models/checkpoints
-Restart=always
-
-[Install]
-WantedBy=multi-user.target
-```
-
-
-
-# ComfyUI
-
-
-
-## Productivity Tips
-
-- drag a image that generated by comfyui will automatically load the workflow.
-  拖拽ComfyUI生成的图片到界面将会自动加载Workflow
-- comfyui只支持单GPU, 一个进程不支持多CPU
-
-# Magnific AI
-
-https://magnific.ai/
-
-# **Claude**
-
-# NLP
-
-
-
-# 训练
-
-## Links
-
-- [civitai: quickstart-guide-to-flux-1](https://education.civitai.com/quickstart-guide-to-flux-1/)
 
 ## Glossary
 
-### 微调（fine tuning）
+## 概念
+
+意图-intent
+
+实体-entity
 
 
 
-指训练模型并微调其性能。具体含义因用法而异，但在 Stable Diffusion 中，狭义的微调是指使用图像和caption进行训练模型。DreamBooth 可视为狭义微调的一种特殊方法。广义的微调包括 LoRA、Textual Inversion、Hypernetworks 等，包括训练模型的所有内容。
+# Agent Architecture
 
-### 步骤（step）
+> 架构模式 以及交互策略
 
+- [AI agent orchestration patterns: 大模型编排模式](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/ai-agent-design-patterns#implementation-considerations)
 
+![img](https://www.anthropic.com/_next/image?url=https%3A%2F%2Fwww-cdn.anthropic.com%2Fimages%2F4zrzovbb%2Fwebsite%2F1198befc0b33726c45692ac40f764022f4de1bf2-4584x2579.png&w=3840&q=75)
 
-粗略地说，每次在训练数据上进行一次计算即为一步。具体来说，“将训练数据的caption传递给当前模型，将生成的图像与训练数据的图像进行比较，稍微更改模型，以使其更接近训练数据”即为一步。
+![img](https://wwfyde.oss-cn-hangzhou.aliyuncs.com/images/20251020111527232.png)
 
-### 批次大小（batch size）
+## 核心思想
 
-
-
-批次大小指定每个步骤要计算多少数据。批次计算可以提高速度。一般来说，批次大小越大，精度也越高。
-
-“批次大小×步数”是用于训练的数据数量。因此，建议减少步数以增加批次大小。
-
-（但是，例如，“批次大小为 1，步数为 1600”和“批次大小为 4，步数为 400”将不会产生相同的结果。如果使用相同的学习速率，通常后者会导致模型欠拟合。请尝试增加学习率（例如 `2e-6`），将步数设置为 500 等。）
-
-批次大小越大，GPU 内存消耗就越大。如果内存不足，将导致错误，或者在边缘时将导致训练速度降低。建议在任务管理器或 `nvidia-smi` 命令中检查使用的内存量进行调整。
-
-注意，一个批次是指“一个数据单位”。
-
-### 学习率
+- **统一对话接口**：AutoGen的每个agent都可以接收、反应和响应消息，实现了统一的消息传递机制。这种设计利用了最先进的LLM在通过聊天进行反馈和推进的能力。
+- 工具集成
+- 人类代理参与
+- 多角色/多agent
+- 维护对话状态, memory
+- 通过context指定上下文信息
+- 通过State来实现multi-agent协作
 
 
 
-学习率指的是每个步骤中改变的程度。如果指定一个大的值，学习速度就会加快，但是可能会出现变化太大导致模型崩溃或无法达到最佳状态的情况。如果指定一个小的值，学习速度会变慢，同时可能无法达到最佳状态。
+## **协调者/主管模式 (Orchestrator/Supervisor Pattern)**。
 
-在fine tuning、DreamBooth、LoRA等过程中，学习率会有很大的差异，并且也会受到训练数据、所需训练的模型、批次大小和步骤数等因素的影响。建议从通常值开始，观察训练状态并逐渐调整。
+https://github.com/langchain-ai/langgraph-supervisor-py
 
-默认情况下，整个训练过程中学习率是固定的。但是可以通过调度程序指定学习率如何变化，因此结果也会有所不同。
+```
+AgentState
+```
 
-### Epoch
+## swarm
+
+> 该模式已被弃用
+
+- langgraph swarm
+
+ agents dynamically hand off control to one another based on their specializations. The system remembers which agent was last active, ensuring that on subsequent interactions, the conversation resumes with that agent.
 
 
 
-Epoch指的是训练数据被完整训练一遍（即数据已经迭代一轮）。如果指定了重复次数，则在重复后的数据迭代一轮后，为1个epoch。
+## react agent
 
-1个epoch的步骤数通常为“数据量÷批次大小”，但如果使用Aspect Ratio Bucketing，则略微增加（由于不同bucket的数据不能在同一个批次中，因此步骤数会增加）。
+# F&Q
 
-### 长宽比分桶（Aspect Ratio Bucketing）
+> 常见问题
 
-
-
-Stable Diffusion 的 v1 是以 512*512 的分辨率进行训练的，但同时也可以在其他分辨率下进行训练，例如 256*1024 和 384*640。这样可以减少裁剪的部分，希望更准确地学习图像和标题之间的关系。
-
-此外，由于可以在任意分辨率下进行训练，因此不再需要事先统一图像数据的长宽比。
-
-此值可以被设定，其在此之前的配置文件示例中已被启用（设置为 `true`）。
-
-只要不超过作为参数给出的分辨率区域（= 内存使用量），就可以按 64 像素的增量（默认值，可更改）在垂直和水平方向上调整和创建训练分辨率。
-
-在机器学习中，通常需要将所有输入大小统一，但实际上只要在同一批次中统一即可。 NovelAI 所说的分桶(bucketing) 指的是，预先将训练数据按照长宽比分类到每个学习分辨率下，并通过使用每个 bucket 内的图像创建批次来统一批次图像大小。
+- 如何触发工具调用:
+  - Prompt显式引导, call tool create_image
+  - LLM判断, 需要注意tool name 和 description
 
 
 
 
 
-## LoRA训练
-
-[kohyaSD-](https://github.com/kohya-ss/sd-scripts/blob/main/docs/train_README-zh.md)
-
-> kohya发音:  **こーや**（kohya）: [koːʝa] 或 [koːja]
+# Gemini API
 
 
 
-## 参数
+https://googleapis.github.io/python-genai/
+
+# 最佳实践
 
 
 
-- train_batch_size: 增加会让训练epoch变多, 时间变长
-- num_repeats: 从目录中拿取, 除非 增加数据集
-- epoch: 
+<div style="display: flex; border: 1px solid;">
+    <div style="flex: 1; padding: 10px;">
+    左边的内容  
+    - 列表1  
+    - 列表2  
+    </div>
+    <div style="flex: 1; padding: 10px; border-left: 1px solid;">
+    右边的内容  
+    - 列表A  
+    - 列表B  
+    </div>
+</div><div style="display: flex; border: 1px solid;">
+    <div style="flex: 1; padding: 10px;">
+    左边的内容  
+    - 列表1  
+    - 列表2  
+    </div>
+    <div style="flex: 1; padding: 10px; border-left: 1px solid;">
+    右边的内容  
+    - 列表A  
+    - 列表B  
+    </div>
+</div>
+
+
+|      | 111111111111 | 222222222222222 | 44444444444444 | eeeeeeeeeeeeeeeeeeeeeeeeeeeee | ererrrr | 44444444444 |
+| ---- | ------------ | --------------- | -------------- | ----------------------------- | ------- | ----------- |
+|      |              |                 |                |                               |         |             |
+|      |              |                 |                |                               |         |             |
 
 
 
-# Flux
+## 局限
 
-cuda >= 12.4 + torch >=2.4.0
+- function call 不支持 文件作为输入, 只能使用 url string, base64 string, 这是有json schema 限制的
+
+## Token
+
+[多模态API图片Tokens用量完全指南：预估成本与优化策略](https://help.apiyi.com/multimodal-api-image-token-calculation-guide.html)
+
+### Base64与URL图片输入方式对比
+
+在调用多模态API时，有两种主要方式提供图像:通过Base64编码或URL链接。这两种方式各有优缺点，下面通过表格详细对比:
+
+| 特性           | Base64编码                | URL链接                            |
+| -------------- | ------------------------- | ---------------------------------- |
+| **Token消耗**  | 较高(额外消耗约30%)       | 较低(仅URL字符本身)                |
+| **处理速度**   | 较快(无需额外网络请求)    | 较慢(需AI服务器下载图片)           |
+| **稳定性**     | 高(不依赖外部资源)        | 中(依赖图片服务器可用性)           |
+| **适用场景**   | 本地图片、对延迟敏感场景  | 已上传至公网的图片、对成本敏感场景 |
+| **实现复杂度** | 中(需要编码处理)          | 低(直接提供链接)                   |
+| **安全性**     | 高(直接传输内容)          | 中(需保证链接安全可访问)           |
+| **大小限制**   | 更容易达到API请求大小限制 | 较少受API请求大小限制              |
+
+**重要结论：** URL方式确实消耗较少的输入tokens(通常只有URL字符串本身的tokens)，但处理效率可能较低，因为AI服务需要先下载图片。如果应用对延迟敏感，Base64可能是更好的选择；如果对成本更敏感，URL方式更合适。

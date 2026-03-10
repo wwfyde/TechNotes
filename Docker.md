@@ -1664,6 +1664,15 @@ commit会保留父镜像的元数据, import则需要重写
 
 
 ```shell
+# 复制文件到容器
+docker cp /path/on/host/file.txt CONTAINER_ID:/path/in/container/
+
+# 从容器中导出文件
+docker cp CONTAINER_ID:/path/in/container/file.txt /path/on/host/
+
+
+# 拷贝目录
+docker cp ./myfolder my_postgres:/data/myfolder
 
 ```
 
@@ -4101,6 +4110,23 @@ docker load -i dist/jinmao-0.1.6.tar
 >
 > 在`Docker Desktop` 和 `Docker Engine` 的 代理配置方式不一样
 
+### 综述
+
+- 容器中代理
+  - Linux中不允许将本地端口映射的里面, 所以需要proxy 有地址比如公网地址, 或本地地址
+
+```yaml
+HTTP_PROXY: http://183.134.100.252:7890
+http_proxy: http://183.134.100.252:7890
+HTTPS_PROXY: http://183.134.100.252:7890
+https_proxy: http://183.134.100.252:7890
+NO_PROXY: localhost,127.0.0.1,redis, ssrf_proxy, plugin_daemon, db, web, worker, api, sandbox,certbot,nginx,weaviate,profiles,qdrant, couchbase-server, pgvector
+no_proxy: localhost,127.0.0.1,redis, ssrf_proxy, plugin_daemon, db, web, worker, api, sandbox,certbot,nginx,weaviate,profiles,qdrant, couchbase-server, pgvector
+
+```
+
+
+
 ### 使用镜像
 
 ### 允许容器可访问代理
@@ -4170,6 +4196,14 @@ extra_hosts:
 ### docker daemon配置文件 (推荐)
 
 > 影响范围: `docker pull`,  `docker push` , `docker search`
+>
+> **给 pull/push 配代理（dockerd / containerd）**
+>
+> 
+>
+> 
+>
+> > 说明：镜像的 **pull/push 实际由 containerd 执行**；有些发行版 containerd 独立为一个 systemd 服务，所以推荐 **docker 和 containerd 都配**。
 
 /etc/docker/daemon.json
 
@@ -4181,6 +4215,12 @@ extra_hosts:
         "no-proxy": "*.test.example.com,.example.org,127.0.0.0/8, 10.31.0.1/16, ssrf_proxy"
     }
 }
+
+    "proxies": {
+        "http-proxy": "http://172.20.210.30:7890",
+        "https-proxy": "http://172.20.210.30:7890",
+        "no-proxy": "*.test.example.com,.example.org,127.0.0.0/8, 10.31.0.1/16, ssrf_proxy"
+    }
 ```
 
 ### Mac配置
@@ -4194,6 +4234,10 @@ extra_hosts:
 > To manage proxy configurations for Docker Desktop, configure the settings in the Docker Desktop app or use [Settings Management](https://docs.docker.com/security/for-admins/hardened-desktop/settings-management/).
 
 `~/.docker/config.json`
+
+
+
+linux 如果使用了docker客户端 也可以使用这种方式:  docker search、docker login 由 **客户端进程**直接访问注册表，因此需要在**用户环境**或 **~/.docker/config.json** 设置代理。
 
 ```json
 {
@@ -4290,6 +4334,7 @@ docker-compose build \
     --build-arg http_proxy=http://127.0.0.1:7890 \
     --build-arg https_proxy=http://127.0.0.1:7890
 
+--build-arg https_proxy=http://183.134.100.252:7890 --build-arg https_proxy=http://183.134.100.252:7890
 
 ## 2）通过设置环境变量：
 
@@ -4649,10 +4694,17 @@ docker run -p 5432:5432 -h postgres --name postgres \
 -v $HOME/docker/postgres/data:/var/lib/postgresql/data \
 -e TZ=Asia/Shanghai -e POSTGRES_PASSWORD=postgres -d postgres:16
 # default username : postgres
-# -e POSTGRES_USER=molook 
-# -e POSTGRES_USER=molook -e POSTGRES_DB=molook \
+# -e POSTGRES_USER=postgres 
+# -e POSTGRES_USER=postgres -e POSTGRES_DB=postgres \
 # --restart always 
 # -v /Users/wwfyde/docker/postgres/data:/var/lib/postgresql/data \
+
+# 注意 POSTGRES_DB 不生效可能是因为本地数据挂载所致, 需要
+
+# postgres18
+docker run -p 5433:5432 -h postgres --name postgres18 \
+-v $HOME/docker/postgres18/data:/var/lib/postgresql/18/docker \
+-e TZ=Asia/Shanghai -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres -e POSTGRES_DB=postgres -d postgres:18
 
 docker run --rm -d  -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres -e POSTGRES_DB=postgres  postgres
 

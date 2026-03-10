@@ -6,6 +6,8 @@
 
 - 使用组合式API
 - `<script setup lang="ts">`
+- 推荐使用自动导入, 不要手动导入, `// import {ElImage} from "element-plus"` vue文件中这样写反而有问题
+- Vue 就用 Element + Nuxt + Shadcn-Vue + daisyUI 就好了, react 为主
 
 # 常见需求
 
@@ -35,7 +37,11 @@ export default ={
                      
 ```
 
+# 问题记录
 
+## 20250908
+
+不要手动导入 // import {ElImage} from "element-plus"
 
 # 项目初始化
 

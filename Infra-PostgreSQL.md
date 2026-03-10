@@ -13,7 +13,10 @@
 
 ## 学习目标
 
-MVCC 多版本控制
+- MVCC 多版本控制
+- index
+
+
 
 ## quickstart
 
@@ -80,6 +83,12 @@ A number of postgresql.conf settings affect performance. For more details, see A
 ## 日志和错误
 
 https://www.postgresql.org/docs/current/runtime-config-logging.html
+
+
+
+## PG18
+
+通过 virtual column 实现total 字段
 
 # 数据库设计
 
@@ -284,35 +293,11 @@ integer > serial
 
 
 
-# Topics
+# **Topics**
 
 ## Index
 
 ### partial index
-
-# Extensions
-
-# Features
-
-## 外部数据源(`Foreign Data Wrappers`（FDW）)
-
-## 并行查询
-
-# Administration
-
-
-
-[](https://www.postgresqltutorial.com/postgresql-administration/)
-
-## 用户和权限管理
-
-```postgresql
--- 创建用户
-CREATE USER username WITH PASSWORD 'password';
-
--- 赋予权限
-GRANT ALL PRIVILEGES ON DATABASE dbname TO username;
-```
 
 
 
@@ -322,8 +307,15 @@ GRANT ALL PRIVILEGES ON DATABASE dbname TO username;
 -- 备份
 pg_dump dbname > dbname.sql
 
+-- 备份一张表
+pg_dump -U postgres -d postgres -t public.user > user.sql
+pg_dump -U postgres -d postgres -t public.prompt --data-only > user.sql
+-- 从docker 中复制出来, 容纳后上传
+
 -- 恢复
 psql dbname < dbname.sql
+
+psql -U postgres -d newdb -f users.sql
 
 -- 迁移
 pgloader
@@ -351,6 +343,34 @@ timestamp=$(date +'%H%M')
 pg_dump -U "$PGUSER" -d "$PGDATABASE" > "$BACKUP_DIR/$PGDATABASE"_"$datestamp"_"$timestamp".sql
 
 ```
+
+
+
+# Extensions
+
+# Features
+
+## 外部数据源(`Foreign Data Wrappers`（FDW）)
+
+## 并行查询
+
+# Administration
+
+
+
+[](https://www.postgresqltutorial.com/postgresql-administration/)
+
+## 用户和权限管理
+
+```postgresql
+-- 创建用户
+CREATE USER username WITH PASSWORD 'password';
+
+-- 赋予权限
+GRANT ALL PRIVILEGES ON DATABASE dbname TO username;
+```
+
+
 
 
 
@@ -431,6 +451,66 @@ select distinct column1, column2 from table_name
 ## neon
 
 ## citus
+
+# 设计惯例
+
+> 设计规范
+>
+> ```json
+>     "created_at": "2025-11-03T08:40:31.721Z",
+> ```
+
+TIMESTAMP WITH TIME ZONE
+
+## 杂项
+
+- 时间: `TIMESTAMP WITH TIME ZONE`
+- 数值: Numeric
+- 除非明确的字段宽度: Text > VarChar, 不要Char
+- 布尔值: Boolean 优于 tinyint(1)
+- JSONB > JSON 
+- 默认是Not Null
+- 主键推荐选择, uuid(v7) 和 BigInt(防止溢出)
+
+
+
+## 命名规范
+
+> 小写+下划线
+>
+> 外键: user_id
+
+| id             | type | name         | description                                             | category |
+| -------------- | ---- | ------------ | ------------------------------------------------------- | -------- |
+| id             |      |              |                                                         |          |
+| cid            |      | categoray_id | 类别id                                                  |          |
+| sid            |      | session_id   | 会话id                                                  |          |
+| tenant_id      |      |              | 一个实例多份数据<br />即用于区分workspace<br />权限隔离 |          |
+| trace_id       |      |              |                                                         |          |
+| created_at     |      |              |                                                         | 时间     |
+| created_on     |      |              | created_on -- 2026-02-01                                | 日期     |
+| created_by     |      |              |                                                         | 审计     |
+| updated_at     |      |              |                                                         |          |
+| modified_at    |      |              |                                                         |          |
+| expires_at     |      |              |                                                         |          |
+| deleted_at     |      |              |                                                         |          |
+| description    |      |              |                                                         |          |
+| last_used_at   |      |              | 最后使用时间                                            |          |
+| last_active_at |      |              |                                                         |          |
+| is_exist       | bool |              | 是否存在                                                |          |
+| is_active      |      |              | 是否                                                    |          |
+| status         | bool |              |                                                         |          |
+| is_deleted     |      |              |                                                         |          |
+| remark         |      |              | 备注                                                    |          |
+| version        |      |              |                                                         |          |
+| source         |      |              | 数据来源                                                |          |
+| ip_address     |      |              |                                                         |          |
+
+## 约束
+
+## 索引
+
+- 并发创建索引
 
 # 最佳实践
 

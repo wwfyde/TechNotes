@@ -5,6 +5,11 @@
 - [Python-教程: 类](https://docs.python.org/zh-cn/3/tutorial/classes.html)
 - [Python Tutorials Class]()
 
+## 哪些场景需要使用面相对象
+
+- 有**长期存在的状态**与**不变式**（必须始终成立的约束）要维护。
+- 存在生命周期与资源管理
+
 ## 面向对象
 
 
@@ -14,6 +19,8 @@
 > Object-oriented programs are made up of objects. An *object* packages both data and the procedures that operate on that data. The procedures are typically called *methods* or *operations*.
 >
 > 面向对象的程序由对象组成。一个 **对象** 包含数据和操作这些数据的过程。这些过程通常被称为 **方法** 或 **操作**。
+>
+> 
 
 ## 类的设计思想
 

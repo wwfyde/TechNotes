@@ -6,6 +6,7 @@
 
 - https://github.com/zhanymkanov/fastapi-best-practices
 - https://github.com/Kludex/fastapi-tips
+- https://deepwiki.com/zhanymkanov/fastapi-best-practices
 
 ### 参考项目
 
