@@ -449,6 +449,164 @@ if __name__ == "__main__":
 > - injectables
 > - components
 
+## 依赖注入的类型注解原理
+
+### 问题：返回类实例时，Annotated 如何注解？
+
+当使用依赖注入时，经常会遇到这样的疑问：依赖函数的返回类型应该注解为 `ChatService()` 还是 `ChatService`？
+
+**简短答案：应该使用 `ChatService`（类型），而不是 `ChatService()`（实例）**
+
+### 原理解释
+
+#### 1. 依赖函数的返回类型注解
+
+```python
+# 全局服务实例
+chat_service = ChatService()
+canvas_service = CanvasService()
+
+# 依赖函数 - 返回类型注解应该使用类型（ChatService），而不是实例（ChatService()）
+def get_chat_service() -> ChatService:  # ✅ 正确：使用类型
+    return chat_service
+
+def get_canvas_service() -> CanvasService:  # ✅ 正确：使用类型
+    return canvas_service
+```
+
+**为什么是 `ChatService` 而不是 `ChatService()`？**
+
+- `ChatService` 是一个**类型（Type）**，表示这个函数返回的对象是 ChatService 类的实例
+- `ChatService()` 是一个**调用表达式**，会立即创建一个新实例，这不是类型注解的语法
+- Python 的类型注解系统（PEP 484）要求使用类型，而不是值
+
+#### 2. 路由函数中的参数注解
+
+```python
+from typing import Annotated
+from fastapi import Depends
+
+@router.get("/chat_session/{session_id}")
+async def get_chat_session(
+    session_id: str,
+    chat_service: Annotated[ChatService, Depends(get_chat_service)]  # ✅ 正确
+):
+    return await chat_service.get_chat_history(session_id=session_id)
+```
+
+**`Annotated[ChatService, Depends(get_chat_service)]` 的含义：**
+
+- `ChatService`：这是**类型注解**，告诉类型检查器和 IDE 这个参数的类型是 ChatService
+- `Depends(get_chat_service)`：这是**元数据**，告诉 FastAPI 如何获取这个参数的值
+  - FastAPI 会调用 `get_chat_service()` 函数
+  - 将返回的实例注入到 `chat_service` 参数中
+
+#### 3. 完整示例对比
+
+```python
+from typing import Annotated
+from fastapi import APIRouter, Depends
+
+# ========== 服务类定义 ==========
+class ChatService:
+    def __init__(self):
+        self.sessions = {}
+    
+    async def get_chat_history(self, session_id: str):
+        return self.sessions.get(session_id, [])
+
+class CanvasService:
+    def __init__(self):
+        self.canvases = {}
+    
+    async def get_canvas(self, canvas_id: str):
+        return self.canvases.get(canvas_id)
+
+# ========== 全局实例（单例模式）==========
+chat_service = ChatService()
+canvas_service = CanvasService()
+
+# ========== 依赖函数 ==========
+# ✅ 正确：返回类型注解使用类型
+def get_chat_service() -> ChatService:
+    """返回全局 ChatService 实例"""
+    return chat_service
+
+def get_canvas_service() -> CanvasService:
+    """返回全局 CanvasService 实例"""
+    return canvas_service
+
+# ❌ 错误示例：不要这样写
+# def get_chat_service() -> ChatService():  # 语法错误！
+#     return chat_service
+
+# ========== 路由函数 ==========
+router = APIRouter()
+
+@router.get("/chat_session/{session_id}")
+async def get_chat_session(
+    session_id: str,
+    # chat_service 参数的类型是 ChatService
+    # FastAPI 会调用 get_chat_service() 获取实例并注入
+    chat_service: Annotated[ChatService, Depends(get_chat_service)]
+):
+    """
+    Annotated 的两个参数：
+    1. ChatService - 类型注解，用于类型检查
+    2. Depends(get_chat_service) - 告诉 FastAPI 如何获取实例
+    """
+    return await chat_service.get_chat_history(session_id=session_id)
+
+@router.get("/canvas/{canvas_id}")
+async def get_canvas(
+    canvas_id: str,
+    canvas_service: Annotated[CanvasService, Depends(get_canvas_service)]
+):
+    return await canvas_service.get_canvas(canvas_id=canvas_id)
+```
+
+#### 4. 工作流程
+
+当请求到达时，FastAPI 的依赖注入系统按以下步骤工作：
+
+1. **解析注解**：FastAPI 看到 `Annotated[ChatService, Depends(get_chat_service)]`
+2. **识别依赖**：发现 `Depends(get_chat_service)`，知道需要调用 `get_chat_service` 函数
+3. **调用依赖函数**：执行 `get_chat_service()`，获得 ChatService 实例
+4. **类型验证**：验证返回的实例是否符合 `ChatService` 类型
+5. **参数注入**：将实例注入到路由函数的 `chat_service` 参数中
+6. **执行路由**：使用注入的实例执行路由函数逻辑
+
+#### 5. 其他注解方式（向后兼容）
+
+```python
+# 方式 1：使用 Annotated（推荐，Python 3.9+）
+async def endpoint1(
+    chat_service: Annotated[ChatService, Depends(get_chat_service)]
+):
+    pass
+
+# 方式 2：使用默认值（旧式写法，仍然支持）
+async def endpoint2(
+    chat_service: ChatService = Depends(get_chat_service)
+):
+    pass
+
+# 两种方式功能相同，但 Annotated 方式更符合现代 Python 类型注解标准
+```
+
+### 总结
+
+| 位置 | 正确写法 | 错误写法 | 说明 |
+|------|---------|---------|------|
+| 依赖函数返回类型 | `-> ChatService` | `-> ChatService()` | 使用类型，不是实例 |
+| 路由函数参数类型 | `chat_service: Annotated[ChatService, ...]` | `chat_service: Annotated[ChatService(), ...]` | 第一个参数是类型 |
+| 依赖函数返回值 | `return chat_service` | - | 返回实例对象 |
+
+**核心原则：**
+- 类型注解位置使用**类型**（`ChatService`）
+- 函数返回和赋值使用**实例**（`chat_service` 变量或 `ChatService()` 调用）
+- `Annotated` 的第一个参数永远是类型，第二个参数是 FastAPI 的元数据（如 `Depends`）
+
 # 全局共享状态
 
 > 全局服务, 全局状态, 
