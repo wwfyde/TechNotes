@@ -853,6 +853,13 @@ https://www.tensorflow.org/tutorials/images/data_augmentation?hl=zh-cn
 
 - [李宏毅:一堂课搞懂生成式人工智能原理](https://speech.ee.ntu.edu.tw/~hylee/GenAI-ML/2025-fall-course-data/LLM.pdf)
 
+
+
+## 认知
+
+- 大模型就是文字接龙
+- 大模型本身没有记忆, 不知道过去发生了什么
+
 ## 通过问题引导
 
 - 大模型的本质是什么?

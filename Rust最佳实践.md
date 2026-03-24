@@ -1108,6 +1108,10 @@ cargo install --path .  # cargo.toml 指定install.root = " ~/.local"
 # create workspace package
 cargo new —lib
 
+# cargo tree
+
+cargo tree
+
 
 
 ```
