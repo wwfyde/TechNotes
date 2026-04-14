@@ -292,9 +292,9 @@ fn main() {
   - 工厂方法
   - trait方法
 
-- 堆分配智能指针(Box)**Box<T>：堆分配智能指针（Heap-Allocated Smart Pointer）**
+- 堆分配智能指针(Box)**`Box<T>`：堆分配智能指针（Heap-Allocated Smart Pointer）**
 
-  - Box<T> 是 Rust 标准库提供的一个智能指针，用于在堆（heap）上分配内存。Box 指向的数据在堆上，Box 本身（指针）在栈（stack）上。
+  - `Box<T>` 是 Rust 标准库提供的一个智能指针，用于在堆（heap）上分配内存。Box 指向的数据在堆上，Box 本身（指针）在栈（stack）上。
 
   - > **Box**：用于在堆上存储数据的所有权类型。
     > **智能指针（Smart Pointer）**：除了像常规指针那样存储内存地址，还拥有额外元数据和功能（如自动释放内存）。
