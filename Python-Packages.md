@@ -641,7 +641,6 @@ parser.add_argument('--speed', dest='speed', action='store',
 
 [官方参考文档](https://docs.python.org/zh-cn/3/library/re.html)
 
-[相关笔记](网络基础.md#RE模块的高级使用)
 
 > 出现双转义的原因是:正则表达式中的转义需要用到 `\` 同时正则表达式的特殊字符需要用到 `\`  python为了识别这个反斜杠时,会有限作为python转义字符使用, 因此会自动屏蔽一次反斜杠, 所以需要在加一个反斜杠才能表示正则表达式中的转义字符标识
 

@@ -5741,7 +5741,7 @@ ssh -R localhost:8189:localhost:8188 wwfyde@122.51.38.230 -N
 
 # SHELL开发技术
 
-> linux基础 [参考文档](Linux基础-高级)
+> linux基础 [参考文档](Linux-Shell.md)
 
 [官方文档](https://www.gnu.org/software/bash/manual/bash.html)
 

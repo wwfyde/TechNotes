@@ -717,7 +717,6 @@ Tensors are a specialized data structure that are very similar to arrays and mat
 
 ## Prompt
 
-[](AI-Prompt.md#Glossary)
 
 - 思维链(chain of thought)
 
@@ -2183,7 +2182,6 @@ GPT
 
 - [AI大模型应用开发实战营大纲](https://u.geekbang.org/subject/llm)
 - [AI大模型微调训练营](https://u.geekbang.org/subject/finetuning)
-- [AI Glossary](AI.md#Glossary)
 - 官方文档和博客
     - [Overview](https://platform.openai.com/docs/overview)
     - [Guide for Prompt Enginerring](https://platform.openai.com/docs/guides/prompt-engineering)

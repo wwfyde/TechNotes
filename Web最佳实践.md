@@ -44,7 +44,6 @@
 
 ## 响应式菜单
 
-> [web-examples::responsive-menu](/Users/wwfyde/projects/web-examples/examples/responsive-menu)
 
 # package manager
 

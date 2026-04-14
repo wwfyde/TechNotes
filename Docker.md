@@ -93,10 +93,6 @@ docker 三大部分 《docker实战》
 curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
 ```
 
-
-
-```s
-
 ```shell
 # 官网安装
 sudo apt-get update

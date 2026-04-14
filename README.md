@@ -11,7 +11,6 @@
 
 ### 兴趣爱好
 
-- [计算机图形学](计算机图形学.md):
 
 ## 设计开发(R&D)
 
@@ -25,23 +24,18 @@
 ## Go
 - [Go程序设计语言](Go程序设计语言.md): 语言相关, 语法基础, 底层原理等.
 - [Go最佳实践](Go最佳实践.md): 项目布局, 编程思想, 开发技巧等.
-- [gin框架](gin框架.md)
 - [gRPC框架](gRPC框架.md): grpc, protobuf 和微服务相关
 
 ## 技术组件
-- [MySQL数据库](MySQL数据库.md)
-- [MongoDB数据库](MongoDB数据库.md)
+- [MySQL数据库](Infra-MySQL.md)
+- [MongoDB数据库](Infra-MongoDB.md)
 
 ## 工作流和参考手册
 
-- [参考手册](参考手册.md): 操作系统, 常用软件的一些使用和技巧的记录
-- [Docker开放平台](Docker开放平台.md)
+- [Docker](Docker.md)
 - [Git参考文档](Git参考文档.md): Git原理, 核心概念和相关命令的使用
 
 ## 杂项
-
-- [逻辑学](逻辑学.md)
-- [设计·Design](设计·Design.md)
 
 
 

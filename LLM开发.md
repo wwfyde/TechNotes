@@ -30,7 +30,7 @@
 
 ### Local
 
-- [llm-examples](/Users/wwfyde/Projects/llm-examples)
+`[llm-examples](/Users/wwfyde/Projects/llm-examples)`
 
 ## 需求
 

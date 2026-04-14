@@ -4,7 +4,6 @@
 GitHub is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere.
 ```
 ## 参考资料
-- [](参考手册.md/#Github)
 
 ## 拉取请求(pull request)
 

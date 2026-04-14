@@ -2977,7 +2977,6 @@ go mod vendor
 ## 参考资料
 
 - [极客时间: Go并发编程实践]
-- [课件:Go并发编程(来自《Go并发编程实践》)](/Users/wwfyde/Desktop/Materials/Go.pptx)
 
 ## 开篇
 

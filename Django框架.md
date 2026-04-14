@@ -1654,7 +1654,7 @@ django附带了一些开箱即用的内置中间件, [官方文档](https://docs
 
 ## 配置Django实现数据库读写分离
 
-[关于如何初始化配置:参考MySQL数据库文档](MySQL数据库.md)
+[关于如何初始化配置:参考MySQL数据库文档](Infra-MySQL.md)
 
 ### 在配置文件中增加slave数据库的配置
 
@@ -2403,7 +2403,6 @@ TIME_ZONE= 'Asia/Shanghai',
 
 # 日志-Logging
 
-[参看开发文档](Python开发笔记.md/)
 
 [参考配置文件- ommanager3]
 

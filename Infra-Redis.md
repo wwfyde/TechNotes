@@ -8,11 +8,9 @@
 >
 > 
 >
-> [安装和配置参见](软件使用技巧.md)
 
 ## 参考资料
 
-- [Interview/面试-Redis](interview/面试-Redis.md)
 - [Redis FAQ](https://redis.io/docs/get-started/faq/)
 - 极客时间: 168-Redis核心技术与实战
 - 极客时间: 223-Redis源码剖析与实战

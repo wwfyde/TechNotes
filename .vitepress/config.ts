@@ -103,5 +103,16 @@ export default defineConfig({
       message: 'Released under the MIT License.',
       copyright: 'Copyright © 2019-present Evan You'
     }
-  }
+  },
+  srcExclude: [
+    "Web-技术参考.md",
+    "interview/**",
+    "参考手册.md",
+    "图形设计.md",
+    "数学题.md",
+    "数学.md",
+    "resume/**",
+    "temp/**",
+    "Archived/**"
+  ],
 })

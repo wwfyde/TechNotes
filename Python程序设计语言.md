@@ -2873,8 +2873,6 @@ def modification():
     
 modification()
 print(a)
-![4e396a57f2be37dc605aa8f360abc636.png](en-resource://database/1422:1)
-
 
 
 #### 修改全局变量的应用场景,   

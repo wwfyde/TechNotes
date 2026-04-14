@@ -64,7 +64,7 @@ Evolve
 - [强烈推荐elements-of-rust](https://github.com/ferrous-systems/elements-of-rust)
 
 - [Rust Ecosystem](https://blessed.rs/crates)
-- [curated crates libraries](lib.rs)
+- [curated crates libraries](https://lib.rs)
 - [rust trends 趋势](https://rust-trends.com/)
 - [Microsoft:Rust Training]()
 

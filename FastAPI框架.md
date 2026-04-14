@@ -728,7 +728,7 @@ async def read_textures(
 
 # pydantic
 
-> 移步[Python包参考](Python包参考)
+> 移步[Python包参考](Python-Packages.md)
 
 # alembic
 
