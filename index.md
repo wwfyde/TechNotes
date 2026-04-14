@@ -9,10 +9,16 @@ hero:
   actions:
     - theme: brand
       text: AI
-      link: /AI
+      link: /llm
     - theme: alt
       text: 系统设计
       link: /系统设计
+    - theme: alt
+      text: 编程技术
+      link: /编程技术
+    - theme: alt
+      text: Flask
+      link: /Flask框架
 
 features:
   - title: Feature A

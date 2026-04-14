@@ -597,6 +597,8 @@ app/
 - 使用root-path 为路由添加额外的路径` uvicorn  --root-path /api/v1`
   - https://fastapi.tiangolo.com/advanced/behind-a-proxy/#checking-the-current-root_path
 - 全局依赖
+- 通过Request.url_for 获取服务本身的url, 用于内部流转
+- 
 
 # Tips
 

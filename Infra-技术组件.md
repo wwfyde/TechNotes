@@ -2,7 +2,7 @@
 title: 技术组件
 i18n:
     en: technical components
-synonym:[后端组件, 后端技术组件, 基础设施软件]
+synonym: [后端组件, 后端技术组件, 基础设施软件]
 description: vault, etcd等等. 
 ---
 

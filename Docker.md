@@ -4217,11 +4217,23 @@ extra_hosts:
 }
 
     "proxies": {
-        "http-proxy": "http://172.20.210.30:7890",
-        "https-proxy": "http://172.20.210.30:7890",
+        "http-proxy": "http://172.20.210.5:7890",
+        "https-proxy": "http://172.20.210.5:7890",
         "no-proxy": "*.test.example.com,.example.org,127.0.0.0/8, 10.31.0.1/16, ssrf_proxy"
     }
 ```
+
+```json
+{
+  "proxies": {
+    "http-proxy": "http://172.20.210.5:7890",
+    "https-proxy": "http://172.20.210.5:7890",
+    "no-proxy": "*.test.example.com,.example.org,127.0.0.0/8"
+  }
+}
+```
+
+
 
 ### Mac配置
 

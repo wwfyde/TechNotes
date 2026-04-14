@@ -1,3 +1,8 @@
+---
+prev: 'Get Started | Markdown'
+next: '下一页'
+---
+
 # Python最佳实践
 
 
@@ -42,6 +47,19 @@
 # 配置全局默认Python版本 实质上写入`~/.config/uv/.python-version`文件
 uv python pin --global 3.12
 uv python install 3.12 --default
+
+
+# 安装Python到系统 uv python update-shell.
+# uv installs Python executables into your PATH by default, e.g., on Unix uv python install 3.12 will install a Python executable into ~/.local/bin, e.g., as python3.12. See the storage documentation for more details about the target directory.
+uv python install 3.12 --default
+uv python install 3.14 --default
+uv tool install pip -p 3.14
+
+
+# 升级python
+uv python upgrade
+
+
 
 # 添加依赖
 
@@ -337,8 +355,8 @@ uv add --dev ruff
 
 ## 参考资料
 
-- https://docs.python.org/3/tutorial/errors.html
-- https://docs.python.org/zh-cn/3/tutorial/errors.html
+- [](https://docs.python.org/3/tutorial/errors.html_
+- [](https://docs.python.org/zh-cn/3/tutorial/errors.html)
 
 ## 技术原理
 
@@ -374,6 +392,8 @@ except Exception as err:
 ## 示例: 数据库
 
 ```python
+import mysql.connector
+
 try:
     # 数据库操作
     pass
@@ -395,6 +415,7 @@ except mysql.connector.Error as e:
 except Exception as e:
     # 处理非数据库相关的其他错误
     print(f"Error: {e}")
+
 ```
 
 
@@ -412,11 +433,8 @@ except Exception as e:
 # 调试分析
 
 > print
->
 > pprint
->
 > rich
->
 > ic(iceCream)
 
 
@@ -467,7 +485,6 @@ pytest
 
 # 性能优化
 
-# 
 
 # 风格指南
 
@@ -545,25 +562,24 @@ if __name__ == "__main__":
 
 - 对于需要保持顺序的数据，考虑使用 collections.OrderedDict
 
-**索引化**：对于 list[dict]，可以预先创建一个以搜索键为键的字典
+**索引化**：对于 `list[dict]`，可以预先创建一个以搜索键为键的字典
 
 
-
+```
   index = {item['id']: item for item in data}
 
   result = index.get(1)
+```
 
 使用 set 进行成员检查：
 
 如果只需要检查成员是否存在，set 比 list 快得多
 
 ```
-```
-
   my_set = set([1, 2, 3, 4, 5])
 
   is_present = 3 in my_set # 非常快
-
+```
 
 
 # list
@@ -592,8 +608,6 @@ result = list(filter(lambda x: x['id'] == 1, data))
 
 # next和生成器表达式
 result = next((item for item in data if item['id'] == 1), None)
-
-
 
 ```
 

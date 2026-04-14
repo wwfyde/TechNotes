@@ -41,23 +41,26 @@
 
 ### 形状:Shapes
 
+```shell
 |  Symbols  |       Means       |         中文名称         |
 | :-------: | :---------------: | :----------------------: |
 |    -->    |       link        |                          |
 |   [...]   |     rectangle     |           矩形           |
 |   (...)   | rounded rectangle |         圆角矩形         |
 |  ([...])  |   stadium shape   | 圆竖边矩形<br />椭圆矩形 |
-|  [[...]]  | subroutine shape  |        双竖边矩形        |
+|  `[[...]]`  | subroutine shape  |        双竖边矩形        |
 |  [(...)]  | cylindrical shape |          圆柱形          |
 |  ((...))  |      circle       |           圆形           |
 |   >...]   |    asymmetric     |        不对称方形        |
 |    {}     |      rhombus      |           菱形           |
-|  {{...}}  |      hexagon      |          六边形          |
+|  `{{...}}`  |      hexagon      |          六边形          |
 |  [/.../]  |                   |         平行距形         |
 | [\\...\\] |                   |        反平行矩形        |
 | [/...\\]  |     Trapezoid     |           梯形           |
 | [\\.../]  |                   |          倒梯形          |
 | (((...))) |   Double circle   |         双圈圆形         |
+```
+
 
 ```mermaid
 ---
@@ -101,58 +104,3 @@ flowchart LR
 > 参考链接
 >
 > [Flowchart](https://mermaid.js.org/syntax/flowchart.html#flowcharts-basic-syntax)
-
-```markdown
-All Flowcharts are composed of **nodes**, the geometric shapes and **edges**, the arrows or lines. The mermaid code defines the way that these nodes and edges are made and interact.
-
-It can also accommodate different arrow types, multi directional arrows, and linking to and from subgraphs.
-
-> Important note: Do not type the word "end" as a Flowchart node. Capitalize all or any one the letters to keep the flowchart from breaking, i.e, "End" or "END". Or you can apply this workaround.
-```
-
-所有的流程图都是由 **节点**-*nodes* , 几何形状和 **边框**-*edges*, 箭头或线 组成的. Mermaid代码定义了节点和边缘之间的构成和交互方式.
-
-Mermaid也支持不同的箭头类型, 多向箭头和子图连接
-
-> 重要提示:
-
-```shell
----
-title:Node
----
-flowchart LR
-	节点ID(节点内容)
-
-```
-
-## 时序图
-
-```mermaid
-sequenceDiagram
-    participant User
-    participant Frontend
-    participant API
-    participant DB
-    
-    User->>Frontend: 点击登录
-    Frontend->>API: POST /login
-    API->>DB: 查询用户
-    DB-->>API: 返回用户数据
-    API-->>Frontend: 返回token
-    Frontend-->>User: 显示成功
-```
-
-## 状态图
-
-
-
-```mermaid
-stateDiagram-v2
-    [*] --> Idle
-    Idle --> Processing: 提交
-    Processing --> Success: 成功
-    Processing --> Failed: 失败
-    Success --> Idle: 重置
-    Failed --> Idle: 重试
-```
-

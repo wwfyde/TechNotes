@@ -66,6 +66,7 @@ Evolve
 - [Rust Ecosystem](https://blessed.rs/crates)
 - [curated crates libraries](lib.rs)
 - [rust trends 趋势](https://rust-trends.com/)
+- [Microsoft:Rust Training]()
 
 <img src="https://wwfyde.oss-cn-hangzhou.aliyuncs.com/images/202506131608991.png" style="zoom: 25%;" />
 
@@ -203,6 +204,410 @@ Rust 还有目前最优秀的异步处理模型，我相信假以时日，这种
 语法
 
 标准库
+
+```mermaid
+mindmap
+  root((Rust 知识体系))
+
+    1. 基础入门
+      开发环境
+        rustup
+        cargo
+        rustc
+        toolchain
+      基础语法
+        变量与可变性
+        基本数据类型
+        函数
+        注释
+        表达式与语句
+        模块初步
+      常用工具链
+        cargo new
+        cargo build
+        cargo run
+        cargo test
+        cargo check
+        cargo fmt
+        cargo clippy
+        cargo doc
+
+    2. 类型系统
+      标量类型
+        整数
+        浮点
+        bool
+        char
+      复合类型
+        tuple
+        array
+        slice
+      字符串体系
+        String
+        str
+        OsString
+        PathBuf
+      集合类型
+        Vec
+        HashMap
+        BTreeMap
+        HashSet
+      枚举与模式
+        enum
+        Option
+        Result
+      结构体
+        struct
+        tuple struct
+        unit struct
+      类型抽象
+        泛型
+        trait
+        associated type
+        const generic
+      动态分发与静态分发
+        impl Trait
+        dyn Trait
+      生命周期
+        生命周期参数
+        借用关系表达
+        elision rules
+
+    3. 流程控制
+      if else
+      loop
+      while
+      for
+      match
+      if let
+      while let
+      let else
+      模式匹配进阶
+        match guard
+        解构
+        忽略模式
+        绑定模式
+
+    4. 所有权与内存模型
+      所有权规则
+        move
+        copy
+        drop
+      借用
+        不可变借用
+        可变借用
+        借用检查
+      引用
+        &
+        &mut
+        解引用
+      生命周期核心
+        悬垂引用为何被禁止
+        返回引用的约束
+      智能指针
+        Box
+        Rc
+        Arc
+        Cell
+        RefCell
+        Mutex
+        RwLock
+      共享与内部可变性
+        Rc<RefCell<T>>
+        Arc<Mutex<T>>
+      内存安全抽象
+        RAII
+        零成本抽象
+
+    5. 错误处理
+      可恢复错误
+        Result
+        ?
+        thiserror
+        anyhow
+      不可恢复错误
+        panic
+        unwrap
+        expect
+      错误传播
+      错误建模
+      日志与诊断
+        log
+        tracing
+
+    6. 模块化与工程组织
+      module
+      pub
+      use
+      crate
+      package
+      workspace
+      可见性设计
+      API 设计
+      文档注释
+      单元测试
+      集成测试
+      基准测试
+      feature flags
+
+    7. Trait 与泛型进阶
+      trait bound
+      where
+      默认实现
+      blanket impl
+      orphan rule
+      newtype
+      operator overloading
+      From Into
+      AsRef Borrow
+      Deref DerefMut
+      Iterator
+      IntoIterator
+      闭包
+        Fn
+        FnMut
+        FnOnce
+
+    8. 函数式与迭代器风格
+      iterator
+      map
+      filter
+      fold
+      collect
+      zip
+      flatten
+      生命周期与迭代器结合
+      闭包捕获语义
+        move closure
+
+    9. 并发编程
+      线程
+        std::thread
+        spawn
+        join
+      消息传递
+        mpsc
+        crossbeam
+      共享状态并发
+        Arc
+        Mutex
+        RwLock
+        Condvar
+      原子类型
+        AtomicBool
+        AtomicUsize
+        Ordering
+      Send 与 Sync
+      并发设计原则
+        避免数据竞争
+        降低锁粒度
+        无锁与有锁权衡
+
+    10. 异步编程
+      Future 模型
+      async await
+      Pin
+      Waker
+      Executor
+      Tokio
+        runtime
+        task
+        spawn
+        time
+        sync
+      异步流
+        Stream
+        async_trait
+      异步错误处理
+      异步并发控制
+        select
+        join
+        timeout
+      背压与取消
+
+    11. Unsafe 与底层能力
+      unsafe block
+      raw pointer
+      extern C
+      FFI
+      Send Sync 手动实现风险
+      内存布局
+        repr C
+        repr transparent
+      pinning
+      性能分析基础
+      何时必须 unsafe
+      如何封装 unsafe
+
+    12. 宏与元编程
+      declarative macro
+        macro_rules!
+      procedural macro
+        derive macro
+        attribute macro
+        function-like macro
+      常见生态
+        serde derive
+        thiserror derive
+        clap derive
+
+    13. 序列化与数据建模
+      serde
+      serde_json
+      toml
+      yaml
+      schema 建模
+      DTO 与领域模型分离
+      配置管理
+        config
+        envy
+
+    14. 网络与系统编程
+      文件系统
+        std::fs
+        Path
+        PathBuf
+      进程管理
+        std::process
+      网络基础
+        TcpListener
+        TcpStream
+        UdpSocket
+      HTTP 基础
+        request response
+        header
+        status code
+        middleware 概念
+      时间与时区
+      环境变量
+
+    15. 工程化能力
+      CLI 工具开发
+        clap
+        argh
+      配置与参数
+      日志与可观测性
+        tracing
+        tracing-subscriber
+      测试体系
+        unit test
+        integration test
+        mock
+      错误治理
+      代码规范
+        rustfmt
+        clippy
+      文档体系
+        rustdoc
+      CI/CD
+      发布与版本管理
+      性能优化
+        criterion
+        flamegraph
+
+    16. Web 后端生态
+      HTTP Client
+        reqwest
+      Web 框架
+        axum
+        actix-web
+        warp
+      中间件
+        tower
+        tower-http
+      序列化
+        serde
+      身份认证
+        JWT
+        session
+      配置管理
+      OpenAPI
+        utoipa
+      可观测性
+        tracing
+      部署
+        docker
+        systemd
+        k8s
+
+    17. 数据库与持久化
+      SQL 基础
+      连接池
+        sqlx pool
+        deadpool
+      ORM / Query Layer
+        sea-orm
+        sqlx
+        diesel
+      迁移管理
+        sea-orm migration
+        refinery
+      事务
+      仓储模式
+      读写分离
+      缓存
+        redis
+      数据一致性设计
+
+    18. 工程项目落地
+      CLI 项目
+        clap
+        anyhow
+        tracing
+      HTTP 服务
+        axum
+        tokio
+        tower
+        serde
+      第三方 API 调用
+        reqwest
+        retry
+        timeout
+      数据持久化
+        sea-orm
+        sqlx
+        redis
+      配置系统
+        dotenvy
+        config
+      可观测性
+        tracing
+        metrics
+      部署交付
+        docker
+        CI
+        release profile
+
+    19. 学习路径建议
+      第一阶段
+        基础语法
+        所有权
+        Result Option
+        模块
+      第二阶段
+        trait
+        泛型
+        生命周期
+        iterator
+      第三阶段
+        并发
+        异步
+        错误处理
+        工程组织
+      第四阶段
+        axum
+        reqwest
+        sea-orm
+        tracing
+        测试与部署
+      第五阶段
+        unsafe
+        宏
+        性能优化
+        底层与架构
+```
+
+
 
 ## 学习路线与目标
 
@@ -517,6 +922,8 @@ syntax, type system, standard library, ecosystem
 - 解析优于校验(Parse, don't validate)
 
 ## 核心特性
+
+> - [YouTube::Let's Get Rusty::All Rust features explained](https://www.youtube.com/watch?v=784JWR4oxOI)
 
 ADT
 
@@ -1205,6 +1612,108 @@ cargo tree
 
 
 
+## 常见函数名
+
+| Name          | Description                                                  |                                                              |
+| ------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| new           | 构造函数                                                     | let s = String::new();                                       |
+| default       | 默认值构造                                                   | let c = Config::default();                                   |
+| clone         |                                                              |                                                              |
+| from          | 从别的类型转换/构造当前类型                                  | let s = String::from("hello");                               |
+| into          | 把自己转换成别的类型, 通常会消费self<br />From/Into trait<br />- 消费当前对象<br />- 拿走内部所有权<br />- 转成另一个值 |                                                              |
+| with          | 表示“在默认基础上，带着某个参数创建”<br />或者“设置某个字段后返回新值”。<br />返回一个新址, 链式调用 | let req = Request::new().with_timeout(30);                   |
+| set           | 修改内部状态, 通常用`&mut self`<br />原地修改, 可变借用      |                                                              |
+| as            | 借用式转换, 不拿走所有权<br />把我当作X来看                  | let s = String::from("hello");<br />let r: &str = s.as_str(); |
+| as_ref/as_mut | 把&T/T/智能指针等，转成某种**共享借用引用**                  |                                                              |
+| as_mut        | 把&T/T/智能指针等，转成某种可变借用                          |                                                              |
+| ~~get~~       | 直接name而不是get_name                                       |                                                              |
+| to            | 生成一个新的目标值<br />往往需要拷贝、分配、计算             |                                                              |
+| is            | 状态判断                                                     |                                                              |
+| has           |                                                              |                                                              |
+| can           | 判断具备某种能力                                             |                                                              |
+| take          | 拿走                                                         |                                                              |
+
+| **命名**                | **常见含义**                |
+| ----------------------- | --------------------------- |
+| new()                   | 基础构造                    |
+| default()               | 默认值构造                  |
+| from(x)                 | 从 x 构造当前类型           |
+| try_from(x)             | 从 x 构造当前类型，可能失败 |
+| into_xxx(self)          | 消费自己并转成别的值        |
+| to_xxx(&self)           | 基于自己生成一个新值        |
+| as_xxx(&self)           | 借用式视图转换              |
+| with_xxx(...)           | 带某个配置创建/返回新值     |
+| set_xxx(&mut self, ...) | 原地设置                    |
+| xxx(&self)              | getter                      |
+| get_xxx(...)            | 查询/安全获取               |
+| is_xxx(&self)           | 是否处于某状态              |
+| has_xxx(&self)          | 是否拥有某属性              |
+| can_xxx(&self)          | 是否能执行某动作            |
+| into_inner(self)        | 消费包装类型，取出内部值    |
+| as_ref()                | 转为共享借用                |
+| as_mut()                | 转为可变借用                |
+
+### **一个简单判断口诀**
+
+
+看到方法名时，可以这样猜：
+
+- **from**：来源
+- **into**：所有权转出
+- **as**：借来看
+- **to**：复制/新建
+- **with**：附带参数构造
+- **set**：原地修改
+- **is/has/can**：布尔判断
+
+
+### 典型例子
+
+```rust
+struct Config {
+    host: String,
+    port: u16,
+}
+
+impl Config {
+    fn new() -> Self {
+        Self {
+            host: "localhost".to_string(),
+            port: 8080,
+        }
+    }
+
+    fn with_port(mut self, port: u16) -> Self {
+        self.port = port;
+        self
+    }
+
+    fn set_host(&mut self, host: String) {
+        self.host = host;
+    }
+
+    fn host(&self) -> &str {
+        &self.host
+    }
+
+    fn is_local(&self) -> bool {
+        self.host == "localhost"
+    }
+
+    fn as_host(&self) -> &str {
+        &self.host
+    }
+
+    fn to_url(&self) -> String {
+        format!("{}:{}", self.host, self.port)
+    }
+
+    fn into_host(self) -> String {
+        self.host
+    }
+}
+```
+
 # tools
 
 ## suttle
@@ -1236,6 +1745,7 @@ cargo tree
 - [bili-sync rust项目](https://github.com/amtoaer/bili-sync)
 - [text-embeddings-inference](https://github.com/huggingface/text-embeddings-inference)
 - [master-hexagonal-architecture-in-rust](https://www.howtocodeit.com/guides/master-hexagonal-architecture-in-rust)
+- [shuttle::using-aws-s3-rust](https://www.shuttle.dev/blog/2024/04/17/using-aws-s3-rust)
 
 ### Projects use axum
 
@@ -1305,7 +1815,113 @@ my-axum-app/
 │           └── api_response.rs
 ```
 
+### technical layered structure
 
+
+
+> - **Function-based structure** 
+>     - **Function-based structure** groups by technical role: `routes/`, `handlers/`, `models/`, and `services/`. This makes the technical architecture clear at a glance and helps developers understand the project organization quickly.
+> - **Model-based structure** groups by domain: `users/routes.rs`, `users/handlers.rs`, `posts/routes.rs`, `posts/handlers.rs`. If you need user code, you know exactly where to find it. Everything related to users lives in one place. The tradeoff is you'll have many files with the same name, which can make searching less convenient.
+
+```shell
+src/
+├─ main.rs
+├─ app/
+│  ├─ mod.rs
+│  ├─ state.rs          # AppState，全局依赖
+│  ├─ router.rs         # 总路由注册
+│  ├─ config.rs         # 配置加载
+│  └─ startup.rs        # 启动、初始化 db/redis/http client
+│
+├─ handlers/            # HTTP 层
+│  ├─ mod.rs
+│  ├─ health.rs
+│  ├─ users.rs
+│  └─ files.rs
+│
+├─ services/            # 业务逻辑层
+│  ├─ mod.rs
+│  ├─ user_service.rs
+│  └─ file_service.rs
+│
+├─ repositories/        # 数据访问层
+│  ├─ mod.rs
+│  ├─ user_repository.rs
+│  └─ file_repository.rs
+│
+├─ models/              # 数据模型
+│  ├─ mod.rs
+│  ├─ user.rs           # DB model / domain-ish model
+│  └─ file.rs
+│
+├─ schemas/             # 请求/响应 DTO
+│  ├─ mod.rs
+│  ├─ user.rs
+│  └─ file.rs
+│
+├─ db/
+│  ├─ mod.rs
+│  ├─ seaorm.rs         # 数据库连接、分页、公共查询工具
+│  └─ entity/           # SeaORM entity
+│
+├─ cache/
+│  ├─ mod.rs
+│  └─ redis.rs
+│
+├─ clients/             # 外部服务客户端
+│  ├─ mod.rs
+│  ├─ s3.rs
+│  └─ external_api.rs
+│
+├─ middlewares/
+│  ├─ mod.rs
+│  ├─ auth.rs
+│  ├─ logging.rs
+│  └─ timeout.rs
+│
+├─ errors/
+│  ├─ mod.rs
+│  ├─ app_error.rs
+│  └─ response.rs
+│
+├─ utils/
+│  ├─ mod.rs
+│  ├─ time.rs
+│  ├─ crypto.rs
+│  └─ pagination.rs
+│
+└─ response/
+   ├─ mod.rs
+   └─ api_response.rs   # 统一响应格式
+```
+
+
+
+### clean architecture
+
+````
+
+
+
+```shell
+src/
+├─ app/
+│  ├─ config.rs
+│  ├─ state.rs
+│  ├─ bootstrap.rs
+│  └─ router.rs
+├─ http/
+├─ service/
+├─ domain/
+├─ infra/
+│  ├─ db/
+│  ├─ cache/
+│  ├─ object_storage/
+│  └─ http_client/
+├─ entity/
+└─ migration/
+```
+````
 
 ## Tips
 

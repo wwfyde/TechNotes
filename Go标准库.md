@@ -735,7 +735,7 @@ method calls panic("bad"), the resulting formatted message will look like
 ```
 
 The %!s just shows the print verb in use when the failure occurred. If the panic is caused by a nil receiver to an Error
-or String method, however, the output is the undecorated string, "<nil>".
+or String method, however, the output is the undecorated string, `<nil>`.
 
 ### fmt.Printf
 

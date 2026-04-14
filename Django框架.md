@@ -1796,7 +1796,7 @@ A template is a text file. It can generate any text-based format (HTML, XML, CSV
 
 Below is a minimal template that illustrates a few basics. Each element will be explained later in this document.
 
-```django
+```python
 {% extends "base_generic.html" %}
 
 {% block title %}{{ section.title }}{% endblock %}
@@ -1841,7 +1841,7 @@ Oh, and one more thing: making humans edit XML is sadistic!
 
 ### block - 块
 
-```django
+```python
 {% block %}
 
 {% endblock %}
@@ -1851,7 +1851,7 @@ Oh, and one more thing: making humans edit XML is sadistic!
 
 ### include - [模板导入](https://docs.djangoproject.com/zh-hans/3.0/ref/templates/builtins/#include)
 
-```django
+```python
 {% include "foo/bar.html" %}
 
 {% include template_name %}  {# 模板变量 #}
@@ -1869,7 +1869,7 @@ Loads a custom template tag set.
 
 可能有url name是一样的情况
 
-```django
+```python
 {% url 'some-url-name' v1 v2 %}
 {% url 'some-url-name' arg1=v1 arg2=v2 %}
 path('client/<int:id>/', app_views.client, name='app-views-client')
@@ -1962,7 +1962,7 @@ For example, assuming you have [`STATIC_URL`](https://docs.djangoproject.com/zh-
 
 This would allow you to refer to the local file `'/opt/webfiles/stats/polls_20101022.tar.gz'` with `'/static/downloads/polls_20101022.tar.gz'` in your templates, e.g.:
 
-```django
+```python
 <a href="{% static "downloads/polls_20101022.tar.gz" %}">
 ```
 
@@ -2111,7 +2111,7 @@ vue组件化开发
 
 [官方说明](https://docs.djangoproject.com/en/3.0/ref/templates/builtins/#verbatim)
 
-```django
+```python
 {% verbatim %}
 	{{ message }}
 {% endverbatim %}
@@ -2121,7 +2121,7 @@ vue组件化开发
 
 [官方说明](https://cn.vuejs.org/v2/api/#delimiters)
 
-```django
+```python
 <div id='app'>
 [[ message ]]
 </div>
