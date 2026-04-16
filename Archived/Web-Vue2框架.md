@@ -831,7 +831,7 @@ export default {
 
 - 默认匹配：`/\.css$/`。
 - 一个 `.vue` 文件可以包含多个 `` 标签。
-- <style> 标签可以有 scoped 或者 module 属性 (查看 scoped CSS和 CSS Modules) 以帮助你将样式封装到当前组件。具有不同封装模式的多个 <style> 标签可以在同一个组件中混合使用。
+- `<style>`标签可以有scoped或者module属性 (查看scoped CSS和CSS Modules) 以帮助你将样式封装到当前组件。具有不同封装模式的多个`<style>`标签可以在同一个组件中混合使用。
 - 任何匹配 `.css` 文件 (或通过它的 `lang` 特性指定的扩展名) 的 webpack 规则都将会运用到这个 `` 块的内容中。
 
 #### [#](https://vue-loader.vuejs.org/zh/spec.html#自定义块)自定义块
@@ -952,7 +952,12 @@ Vue.component('button-counter', {
 
 {% raw %}
 
-<script> Vue.component('button-counter', { data: function () { return { count: 0 } }, template: 'You clicked me {{ count }} times.' }) new Vue({ el: '#components-demo' }) </script> {% endraw %}
+<script> 
+Vue.component('button-counter', 
+{ data: function () { return { count: 0 } }, template: 'You clicked me {{ count }} times.' })
+new Vue({ el: '#components-demo' }) 
+</script> 
+{% endraw %}
 
 因为组件是可复用的 Vue 实例，所以它们与 `new Vue` 接收相同的选项，例如 `data`、`computed`、`watch`、`methods` 以及生命周期钩子等。仅有的例外是像 `el` 这样根实例特有的选项。
 

@@ -5,6 +5,7 @@
     "docs:preview": "vitepress preview"
   },
   "devDependencies": {
+    "markdown-it-mathjax3": "^4.3.2",
     "vite": "^8.0.8",
     "vitepress": "2.0.0-alpha.17"
   }

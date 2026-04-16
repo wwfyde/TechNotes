@@ -2,10 +2,15 @@ import {defineConfig} from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-
+  markdown: {
+    math: true
+  },
   title: "技术笔记",
-  description: "Kayn的个人技术笔记",
+  description: "个人技术笔记",
+  cleanUrls: true, // 强烈建议开启，去掉 .html 后缀
+  ignoreDeadLinks: true,
   lastUpdated: true,
+  // srcDir: ".",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     // search: {
@@ -104,13 +109,14 @@ export default defineConfig({
       copyright: 'Copyright © 2019-present Evan You'
     }
   },
+  rewrites: {
+    '领域术语/服装.md': 'pkg-a/index.md',
+    'packages/pkg-a/src/foo.md': 'pkg-a/foo.md',
+    'packages/pkg-b/src/index.md': 'pkg-b/index.md',
+    'packages/pkg-b/src/bar.md': 'pkg-b/bar.md'
+  },
   srcExclude: [
-    "Web-技术参考.md",
     "interview/**",
-    "参考手册.md",
-    "图形设计.md",
-    "数学题.md",
-    "数学.md",
     "resume/**",
     "temp/**",
     "Archived/**"
